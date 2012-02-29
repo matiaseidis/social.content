@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.prevayler.Transaction;
 
-import com.mati.demo.model.base.BaseModel;
+import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.user.User;
 
@@ -19,7 +19,7 @@ public class CreatePost implements Transaction {
 	}
 
 	public void executeOn(Object prevalentSystem, Date executionTime) {
-		BaseModel model = (BaseModel)prevalentSystem;
+		Model model = (Model)prevalentSystem;
 		model.loadUserByUsername(user.getUserName()).getPosts().add(post);
 	}
 

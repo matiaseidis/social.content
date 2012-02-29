@@ -3,7 +3,6 @@ package com.mati.demo.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.user.User;
-import com.mati.demo.prevalence.PrevalenceModelProvider;
+import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.CreateUser;
 
 @Controller
@@ -20,7 +19,7 @@ import com.mati.demo.prevalence.transaction.CreateUser;
 public class UserController {
 
 	@Resource
-	private PrevalenceModelProvider modelProvider;
+	private BaseModel modelProvider;
 	
 	public static final String ROLE_USER = "ROLE_USER";
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
@@ -32,23 +31,20 @@ public class UserController {
 	
 	@RequestMapping(value="add", method=RequestMethod.GET)
 	public ModelAndView add(){
-		
 		return null;
 	}
 	
+//	@RequestMapping(value="/", method=RequestMethod.GET)
+//	public ModelAndView index(){
+//		return new ModelAndView("redirect:list", "users", modelProvider.getModel().getUsers());
+//	}
+	
 	@RequestMapping(value="create", method=RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute User user, final HttpSession httpSession){
-		
-//		org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		
-		
-//		System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
-		
+
 		boolean available = (modelProvider.getModel().loadUserByUsername(user.getUserName()) == null);
 		
 		if(available){
-//			user.create(modelProvider.getPrevayler());
 			
 			if(CollectionUtils.isEmpty(user.getRoles())){
 				user.getRoles().add(ROLE_USER);

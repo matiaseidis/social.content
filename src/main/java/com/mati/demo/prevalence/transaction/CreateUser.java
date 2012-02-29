@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.prevayler.Transaction;
 
-import com.mati.demo.model.base.BaseModel;
+import com.mati.demo.model.base.Model;
 import com.mati.demo.model.user.User;
 
 public class CreateUser implements Transaction {
@@ -16,7 +16,7 @@ public class CreateUser implements Transaction {
 	public CreateUser(User user) {this.user = user;}
 	
 	public void executeOn(Object prevalentSystem, Date executionTime) {
-		BaseModel baseModel = (BaseModel) prevalentSystem;
+		Model baseModel = (Model) prevalentSystem;
 		baseModel.getUsersMap().put(user.getUserName(), user);
 	}
 

@@ -9,7 +9,9 @@
 <body>
 <form action="create.h" method=POST>
 <input type="text" name="title">
-<input type="text" name="body">
+<p></p>
+<textarea rows="20" cols="70" name="body"></textarea>
+<p></p>
 <input type="submit">
 </form>
 </body>

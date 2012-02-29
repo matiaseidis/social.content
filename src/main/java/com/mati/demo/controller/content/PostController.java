@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.user.User;
-import com.mati.demo.prevalence.PrevalenceModelProvider;
+import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.CreatePost;
 
 
@@ -23,7 +23,7 @@ import com.mati.demo.prevalence.transaction.CreatePost;
 public class PostController {
 	
 	@Resource
-	private PrevalenceModelProvider modelProvider;
+	private BaseModel modelProvider;
 
 	@RequestMapping(value="{contentType}/add", method=RequestMethod.GET)
 	public ModelAndView add(@PathVariable String contentType){

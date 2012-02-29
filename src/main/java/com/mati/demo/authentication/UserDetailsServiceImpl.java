@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.annotation.Resource;
+import lombok.Setter;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.mati.demo.model.base.BaseModel;
 import com.mati.demo.model.user.User;
-import com.mati.demo.prevalence.PrevalenceModelProvider;
+import com.mati.demo.prevalence.BaseModel;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -24,15 +23,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private static final String ROLE_USER = "ROLE_USER";
 	private static final String ROLE_ADMIN = "ROLE_ADMIN";
 	
-	@Resource
-	private PrevalenceModelProvider modelProvider;
+	
+	@Setter private BaseModel baseModel;
 	
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		if(username.equals("admin")){
 			return admin();
 		}
-		return authUser(modelProvider.getModel().loadUserByUsername(username));
+		return authUser(baseModel.getModel().loadUserByUsername(username));
 	}
 
 	private UserDetails admin() {
@@ -62,15 +61,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private Collection<? extends GrantedAuthority> roles(User user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		for(String role : user.getRoles()){
-			authorities.add(new GrantedAuthorityImpl(role));
+			authorities.add(new SimpleGrantedAuthority(role));
 		}
 		return authorities;
 	}
 
 	private Collection<? extends GrantedAuthority> adminRoles() {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		authorities.add(new GrantedAuthorityImpl(ROLE_USER));
-		authorities.add(new GrantedAuthorityImpl(ROLE_ADMIN));
+		authorities.add(new SimpleGrantedAuthority(ROLE_USER));
+		authorities.add(new SimpleGrantedAuthority(ROLE_ADMIN));
 		return authorities;
 	}
 	
