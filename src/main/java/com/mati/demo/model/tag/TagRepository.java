@@ -6,10 +6,32 @@ public class TagRepository {
 
 	/*
 	 * Tags Collection
+	 * TODO pick concurrent collection impl
+	 * must be thread safe
 	 */
 	Collection tagsBag;
 	
 	public static final TagRepository INSTANCE = new TagRepository();
 	
 	private TagRepository(){}
+	
+	public Collection getTagsBag(){
+		return tagsBag;
+	}
+	
+	public boolean addTag(Tag tag){
+		/*
+		 * TODO
+		 * put if absent
+		 */
+		return getTagsBag().add(tag);
+	}
+	
+	public boolean removeTag(Tag tag){
+		/*
+		 * TODO
+		 * remove if exists
+		 */
+		return getTagsBag().remove(tag);
+	}
 }
