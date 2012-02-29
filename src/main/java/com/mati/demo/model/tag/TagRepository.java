@@ -1,35 +1,37 @@
 package com.mati.demo.model.tag;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TagRepository {
 
 	/*
 	 * Tags Collection
 	 */
-	Collection tagsBag;
+	final Map<String, Tag> tagsBag = new HashMap<String, Tag>();
 	
 	public static final TagRepository INSTANCE = new TagRepository();
 	
 	private TagRepository(){}
 	
-	public Collection getTagsBag(){
-		return tagsBag;
+	public Collection<Tag> getAllTags(){
+		return tagsBag.values();
 	}
 	
-	public boolean addTag(Tag tag){
-		/*
-		 * TODO
-		 * put if absent
-		 */
-		return getTagsBag().add(tag);
+	public Tag exists(Tag tag){
+		return getByTagName(tag.getTagName());
 	}
 	
-	public boolean removeTag(Tag tag){
-		/*
-		 * TODO
-		 * remove if exists
-		 */
-		return getTagsBag().remove(tag);
+	public Tag getByTagName(String tagName) {
+		return tagsBag.get(tagName);
+	}
+
+	public void addTag(Tag tag){
+		tagsBag.put(tag.getTagName(), tag);
+	}
+	
+	public void removeTag(Tag tag){
+		tagsBag.remove(tag.getTagName());
 	}
 }

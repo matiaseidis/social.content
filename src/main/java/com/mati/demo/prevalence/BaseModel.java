@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.tag.Tag;
+import com.mati.demo.model.tag.TagRepository;
 import com.mati.demo.model.tag.Taggable;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.transaction.AddTagToUser;
@@ -21,7 +22,6 @@ public class BaseModel {
 	@Getter private Prevayler prevayler;
 	@Setter private PrevaylerFactory prevaylerFactory;
 	
-
 	public BaseModel(){}
 	
 	public void init(){

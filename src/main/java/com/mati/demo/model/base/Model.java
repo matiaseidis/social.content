@@ -8,7 +8,9 @@ import java.util.Map;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import lombok.Getter;
+import lombok.Setter;
 
+import com.mati.demo.model.tag.TagRepository;
 import com.mati.demo.model.tag.Taggable;
 import com.mati.demo.model.user.User;
 
@@ -21,6 +23,7 @@ public class Model implements Serializable{
 
 	private final Map<String, User> users = new HashMap<String, User>();
 	@Getter private final Map<String, Taggable> taggables = new HashMap<String, Taggable>();
+	@Getter @Setter TagRepository tagRepository = TagRepository.INSTANCE;
 	
 	public Collection<User> getUsers(){
 		return users.values();

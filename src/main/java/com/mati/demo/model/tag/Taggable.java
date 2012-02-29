@@ -11,16 +11,18 @@ public class Taggable {
 	 */
 	List<Tag> tags = new ArrayList<Tag>();
 	
-	TagRepository tagRepository;
+	TagRepository tagRepository = TagRepository.INSTANCE;
 	
 	public boolean addTag(Tag tag){
 		
-		/*
-		 * TODO
-		 * check if repo contains tag
-		 */
+		Tag tagFromRepo = tagRepository.getByTagName(tag.getTagName());
 		
-		return this.getTags().add(tag);
+		if(tagFromRepo == null){
+			tagRepository.addTag(tag);
+			tagFromRepo = tag;
+		}
+		
+		return this.getTags().add(tagFromRepo);
 	}
 
 	public List<Tag> getTags() {
@@ -28,6 +30,11 @@ public class Taggable {
 	}
 	
 	public boolean removeTag(Tag tag){
+		
+		this.getTags().remove(tag);
+		if(tag.getTagged().isEmpty()){
+			tagRepository.removeTag(tag);
+		}
 		
 		/*
 		 * TODO
