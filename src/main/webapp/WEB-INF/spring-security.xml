@@ -13,7 +13,11 @@
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
 		<!-- <security:custom-filter ref="filter" position="FORM_LOGIN_FILTER"/> -->
-		<security:form-login login-page="/login.jsp" />
+		<security:form-login login-page="/login.jsp" 
+			default-target-url="/" authentication-failure-url="/login.jsp?error=true"/>
+		<security:logout logout-success-url="/" />
+		
+		
 	</security:http>
 
 	<security:authentication-manager>

@@ -4,7 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.springframework.util.CollectionUtils;
+import org.apache.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -14,12 +14,16 @@ import com.mati.demo.prevalence.transaction.CreateUser;
 
 public class ContextListener implements ServletContextListener {
 
+	public Logger logger = Logger.getLogger(getClass());
+
+	
 	public static final String ROLE_USER = "ROLE_USER";
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
 	public static final String ADMIN_NAME = "admin";
 	public static final String ADMIN_PASS = "admin";
 	
 	public void contextInitialized(ServletContextEvent sce) {
+		logger.info("Staring web app");
 		ServletContext ctx = sce.getServletContext();
 		WebApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(ctx);
 		BaseModel baseModel = (BaseModel) springContext.getBean("base.model");
@@ -41,8 +45,18 @@ public class ContextListener implements ServletContextListener {
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
-		// TODO Auto-generated method stub
-
+		/*
+		 * take snapshot on context shutdown
+		 */
+		ServletContext ctx = sce.getServletContext();
+		WebApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(ctx);
+		BaseModel baseModel = (BaseModel) springContext.getBean("base.model");
+		try {
+			baseModel.getPrevayler().takeSnapshot();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

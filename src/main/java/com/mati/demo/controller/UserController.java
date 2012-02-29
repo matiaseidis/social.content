@@ -14,7 +14,7 @@ import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.CreateUser;
 
 @Controller
-@RequestMapping("user/")
+@RequestMapping("user")
 public class UserController {
 
 	@Resource
@@ -22,23 +22,32 @@ public class UserController {
 	
 	public static final String ROLE_USER = "ROLE_USER";
 	
-	@RequestMapping(value="list", method=RequestMethod.GET)
+	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView list(){
-		return new ModelAndView("user/list", "users", baseModel.getModel().getUsers());
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("users", baseModel.getModel().getUsers());
+		return mav;
 	}
 	
-	@RequestMapping(value="add", method=RequestMethod.GET)
+	@RequestMapping(value="/edit", method=RequestMethod.GET)
+	public ModelAndView edit(){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("user", baseModel.getModel().getLoggedInUser());
+		return mav;
+	}
+	
+	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public ModelAndView add(){
 		return null;
 	}
 	
-//	@RequestMapping(value="/", method=RequestMethod.GET)
-//	public ModelAndView index(){
-//		return new ModelAndView("redirect:list", "users", modelProvider.getModel().getUsers());
-//	}
+	@RequestMapping(value="", method=RequestMethod.GET)
+	public ModelAndView index(){
+		return new ModelAndView("redirect:/user/list", "users", baseModel.getModel().getUsers());
+	}
 	
-	@RequestMapping(value="create", method=RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute User user){
+	@RequestMapping(value="/create", method=RequestMethod.POST)
+	public ModelAndView create(@ModelAttribute User user){
 
 		boolean available = (baseModel.getModel().loadUserByUsername(user.getUserName()) == null);
 		
@@ -48,10 +57,17 @@ public class UserController {
 			}
 			
 			baseModel.getPrevayler().execute(new CreateUser(user));
-			
 		}
+		return new ModelAndView("redirect:/user/list", "users", baseModel.getModel().getUsers());
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public ModelAndView update(@ModelAttribute User user){
 		
-		return new ModelAndView("redirect:list", "users", baseModel.getModel().getUsers());
+		/*
+		 * TODO update user
+		 */
+		return new ModelAndView("redirect:/user/list", "users", baseModel.getModel().getUsers());
 	}
 
 }

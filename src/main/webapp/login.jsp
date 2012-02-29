@@ -15,7 +15,7 @@
 <body onload='document.f.j_username.focus();'>
 	<h3>Login with Username and Password (Custom Page)</h3>
  
-	<c:if test="${not empty error}">
+	<c:if test="${not empty param.error}">
 		<div class="errorblock">
 			Your login attempt was not successful, try again.<br /> Caused :
 			${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
