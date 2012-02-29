@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Tags</title>
 </head>
 <body>
-	<p>Users:</p>
+	<p>Tags:</p>
 	<div>
 		<ul>
-			<c:forEach items="${users}" var="user">
-				<li>${user.userName}<span><a href="../tag/add">add tag</a></span></li>
+			<c:forEach items="${tags}" var="tag">
+				<li>${tag.tagName}</li>
 			</c:forEach>
 		</ul>
 	</div>

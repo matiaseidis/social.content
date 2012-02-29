@@ -6,8 +6,6 @@ public class TagRepository {
 
 	/*
 	 * Tags Collection
-	 * TODO pick concurrent collection impl
-	 * must be thread safe
 	 */
 	Collection tagsBag;
 	

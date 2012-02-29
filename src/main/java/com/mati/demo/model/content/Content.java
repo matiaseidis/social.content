@@ -1,5 +1,7 @@
 package com.mati.demo.model.content;
 
-public interface Content {
+import java.io.Serializable;
+
+public interface Content extends Serializable{
 
 }

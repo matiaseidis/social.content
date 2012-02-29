@@ -1,10 +1,16 @@
 package com.mati.demo.model.tag;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Taggable {
 	
-	Collection<Tag> tags;
+	/*
+	 * the tags for this taggable
+	 */
+	List<Tag> tags = new ArrayList<Tag>();
+	
 	TagRepository tagRepository;
 	
 	public boolean addTag(Tag tag){
@@ -17,7 +23,7 @@ public class Taggable {
 		return this.getTags().add(tag);
 	}
 
-	public Collection<Tag> getTags() {
+	public List<Tag> getTags() {
 		return tags;
 	}
 	

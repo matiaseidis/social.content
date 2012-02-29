@@ -11,10 +11,11 @@ import org.prevayler.Prevayler;
 import org.springframework.util.CollectionUtils;
 
 import com.mati.demo.model.content.type.Post;
+import com.mati.demo.model.tag.Taggable;
 import com.mati.demo.prevalence.transaction.CreatePost;
 import com.mati.demo.prevalence.transaction.CreateUser;
 
-public class User implements Serializable{
+public class User extends Taggable implements Serializable{
 	
 	/**
 	 * 
@@ -34,16 +35,16 @@ public class User implements Serializable{
 		
 	}
 	
-	public void create(Prevayler prevayler){
-		if(CollectionUtils.isEmpty(this.getRoles())){
-			this.getRoles().add(ROLE_USER);
-			if(this.getUserName().equals("admin")){
-				this.getRoles().add(ROLE_ADMIN);
-			}
-		}
-		
-		prevayler.execute(new CreateUser(this));
-	}
+//	public void create(Prevayler prevayler){
+//		if(CollectionUtils.isEmpty(this.getRoles())){
+//			this.getRoles().add(ROLE_USER);
+//			if(this.getUserName().equals("admin")){
+//				this.getRoles().add(ROLE_ADMIN);
+//			}
+//		}
+//		
+//		prevayler.execute(new CreateUser(this));
+//	}
 
 	public void addPost(Prevayler prevayler, Post post) {
 		prevayler.execute(new CreatePost(this, post));
