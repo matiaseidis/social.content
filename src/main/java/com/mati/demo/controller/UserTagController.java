@@ -22,10 +22,8 @@ public class UserTagController {
 		
 		@RequestMapping(value="list", method=RequestMethod.GET)
 		public ModelAndView list(){
-//			new ModelAndView("list", );
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("tags", modelProvider.getModel().getLoggedInUser().getTags());
-//			return new ModelAndView("list", "tags", modelProvider.getModel().getLoggedInUser().getTags());
 			return mav;
 		}
 		
