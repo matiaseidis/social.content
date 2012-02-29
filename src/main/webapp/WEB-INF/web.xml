@@ -9,6 +9,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring-*.xml</param-value>
+<!-- 		<param-value>/WEB-INF/spring-context.xml</param-value> -->
 	</context-param>
 
 
@@ -18,9 +19,12 @@
 		</listener-class>
 	</listener>
 	<listener>
-		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher
-		</listener-class>
+    	<listener-class>com.mati.demo.context.ContextListener</listener-class>
 	</listener>
+<!-- 	<listener> -->
+<!-- 		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher -->
+<!-- 		</listener-class> -->
+<!-- 	</listener> -->
 
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>

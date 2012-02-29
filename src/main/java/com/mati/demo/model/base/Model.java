@@ -21,9 +21,8 @@ public class Model implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final Map<String, User> users = new HashMap<String, User>();
-	@Getter private final Map<String, Taggable> taggables = new HashMap<String, Taggable>();
-	@Getter @Setter TagRepository tagRepository = TagRepository.INSTANCE;
+	private Map<String, User> users = new HashMap<String, User>();
+	@Getter private Map<String, Taggable> taggables = new HashMap<String, Taggable>();
 	
 	public Collection<User> getUsers(){
 		return users.values();

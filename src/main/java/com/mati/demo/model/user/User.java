@@ -11,6 +11,7 @@ import org.prevayler.Prevayler;
 import org.springframework.util.CollectionUtils;
 
 import com.mati.demo.model.content.type.Post;
+import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.tag.Taggable;
 import com.mati.demo.prevalence.transaction.CreatePost;
 import com.mati.demo.prevalence.transaction.CreateUser;
@@ -27,6 +28,7 @@ public class User extends Taggable implements Serializable{
 	
 	@Setter @Getter private String userName;
 	@Setter @Getter private String password;
+	
 	@Setter @Getter private List<String> roles = new ArrayList<String>();
 	
 	@Setter @Getter private List<Post> posts = new ArrayList<Post>();
@@ -49,6 +51,16 @@ public class User extends Taggable implements Serializable{
 	public void addPost(Prevayler prevayler, Post post) {
 		prevayler.execute(new CreatePost(this, post));
 		
+	}
+
+	@Override
+	protected void registerWithTag(Tag tag) {
+		tag.addTagged(this);
+	}
+
+	@Override
+	protected void unregisterWithTag(Tag tag) {
+		tag.removeTagged(this);
 	}
 
 }

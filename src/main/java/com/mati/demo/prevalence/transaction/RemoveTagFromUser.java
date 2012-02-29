@@ -6,6 +6,7 @@ import org.prevayler.Transaction;
 
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.tag.Tag;
+import com.mati.demo.model.tag.TagRepository;
 import com.mati.demo.model.tag.Taggable;
 
 public class RemoveTagFromUser implements Transaction {
@@ -25,7 +26,7 @@ public class RemoveTagFromUser implements Transaction {
 		
 		Model model = (Model) prevalentSystem;
 		
-		Tag tagFromRepo = model.getTagRepository().getByTagName(tag.getTagName());
+		Tag tagFromRepo = TagRepository.INSTANCE.getByTagName(tag.getTagName());
 		
 		model.getLoggedInUser().removeTag(tagFromRepo);
 	}

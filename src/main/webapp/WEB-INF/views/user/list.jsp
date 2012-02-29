@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="/admin/menu.jsp"></jsp:include>
 	<p>Users:</p>
 	<div>
 		<ul>

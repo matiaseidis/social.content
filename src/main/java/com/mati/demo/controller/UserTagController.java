@@ -12,6 +12,7 @@ import com.mati.demo.model.content.Content;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
+import com.mati.demo.prevalence.transaction.AddTagToUser;
 
 @Controller
 @RequestMapping("user/tags/")
@@ -35,13 +36,16 @@ public class UserTagController {
 		@RequestMapping(value="create", method=RequestMethod.POST)
 		public ModelAndView save(@ModelAttribute Tag tag){
 
-			User user = modelProvider.getModel().getLoggedInUser();
 
 			/*
 			 * TODO tag validation
 			 */
 
-			modelProvider.addTagToUser(tag);
+//			modelProvider.addTagToUser(tag);
+			modelProvider.getPrevayler().execute(new AddTagToUser(tag));
+
+			User user = modelProvider.getModel().getLoggedInUser();
+			
 			return new ModelAndView("redirect:list", "tags", user.getTags());
 		}
 
