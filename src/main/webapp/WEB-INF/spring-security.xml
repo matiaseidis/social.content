@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+<security:http auto-config="true">
+<!-- <security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" /> -->
+	<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
+<!-- 		<security:custom-filter ref="filter" position="FORM_LOGIN_FILTER"/> -->
+		<security:form-login login-page="/login.jsp"/>
+</security:http>
+
+<security:authentication-manager>
+        <security:authentication-provider ref="authenticationProvider" />
+        
+</security:authentication-manager>
+
+<bean id="authenticationProvider"
+    class="com.mati.demo.authentication.AuthenticationProviderImpl" >
+<!--     <password-encoder hash="Md5PasswordEncoder"/> -->
+    <property name="userDetailsService" ref="user.details.service" />
+<!--     <property name="prevalenceModelProvider" ref="model.provider"></property> -->
+</bean>
+
+<bean id="user.details.service" class="com.mati.demo.authentication.UserDetailsServiceImpl"></bean>
+
+<bean id="filter" class="com.mati.demo.authentication.AfterAuthenticationFilter" >
+<property name="prevalenceModelProvider" ref="model.provider"></property>
+</bean>
+  
+
+<!-- <security:global-method-security secured-annotations="disabled"></security:global-method-security> -->
+<!-- <security:http auto-config="true"> -->
+<!-- 		<security:intercept-url pattern="/**" access="ROLE_USER" /> -->
+<!-- </security:http> -->
+
+<!-- 	<security:authentication-manager> -->
+<!-- 		<security:authentication-provider> -->
+<!-- 		<security:password-encoder></security:password-encoder> -->
+<!-- 		<security:user-service id="userDetailsService"> -->
+<!-- 			<security:user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" /> -->
+<!-- 			<security:user name="user" password="user" authorities="ROLE_USER" /> -->
+<!-- 		</security:user-service> -->
+<!-- 		</security:authentication-provider> -->
+<!-- 	</security:authentication-manager> -->
+
+</beans>
