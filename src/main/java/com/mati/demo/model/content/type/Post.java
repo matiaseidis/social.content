@@ -7,7 +7,6 @@ import com.mati.demo.model.content.Content;
 
 public class Post extends Content{
 	
-	@Setter @Getter private String title;
 	@Setter @Getter private String body;
 
 }

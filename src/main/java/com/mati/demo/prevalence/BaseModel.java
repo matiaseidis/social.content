@@ -6,14 +6,13 @@ import lombok.Setter;
 import org.prevayler.Prevayler;
 import org.prevayler.PrevaylerFactory;
 import org.prevayler.foundation.monitor.SimpleMonitor;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.mati.demo.model.base.Model;
+import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.tag.Tag;
-import com.mati.demo.model.tag.TagRepository;
-import com.mati.demo.model.tag.Taggable;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.transaction.AddTagToUser;
+import com.mati.demo.prevalence.transaction.CreatePost;
 import com.mati.demo.prevalence.transaction.RemoveTagFromUser;
 
 public class BaseModel {
@@ -52,6 +51,10 @@ public class BaseModel {
 	
 	public void removeTagFromUser(Tag tag){
 		prevayler.execute(new RemoveTagFromUser(tag));
+	}
+	
+	public void addContent(Post post) {
+		prevayler.execute(new CreatePost(post));
 	}
 	
 }

@@ -10,6 +10,7 @@ import lombok.Setter;
 
 public abstract class Content extends Taggable implements Serializable{
 
+	@Getter @Setter private int id;
 	@Getter @Setter private String title;
 
 	@Override
@@ -20,6 +21,19 @@ public abstract class Content extends Taggable implements Serializable{
 	@Override
 	protected void unregisterWithTag(Tag tag) {
 		tag.removeTagged(this);
+	}
+	
+	@Override
+	public int hashCode() {
+		return getTitle().hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null || !(obj instanceof Content)){
+			return false;
+		}
+		return this.getTitle().equals(((Content)obj).getTitle());
 	}
 	
 }

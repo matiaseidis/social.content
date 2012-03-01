@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Create Post</title>
+<title>Update Post</title>
 </head>
 <body>
-<form action="create" method=POST>
-<input type="text" name="title">
+<form action="../update/${post.id}" method=POST>
+<input type="text" name="title" value="${post.title}">
 <p></p>
-<textarea rows="20" cols="70" name="body"></textarea>
+<textarea rows="20" cols="70" name="body" value="${post.body}"></textarea>
 <p></p>
 <input type="submit">
 </form>

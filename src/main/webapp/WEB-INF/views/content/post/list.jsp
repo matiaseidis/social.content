@@ -11,11 +11,26 @@
 <body>
 	<p>Posts:</p>
 	<div>
-		<ul>
-			<c:forEach items="${posts}" var="post">
-				<li>${post.title}</li>
-			</c:forEach>
-		</ul>
+		<table>
+			<tbody>
+				<c:forEach items="${posts}" var="post">
+					<tr>
+						<td><c:out value="${post.title}"></c:out></td>
+						<td><span><a
+								href="<c:out value="${post.title}"></c:out>">ver</a></span></td>
+						<td><span><a
+								href="edit/<c:out value="${post.id}"></c:out>">editar</a></span></td>
+						<td><span> <a
+								href="delete/<c:out value="${post.id}"></c:out>">borrar</a>
+								<form action="delete/<c:out value='${post.id}'></c:out>"
+									method="POST">
+									<input type="submit" value="borrar">
+								</form>
+						</span></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>
