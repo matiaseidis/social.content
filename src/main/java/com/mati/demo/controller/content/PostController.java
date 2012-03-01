@@ -1,23 +1,25 @@
 package com.mati.demo.controller.content;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
-import com.mati.demo.prevalence.transaction.CreatePost;
-import com.mati.demo.prevalence.transaction.DeletePost;
-import com.mati.demo.prevalence.transaction.UpdatePost;
+import com.mati.demo.prevalence.transaction.content.post.CreatePost;
+import com.mati.demo.prevalence.transaction.content.post.DeletePost;
+import com.mati.demo.prevalence.transaction.content.post.UpdatePost;
 
 
 
@@ -27,21 +29,56 @@ public class PostController {
 	
 	@Resource
 	private BaseModel baseModel;
-
+	
+//	@Resource
+//	Validator globalValidator;
+	
 	@RequestMapping(value="add", method=RequestMethod.GET)
 	public ModelAndView add(){
-		return null;
+		ModelAndView m = new ModelAndView();
+		m.addObject("command", new Post());
+		return m;
+//		return null;
 	}
 	
+//	@RequestMapping(value="create", method=RequestMethod.POST)
+//	public ModelAndView save(@ModelAttribute Post command){
+//		
+//		User user = baseModel.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+//		
+//		baseModel.getPrevayler().execute(new CreatePost(command));
+//		
+//		return new ModelAndView("redirect:list", "posts", user.getPosts());
+//	}
+	//http://www.roseindia.net/tutorial/spring/spring3/web/spring-3-mvc-validation-example.html
+
 	@RequestMapping(value="create", method=RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute Post command){
-		
+	public ModelAndView save(@Valid Post post, BindingResult result/*, Map model*/){
+
+		if (result.hasErrors()) {
+			return new ModelAndView("add");
+		}
+		// Add the saved validationForm to the model
+		/*model.put("post", post);*/
+		baseModel.getPrevayler().execute(new CreatePost(post));
 		User user = baseModel.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-		
-		baseModel.getPrevayler().execute(new CreatePost(command));
-		
 		return new ModelAndView("redirect:list", "posts", user.getPosts());
+
 	}
+	
+
+	
+	// Process the form.
+//    @RequestMapping(method = RequestMethod.POST)
+//    public String processValidatinForm(@Valid ValidationForm validationForm, BindingResult result, Map model) {
+//            if (result.hasErrors()) {
+//                    return "validationform";
+//            }
+//            // Add the saved validationForm to the model
+//            model.put("validationForm", validationForm);
+//            return "validationsuccess";
+//    }
+
 	
 	@RequestMapping(value="delete/{nodeId}", method=RequestMethod.POST)
 	public ModelAndView delete(@PathVariable int nodeId){

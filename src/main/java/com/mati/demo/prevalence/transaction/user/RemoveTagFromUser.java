@@ -1,4 +1,4 @@
-package com.mati.demo.prevalence.transaction;
+package com.mati.demo.prevalence.transaction.user;
 
 import java.util.Date;
 

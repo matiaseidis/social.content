@@ -10,7 +10,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
-import com.mati.demo.prevalence.transaction.CreateUser;
+import com.mati.demo.prevalence.transaction.user.CreateUser;
 
 public class ContextListener implements ServletContextListener {
 

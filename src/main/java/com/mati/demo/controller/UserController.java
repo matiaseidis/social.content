@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
-import com.mati.demo.prevalence.transaction.CreateUser;
+import com.mati.demo.prevalence.transaction.user.CreateUser;
 
 @Controller
 @RequestMapping("user")

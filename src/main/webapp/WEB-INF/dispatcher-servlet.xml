@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:p="http://www.springframework.org/schema/p"
 xmlns:context="http://www.springframework.org/schema/context"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/context
-http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	
 	<context:component-scan base-package="com.mati.demo.controller" />
 
+    <!-- JSR-303 support will be detected on classpath and enabled automatically -->
+<!--     <bean id="globalValidator" class="com.mati.demo.model.validator.PostValidator" /> -->
+<!--     <mvc:annotation-driven  validator="globalValidator"/> -->
+    
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
@@ -21,46 +28,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		</property>
 	</bean>
 	
-<!-- 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer"> -->
-<!--     <property name="resourceLoaderPath"> -->
-<!--         <value>/WEB-INF/velocity/</value> -->
-<!--     </property> -->
-<!-- </bean> -->
-
-<!-- Next up is letting Spring know that Velocity is the default View that will be used. This configures a few handy 
-defaults that represent the common case response. That being is will be an XML response, the template name has no 
-prefix and a .vm suffix, and we configure some custom tools to be available in the macros. -->
-
-<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver"> -->
-<!--     <property name="exposeSpringMacroHelpers"> -->
-<!--         <value>true</value> -->
-<!--     </property> -->
-<!--     <property name="contentType"> -->
-<!--         <value>text/xml</value> -->
-<!--     </property> -->
-<!--     <property name="prefix"> -->
-<!--         <value></value> -->
-<!--     </property> -->
-<!--     <property name="suffix"> -->
-<!--         <value>.vm</value> -->
-<!--     </property> -->
-<!--     <property name="toolboxConfigLocation"> -->
-<!--         <value>/WEB-INF/toolbox.xml</value> -->
-<!--     </property> -->
-<!-- </bean> -->
-	
-<!-- <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> -->
-<!--     <property name="warnLogCategory"> -->
-<!--         <value>com.neophi.exception</value> -->
-<!--     </property> -->
-<!--     <property name="defaultStatusCode"> -->
-<!--         <value>200</value> -->
-<!--     </property> -->
-<!--     <property name="exceptionMappings"> -->
-<!--         <props> -->
-<!--             <prop key="com.neophi.exception.ServerException">exception</prop> -->
-<!--         </props> -->
-<!--     </property> -->
-<!-- </bean> -->
+<!-- <bean id="postController" class="com.mati.demo.controller.content.PostController" ></bean> -->
 
 </beans>

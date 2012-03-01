@@ -11,9 +11,9 @@ import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
-import com.mati.demo.prevalence.transaction.AddTagToUser;
-import com.mati.demo.prevalence.transaction.CreatePost;
-import com.mati.demo.prevalence.transaction.RemoveTagFromUser;
+import com.mati.demo.prevalence.transaction.content.post.CreatePost;
+import com.mati.demo.prevalence.transaction.user.AddTagToUser;
+import com.mati.demo.prevalence.transaction.user.RemoveTagFromUser;
 
 public class BaseModel {
 	

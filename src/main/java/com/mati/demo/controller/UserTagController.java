@@ -12,7 +12,7 @@ import com.mati.demo.model.content.Content;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
-import com.mati.demo.prevalence.transaction.AddTagToUser;
+import com.mati.demo.prevalence.transaction.user.AddTagToUser;
 
 @Controller
 @RequestMapping("user/tags/")
