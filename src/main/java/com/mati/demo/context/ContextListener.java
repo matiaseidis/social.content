@@ -24,6 +24,7 @@ public class ContextListener implements ServletContextListener {
 	
 	public void contextInitialized(ServletContextEvent sce) {
 		logger.info("Staring web app");
+		
 		ServletContext ctx = sce.getServletContext();
 		WebApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(ctx);
 		BaseModel baseModel = (BaseModel) springContext.getBean("base.model");

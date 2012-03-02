@@ -1,13 +1,14 @@
 package com.mati.demo.controller.content;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.validator.GenericValidator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,56 +31,59 @@ public class PostController {
 	@Resource
 	private BaseModel baseModel;
 	
-//	@Resource
-//	Validator globalValidator;
+
 	
 	@RequestMapping(value="add", method=RequestMethod.GET)
-	public ModelAndView add(){
-		ModelAndView m = new ModelAndView();
-		m.addObject("command", new Post());
-		return m;
-//		return null;
+	public ModelAndView add(HttpSession session){
+		return retrieveErrorsFromSession(session);
 	}
 	
-//	@RequestMapping(value="create", method=RequestMethod.POST)
-//	public ModelAndView save(@ModelAttribute Post command){
-//		
-//		User user = baseModel.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-//		
-//		baseModel.getPrevayler().execute(new CreatePost(command));
-//		
-//		return new ModelAndView("redirect:list", "posts", user.getPosts());
-//	}
-	//http://www.roseindia.net/tutorial/spring/spring3/web/spring-3-mvc-validation-example.html
+	private ModelAndView retrieveErrorsFromSession(HttpSession session) {
+		ModelAndView m = null;
+		Map<String, String> errors = (Map<String, String>)session.getAttribute("errors");
+		if(errors != null && !errors.isEmpty()){
+			m = new ModelAndView(); 
+			m.addObject("errors", errors);
+		}
+		session.setAttribute("errors", null);
+		return m;
+	}
 
 	@RequestMapping(value="create", method=RequestMethod.POST)
-	public ModelAndView save(@Valid Post post, BindingResult result/*, Map model*/){
-
-		if (result.hasErrors()) {
-			return new ModelAndView("add");
+	public ModelAndView save(@ModelAttribute Post post, HttpSession session){
+	
+		if(sendErrorsToSession(session, isValidPost(post))){
+			return new ModelAndView("redirect:add");
 		}
-		// Add the saved validationForm to the model
-		/*model.put("post", post);*/
-		baseModel.getPrevayler().execute(new CreatePost(post));
+		
 		User user = baseModel.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		
+		baseModel.getPrevayler().execute(new CreatePost(post));
+		
 		return new ModelAndView("redirect:list", "posts", user.getPosts());
-
 	}
-	
+	 
+	private boolean sendErrorsToSession(HttpSession session, Map<String, String> errors) {
+		
+		if(!errors.isEmpty()){
+			session.setAttribute("errors", errors);
+			return true;
+		}
+		return false;
+	}
 
-	
-	// Process the form.
-//    @RequestMapping(method = RequestMethod.POST)
-//    public String processValidatinForm(@Valid ValidationForm validationForm, BindingResult result, Map model) {
-//            if (result.hasErrors()) {
-//                    return "validationform";
-//            }
-//            // Add the saved validationForm to the model
-//            model.put("validationForm", validationForm);
-//            return "validationsuccess";
-//    }
+	private Map<String, String> isValidPost(Post command) {
 
-	
+		Map<String, String> errors = new HashMap<String, String>();
+		
+		String title = command.getTitle();
+		if(GenericValidator.isBlankOrNull(title) || GenericValidator.maxLength(title, 64)){
+			errors.put("title", "el titulo es obligatorio");
+		}
+		
+		return errors;
+	}
+
 	@RequestMapping(value="delete/{nodeId}", method=RequestMethod.POST)
 	public ModelAndView delete(@PathVariable int nodeId){
 		
@@ -111,13 +115,18 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="update/{nodeId}", method=RequestMethod.POST)
-	public ModelAndView update(@ModelAttribute Post updatedPost, @PathVariable int oldNodeId){
+	public ModelAndView update(@ModelAttribute Post updatedPost, @PathVariable int oldNodeId, HttpSession session){
 		/*
 		 * TODO 
 		 * hay que pasarle el hash a la vista, y comparar si el hash del updated es igual al anterior. 
 		 * Si no son iguales, hay que pasar la metadata del viejo (fecha de creacion, etc) al nuevo, persistir el nuevo y borrar el viejo
 		 * Por ahora el hash se saca del titulo
 		 */
+
+		if(this.sendErrorsToSession(session, isValidPost(updatedPost))){
+			return new ModelAndView("redirect:edit");
+		}
+		
 		Post oldPost = baseModel.getModel().getLoggedInUser().getPost(oldNodeId);
 		
 		if(updatedPost.getTitle().hashCode() != oldNodeId){

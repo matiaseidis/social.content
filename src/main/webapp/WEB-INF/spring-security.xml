@@ -7,17 +7,13 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
 	<security:http auto-config="true">
-		<!-- <security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" 
-			/> -->
-		<security:intercept-url pattern="/login.jsp"
-			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+<!-- 		<security:intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" 	/> -->
+		<security:intercept-url pattern="*.js" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
-		<!-- <security:custom-filter ref="filter" position="FORM_LOGIN_FILTER"/> -->
 		<security:form-login login-page="/login.jsp" 
 			default-target-url="/" authentication-failure-url="/login.jsp?error=true"/>
 		<security:logout logout-success-url="/" />
-		
-		
 	</security:http>
 
 	<security:authentication-manager>
