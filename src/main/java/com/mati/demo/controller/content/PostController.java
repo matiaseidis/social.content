@@ -35,16 +35,26 @@ public class PostController {
 	
 	@RequestMapping(value="add", method=RequestMethod.GET)
 	public ModelAndView add(HttpSession session){
-		return retrieveErrorsFromSession(session);
+		ModelAndView m = retrieveErrorsFromSession(session);
+		
+		if(m == null){
+			m = new ModelAndView();
+		}
+		
+		m.setViewName("/content/post/add-edit");
+		m.addObject("action", "create");
+		return  m;
 	}
 	
 	private ModelAndView retrieveErrorsFromSession(HttpSession session) {
 		ModelAndView m = null;
 		Map<String, String> errors = (Map<String, String>)session.getAttribute("errors");
+		
 		if(errors != null && !errors.isEmpty()){
 			m = new ModelAndView(); 
 			m.addObject("errors", errors);
 		}
+		
 		session.setAttribute("errors", null);
 		return m;
 	}
@@ -63,7 +73,7 @@ public class PostController {
 		return new ModelAndView("redirect:list", "posts", user.getPosts());
 	}
 	 
-	private boolean sendErrorsToSession(HttpSession session, Map<String, String> errors) {
+	private boolean sendErrorsToSession(HttpSession session, Map<String, Object> errors) {
 		
 		if(!errors.isEmpty()){
 			session.setAttribute("errors", errors);
@@ -72,13 +82,15 @@ public class PostController {
 		return false;
 	}
 
-	private Map<String, String> isValidPost(Post command) {
+	private Map<String, Object> isValidPost(Post command) {
 
-		Map<String, String> errors = new HashMap<String, String>();
+		Map<String, Object> errors = new HashMap<String, Object>();
 		
 		String title = command.getTitle();
-		if(GenericValidator.isBlankOrNull(title) || GenericValidator.maxLength(title, 64)){
+		if(GenericValidator.isBlankOrNull(title) || !GenericValidator.maxLength(title, 64)){
 			errors.put("title", "el titulo es obligatorio");
+			errors.put("post", command);
+			
 		}
 		
 		return errors;
@@ -97,7 +109,10 @@ public class PostController {
 	@RequestMapping(value="edit/{nodeId}", method=RequestMethod.GET)
 	public ModelAndView edit(@PathVariable int nodeId){
 		Post post = baseModel.getModel().getLoggedInUser().getPost(nodeId);
-		return new ModelAndView("content/post/edit", "post", post);
+		ModelAndView m = new ModelAndView("content/post/add-edit", "post", post);
+		m.addObject("action", "../update/"+nodeId);
+		return  m;
+
 	}
 	
 	@RequestMapping(value="{title}", method=RequestMethod.GET)

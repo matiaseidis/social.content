@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import com.mati.demo.model.content.type.Post;
+import com.mati.demo.model.content.type.Video;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.tag.Taggable;
 
@@ -30,6 +31,7 @@ public class User extends Taggable implements Serializable{
 	@Setter @Getter private List<String> roles = new ArrayList<String>();
 	
 	private Map<Integer, Post> posts = new HashMap<Integer, Post>();
+	private Map<Integer, Video> videos = new HashMap<Integer, Video>();
 	
 	public User() {
 		
@@ -68,9 +70,37 @@ public class User extends Taggable implements Serializable{
 		}
 		
 	}
+	
+	public void updateVideo(Video oldVideo, Video updatedVideo) {
+		int oldVideoId = oldVideo.getTitle().hashCode();
+		
+		if(updatedVideo == null){
+			videos.put(oldVideoId, oldVideo);
+		} else {
+			deleteVideo(oldVideoId);
+			videos.put(updatedVideo.getTitle().hashCode(), updatedVideo);
+		}
+		
+	}
 
 	public boolean deletePost(int id) {
 		return posts.remove(id) == null;
+	}
+
+	public void addVideo(Video video) {
+		videos.put(video.hashCode(), video);
+	}
+	
+	public boolean deleteVideo(int id) {
+		return videos.remove(id) == null;
+	}
+
+	public Collection getVideos() {
+		return videos.values();
+	}
+
+	public Video getVideo(int nodeId) {
+		return videos.get(nodeId);
 	}
 
 }
