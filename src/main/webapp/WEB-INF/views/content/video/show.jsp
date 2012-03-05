@@ -6,28 +6,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type='text/javascript' src='../../js/mediaplayer-5.9-viral/jwplayer.js'></script>	
+
 <title>${video.title}</title>
 </head>
 <body>
-	<div>
-	<p>
-				<h1>${video.title}</h1>
-				</p>
-				<p>
-				<h4>${video.uri}</h4>
-				</p>
-	</div>
-	<video id="my_video_1" class="video-js vjs-default-skin" controls
-  preload="auto" width="640" height="264" poster="my_video_poster.png"
-  data-setup="{}">
-  <source src="${video.uri}" type='video/flv'>
-<!--   <source src="my_video.mp4" type='video/mp4'> -->
-<!--   <source src="my_video.webm" type='video/webm'> -->
-</video>
+<h1><c:out value="${video.title}" ></c:out></h1>
 
-	
-<link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
-<script src="http://vjs.zencdn.net/c/video.js"></script>
+<div id='mediaspace'>This text will be replaced</div>
+
+<script type='text/javascript'>
+  jwplayer('mediaspace').setup({
+    'flashplayer': '../../js/mediaplayer-5.9-viral/player.swf',
+    'file': '<c:out value="${video.baseUrl}${video.fileName}" ></c:out>',
+    'controlbar': 'bottom',
+    'width': '470',
+    'height': '320'
+  });
+</script>
 
 	
 </body>

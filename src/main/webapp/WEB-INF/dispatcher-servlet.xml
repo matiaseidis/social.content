@@ -11,7 +11,34 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	
-	<context:component-scan base-package="com.mati.demo.controller" />
+<!-- 	<context:component-scan base-package="com.mati.demo.controller" /> -->
+<context:property-placeholder location="classpath:general.properties" />
+	
+	<bean id="user.controller" class="com.mati.demo.controller.UserController">
+		<property name="baseModel" ref="base.model"></property>
+		<property name="entityName" value="post"></property>
+		<property name="entityPluralName" value="posts"></property>
+		<property name="basePath" value="${user.base.path}"></property>
+	</bean>
+	
+	<bean id="video.controller" class="com.mati.demo.controller.content.VideoController">
+		<property name="baseModel" ref="base.model"></property>
+		<property name="staticContentBase" value="${static.content.server.base}"></property>
+		<property name="entityName" value="video"></property>
+		<property name="entityPluralName" value="videos"></property>
+		<property name="serverBasePath" value="${static.content.server.base}"></property>
+		<property name="fileSystemBasePath" value="${static.content.file.system.base}"></property>
+		
+	</bean>
+	
+	<bean id="post.controller" class="com.mati.demo.controller.content.PostController">
+		<property name="baseModel" ref="base.model"></property>
+		<property name="staticContentBase" value="${static.content.server.base}"></property>
+		<property name="entityName" value="post"></property>
+		<property name="entityPluralName" value="posts"></property>
+		<property name="basePath" value="${content.base.path}"></property>
+	</bean>
+	
 	
 <!-- 	<mvc:default-servlet-handler/> -->
 <!-- 	<context:annotation-config/>   -->

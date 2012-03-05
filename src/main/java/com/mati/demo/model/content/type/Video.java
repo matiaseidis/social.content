@@ -13,7 +13,8 @@ public class Video extends Content{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Getter @Setter String body;
-	@Getter @Setter String uri;
+	@Getter @Setter private String body;
+	@Getter @Setter private String fileName;
+	transient @Getter @Setter private String baseUrl;
 	transient @Getter @Setter private CommonsMultipartFile fileData;
 }
