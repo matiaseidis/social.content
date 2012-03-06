@@ -1,6 +1,5 @@
 package com.mati.demo.model.user;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,10 +11,12 @@ import lombok.Setter;
 
 import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.content.type.Video;
+import com.mati.demo.model.relationships.Followable;
+import com.mati.demo.model.relationships.Follower;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.tag.Taggable;
 
-public class User extends Taggable implements Serializable{
+public class User extends Taggable implements Followable, Follower{
 	
 	/**
 	 * 
@@ -24,7 +25,8 @@ public class User extends Taggable implements Serializable{
 
 	public static final String ROLE_USER = "ROLE_USER";
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
-	
+
+	@Getter @Setter private int id;
 	@Setter @Getter private String userName;
 	@Setter @Getter private String password;
 	
@@ -32,6 +34,11 @@ public class User extends Taggable implements Serializable{
 	
 	private Map<Integer, Post> posts = new HashMap<Integer, Post>();
 	private Map<Integer, Video> videos = new HashMap<Integer, Video>();
+	
+	private Map<Integer, Follower> followedBy = new HashMap<Integer, Follower>();
+	
+	private Map<Integer, Followable> followedUsers = new HashMap<Integer, Followable>();
+//	private Map<Integer, Followable<Tag>> followedTags = new HashMap<Integer, Tag>();
 	
 	public User() {
 		
@@ -101,6 +108,15 @@ public class User extends Taggable implements Serializable{
 
 	public Video getVideo(int nodeId) {
 		return videos.get(nodeId);
+	}
+
+	public void startFollowing(User follower) {
+		followedBy.put(follower.getId(), follower);
+	}
+
+	public void stopFollowing(User follower) {
+		followedBy.remove(follower.getId());
+		
 	}
 
 }
