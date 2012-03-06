@@ -102,6 +102,6 @@ public class PostController extends ContentController<Post>{
 	@Override
 	protected boolean isValidContent(Post content, Map<String, Object> errors) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }

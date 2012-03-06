@@ -29,10 +29,11 @@ public abstract class BaseController<T> {
 	
 	@Getter @Setter private String entityName;
 	@Getter @Setter private String entityPluralName;
-	@Getter @Setter	protected String basePath = "content";
+	@Getter @Setter	protected String basePath;
 	protected final String ADD = "add";
+	protected final String ADD_EDIT = "add-edit";
 	protected final String CREATE = "create";
-	protected final String EDIT = "edit";
+	protected final String EDIT = "add-edit";
 	protected final String UPDATE = "update";
 	protected final String LIST = "list";
 	protected final String DELETE = "delete";
@@ -50,6 +51,18 @@ public abstract class BaseController<T> {
 	protected abstract Collection<T> listEntities(); //user.getPosts()
 	protected abstract T getEntity(int nodeId); //Post post = baseModel.getModel().getLoggedInUser().getPost(nodeId);
 	
+	@RequestMapping(value=LIST, method=RequestMethod.GET)
+	public ModelAndView list(){
+		
+		ModelAndView m = new ModelAndView();
+		
+		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath + File.separator;
+		m.setViewName(base + getEntityName() + File.separator + LIST);
+		
+		m.addObject(getEntityPluralName(), listEntities());
+		
+		return m;
+	}
 	
 	@RequestMapping(value="edit/{nodeId}", method=RequestMethod.GET)
 	public ModelAndView edit(@PathVariable int nodeId){
@@ -58,7 +71,7 @@ public abstract class BaseController<T> {
 		ModelAndView m = new ModelAndView();
 		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath;
 		
-		m.setViewName(base + File.separator + getEntityName() + File.separator + EDIT);
+		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
 		
 		m.addObject(getEntityName(), getEntity(nodeId));
 		m.addObject(ACTION, "../"+UPDATE+"/"+nodeId);
@@ -85,7 +98,7 @@ public abstract class BaseController<T> {
 			m = new ModelAndView();
 		}
 		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath;
-		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD.toLowerCase() + "-" + EDIT.toLowerCase());
+		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
 		m.addObject(ACTION, CREATE);
 		m.addObject(getEntityName(), new Video());
 		return  m;

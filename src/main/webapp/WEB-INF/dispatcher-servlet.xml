@@ -16,19 +16,20 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	
 	<bean id="user.controller" class="com.mati.demo.controller.UserController">
 		<property name="baseModel" ref="base.model"></property>
-		<property name="entityName" value="post"></property>
-		<property name="entityPluralName" value="posts"></property>
-		<property name="basePath" value="${user.base.path}"></property>
+		<property name="entityName" value="user"></property>
+		<property name="entityPluralName" value="users"></property>
+<!-- 	no aplica	<property name="basePath" value="${user.base.path}"></property> -->
 	</bean>
 	
 	<bean id="video.controller" class="com.mati.demo.controller.content.VideoController">
+		
 		<property name="baseModel" ref="base.model"></property>
 		<property name="staticContentBase" value="${static.content.server.base}"></property>
 		<property name="entityName" value="video"></property>
 		<property name="entityPluralName" value="videos"></property>
 		<property name="serverBasePath" value="${static.content.server.base}"></property>
 		<property name="fileSystemBasePath" value="${static.content.file.system.base}"></property>
-		
+		<property name="basePath" value="${content.base.path}"></property>
 	</bean>
 	
 	<bean id="post.controller" class="com.mati.demo.controller.content.PostController">

@@ -8,6 +8,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="/nuestras_cosas/Matias/Desarrollo/lib/jave-1.0.2/jave-1.0.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

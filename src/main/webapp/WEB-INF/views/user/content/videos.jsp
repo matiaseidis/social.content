@@ -9,17 +9,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>Posts:</p>
+	<p>Videos de ${user.userName}:</p>
 	<div>
 		<table>
 			<tbody>
 				<c:forEach items="${videos}" var="video">
 					<tr>
 						<td><c:out value="${video.title}"></c:out></td>
+						<td><span> <a
+								href="${pageContext.request.contextPath}/content/video/<c:out value='${video.title}'></c:out>">ver</a>
+						</span></td>
 						<td><span><a
-								href="<c:out value="${video.title}"></c:out>">ver</a></span></td>
-						<td><span><a
-								href="edit/<c:out value="${video.id}"></c:out>">editar</a></span></td>
+								href="${pageContext.request.contextPath}/content/video/edit/<c:out value='${video.id}'></c:out>">editar</a></span></td>
 						<td><span>
 								<form action="delete/<c:out value='${video.id}'></c:out>"
 									method="POST">

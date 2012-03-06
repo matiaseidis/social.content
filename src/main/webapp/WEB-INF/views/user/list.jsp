@@ -9,14 +9,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="/admin/menu.jsp"></jsp:include>
-	<p>Users:</p>
+	<jsp:include page="/admin/menu.jsp"></jsp:include>
+	<p>Users (${fn:length(users)}):</p>
 	<div>
-		<ul>
-			<c:forEach items="${users}" var="user">
-				<li>${user.userName}<span><a href="../tag/add">add tag</a></span></li>
-			</c:forEach>
-		</ul>
+		<table>
+			<thead>
+				<tr>
+					<td>name</td>
+					<td>pass</td>
+					<td>roles</td>
+					<td>posts</td>
+					<td>videos</td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${users}" var="user">
+					<tr>
+						<td>${user.userName}</td>
+						<td>${user.password}</td>
+						<td>${fn:length(user.roles)}</td>
+						<td>${fn:length(user.posts)}</td>
+						<td><a href="<c:out value='${user.userName}' ></c:out>/videos" >${fn:length(user.videos)}</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

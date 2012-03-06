@@ -1,20 +1,27 @@
 package com.mati.demo.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import org.prevayler.Transaction;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.mati.demo.model.content.type.Video;
+import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("user/")
 public class UserController extends BaseController{
 
 	
@@ -28,14 +35,38 @@ public class UserController extends BaseController{
 
 	@Override
 	protected Collection listEntities() {
-		return getBaseModel().getModel().getUsers();
+		Comparator userNameComparator = new Comparator<User>(){
+
+			public int compare(User o1, User o2) {
+				return o1.getUserName().compareTo(o2.getUserName());
+			}
+		};
+		List<User> users = new ArrayList<User>(getBaseModel().getModel().getUsers());
+		Collections.sort(users, userNameComparator);
+		return users;
 	}
 
 	@Override
 	protected Object getEntity(int nodeId) {
 		return getBaseModel().getModel().getLoggedInUser();
 	}
-
+	
+	@RequestMapping(value="{username}/videos", method=RequestMethod.GET)
+	public ModelAndView videos(@PathVariable String username){
+		ModelAndView mav = new ModelAndView();
+		User user = getBaseModel().getModel().loadUserByUsername(username);
+		List<Video> videos = null;
+		if(user != null){
+			videos = new ArrayList<Video>(user.getVideos());
+		}
+		
+		mav.addObject("videos", videos);
+		mav.addObject(getEntityName(), user);
+		mav.setViewName("/"+getEntityName()+"/content/videos");
+		return mav;
+	}
+	
+//	public ModelAndView add(){
 //	public static final String ROLE_USER = "ROLE_USER";
 //	
 //	@RequestMapping(value="/list", method=RequestMethod.GET)
@@ -85,6 +116,32 @@ public class UserController extends BaseController{
 //		 */
 //		return new ModelAndView("redirect:/user/list", "users", getBaseModel().getModel().getUsers());
 //	}
+	
+
+
+//		//	@RequestMapping(value="/toto", method=RequestMethod.GET)
+//		List<User> users = new ArrayList<User>();
+//		for(int i = 0; i<10000; i++){
+//			User user = new User();
+//			user.setUserName("user"+i);
+//			user.setPassword("user"+i);
+//			users.add(user);
+//		}
+//		
+//		for (User u : users){
+//			for(int i = 0; i<6; i++){
+//				Post post = new Post();
+//				post.setTitle("title post "+ u.getUserName() + i);
+//				post.setBody("title body "+ u.getUserName() + i);
+//				
+//				u.addPost(post);
+//				getBaseModel().getPrevayler().execute(new CreateUser(u));
+//			}
+//		}
+//		
+//		return null;
+//	}
+
 
 }
 	

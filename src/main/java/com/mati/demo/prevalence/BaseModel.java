@@ -28,6 +28,10 @@ public class BaseModel {
 		prevaylerFactory.configurePrevalenceDirectory(prevalenceDirectory);
 		prevaylerFactory.configurePrevalentSystem(new Model());
 		prevaylerFactory.configureMonitor(new SimpleMonitor(System.err));
+		/*
+		 * food taster off
+		 */
+		prevaylerFactory.configureTransactionFiltering(false);
 
 		try{
 		prevayler = prevaylerFactory.create(); 

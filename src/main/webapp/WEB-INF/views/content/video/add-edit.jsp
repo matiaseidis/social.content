@@ -10,7 +10,7 @@
         <title>Upload Example</title>
     </head>
     <body>
-        <form:form action="create" modelAttribute="video" method="post"  enctype="multipart/form-data">
+        <form:form action="${action}" modelAttribute="video" method="post"  enctype="multipart/form-data">
             <fieldset>
                 <legend>Upload Fields</legend>
  
@@ -23,8 +23,9 @@
                 </p>
  
                 <p>
-                    <form:label for="fileData" path="fileData">File</form:label><br/>
-                    <form:input path="fileData" type="file"/>
+                    <form:label for="fileData" path="fileData">File: <c:out value="${video.fileName}" /></form:label><br/>
+                    <form:input path="fileData" type="file" />
+                    
                 </p>
  
                 <p>

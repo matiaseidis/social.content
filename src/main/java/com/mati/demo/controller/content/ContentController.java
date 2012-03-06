@@ -79,27 +79,13 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			return new ModelAndView("redirect:"+ADD);
 		}
 		
+		content.setId(content.getTitle().hashCode());
 		getBaseModel().getPrevayler().execute(addTransaction(content));
 		
 		User user = getBaseModel().getModel().getLoggedInUser();
 		return new ModelAndView("redirect:"+LIST, getEntityPluralName(), listEntities());
 	}
 	 
-	
-	
-	@RequestMapping(value=LIST, method=RequestMethod.GET)
-	public ModelAndView list(){
-		
-		ModelAndView m = new ModelAndView();
-		
-		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath;
-		m.setViewName(base + File.separator + getEntityName() + File.separator + LIST);
-		
-		m.addObject(getEntityPluralName(), listEntities());
-		
-		return m;
-	}
-	
 	@RequestMapping(value=UPDATE+"/{nodeId}", method=RequestMethod.POST)
 	public ModelAndView update(@ModelAttribute T updatedContent, @PathVariable int oldNodeId, HttpSession session){
 		/*

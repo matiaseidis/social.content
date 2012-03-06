@@ -122,6 +122,6 @@ public class VideoController extends ContentController<Video>{
 		protected boolean isValidContent(Video content,
 				Map<String, Object> errors) {
 			// TODO Auto-generated method stub
-			return false;
+			return true;
 		};
 }
