@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.mati.demo.Perro;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.user.CreateUser;
@@ -15,7 +16,6 @@ import com.mati.demo.prevalence.transaction.user.CreateUser;
 public class ContextListener implements ServletContextListener {
 
 	public Logger logger = Logger.getLogger(getClass());
-
 	
 	public static final String ROLE_USER = "ROLE_USER";
 	public static final String ROLE_ADMIN = "ROLE_ADMIN";
@@ -23,6 +23,7 @@ public class ContextListener implements ServletContextListener {
 	public static final String ADMIN_PASS = "admin";
 	
 	public void contextInitialized(ServletContextEvent sce) {
+		
 		logger.info("Staring web app");
 		
 		ServletContext ctx = sce.getServletContext();
