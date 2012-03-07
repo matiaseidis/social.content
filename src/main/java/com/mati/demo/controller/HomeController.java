@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 
 @Controller
@@ -19,12 +20,16 @@ public class HomeController {
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public /*@ResponseBody*/ ModelAndView hello(){
 		ModelAndView m = new ModelAndView("home");
-		
-		m.addObject("followedUsers", baseModel.getModel().getLoggedInUser().getFollowedUsers());
-		m.addObject("followedTags", baseModel.getModel().getLoggedInUser().getFollowedTags());
-		
+		User user = baseModel.getModel().getLoggedInUser();
+
+		if(user != null){
+			m.addObject("followedUsers", user.getFollowedUsers());
+			m.addObject("followedTags", user.getFollowedTags());
+			m.addObject("loggedIn", true);	
+		}else{
+			m.addObject("loggedIn", false);
+		}
 		m.addObject("users", baseModel.getModel().getUsers());
-		
 		return m;
 	} 	
 
