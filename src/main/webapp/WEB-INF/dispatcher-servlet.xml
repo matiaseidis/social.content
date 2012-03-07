@@ -20,8 +20,12 @@
 <!-- 	no aplica	<property name="basePath" value="${user.base.path}"></property> -->
 	</bean>
 	
-	<bean id="test.groovy.controller" class="com.mati.demo.controller.GroovyController">
+	<bean id="home.controller" class="com.mati.demo.controller.HomeController">
+		<property name="baseModel" ref="base.model"></property>
 	</bean>
+	
+<!-- 	<bean id="test.groovy.controller" class="com.mati.demo.controller.GroovyController"> -->
+<!-- 	</bean> -->
 	
 <!-- 	<lang:groovy id="perro" refresh-check-delay="5000" script-source="classpath:groovy.Perro"></lang:groovy> -->
 	
@@ -69,6 +73,13 @@
 		</property>
 	</bean>
 	
-<!-- <bean id="postController" class="com.mati.demo.controller.content.PostController" ></bean> -->
-
+<!-- 	<bean id="unAuthenticatedUrlMapping" -->
+<!--         class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!--     <property name="mappings"> -->
+<!--       <props> -->
+<!--         <prop key="/index.jsp">home.controller</prop> -->
+<!--       </props> -->
+<!--     </property> -->
+<!--   </bean> -->
+	
 </beans>

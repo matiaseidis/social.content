@@ -43,6 +43,17 @@ public class ContextListener implements ServletContextListener {
 			user.getRoles().add(ROLE_ADMIN);
 			
 			baseModel.getPrevayler().execute(new CreateUser(user));
+
+			String userName = "user-";
+			for(int i = 0; i < 5; i++){
+				User u = new User();
+				u.setUserName(userName+i);
+				u.setPassword(userName+i);
+				u.getRoles().add(ROLE_USER);
+				
+				baseModel.getPrevayler().execute(new CreateUser(u));
+
+			}
 		}
 	}
 

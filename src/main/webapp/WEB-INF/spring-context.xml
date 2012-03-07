@@ -13,7 +13,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<context:property-placeholder location="classpath:general.properties" />
 <!--     <mvc:default-servlet-handler/> -->
 
-	<bean id="groovyContextProcessor" class="com.mati.demo.context.GroovyObjectTargetClassPreservingBeanFactoryPostProcessor" ></bean>
+<!-- 	<bean id="groovyContextProcessor" class="com.mati.demo.context.GroovyObjectTargetClassPreservingBeanFactoryPostProcessor" ></bean> -->
 
 	<bean id="base.model" class="com.mati.demo.prevalence.BaseModel" init-method="init">
 		<property name="prevalenceDirectory" value="${user.home}/${prevalence.directory}"></property>

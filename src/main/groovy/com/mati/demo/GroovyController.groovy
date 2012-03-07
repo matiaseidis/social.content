@@ -1,4 +1,4 @@
-package com.mati.demo.controller
+package com.mati.demo
 import java.util.ArrayList;
 import java.util.List;
 

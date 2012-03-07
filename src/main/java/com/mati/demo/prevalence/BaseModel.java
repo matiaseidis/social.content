@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.prevayler.Prevayler;
 import org.prevayler.PrevaylerFactory;
 import org.prevayler.foundation.monitor.SimpleMonitor;
+import org.prevayler.foundation.serialization.Serializer;
 
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.type.Post;
@@ -14,6 +15,8 @@ import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.transaction.content.post.CreatePost;
 import com.mati.demo.prevalence.transaction.user.AddTagToUser;
 import com.mati.demo.prevalence.transaction.user.RemoveTagFromUser;
+
+import org.prevayler.foundation.serialization.XStreamSerializer;
 
 public class BaseModel {
 	
@@ -32,6 +35,13 @@ public class BaseModel {
 		 * food taster off
 		 */
 		prevaylerFactory.configureTransactionFiltering(false);
+		
+		/*
+		 * XML format
+		 */
+		XStreamSerializer s = new XStreamSerializer();
+		prevaylerFactory.configureJournalSerializer(s);
+		prevaylerFactory.configureSnapshotSerializer(s);
 
 		try{
 		prevayler = prevaylerFactory.create(); 

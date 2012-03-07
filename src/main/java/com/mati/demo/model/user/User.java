@@ -140,5 +140,16 @@ public class User extends Taggable implements Followable, Follower{
 	public void unfollow(Tag t) {
 		followedTags.remove(t.getId());		
 	}
+	
+	public Collection getFollowedUsers(){
+		return followedUsers.values();
+	}
 
+	public Collection getFollowedTags(){
+		return followedTags.values();
+	}
+	
+	public Collection getFollowedBy(){
+		return followedBy.values();
+	}
 }

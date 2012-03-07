@@ -1,4 +1,4 @@
-package com.mati.demo.prevalence.transaction.content.post
+package com.mati.demo
 
 import java.util.Date
 
