@@ -13,12 +13,10 @@
 <body>
 <h2>Social Content</h2>
 <h2>${loggedIn}</h2>
-   <sec:authorize access='hasRole("ROLE_USER")'>
-                lalalalalalalalalala
-        </sec:authorize>
-<c:if test="${loggedIn eq false}">
+   <sec:authorize access='isAnonymous()'>
+
 <jsp:include page="/login.jsp"></jsp:include>
-</c:if>
+        </sec:authorize>
 <h2>Social Content</h2>
 <br />
 Estas siguiendo a Usuarios:
