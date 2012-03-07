@@ -38,7 +38,7 @@ public class User extends Taggable implements Followable, Follower{
 	private Map<Integer, Follower> followedBy = new HashMap<Integer, Follower>();
 	
 	private Map<Integer, Followable> followedUsers = new HashMap<Integer, Followable>();
-//	private Map<Integer, Followable<Tag>> followedTags = new HashMap<Integer, Tag>();
+	private Map<Integer, Followable> followedTags = new HashMap<Integer, Followable>();
 	
 	public User() {
 		
@@ -110,13 +110,35 @@ public class User extends Taggable implements Followable, Follower{
 		return videos.get(nodeId);
 	}
 
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.mati.demo.model.relationships.Followable#startFollowing(com.mati.demo.model.user.User)
+	 */
 	public void startFollowing(User follower) {
 		followedBy.put(follower.getId(), follower);
+//		follower.
 	}
 
 	public void stopFollowing(User follower) {
 		followedBy.remove(follower.getId());
+	}
+
+	public void follow(User u) {
+		followedUsers.put(u.getId(), u);
+	}
+
+	public void unfollow(User u) {
+		followedUsers.remove(u.getId());		
+	}
+
+	public void follow(Tag t) {
+		followedTags.put(t.getId(), t);
 		
+	}
+
+	public void unfollow(Tag t) {
+		followedTags.remove(t.getId());		
 	}
 
 }

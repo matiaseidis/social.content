@@ -24,12 +24,13 @@ public class Tag implements Followable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Getter @Setter private int id;
+	@Getter @Setter private String tagName;
+	
 	private final Set<Content> taggedContent = new HashSet<Content>();
 	private final Set<User> taggedUsers = new HashSet<User>();
 	
 	private Map<Integer, Follower> followedBy = new HashMap<Integer, Follower>();
-	
-	@Getter @Setter private String tagName;
 	
 	public boolean isNotTaggingAnything(){
 		return taggedUsers.isEmpty() && taggedContent.isEmpty();

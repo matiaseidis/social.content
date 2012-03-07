@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.mati.demo.Perro;
+
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.user.CreateUser;
