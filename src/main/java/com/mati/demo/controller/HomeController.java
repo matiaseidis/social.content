@@ -18,18 +18,8 @@ public class HomeController {
 	@Setter @Getter private BaseModel baseModel;
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
-	public /*@ResponseBody*/ ModelAndView hello(){
-		ModelAndView m = new ModelAndView("home");
-		User user = baseModel.getModel().getLoggedInUser();
-
-		if(user != null){
-			m.addObject("followedUsers", user.getFollowedUsers());
-			m.addObject("followedTags", user.getFollowedTags());
-			m.addObject("loggedIn", true);	
-		}else{
-			m.addObject("loggedIn", false);
-		}
-		m.addObject("users", baseModel.getModel().getUsers());
+	public /*@ResponseBody*/ ModelAndView hello(ModelAndView m){
+		m.setViewName("home");
 		return m;
 	} 	
 

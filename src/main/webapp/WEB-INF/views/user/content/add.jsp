@@ -9,9 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="/barrita.jsp"></jsp:include>
-
-
-	<h2>Social Content</h2>
-	</body>
+	<jsp:include page="/barrita.jsp"></jsp:include>
+	<ul>
+		<li><a href="${pageContext.request.contextPath}/content/post/add">Crear
+				Post</a></li>
+		<li><a
+			href="${pageContext.request.contextPath}/content/video/add">Crear
+				Video</a></li>
+	</ul>
+</body>
 </html>

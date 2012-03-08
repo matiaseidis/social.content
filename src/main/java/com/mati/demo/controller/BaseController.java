@@ -100,9 +100,11 @@ public abstract class BaseController<T> {
 		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath;
 		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
 		m.addObject(ACTION, CREATE);
-		m.addObject(getEntityName(), new Video());
+		m.addObject(getEntityName(), createEntity());
 		return  m;
 	}
+
+	protected T createEntity(){return null;}
 
 	protected ModelAndView retrieveErrorsFromSession(HttpSession session) {
 		ModelAndView m = null;

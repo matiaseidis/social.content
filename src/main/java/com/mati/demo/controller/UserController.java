@@ -66,6 +66,11 @@ public class UserController extends BaseController{
 		return mav;
 	}
 	
+	@RequestMapping(value="content/add", method=RequestMethod.GET)
+	public ModelAndView addContent(ModelAndView m){
+		return m;
+	}
+	
 //	public ModelAndView add(){
 //	public static final String ROLE_USER = "ROLE_USER";
 //	

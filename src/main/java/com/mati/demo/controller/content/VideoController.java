@@ -124,4 +124,7 @@ public class VideoController extends ContentController<Video>{
 			// TODO Auto-generated method stub
 			return true;
 		};
+		
+		@Override
+		protected Video createEntity(){return new Video();}
 }

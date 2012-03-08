@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
-<!-- 	<context:component-scan base-package="com.mati.demo.controller" /> -->
+	<context:component-scan base-package="com.mati.demo.controller.profile" />
 <context:property-placeholder location="classpath:general.properties" />
 	
 	<bean id="user.controller" class="com.mati.demo.controller.UserController">
@@ -20,12 +20,20 @@
 <!-- 	no aplica	<property name="basePath" value="${user.base.path}"></property> -->
 	</bean>
 	
+	
+	
 	<bean id="home.controller" class="com.mati.demo.controller.HomeController">
 		<property name="baseModel" ref="base.model"></property>
 	</bean>
 	
 <!-- 	<bean id="test.groovy.controller" class="com.mati.demo.controller.GroovyController"> -->
 <!-- 	</bean> -->
+
+
+
+<!-- <lang:groovy id="profile.controller" script-source="classpath:com.mati.demo.controller.ProfileController"> -->
+<!-- 	<lang:property name="baseModel" ref="base.model"></lang:property> -->
+<!-- </lang:groovy> -->
 	
 <!-- 	<lang:groovy id="perro" refresh-check-delay="5000" script-source="classpath:groovy.Perro"></lang:groovy> -->
 	

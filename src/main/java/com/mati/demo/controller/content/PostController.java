@@ -33,8 +33,7 @@ public class PostController extends ContentController<Post>{
 	
 	@Getter @Setter private String entityName;
 	@Getter @Setter private String entityPluralName;
-	@Getter @Setter	protected String basePath;
-
+	
 	@Override
 	protected Post retrieveContent(User user, int contentHash) {
 		return getBaseModel().getModel().getLoggedInUser().getPost(contentHash);
