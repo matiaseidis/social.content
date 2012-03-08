@@ -30,7 +30,8 @@ public class AuthenticationProviderImpl extends AbstractUserDetailsAuthenticatio
 					userDetails.getPassword(), 
 					userDetails.getAuthorities());
 		}
-		return null;
+		throw new AuthenticationCredentialsNotFoundException("Invalid username / password");
+//		return null;
 	}
 
 	public boolean supports(Class<?> authentication) {
