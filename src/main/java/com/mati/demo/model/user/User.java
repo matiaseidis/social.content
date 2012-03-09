@@ -35,10 +35,10 @@ public class User extends Taggable implements Followable, Follower{
 	private Map<Integer, Post> posts = new HashMap<Integer, Post>();
 	private Map<Integer, Video> videos = new HashMap<Integer, Video>();
 	
-	private Map<Integer, Follower> followedBy = new HashMap<Integer, Follower>();
+	private Map<String, Follower> followedBy = new HashMap<String, Follower>();
 	
-	private Map<Integer, Followable> followedUsers = new HashMap<Integer, Followable>();
-	private Map<Integer, Followable> followedTags = new HashMap<Integer, Followable>();
+	private Map<String, Followable> followedUsers = new HashMap<String, Followable>();
+	private Map<String, Followable> followedTags = new HashMap<String, Followable>();
 	
 	public User() {
 		
@@ -116,29 +116,28 @@ public class User extends Taggable implements Followable, Follower{
 	 * @see com.mati.demo.model.relationships.Followable#startFollowing(com.mati.demo.model.user.User)
 	 */
 	public void startFollowing(User follower) {
-		followedBy.put(follower.getId(), follower);
-//		follower.
+		followedBy.put(follower.getUserName(), follower);
 	}
 
 	public void stopFollowing(User follower) {
-		followedBy.remove(follower.getId());
+		followedBy.remove(follower.getUserName());
 	}
 
 	public void follow(User u) {
-		followedUsers.put(u.getId(), u);
+		followedUsers.put(u.getUserName(), u);
 	}
 
 	public void unfollow(User u) {
-		followedUsers.remove(u.getId());		
+		followedUsers.remove(u.getUserName());		
 	}
 
 	public void follow(Tag t) {
-		followedTags.put(t.getId(), t);
+		followedTags.put(t.getTagName(), t);
 		
 	}
 
 	public void unfollow(Tag t) {
-		followedTags.remove(t.getId());		
+		followedTags.remove(t.getTagName());		
 	}
 	
 	public Collection getFollowedUsers(){
@@ -152,4 +151,13 @@ public class User extends Taggable implements Followable, Follower{
 	public Collection getFollowedBy(){
 		return followedBy.values();
 	}
+
+	public void addFollower(User user) {
+		followedBy.put(user.getUserName(), user);
+	}
+	
+	public void removeFollower(User user) {
+		followedBy.remove(user.hashCode());
+	}
+
 }

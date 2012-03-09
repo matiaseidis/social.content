@@ -20,6 +20,10 @@
 <!-- 	no aplica	<property name="basePath" value="${user.base.path}"></property> -->
 	</bean>
 	
+	<bean id="follow.controller" class="com.mati.demo.controller.FollowController">
+<!-- 		<property name="baseModel" ref="base.model"></property> -->
+	</bean>
+	
 	
 	
 	<bean id="home.controller" class="com.mati.demo.controller.HomeController">
