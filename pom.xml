@@ -195,6 +195,18 @@
 			<artifactId>spring-security-acl</artifactId>
 			<version>3.1.0.RELEASE</version>
 		</dependency>
+		<dependency>
+	<groupId>antlr</groupId>
+	<artifactId>antlr</artifactId>
+	<version>20030911</version>
+</dependency>
+<dependency>
+	<groupId>org.sitemesh</groupId>
+	<artifactId>sitemesh</artifactId>
+	<version>3.0-alpha-2</version>
+</dependency>
+      
+            
 	</dependencies>
 	<build>
 		<finalName>social.content</finalName>

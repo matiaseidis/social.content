@@ -8,9 +8,10 @@ import org.apache.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-
+import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
+import com.mati.demo.prevalence.transaction.tag.CreateTag;
 import com.mati.demo.prevalence.transaction.user.CreateUser;
 
 public class ContextListener implements ServletContextListener {
@@ -52,7 +53,15 @@ public class ContextListener implements ServletContextListener {
 				u.getRoles().add(ROLE_USER);
 				
 				baseModel.getPrevayler().execute(new CreateUser(u));
+			}
+		}
+		for(int i = 0; i < 5; i++){
 
+			Tag tag = new Tag("tag-"+i);
+			try{
+				baseModel.getPrevayler().execute(new CreateTag(tag));
+			}catch(RuntimeException e){
+				logger.info("pincho por tag existente");
 			}
 		}
 	}

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,7 @@ import com.mati.demo.model.relationships.Followable;
 import com.mati.demo.model.relationships.Follower;
 import com.mati.demo.model.user.User;
 
+@EqualsAndHashCode(of="tagName")
 public class Tag implements Followable{
 	
 	/**
@@ -26,6 +28,14 @@ public class Tag implements Followable{
 
 	@Getter @Setter private int id;
 	@Getter @Setter private String tagName;
+	
+	public Tag() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Tag(String tagName){
+		this.tagName = tagName;
+	}
 	
 	private final Set<Content> taggedContent = new HashSet<Content>();
 	private final Set<User> taggedUsers = new HashSet<User>();
@@ -64,5 +74,4 @@ public class Tag implements Followable{
 		followedBy.remove(follower.getId());
 		
 	}
-	
 }

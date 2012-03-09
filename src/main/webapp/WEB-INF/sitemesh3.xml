@@ -1,0 +1,7 @@
+<sitemesh>
+  <mapping path="/*" decorator="/decorators/master.jsp"/>
+<!-- <excludes> -->
+<!-- <pattern>/exclude.jsp</pattern> -->
+<!--         <pattern>/exclude/*</pattern> -->
+<!-- </excludes>       -->
+</sitemesh>

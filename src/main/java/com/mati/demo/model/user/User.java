@@ -35,10 +35,10 @@ public class User extends Taggable implements Followable, Follower{
 	private Map<Integer, Post> posts = new HashMap<Integer, Post>();
 	private Map<Integer, Video> videos = new HashMap<Integer, Video>();
 	
-	private Map<String, Follower> followedBy = new HashMap<String, Follower>();
+	private Map<String, User> followedBy = new HashMap<String, User>();
 	
-	private Map<String, Followable> followedUsers = new HashMap<String, Followable>();
-	private Map<String, Followable> followedTags = new HashMap<String, Followable>();
+	private Map<String, User> followedUsers = new HashMap<String, User>();
+	private Map<String, Tag> followedTags = new HashMap<String, Tag>();
 	
 	public User() {
 		
@@ -140,15 +140,15 @@ public class User extends Taggable implements Followable, Follower{
 		followedTags.remove(t.getTagName());		
 	}
 	
-	public Collection getFollowedUsers(){
+	public Collection<User> getFollowedUsers(){
 		return followedUsers.values();
 	}
 
-	public Collection getFollowedTags(){
+	public Collection<Tag> getFollowedTags(){
 		return followedTags.values();
 	}
 	
-	public Collection getFollowedBy(){
+	public Collection<User> getFollowedBy(){
 		return followedBy.values();
 	}
 

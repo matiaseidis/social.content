@@ -5,12 +5,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.Getter;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import com.mati.demo.model.tag.TagRepository;
+import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.tag.Taggable;
 import com.mati.demo.model.user.User;
 
@@ -22,6 +21,9 @@ public class Model implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Map<String, User> users = new HashMap<String, User>();
+	
+	private Map<String, Tag> tags = new HashMap<String, Tag>();
+	
 	@Getter private Map<String, Taggable> taggables = new HashMap<String, Taggable>();
 	
 	public Collection<User> getUsers(){
@@ -40,5 +42,17 @@ public class Model implements Serializable{
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		User user = loadUserByUsername(userName); 
 		return user;
+	}
+	
+	public void addTag(Tag tag){
+		tags.put(tag.getTagName(), tag);
+	}
+	
+	public void removeTag(Tag tag){
+		tags.remove(tag.getTagName());
+	}
+
+	public Collection<Tag> getTags() {
+		return tags.values();
 	}
 }
