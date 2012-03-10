@@ -10,12 +10,14 @@
 </head>
 <body>
 	<div>
-	<p>
-				<h1>${post.title}</h1>
-				</p>
+<!-- 	<p> -->
+<%-- 				<h1>${post.title}</h1> --%>
+<!-- 				</p> -->
 				<p>
 				<h4>${post.body}</h4>
 				</p>
 	</div>
+	
+	<jsp:include page="../comments-box.jsp" />	
 </body>
 </html>

@@ -57,6 +57,36 @@
 			</tbody>
 		</table>
 	</div>
+	
+		<p>Tags (${fn:length(tags)}):</p>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<td>name</td>
+					<td>followed by</td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${tags}" var="tag">
+					<tr>
+						<td>${tag.tagName}</td>
+						<td>${fn:length(tag.taggedUsers)}</td>
+						<td>
+							<form action="tag/follow/${tag.tagName}" method="POST">
+								<input type="submit" value="follow">
+							</form>
+						</td>
+						<td>
+							<form action="tag/unfollow/${tag.tagName}" method="POST">
+								<input type="submit" value="unfollow">
+							</form>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
 	<%--
 	<p>Posts:</p>

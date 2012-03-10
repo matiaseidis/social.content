@@ -1,5 +1,6 @@
 package com.mati.demo.model.tag;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -11,7 +12,6 @@ import lombok.Setter;
 
 import com.mati.demo.model.content.Content;
 import com.mati.demo.model.relationships.Followable;
-import com.mati.demo.model.relationships.Follower;
 import com.mati.demo.model.user.User;
 
 @EqualsAndHashCode(of="tagName")
@@ -37,10 +37,14 @@ public class Tag implements Followable{
 		this.tagName = tagName;
 	}
 	
-	private final Set<Content> taggedContent = new HashSet<Content>();
-	private final Set<User> taggedUsers = new HashSet<User>();
+	@Getter private final Set<Content> taggedContent = new HashSet<Content>();
+	@Getter private final Set<User> taggedUsers = new HashSet<User>();
 	
-	private Map<Integer, Follower> followedBy = new HashMap<Integer, Follower>();
+	private Map<Integer, User> followedBy = new HashMap<Integer, User>();
+	
+	public Collection<User> getFollowers(){
+		return followedBy.values();
+	}
 	
 	public boolean isNotTaggingAnything(){
 		return taggedUsers.isEmpty() && taggedContent.isEmpty();

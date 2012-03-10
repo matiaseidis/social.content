@@ -6,18 +6,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type='text/javascript' src='../../js/mediaplayer-5.9-viral/jwplayer.js'></script>	
+<script type='text/javascript' src='${pageContext.request.contextPath}/js/mediaplayer-5.9-viral/jwplayer.js'></script>	
 
 <title>${video.title}</title>
 </head>
 <body>
-<h1><c:out value="${video.title}" ></c:out></h1>
 
 <div id='mediaspace'>This text will be replaced</div>
 
 <script type='text/javascript'>
   jwplayer('mediaspace').setup({
-    'flashplayer': '../../js/mediaplayer-5.9-viral/player.swf',
+    'flashplayer': '${pageContext.request.contextPath}/js/mediaplayer-5.9-viral/player.swf',
     'file': '<c:out value="${video.baseUrl}${video.fileName}" ></c:out>',
     'controlbar': 'bottom',
     'width': '470',
@@ -25,6 +24,6 @@
   });
 </script>
 
-	
+<jsp:include page="../comments-box.jsp" />	
 </body>
 </html>

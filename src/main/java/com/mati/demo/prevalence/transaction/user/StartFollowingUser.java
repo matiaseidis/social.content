@@ -19,14 +19,13 @@ public class StartFollowingUser implements Transaction {
 		Model model = (Model) prevalentSystem;
 		
 		User userToFollow = model.loadUserByUsername(followedUserName);
-		if(userToFollow.equals(model.getLoggedInUser())){
-			throw new RuntimeException("the user can not follow himself");
-		}
 		if(userToFollow == null){
 			throw new RuntimeException("the user to follow does not exist");
 		}
-		if(model.getLoggedInUser().getFollowedUsers().contains(userToFollow) || 
-				userToFollow.getFollowedBy().contains(model.getLoggedInUser())){
+		if(userToFollow.equals(model.getLoggedInUser())){
+			throw new RuntimeException("the user can not follow himself");
+		}
+		if(model.getLoggedInUser().getFollowedUsers().contains(userToFollow)){
 			throw new RuntimeException("the user "+userToFollow.getUserName()+" to follow is already being followed by "+model.getLoggedInUser().getUserName());
 		}
 		

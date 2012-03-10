@@ -15,6 +15,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.GenericValidator;
 import org.prevayler.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -30,7 +31,7 @@ import com.mati.demo.prevalence.transaction.content.video.UpdateVideo;
 @RequestMapping("content/video/")
 public class VideoController extends ContentController<Video>{
 
-		@Setter @Getter private BaseModel baseModel;
+	@Autowired @Setter @Getter private BaseModel baseModel;
 		@Setter String staticContentBase;
 		
 		@Getter @Setter private String entityName;

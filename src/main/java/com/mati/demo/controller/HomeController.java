@@ -3,6 +3,7 @@ package com.mati.demo.controller;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,7 @@ import com.mati.demo.prevalence.BaseModel;
 
 public class HomeController {
 	
-	@Setter @Getter private BaseModel baseModel;
-	
+	@Autowired @Setter @Getter private BaseModel baseModel;	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public /*@ResponseBody*/ ModelAndView hello(ModelAndView m){
 		m.setViewName("home");

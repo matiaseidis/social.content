@@ -1,4 +1,4 @@
-package com.mati.demo.controller;
+package com.mati.demo.controller.follow;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +19,7 @@ import com.mati.demo.prevalence.transaction.user.StopFollowingUser;
 
 @Controller
 @RequestMapping("user/")
-public class FollowController {
+public class FollowUserController {
 
 	@Autowired @Setter @Getter private BaseModel baseModel;
 

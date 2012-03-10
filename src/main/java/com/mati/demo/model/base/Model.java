@@ -38,6 +38,10 @@ public class Model implements Serializable{
 		return users.get(username);
 	}
 	
+	public Tag loadTagByTagName(String tagname) {
+		return tags.get(tagname);
+	}
+	
 	public User getLoggedInUser() {
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		User user = loadUserByUsername(userName); 

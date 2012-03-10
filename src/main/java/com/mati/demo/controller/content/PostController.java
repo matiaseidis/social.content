@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import org.apache.commons.validator.GenericValidator;
 import org.prevayler.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,7 +29,7 @@ import com.mati.demo.prevalence.transaction.content.post.UpdatePost;
 @RequestMapping("content/post/")
 public class PostController extends ContentController<Post>{
 	
-	@Getter @Setter private BaseModel baseModel;
+	@Autowired @Getter @Setter private BaseModel baseModel;
 	@Setter private String staticContentBase;
 	
 	@Getter @Setter private String entityName;

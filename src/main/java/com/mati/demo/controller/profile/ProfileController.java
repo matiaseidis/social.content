@@ -1,6 +1,7 @@
 package com.mati.demo.controller.profile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -19,26 +20,9 @@ public class ProfileController {
 
 	@RequestMapping("/profile")
 	public ModelAndView profile(ModelAndView m){
-		User user = baseModel.getModel().getLoggedInUser();
-
-		m.addObject("user", user);
-		m.addObject("followedUsers", new ArrayList<User>(user.getFollowedUsers()));
-		m.addObject("followedTags", new ArrayList<Tag>(user.getFollowedTags()));
-		m.addObject("followedBy", new ArrayList<User>(user.getFollowedBy()));
-		System.out.println("tags");
-		for(Tag tag : baseModel.getModel().getTags()){
-			System.out.println(tag.getTagName());
-		}
-		System.out.println("users: "+user.getFollowedUsers().size());
-		for(User u : user.getFollowedUsers()){
-			System.out.println(u.getUserName());
-		}
 		
-		
-		
-		m.addObject("tags", new ArrayList<Tag>(baseModel.getModel().getTags()));
 		m.addObject("users", baseModel.getModel().getUsers());
-
+		m.addObject("users", baseModel.getModel().getUsers());
 		return m;
 	}
 

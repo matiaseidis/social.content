@@ -6,13 +6,17 @@
 <%@ tag body-content="tagdependent"%>
 <c:if test="${not empty tags}">
 	<div>
-		<h1>${title}</h1>
-		<strong><jsp:doBody /></strong> <br> <img
-			src="images/companyLogo.gif"> <br>
-		<ul>
-			<c:forEach var="tag" items="${tags}">
-				<li>${tag.tagName}dd</li>
-			</c:forEach>
-		</ul>
+		<fieldset>
+			<legend>
+				<h3>${title}</h3>
+			</legend>
+			<strong><jsp:doBody /></strong> <br> <img
+				src="images/companyLogo.gif"> <br>
+			<ul>
+				<c:forEach var="tag" items="${tags}">
+					<li>${tag.tagName}dd</li>
+				</c:forEach>
+			</ul>
+		</fieldset>
 	</div>
 </c:if>

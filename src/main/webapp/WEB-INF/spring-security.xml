@@ -21,7 +21,9 @@
 		
 		<security:intercept-url pattern="/*" access='hasRole("ROLE_USER")' />
 		
-		<security:intercept-url pattern="*.js" access="permitAll" />
+<!-- 		<security:intercept-url pattern="/resources/**/*" access="permitAll" /> -->
+		<security:intercept-url pattern="/js/**/*.js" access="permitAll" />
+		<security:intercept-url pattern="/css/**/*.css" access="permitAll" />
 		<security:intercept-url pattern="/login_stand_alone.jsp" access="permitAll" />
 		<security:intercept-url pattern="/**" access='hasRole("ROLE_USER")' />
 		<security:intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')"/>

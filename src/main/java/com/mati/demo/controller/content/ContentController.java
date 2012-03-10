@@ -128,9 +128,8 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 	
 	
 
-	@RequestMapping(value="{title}", method=RequestMethod.GET)
+	@RequestMapping(value="show/{title}", method=RequestMethod.GET)
 	public ModelAndView show(@PathVariable String title){
-		ModelAndView mav = new ModelAndView();
 		T content = retrieveContent(getBaseModel().getModel().getLoggedInUser(), title.hashCode());
 		
 		if(content == null){

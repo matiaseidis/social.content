@@ -14,36 +14,23 @@
 <context:property-placeholder location="classpath:general.properties" />
 	
 	<bean id="user.controller" class="com.mati.demo.controller.UserController">
-		<property name="baseModel" ref="base.model"></property>
+<!-- 		<property name="baseModel" ref="base.model"></property> -->
 		<property name="entityName" value="user"></property>
 		<property name="entityPluralName" value="users"></property>
 <!-- 	no aplica	<property name="basePath" value="${user.base.path}"></property> -->
 	</bean>
 	
-	<bean id="follow.controller" class="com.mati.demo.controller.FollowController">
-<!-- 		<property name="baseModel" ref="base.model"></property> -->
-	</bean>
+	<bean id="follow.user.controller" class="com.mati.demo.controller.follow.FollowUserController"></bean>
+	<bean id="follow.tag.controller" class="com.mati.demo.controller.follow.FollowTagController"></bean>
 	
 	
 	
 	<bean id="home.controller" class="com.mati.demo.controller.HomeController">
-		<property name="baseModel" ref="base.model"></property>
+<!-- 		<property name="baseModel" ref="base.model"></property> -->
 	</bean>
 	
-<!-- 	<bean id="test.groovy.controller" class="com.mati.demo.controller.GroovyController"> -->
-<!-- 	</bean> -->
-
-
-
-<!-- <lang:groovy id="profile.controller" script-source="classpath:com.mati.demo.controller.ProfileController"> -->
-<!-- 	<lang:property name="baseModel" ref="base.model"></lang:property> -->
-<!-- </lang:groovy> -->
-	
-<!-- 	<lang:groovy id="perro" refresh-check-delay="5000" script-source="classpath:groovy.Perro"></lang:groovy> -->
-	
 	<bean id="video.controller" class="com.mati.demo.controller.content.VideoController">
-		
-		<property name="baseModel" ref="base.model"></property>
+<!-- 		<property name="baseModel" ref="base.model"></property> -->
 		<property name="staticContentBase" value="${static.content.server.base}"></property>
 		<property name="entityName" value="video"></property>
 		<property name="entityPluralName" value="videos"></property>
@@ -53,13 +40,45 @@
 	</bean>
 	
 	<bean id="post.controller" class="com.mati.demo.controller.content.PostController">
-		<property name="baseModel" ref="base.model"></property>
+<!-- 		<property name="baseModel" ref="base.model"></property> -->
 		<property name="staticContentBase" value="${static.content.server.base}"></property>
 		<property name="entityName" value="post"></property>
 		<property name="entityPluralName" value="posts"></property>
 		<property name="basePath" value="${content.base.path}"></property>
 	</bean>
 	
+<!-- 	<mvc:interceptors> -->
+<!--     Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
+<!--     <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" /> -->
+<!-- </mvc:interceptors> -->
+
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*" />
+			<bean id="sidebar.populator.interceptor" 
+                 class="com.mati.demo.controller.interceptor.SidebarInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/content/*/show/**" />
+			<bean id="comment.form.interceptor" 
+                 class="com.mati.demo.controller.interceptor.CommentFormInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+<!-- 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!-- 		<property name="mappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="/*">*.controller</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 		<property name="interceptors"> -->
+<!-- 			<list> -->
+<!-- 				<ref bean="sidebar.populator.interceptor" /> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
+		
 	
 <!-- 	<mvc:default-servlet-handler/> -->
 <!-- 	<context:annotation-config/>   -->
@@ -84,6 +103,10 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+	
+	<!-- Handles GET requests for /resources/** by efficiently serving static content in the ${webappRoot}/resources dir -->
+<!-- <mvc:resources mapping="/resources/**" location="/resources/" /> -->
+	
 	
 <!-- 	<bean id="unAuthenticatedUrlMapping" -->
 <!--         class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->

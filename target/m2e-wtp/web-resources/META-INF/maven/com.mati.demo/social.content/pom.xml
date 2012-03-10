@@ -205,8 +205,6 @@
 	<artifactId>sitemesh</artifactId>
 	<version>3.0-alpha-2</version>
 </dependency>
-      
-            
 	</dependencies>
 	<build>
 		<finalName>social.content</finalName>

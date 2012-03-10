@@ -22,7 +22,13 @@ private final String followedUserName;
 		User userToStopFollowing = model.loadUserByUsername(followedUserName);
 		
 		if(userToStopFollowing == null){
-			throw new RuntimeException("the user to stop following does not exist");
+			throw new RuntimeException("the user to unfollow does not exist");
+		}
+		if(userToStopFollowing.equals(model.getLoggedInUser())){
+			throw new RuntimeException("the user can not follow or unfollow himself");
+		}
+		if(!model.getLoggedInUser().getFollowedUsers().contains(userToStopFollowing)){
+			throw new RuntimeException("the user "+userToStopFollowing.getUserName()+" to unfollow is no being followed by "+model.getLoggedInUser().getUserName());
 		}
 		
 		model.getLoggedInUser().unfollow(userToStopFollowing);
