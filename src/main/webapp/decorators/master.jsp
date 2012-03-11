@@ -21,9 +21,9 @@
 	</div>
 	<div class="page-wrapper">
 		<br />
-		<c:if test="${sessionScope.error ne null}">
+		<c:if test="${sessionScope.errors ne null}">
 			<div class="errorblock">
-				<p>${error}</p>
+				<p>${errors}</p>
 			</div>
 		</c:if>
 		<c:out value="${user.userName}"></c:out>

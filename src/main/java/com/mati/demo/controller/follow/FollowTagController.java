@@ -28,8 +28,9 @@ public class FollowTagController {
 		
 		Tag tag = getBaseModel().getModel().loadTagByTagName(tagName);
 		
+		String message = null;
 		try{
-			session.setAttribute("error", null);
+//			session.setAttribute("errors", null);
 			if(tag != null){
 				getBaseModel().getPrevayler().execute(new StartFollowingTag(tag.getTagName()));
 			} else{
@@ -37,11 +38,12 @@ public class FollowTagController {
 				 * TODO handle
 				 */
 //				return null;
-				session.setAttribute("error", "Bad tag");
+				message = "Bad tag";
 			}
 		}catch(RuntimeException e){
-			session.setAttribute("error", e.getMessage());
+			message = e.getMessage();
 		}	
+		session.setAttribute("errors", message);
 		m.setViewName("redirect:/profile");
 		return m;
 	}
@@ -49,8 +51,9 @@ public class FollowTagController {
 	@RequestMapping(value="unfollow/{tagName}", method=RequestMethod.POST)
 	public ModelAndView unfollow(@PathVariable String tagName, ModelAndView m, HttpSession session){
 		Tag tag = getBaseModel().getModel().loadTagByTagName(tagName);
+		String message = null;
 		try{
-			session.setAttribute("error", null);
+//			session.setAttribute("errors", null);
 			if(tag != null){
 				getBaseModel().getPrevayler().execute(new StopFollowingTag(tag.getTagName()));
 			} else{
@@ -58,11 +61,12 @@ public class FollowTagController {
 				 * TODO handle
 				 */
 //				return null;
-				session.setAttribute("error", "Bad tag");
+				message = "Bad tag";
 			}
 		}catch(RuntimeException e){
-			session.setAttribute("error", e.getMessage());
+			message = e.getMessage();
 		}	
+		session.setAttribute("errors", message);
 		m.setViewName("redirect:/profile");
 		return m;
 	}

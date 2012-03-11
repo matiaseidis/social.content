@@ -10,7 +10,6 @@
         <title>Upload Example</title>
     </head>
     <body>
-    <jsp:include page="/barrita.jsp"></jsp:include>
         <form:form action="${action}" modelAttribute="video" method="post"  enctype="multipart/form-data">
             <fieldset>
                 <legend>Upload Fields</legend>

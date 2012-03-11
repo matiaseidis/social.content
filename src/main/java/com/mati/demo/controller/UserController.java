@@ -28,29 +28,24 @@ public class UserController extends BaseController{
 	
 	@Autowired @Setter @Getter private BaseModel baseModel;
 	
-	@Override
-	protected Transaction deleteTransaction(int nodeId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	protected Transaction deleteTransaction(int nodeId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
-	@Override
-	protected Collection listEntities() {
-		Comparator userNameComparator = new Comparator<User>(){
-
-			public int compare(User o1, User o2) {
-				return o1.getUserName().compareTo(o2.getUserName());
-			}
-		};
-		List<User> users = new ArrayList<User>(getBaseModel().getModel().getUsers());
-		Collections.sort(users, userNameComparator);
-		return users;
-	}
-
-	@Override
-	protected Object getEntity(int nodeId) {
-		return getBaseModel().getModel().getLoggedInUser();
-	}
+//	@Override
+//	protected Collection listEntities() {
+//		Comparator userNameComparator = new Comparator<User>(){
+//
+//			public int compare(User o1, User o2) {
+//				return o1.getUserName().compareTo(o2.getUserName());
+//			}
+//		};
+//		List<User> users = new ArrayList<User>(getBaseModel().getModel().getUsers());
+//		Collections.sort(users, userNameComparator);
+//		return users;
+//	}
 	
 	@RequestMapping(value="{username}/videos", method=RequestMethod.GET)
 	public ModelAndView videos(@PathVariable String username){
@@ -58,7 +53,7 @@ public class UserController extends BaseController{
 		User user = getBaseModel().getModel().loadUserByUsername(username);
 		List<Video> videos = null;
 		if(user != null){
-			videos = new ArrayList<Video>(user.getVideos());
+			videos = new ArrayList<Video>(user.getContent(Video.class));
 		}
 		
 		mav.addObject("videos", videos);

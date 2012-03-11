@@ -16,8 +16,11 @@ public class CreateUser implements Transaction {
 	public CreateUser(User user) {this.user = user;}
 	
 	public void executeOn(Object prevalentSystem, Date executionTime) {
-		Model baseModel = (Model) prevalentSystem;
-		baseModel.getUsersMap().put(user.getUserName(), user);
+		Model model = (Model) prevalentSystem;
+		if(model.containsUser(user)){
+			throw new RuntimeException("User "+user.getUserName()+" is already registrated");
+		}
+		model.addUser(user);
 	}
 
 }

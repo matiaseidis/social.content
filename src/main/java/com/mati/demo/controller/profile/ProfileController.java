@@ -22,7 +22,6 @@ public class ProfileController {
 	public ModelAndView profile(ModelAndView m){
 		
 		m.addObject("users", baseModel.getModel().getUsers());
-		m.addObject("users", baseModel.getModel().getUsers());
 		return m;
 	}
 

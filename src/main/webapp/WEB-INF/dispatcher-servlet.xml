@@ -13,6 +13,11 @@
 	<context:component-scan base-package="com.mati.demo.controller.profile" />
 <context:property-placeholder location="classpath:general.properties" />
 	
+	
+	
+	<bean id="user.account.controller" class="com.mati.demo.controller.UserAccountController">
+	</bean>
+	
 	<bean id="user.controller" class="com.mati.demo.controller.UserController">
 <!-- 		<property name="baseModel" ref="base.model"></property> -->
 		<property name="entityName" value="user"></property>
@@ -59,6 +64,13 @@
 			<bean id="sidebar.populator.interceptor" 
                  class="com.mati.demo.controller.interceptor.SidebarInterceptor" />
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*" />
+			<bean id="clean.session.interceptor" 
+                 class="com.mati.demo.controller.interceptor.CleanSessionInterceptor" />
+		</mvc:interceptor>
+		
 		<mvc:interceptor>
 			<mvc:mapping path="/content/*/show/**" />
 			<bean id="comment.form.interceptor" 
@@ -103,6 +115,8 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+	
+<!-- 	<mvc:view-controller path="register" view-name="register-form" /> -->
 	
 	<!-- Handles GET requests for /resources/** by efficiently serving static content in the ${webappRoot}/resources dir -->
 <!-- <mvc:resources mapping="/resources/**" location="/resources/" /> -->

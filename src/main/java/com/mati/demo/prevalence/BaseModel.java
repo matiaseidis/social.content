@@ -6,17 +6,13 @@ import lombok.Setter;
 import org.prevayler.Prevayler;
 import org.prevayler.PrevaylerFactory;
 import org.prevayler.foundation.monitor.SimpleMonitor;
-import org.prevayler.foundation.serialization.Serializer;
+import org.prevayler.foundation.serialization.XStreamSerializer;
 
 import com.mati.demo.model.base.Model;
-import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
-import com.mati.demo.prevalence.transaction.content.post.CreatePost;
 import com.mati.demo.prevalence.transaction.user.AddTagToUser;
 import com.mati.demo.prevalence.transaction.user.RemoveTagFromUser;
-
-import org.prevayler.foundation.serialization.XStreamSerializer;
 
 public class BaseModel {
 	
@@ -67,8 +63,8 @@ public class BaseModel {
 		prevayler.execute(new RemoveTagFromUser(tag));
 	}
 	
-	public void addContent(Post post) {
-		prevayler.execute(new CreatePost(post));
-	}
-	
+//	public void addContent(Post post) {
+//		prevayler.execute(new CreatePost(post));
+//	}
+//	
 }

@@ -22,7 +22,7 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-
+		
 		User user = baseModel.getModel().getLoggedInUser();
 		if(user != null){
 			modelAndView.addObject("user", user);
@@ -30,19 +30,23 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 			modelAndView.addObject("followedUsers", followedUsers);
 			modelAndView.addObject("followedTags", new ArrayList<Tag>(user.getFollowedTags()));
 			modelAndView.addObject("followedBy", new ArrayList<User>(user.getFollowedBy()));
-			System.out.println("tags");
-			for(Tag tag : baseModel.getModel().getTags()){
-				System.out.println(tag.getTagName());
-			}
-			System.out.println("users: "+user.getFollowedUsers().size());
-			for(User u : user.getFollowedUsers()){
-				System.out.println(u.getUserName());
-			}
+//			System.out.println("tags");
+//			System.out.println(baseModel.getModel().getTags());
+//			for(Tag tag : baseModel.getModel().getTags()){
+//				System.out.println(tag.getTagName());
+//			}
+//			System.out.println("users: "+user.getFollowedUsers().size());
+//			for(User u : user.getFollowedUsers()){
+//				System.out.println(u.getUserName());
+//			}
 
 
 			modelAndView.addObject("tags", new ArrayList<Tag>(baseModel.getModel().getTags()));
+			System.out.println("asdasd");
 		}
 		super.postHandle(request, response, handler, modelAndView);
 
 	}
+	
+
 }

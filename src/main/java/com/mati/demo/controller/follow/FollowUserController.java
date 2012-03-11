@@ -26,21 +26,22 @@ public class FollowUserController {
 	@RequestMapping(value="follow/{username}", method=RequestMethod.POST)
 	public ModelAndView follow(@PathVariable String username, ModelAndView m, HttpSession session){
 		User user = getBaseModel().getModel().loadUserByUsername(username);
-
+		String message = null;
 		try{
-			session.setAttribute("error", null);
+			//			session.setAttribute("errors", null);
 			if(user != null){
 				getBaseModel().getPrevayler().execute(new StartFollowingUser(user.getUserName()));
 			} else{
 				/*
 				 * TODO handle
 				 */
-//				return null;
-				session.setAttribute("error", "Bad user");
+				//				return null;
+				message = "Bad user";
 			}
 		}catch(RuntimeException e){
-			session.setAttribute("error", e.getMessage());
+			message = e.getMessage();
 		}	
+		session.setAttribute("errors", message);
 		m.setViewName("redirect:/profile");
 		return m;
 	}
@@ -48,20 +49,22 @@ public class FollowUserController {
 	@RequestMapping(value="unfollow/{username}", method=RequestMethod.POST)
 	public ModelAndView unfollow(@PathVariable String username, ModelAndView m, HttpSession session){
 		User user = getBaseModel().getModel().loadUserByUsername(username);
+		String message = null;
 		try{
-			session.setAttribute("error", null);
+			//			session.setAttribute("errors", null);
 			if(user != null){
 				getBaseModel().getPrevayler().execute(new StopFollowingUser(user.getUserName()));
 			} else{
 				/*
 				 * TODO handle
 				 */
-//				return null;
-				session.setAttribute("error", "Bad user");
+				//				return null;
+				message = "Bad user";
 			}
 		}catch(RuntimeException e){
-			session.setAttribute("error", e.getMessage());
+			message = e.getMessage();
 		}	
+		session.setAttribute("errors", message);
 		m.setViewName("redirect:/profile");
 		return m;
 	}

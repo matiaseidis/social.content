@@ -13,6 +13,7 @@ import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.tag.CreateTag;
 import com.mati.demo.prevalence.transaction.user.CreateUser;
+import com.mati.demo.prevalence.transaction.user.StartFollowingUser;
 
 public class ContextListener implements ServletContextListener {
 
@@ -37,14 +38,14 @@ public class ContextListener implements ServletContextListener {
 			/*
 			 * create admin user
 			 */
-			User user = new User();
-			user.setUserName(ADMIN_NAME);
-			user.setPassword(ADMIN_PASS);
-			user.getRoles().add(ROLE_USER);
-			user.getRoles().add(ROLE_ADMIN);
+			User admin = new User();
+			admin.setUserName(ADMIN_NAME);
+			admin.setPassword(ADMIN_PASS);
+			admin.getRoles().add(ROLE_USER);
+			admin.getRoles().add(ROLE_ADMIN);
 			
-			baseModel.getPrevayler().execute(new CreateUser(user));
-
+			baseModel.getPrevayler().execute(new CreateUser(admin));
+			
 			String userName = "user-";
 			for(int i = 0; i < 5; i++){
 				User u = new User();
@@ -53,6 +54,8 @@ public class ContextListener implements ServletContextListener {
 				u.getRoles().add(ROLE_USER);
 				
 				baseModel.getPrevayler().execute(new CreateUser(u));
+//				baseModel.getPrevayler().execute(new StartFollowingUser("admin"));
+				
 			}
 		}
 		for(int i = 0; i < 5; i++){

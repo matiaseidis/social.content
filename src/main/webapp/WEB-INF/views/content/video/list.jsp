@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>Posts:</p>
+	<p>Videos:</p>
 	<div>
 		<table>
 			<tbody>
@@ -17,7 +17,7 @@
 					<tr>
 						<td><c:out value="${video.title}"></c:out></td>
 						<td><span><a
-								href="<c:out value="show/${video.title}"></c:out>">ver</a></span></td>
+								href="<c:out value="show/${video.id}"></c:out>">ver</a></span></td>
 						<td><span><a
 								href="edit/<c:out value="${video.id}"></c:out>">editar</a></span></td>
 						<td><span>

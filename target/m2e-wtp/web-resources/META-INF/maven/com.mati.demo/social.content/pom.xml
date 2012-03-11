@@ -205,6 +205,11 @@
 	<artifactId>sitemesh</artifactId>
 	<version>3.0-alpha-2</version>
 </dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>1.8.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>social.content</finalName>
