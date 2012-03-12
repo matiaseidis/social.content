@@ -16,7 +16,6 @@
 		 Post</title>
 </head>
 <body>
-<jsp:include page="/barrita.jsp"></jsp:include>
 	<h1>
 		<c:choose>
 			<c:when test="${not empty post}">Edit</c:when>

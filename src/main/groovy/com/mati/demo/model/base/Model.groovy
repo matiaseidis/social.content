@@ -57,19 +57,24 @@ class Model implements Serializable{
    }
    
    def addTag(Tag tag){
-	   tagsMap[tag.tagName] = tag
+	   tagsMap.put(tag.tagName, tag)
    }
    
    def removeTag(Tag tag){
-	   tagsMap[tag.tagName] = null
+	   tagsMap.put(tag.tagName, null)
    }
 
+//   def addContent(Content c){
+//	   contentMap[c.hashCode] = c;
+//   }
+   
    def addContent(Content c){
-	   contentMap[c.hashCode] = c;
+	   contentMap.put(c.hashCode(), c);
+	   print "added content model"
    }
    
    def addUser(User u){
-   		usersMap[u.userName] = u
+   		usersMap.put(u.userName, u)
    }
    
    def boolean containsTag(Tag tag){

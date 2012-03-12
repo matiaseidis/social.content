@@ -1,5 +1,7 @@
 package com.mati.demo.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.authentication.AuthenticationProviderImpl;
@@ -34,6 +39,10 @@ public class UserAccountController {
 	
 	@Autowired @Getter @Setter private BaseModel baseModel;
 	@Resource(name="authenticationProvider") private AuthenticationProviderImpl authenticationProvider;
+	
+	@Getter @Setter private String fileSystemBasePath;
+	
+	@Getter @Setter private String userPictureFolder;
 
 	@RequestMapping(value="register", method=RequestMethod.GET)
 	public ModelAndView registerForm(ModelAndView m){
@@ -43,10 +52,15 @@ public class UserAccountController {
 		return m;
 	}
 	
+	@RequestMapping(value="welcome", method=RequestMethod.GET)
+	public ModelAndView welcome(ModelAndView m){
+		return m;
+	}
+	
 	@RequestMapping(value="register", method=RequestMethod.POST)
 	public ModelAndView register(@ModelAttribute User user, HttpServletRequest request, ModelAndView m){
 		
-		Validator v= new UserValidator(user);
+		Validator v= new UserValidator(user, fileSystemBasePath, userPictureFolder);
 		boolean unavailable = v.exists(baseModel.getModel());
 		if(v.validate() && !unavailable){
 			try{
@@ -57,7 +71,7 @@ public class UserAccountController {
 				m.setViewName("account/register");
 				return m;
 			}
-			m.setViewName("welcome");
+			m.setViewName("redirect:welcome");
 			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
 		    try {
 		        Authentication auth = authenticationProvider.authenticate(token);

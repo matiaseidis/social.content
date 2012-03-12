@@ -12,6 +12,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mati.demo.model.content.Content
 import com.mati.demo.model.content.type.Post;
+import com.mati.demo.model.content.type.Video
 import com.mati.demo.model.relationships.Followable;
 import com.mati.demo.model.relationships.Follower;
 import com.mati.demo.model.tag.Tag;
@@ -44,10 +45,6 @@ class User extends Taggable implements Followable, Follower{
 	private Map<String, User> followedUsers = new HashMap<String, User>();
 	private Map<String, Tag> followedTags = new HashMap<String, Tag>();
 	
-	public _User() {
-		
-	}
-	
 	def addContent(Content c){
 		content.put(c.hashCode(), c);
 		print "added content user"
@@ -57,8 +54,9 @@ class User extends Taggable implements Followable, Follower{
 //		content.put(post.hashCode(), post);
 //	}
 	
-	public Collection<Post> getPosts(){return getContent(Post.class);}
-	public Collection<Post> getVideos(){return getContent(Post.class);}
+	public Collection<Content> getContent(){	content.values()}
+	public Collection<Post> getPosts(){			getContent(Post.class)}
+	public Collection<Post> getVideos(){		getContent(Video.class)}
 
 	@Override
 	protected void registerWithTag(Tag tag) {

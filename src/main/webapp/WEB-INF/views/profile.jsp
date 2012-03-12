@@ -12,9 +12,6 @@
 </head>
 <body>
 
-
-	
-
 	<p>Users (${fn:length(users)}):</p>
 	<div>
 		<table>
@@ -33,7 +30,7 @@
 			<tbody>
 				<c:forEach items="${users}" var="user">
 					<tr>
-						<td>${user.userName}</td>
+						<td><a href="user/${user.userName}/content">${user.userName}</a></td>
 						<td>${user.password}</td>
 						<td>${fn:length(user.roles)}</td>
 						<td>${fn:length(user.posts)}</td>

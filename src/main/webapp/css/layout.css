@@ -2,7 +2,10 @@
     margin-left: auto;
     margin-right: auto;
     width: 960px;
+    clear:both;
 }
+.barrita{}
+.barrita-wrapper{}
 .mainBody {
 	float:left;
     margin-left: 0;

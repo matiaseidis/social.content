@@ -10,6 +10,7 @@ import com.mati.demo.model.user.User;
 public class CreateUser implements Transaction {
 
 	private User user;
+	private final String userRole = "ROLE_USER"; 
 	
 	public CreateUser() {}
 	
@@ -20,6 +21,7 @@ public class CreateUser implements Transaction {
 		if(model.containsUser(user)){
 			throw new RuntimeException("User "+user.getUserName()+" is already registrated");
 		}
+		user.getRoles().add(userRole);
 		model.addUser(user);
 	}
 

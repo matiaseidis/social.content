@@ -39,5 +39,6 @@
 		</table>
  
 	</form>
+	<a href="register">Crear cuenta</a>
 </body>
 </html>

@@ -27,7 +27,7 @@ public class VideoValidator extends ContentValidator<Video> {
 		
 		String destinationPath = fileSystemBasePath + File.separator + "video" + File.separator; 
 		
-		String fileName = StringUtils.replace(multipartFile.getOriginalFilename(), " ", "-");
+		String fileName = StringUtils.replace(multipartFile.getOriginalFilename().toLowerCase(), " ", "-");
 		
 		File file = new File(destinationPath + fileName);
 		try {

@@ -10,9 +10,8 @@
 			<legend>
 				<h3>${title}</h3>
 			</legend>
-
-			<strong><jsp:doBody /></strong> <br> <img
-				src="images/companyLogo.gif"> <br>
+<%-- 			<strong><jsp:doBody /></strong> <br> <img --%>
+<!-- 				src="images/companyLogo.gif"> <br> -->
 			<ul>
 				<c:forEach var="u" items="${userList}">
 					<li>${u.userName}</li>
