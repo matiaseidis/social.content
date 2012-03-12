@@ -30,6 +30,10 @@ public abstract class Content extends Taggable implements Commentable{
 		tag.removeTagged(this);
 	}
 	
+	public void comment(Comment comment) {
+		comments.add(comment);
+	}
+	
 	@Override
 	public int hashCode() {
 		return getTitle().hashCode();

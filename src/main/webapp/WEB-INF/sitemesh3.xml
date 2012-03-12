@@ -1,5 +1,8 @@
 <sitemesh>
-  <mapping path="/*" exclude="false" decorator="/decorators/master.jsp"/>
+  <mapping path="/*" exclude="false" name="uno" decorator="/decorators/masterDecorator.jsp" />
+  
+<!--   <mapping path="/content/**/show/**" exclude="false" decorator="/decorators/contentDecorator.jsp"/> -->
+  
   <mapping path="/login" exclude="true"/>
   <mapping path="/register" exclude="true"/>
 </sitemesh>
