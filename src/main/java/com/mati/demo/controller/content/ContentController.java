@@ -250,7 +250,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 
 
 	@RequestMapping(value="show/{id}", method=RequestMethod.GET)
-	public ModelAndView show(@PathVariable int id){
+	public ModelAndView show(@PathVariable int id, ModelAndView m){
 		T content = (T)getBaseModel().getModel().loadContentById(id);
 
 		if(content == null){
@@ -259,8 +259,11 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			 */
 		}
 		processBeforeShow(content);
+		m.addObject("content", content);
+		m.addObject("contentType", getEntityName());
+		m.setViewName("content/"+getEntityName()+"/"+SHOW);
 
-		return new ModelAndView("content/"+getEntityName()+"/"+SHOW, "content", content);
+		return m;
 	}
 
 }

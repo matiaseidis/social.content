@@ -16,14 +16,6 @@
 		 Post</title>
 </head>
 <body>
-	<h1>
-		<c:choose>
-			<c:when test="${not empty post}">Edit</c:when>
-			<c:otherwise>New</c:otherwise>
-		</c:choose>
-
-		Post
-	</h1>
 	<form action="<c:out value="${action}"></c:out>" method=POST>
 		<h3>Title</h3>
 		<p></p>

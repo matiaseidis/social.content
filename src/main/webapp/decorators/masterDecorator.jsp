@@ -6,32 +6,21 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
+
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/layout.css" />
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery/jquery-1.7.1.min.js" ></script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery/jquery.easing.1.3.js" ></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/layout.css" />
+<!-- <script type="text/javascript" -->
+<%-- 	src="${ctx}/js/jquery/jquery-1.7.1.min.js"></script> --%>
 
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery/jquery.easing.compatibility.js" ></script>
-	<script>
-    
-    $(document).ready(function(){  
-        
-        //When mouse rolls over  
-        $("li.active").mouseover(function(){  
-            $(this).stop().animate({height:'150px'},{queue:false, duration:600, easing: 'easeOutBounce'});
-        });  
-      
-        //When mouse is removed  
-        $("li.active").mouseout(function(){  
-            $(this).stop().animate({height:'50px'},{queue:false, duration:600, easing: 'easeOutBounce'});  
-        });  
-      
-    });  
-    
-	</script> 
+<!-- <script type="text/javascript" -->
+<%-- 	src="${ctx}/js/jquery/jquery.easing.1.3.js"></script> --%>
+
+<!-- <script type="text/javascript" -->
+<%-- 	src="${ctx}/js/jquery/jquery.easing.compatibility.js"></script> --%>
+<%-- <script type="text/javascript" src="${ctx}/js/menu.js"></script> --%>
+
 <title><sitemesh:write property='title' /></title>
 <sitemesh:write property='head' />
 </head>
@@ -55,10 +44,10 @@
 			<sitemesh:write property='body' />
 		</div>
 		<div class='sidebar'>
-<!-- 			sidebar right -->
+			<!-- 			sidebar right -->
 			<sec:authorize access="isAuthenticated()">
 				<c:out value="${user.userName}"></c:out>
-				<img src="${userPictureURI}" width="100px" height="100px"/>
+				<img src="${userPictureURI}" width="100px" height="100px" />
 				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList>
 				<myTags:userList title="followedBy" userList="${followedBy}">usuarios que te siguen</myTags:userList>
 				<myTags:tagList title="followedTags" tags="${followedTags}">etiquetas que estas siguiendo</myTags:tagList>

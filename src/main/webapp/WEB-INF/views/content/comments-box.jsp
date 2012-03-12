@@ -11,7 +11,7 @@
 			<h3>Comente esto viejo!</h3>
 		</legend>
 		<sec:authorize access="isAuthenticated()">
-			<form:form action="${pageContext.request.contextPath}/comment/add/${content.id}" modelAttribute="comment"
+			<form:form action="${pageContext.request.contextPath}/comment/add/${contentType}/${content.id}" modelAttribute="comment"
 				method="post">
 				<p>
 					<form:label for="title" path="title">Titulo</form:label>
@@ -24,7 +24,7 @@
 				<p>
 					<form:label for="body" path="body"></form:label>
 					<br />
-					<form:textarea cols="80" rows="10" path="body" />
+					<form:textarea cols="70" rows="10" path="body" />
 					<c:if test="${not empty errors}">
 						<c:out value="${errors.body}"></c:out>
 					</c:if>

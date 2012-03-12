@@ -21,17 +21,17 @@ public class CommentController {
 
 	@Autowired @Setter @Getter private BaseModel baseModel;
 	
-	@RequestMapping(value="add/{id}", method=RequestMethod.POST)
-	public ModelAndView add(Comment comment, @PathVariable int id, ModelAndView m){
+	@RequestMapping(value="add/{contentType}/{id}", method=RequestMethod.POST)
+	public ModelAndView add(Comment comment, @PathVariable int id, @PathVariable String contentType, ModelAndView m){
 		Content content = baseModel.getModel().loadContentById(id);
 		
-		if(content == null){
+		if(content == null || contentType == null){
 			//TODO handle
 		}
 		
 		baseModel.getPrevayler().execute(new CreateComment(comment, id));
 		
-		m.setViewName("redirect:/content/show/"+id);
+		m.setViewName("redirect:/content/"+contentType+"/show/"+id);
 		return m;
 	}
 			
