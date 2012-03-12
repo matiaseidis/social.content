@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type='text/javascript' src='${pageContext.request.contextPath}/js/mediaplayer-5.9-viral/jwplayer.js'></script>	
 
-<title>${video.title}</title>
+<title>${content.title}</title>
 </head>
 <body>
 

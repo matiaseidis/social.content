@@ -22,9 +22,9 @@ import com.mati.demo.model.content.Content;
 import com.mati.demo.model.user.User;
 import com.mati.demo.model.validator.content.ContentValidator;
 import com.mati.demo.prevalence.BaseModel;
-import com.mati.demo.prevalence.transaction.content.Create;
-import com.mati.demo.prevalence.transaction.content.Delete;
-import com.mati.demo.prevalence.transaction.content.Update;
+import com.mati.demo.prevalence.transaction.content.CreateContent;
+import com.mati.demo.prevalence.transaction.content.DeleteContent;
+import com.mati.demo.prevalence.transaction.content.UpdateContent;
 
 public abstract class ContentController<T extends Content> extends BaseController<T> {
 
@@ -144,7 +144,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		content.setId(content.getTitle().hashCode());
 		ContentValidator<T> validator = getValidator(content, getBaseModel().getModel());
 		try{
-			Create<T> create = new Create<T>(content);
+			CreateContent<T> create = new CreateContent<T>(content);
 			if(validator.validate()){
 				getBaseModel().getPrevayler().execute(create);
 			}
@@ -191,7 +191,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 
 		User user = getBaseModel().loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
-		getBaseModel().getPrevayler().execute(new Delete(nodeId));
+		getBaseModel().getPrevayler().execute(new DeleteContent(nodeId));
 
 		return new ModelAndView("redirect:"+LIST, getEntityPluralName(), list(getEntityClass()));
 	}
@@ -215,7 +215,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			transferMetaData(initialContent, updatedContent);
 
 			try{
-				getBaseModel().getPrevayler().execute(new Update(updatedContent, validator));
+				getBaseModel().getPrevayler().execute(new UpdateContent(updatedContent, validator));
 			}catch(Exception e){
 				if(CollectionUtils.isNotEmpty(validator.getErrors())){
 					session.setAttribute("errors", validator.getErrors());
@@ -228,7 +228,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			 */
 			updateContent(initialContent, updatedContent);
 			try{
-				getBaseModel().getPrevayler().execute(new Update(initialContent, updatedContent, getValidator(null, getBaseModel().getModel())));
+				getBaseModel().getPrevayler().execute(new UpdateContent(initialContent, updatedContent, getValidator(null, getBaseModel().getModel())));
 			}catch(Exception e){
 				if(CollectionUtils.isNotEmpty(validator.getErrors())){
 					session.setAttribute("errors", validator.getErrors());
@@ -260,7 +260,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		}
 		processBeforeShow(content);
 
-		return new ModelAndView("content/"+getEntityName()+"/"+SHOW, getEntityName(), content);
+		return new ModelAndView("content/"+getEntityName()+"/"+SHOW, "content", content);
 	}
 
 }

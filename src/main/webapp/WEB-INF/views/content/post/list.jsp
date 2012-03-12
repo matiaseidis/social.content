@@ -17,7 +17,7 @@
 					<tr>
 						<td><c:out value="${post.title}"></c:out></td>
 						<td><span><a
-								href="<c:out value="show/${post.title}"></c:out>">ver</a></span></td>
+								href="<c:out value="show/${post.id}"></c:out>">ver</a></span></td>
 						<td><span><a
 								href="edit/<c:out value="${post.id}"></c:out>">editar</a></span></td>
 						<td><span> <a

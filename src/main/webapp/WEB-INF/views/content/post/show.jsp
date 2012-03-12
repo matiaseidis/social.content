@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${post.title}</title>
+<title>${content.title}</title>
 </head>
 <body>
 	<div>
@@ -14,7 +14,7 @@
 <%-- 				<h1>${post.title}</h1> --%>
 <!-- 				</p> -->
 				<p>
-				<h4>${post.body}</h4>
+				<h4>${content.body}</h4>
 				</p>
 	</div>
 	

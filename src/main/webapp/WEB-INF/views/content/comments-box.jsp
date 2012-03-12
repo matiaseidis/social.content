@@ -11,7 +11,7 @@
 			<h3>Comente esto viejo!</h3>
 		</legend>
 		<sec:authorize access="isAuthenticated()">
-			<form:form action="comment/add/" modelAttribute="comment"
+			<form:form action="${pageContext.request.contextPath}/comment/add/${content.id}" modelAttribute="comment"
 				method="post">
 				<p>
 					<form:label for="title" path="title">Titulo</form:label>
@@ -36,6 +36,14 @@
 
 			</form:form>
 		</sec:authorize>
-		<sec:authorize access="isAnonymous()">invitacion a autenticarse / registrarse</sec:authorize>
+		<c:forEach items="${content.comments}" var="c">
+			<div class="comment">
+			<h3>${c.title}</h3>
+			<h6>Por ${c.author.userName}</h6>
+			<h6>el ${c.postDate}</h6>
+			<h4>${c.body}</h4>
+			</div>
+		</c:forEach>
+		<sec:authorize access="isAnonymous()">registrese si quiere commentar...</sec:authorize>
 	</fieldset>
 </div>
