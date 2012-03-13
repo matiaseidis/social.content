@@ -77,11 +77,11 @@ class Model implements Serializable{
    		usersMap.put(u.userName, u)
    }
    
-   def boolean containsTag(Tag tag){
+   def boolean hasTag(Tag tag){
 		tagsMap[tag.tagName] != null   
    }
    
-   def boolean containsUser(User user){
+   def boolean hasUser(User user){
 	   usersMap[user.userName] != null
   }
   

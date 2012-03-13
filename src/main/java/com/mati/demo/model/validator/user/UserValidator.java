@@ -83,7 +83,7 @@ public class UserValidator extends AbstractValidator<User> {
 		
 		if(user == null) return false;
 		
-		boolean unavailable = model.containsUser(user);
+		boolean unavailable = model.hasUser(user);
 		if(unavailable){
 			addError("unavailable","El nombre ya esta siendo usado por otro usuario");
 		}

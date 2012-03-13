@@ -2,7 +2,9 @@ package com.mati.demo.model.content;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +23,11 @@ public abstract class Content extends Taggable implements Commentable{
 	@Getter @Setter private Date postDate;
 	@Getter @Setter private String title;
 	@Getter @Setter private User author;
-	@Getter @Setter private String contentType = getClass().getSimpleName().toLowerCase();
+	@Getter final private String contentType = getClass().getSimpleName().toLowerCase();
 	
 	@Getter private final List<Comment> comments = new ArrayList<Comment>(); 
+	
+	private Map<String, Tag> tagsMap = new HashMap<String, Tag>();
 
 	@Override
 	protected void registerWithTag(Tag tag) {
@@ -34,6 +38,8 @@ public abstract class Content extends Taggable implements Commentable{
 	protected void unregisterWithTag(Tag tag) {
 		tag.removeTagged(this);
 	}
+	
+//	protected abstract String getContentType();
 	
 	public void comment(Comment comment) {
 		comments.add(comment);
@@ -50,6 +56,10 @@ public abstract class Content extends Taggable implements Commentable{
 			return false;
 		}
 		return this.getTitle().equals(((Content)obj).getTitle());
+	}
+
+	public boolean hasTag(Tag tag) {
+		return tagsMap.containsKey(tag.getTagName());
 	}
 
 }

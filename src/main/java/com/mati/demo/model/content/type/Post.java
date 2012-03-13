@@ -9,5 +9,6 @@ public class Post extends Content{
 
 	
 	@Setter @Getter private String body;
+//	@Getter private final String contentType = "post";
 
 }

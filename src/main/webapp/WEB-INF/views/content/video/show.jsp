@@ -17,10 +17,12 @@
 <script type='text/javascript'>
   jwplayer('mediaspace').setup({
     'flashplayer': '${pageContext.request.contextPath}/js/mediaplayer-5.9-viral/player.swf',
-    'file': '<c:out value="${video.baseUrl}${video.fileName}" ></c:out>',
+    'file': '<c:out value="${content.baseUrl}${content.fileName}" ></c:out>',
     'controlbar': 'bottom',
     'width': '470',
-    'height': '320'
+    'height': '320',
+    /*'skin':'${pageContext.request.contextPath}/js/video-js/skins/playcasso/playcasso.zip'*/
+    'skin':'${pageContext.request.contextPath}/js/video-js/skins/grungetape/grungetape.zip'
   });
 </script>
 

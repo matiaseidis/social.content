@@ -18,7 +18,7 @@ public class CreateUser implements Transaction {
 	
 	public void executeOn(Object prevalentSystem, Date executionTime) {
 		Model model = (Model) prevalentSystem;
-		if(model.containsUser(user)){
+		if(model.hasUser(user)){
 			throw new RuntimeException("User "+user.getUserName()+" is already registrated");
 		}
 		user.getRoles().add(userRole);

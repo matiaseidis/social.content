@@ -83,6 +83,8 @@
 		<url-pattern>*.img</url-pattern>
 		<url-pattern>*.htm</url-pattern>
 		<url-pattern>*.swf</url-pattern>
+		<url-pattern>*.zip</url-pattern>
+		<url-pattern>*.xml</url-pattern>
 		<url-pattern>/static/*</url-pattern>
 	</servlet-mapping>
 

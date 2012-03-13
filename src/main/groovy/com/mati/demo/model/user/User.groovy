@@ -67,7 +67,15 @@ class User extends Taggable implements Followable, Follower{
 		}
 		c
 	}
-	
+
+//	Collection<Content> getFollowedContent(){
+//		def c = []
+//		c = getFollowedUsers().content.values()
+//		//.findAll{ id, item -> item }
+//		c
+//	}
+
+		
 	@Override
 	protected void registerWithTag(Tag tag) {
 		tag.addTagged(this);
