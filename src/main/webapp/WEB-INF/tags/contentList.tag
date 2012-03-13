@@ -14,7 +14,7 @@
 			</legend>
 			<ul>
 				<c:forEach var="content" items="${contentList}">
-					<li><a href="${pageContext.request.contextPath}/content/${contentType}/show/${content.title}">${content.title}</a></li>
+					<li><a href="${pageContext.request.contextPath}/content/${contentType}/show/${content.id}">${content.title}</a></li>
 				</c:forEach>
 			</ul>
 		</fieldset>
