@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mati.demo.controller.BaseController;
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.Content;
+import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.model.validator.content.ContentValidator;
 import com.mati.demo.prevalence.BaseModel;
@@ -261,6 +262,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		processBeforeShow(content);
 		m.addObject("content", content);
 		m.addObject("contentType", getEntityName());
+		m.addObject("tag", new Tag());
 		m.setViewName("content/"+getEntityName()+"/"+SHOW);
 
 		return m;
