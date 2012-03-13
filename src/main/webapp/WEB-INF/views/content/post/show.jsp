@@ -6,18 +6,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${content.title}</title>
+<title><c:out value="${content.title}" escapeXml="true"></c:out></title>
 </head>
 <body>
 	<div>
-<!-- 	<p> -->
-<%-- 				<h1>${post.title}</h1> --%>
-<!-- 				</p> -->
-				<p>
-				<h4>${content.body}</h4>
-				</p>
+	<h6>Por <c:out value="${content.author.userName}" escapeXml="true"></c:out></h6>
+	<h6>publicado el <c:out value="${content.postDate}" escapeXml="true"></c:out></h6>
+		<p>
+		<h4>
+			<c:out value="${content.body}"></c:out>
+		</h4>
+		</p>
 	</div>
-	
-	<jsp:include page="../comments-box.jsp" />	
+
+	<jsp:include page="../comments-box.jsp" />
 </body>
 </html>

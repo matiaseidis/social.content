@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
@@ -54,7 +55,6 @@ public class ContextListener implements ServletContextListener {
 				u.getRoles().add(ROLE_USER);
 				
 				baseModel.getPrevayler().execute(new CreateUser(u));
-//				baseModel.getPrevayler().execute(new StartFollowingUser("admin"));
 				
 			}
 		}

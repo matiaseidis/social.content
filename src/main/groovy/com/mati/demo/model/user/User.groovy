@@ -40,10 +40,11 @@ class User extends Taggable implements Followable, Follower{
 //	private Map<Integer, Post> posts = new HashMap<Integer, Post>();
 //	private Map<Integer, Video> videos = new HashMap<Integer, Video>();
 	
-	private Map<String, User> followedBy = new HashMap<String, User>();
+	def followedBy = new HashMap<String, User>();
 	
-	private Map<String, User> followedUsers = new HashMap<String, User>();
-	private Map<String, Tag> followedTags = new HashMap<String, Tag>();
+	def followedUsers = new HashMap<String, User>();
+	def followedTags = new HashMap<String, Tag>();
+	
 	
 	def addContent(Content c){
 		content.put(c.hashCode(), c);
@@ -54,10 +55,19 @@ class User extends Taggable implements Followable, Follower{
 //		content.put(post.hashCode(), post);
 //	}
 	
-	public Collection<Content> getContent(){	content.values()}
-	public Collection<Post> getPosts(){			getContent(Post.class)}
-	public Collection<Post> getVideos(){		getContent(Video.class)}
-
+	Collection<Content> getContent(){	content.values()}
+	Collection<Post> getPosts(){			getContent(Post.class)}
+	Collection<Post> getVideos(){		getContent(Video.class)}
+	Collection<Content> getFollowedContent(){ 
+		def c = []
+		getFollowedUsers().each{
+			it.content.each { cont ->
+				c.add(cont)
+			}	
+		}
+		c
+	}
+	
 	@Override
 	protected void registerWithTag(Tag tag) {
 		tag.addTagged(this);

@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
@@ -48,10 +49,25 @@
 			<sec:authorize access="isAuthenticated()">
 				<c:out value="${user.userName}"></c:out>
 				<img src="${userPictureURI}" width="100px" height="100px" />
+				<p></p>
+				Contenido de gente a la que seguis
+				<div>
+				<c:forEach items="${followedContent }" var="c">
+					<p><a href="${ctx}/content/${c.contentType}/show/${c.id}"><c:out value="${c.title}"></c:out></a></p>
+					
+					<p><c:out value="${c.author.userName}"></c:out> -
+					<fmt:formatDate pattern="dd" type="date" value="${c.postDate}" timeZone="es"/> de  
+<fmt:formatDate  pattern="MM" type="date" value="${c.postDate}" timeZone="es"/> de 
+<fmt:formatDate  pattern="yyyy, HH:mm" type="time" value="${c.postDate}" timeZone="es"/></p>
+					</p>
+				</c:forEach>
+				</div>
+				
+				
 				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList>
 				<myTags:userList title="followedBy" userList="${followedBy}">usuarios que te siguen</myTags:userList>
 				<myTags:tagList title="followedTags" tags="${followedTags}">etiquetas que estas siguiendo</myTags:tagList>
-				<myTags:tagList title="tags" tags="${tags}">etiquetas</myTags:tagList>
+<%-- 				<myTags:tagList title="tags" tags="${tags}">etiquetas</myTags:tagList> --%>
 			</sec:authorize>
 		</div>
 

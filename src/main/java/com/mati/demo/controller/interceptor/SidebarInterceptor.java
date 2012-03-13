@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.mati.demo.model.content.Content;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
@@ -36,6 +37,9 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 			List<User> followedUsers = new ArrayList<User>(user.getFollowedUsers());
 			modelAndView.addObject("followedUsers", followedUsers);
 			modelAndView.addObject("followedTags", new ArrayList<Tag>(user.getFollowedTags()));
+			
+			List<Content> cl = new ArrayList<Content>(baseModel.getModel().getLoggedInUser().getFollowedContent());
+			modelAndView.addObject("followedContent", cl);
 			modelAndView.addObject("followedBy", new ArrayList<User>(user.getFollowedBy()));
 			
 			String userPictureURI = "http://"+serverBasePath+userPictureFolder+"/" +

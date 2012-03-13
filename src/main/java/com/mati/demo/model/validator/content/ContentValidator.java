@@ -26,7 +26,6 @@ public abstract class ContentValidator<T extends Content> extends AbstractValida
 		String title = content.getTitle();
 		if(GenericValidator.isBlankOrNull(title) || !GenericValidator.maxLength(title, 64)){
 			addError("title", "el titulo es obligatorio");
-			
 		}
 		
 		performValidation();

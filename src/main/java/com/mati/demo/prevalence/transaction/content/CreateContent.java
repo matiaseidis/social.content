@@ -23,6 +23,8 @@ public class CreateContent<T extends Content> implements Transaction {
 	public void executeOn(Object prevalentSystem, Date executionTime) {
 		Model model = (Model)prevalentSystem;
 			_content.setId(_content.hashCode());
+			_content.setAuthor(model.getLoggedInUser());
+			_content.setPostDate(new Date());
 			model.getLoggedInUser().addContent(_content);
 			model.addContent(_content);
 	}

@@ -17,4 +17,5 @@ public class Video extends Content{
 	@Getter @Setter private String fileName;
 	transient @Getter @Setter private String baseUrl;
 	transient @Getter @Setter private CommonsMultipartFile fileData;
+	
 }
