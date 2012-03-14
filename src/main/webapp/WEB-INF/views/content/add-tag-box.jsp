@@ -8,7 +8,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <div>
 		<sec:authorize access="isAuthenticated()">
-			<form:form action="${ctx}/tag/add/${contentType}/${content.id}" modelAttribute="tag"
+			<form:form action="${ctx}/tag/add/${content.id}" modelAttribute="tag"
 				method="post">
 				<p>
 					<form:label for="tagName" path="tagName">etiquetar</form:label>

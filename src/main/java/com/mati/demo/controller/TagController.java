@@ -3,6 +3,7 @@ package com.mati.demo.controller;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,11 +35,12 @@ public class TagController {
 		@RequestMapping(value="add/{id}", method=RequestMethod.POST)
 		public ModelAndView add(@ModelAttribute Tag tag, @PathVariable int id, ModelAndView m){
 			Content c = baseModel.getModel().loadContentById(id);
-			if(c == null || tag == null){
+			if(c == null || tag == null || StringUtils.isEmpty(tag.getTagName())){
 				//TODO handle
+			} else{
+				baseModel.getPrevayler().execute(new AddTag(tag, id));
+				//	TODO log
 			}
-			baseModel.getPrevayler().execute(new AddTag(tag, id));
-			//TODO log
 			
 			m.setViewName("redirect:/content/"+c.getContentType()+"/show/"+id);
 			return m;

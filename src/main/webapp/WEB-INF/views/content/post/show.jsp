@@ -17,7 +17,7 @@
 	<jsp:include page="../add-tag-box.jsp"></jsp:include>
 		<p>
 		<h4>
-			<c:out value="${content.body}"></c:out>
+			<c:out value="${content.body}" escapeXml="false"></c:out>
 		</h4>
 		</p>
 	</div>

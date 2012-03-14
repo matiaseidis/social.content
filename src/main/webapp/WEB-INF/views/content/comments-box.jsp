@@ -6,10 +6,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <div>
-	<fieldset>
-		<legend>
 			<h3>Comente esto viejo!</h3>
-		</legend>
 		<sec:authorize access="isAuthenticated()">
 			<form:form action="${pageContext.request.contextPath}/comment/add/${contentType}/${content.id}" modelAttribute="comment"
 				method="post">
@@ -45,5 +42,4 @@
 			</div>
 		</c:forEach>
 		<sec:authorize access="isAnonymous()">registrese si quiere commentar...</sec:authorize>
-	</fieldset>
 </div>

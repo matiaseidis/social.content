@@ -6,6 +6,10 @@
     clear:both;
 }
 .barrita{}
+.menu-left{float:left;}
+.menu-right{float:right;}
+.search-form{display:inline;}
+.search-form input{display:inline;}
 .barrita-wrapper{}
 .mainBody {
 	float:left;

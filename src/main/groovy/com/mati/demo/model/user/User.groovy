@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -58,6 +57,7 @@ class User extends Taggable implements Followable, Follower{
 	Collection<Content> getContent(){	content.values()}
 	Collection<Post> getPosts(){			getContent(Post.class)}
 	Collection<Post> getVideos(){		getContent(Video.class)}
+	
 	Collection<Content> getFollowedContent(){ 
 		def c = []
 		getFollowedUsers().each{
@@ -66,6 +66,27 @@ class User extends Taggable implements Followable, Follower{
 			}	
 		}
 		c
+	}
+	
+	Collection<Content> getFollowedVideos(){
+		getFollowedContent(Video.class)
+	}
+	
+	Collection<Content> getFollowedPosts(){
+		getFollowedContent(Post.class)
+	}
+	
+	Collection<Content> getFollowedContent(Class clazz){
+		
+		def c = []
+		getFollowedUsers().each{
+			it.content.each { cont ->
+				println cont.class
+				if(c.class.equals(clazz)) c.add(cont)
+			}
+		}
+		c
+		
 	}
 
 //	Collection<Content> getFollowedContent(){

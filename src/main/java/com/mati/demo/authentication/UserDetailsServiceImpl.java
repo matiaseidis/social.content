@@ -6,6 +6,7 @@ import java.util.List;
 
 import lombok.Setter;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,8 +31,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throws UsernameNotFoundException {
 		if(username.equals("admin")){
 			return admin();
+		} 
+		UserDetails userDetails = authUser(baseModel.getModel().loadUserByUsername(username)); 
+		if(userDetails == null || CollectionUtils.isEmpty(userDetails.getAuthorities())){
+			throw new UsernameNotFoundException("Invalid userName / password");
 		}
-		return authUser(baseModel.getModel().loadUserByUsername(username));
+		return userDetails;
 	}
 
 	private UserDetails admin() {

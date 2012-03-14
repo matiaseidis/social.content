@@ -12,6 +12,7 @@
 	<context:property-placeholder location="classpath:general.properties" />
 
 <bean id="comment.controller" class="com.mati.demo.controller.content.CommentController"></bean>
+<bean id="admin.controller" class="com.mati.demo.controller.admin.AdminController"></bean>
 
 
 	<bean id="user.account.controller" class="com.mati.demo.controller.UserAccountController">

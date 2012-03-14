@@ -11,8 +11,6 @@
     </head>
     <body>
         <form:form action="${action}" modelAttribute="video" method="post"  enctype="multipart/form-data">
-            <fieldset>
-                <legend>Upload Fields</legend>
  
                 <p>
                     <form:label for="title" path="title">Name</form:label><br/>
@@ -32,7 +30,6 @@
                     <input type="submit" />
                 </p>
  
-            </fieldset>
         </form:form>
     </body>
 </html>

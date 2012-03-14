@@ -4,20 +4,20 @@
 <%@ attribute name="userList" required="true" rtexprvalue="true"
 	type="java.util.List"%>
 <%@ tag body-content="tagdependent"%>
+<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
 <c:if test="${not empty userList}">
 	<div>
-		<fieldset>
-			<legend>
 				<h3>${title}</h3>
-			</legend>
-<%-- 			<strong><jsp:doBody /></strong> <br> <img --%>
-<!-- 				src="images/companyLogo.gif"> <br> -->
+ 
 			<ul>
 				<c:forEach var="u" items="${userList}">
-					<li>${u.userName}</li>
+					<li>
+					<a href="${ctx}/profile/${u.userName}">${u.userName}</a>
+					<a href="${ctx}/profile/${u.userName}"><myTags:userImg height="50" width="50" username="${u.userName}"></myTags:userImg></a>
+					</li>
 				</c:forEach>
 			</ul>
-		</fieldset>
 	</div>
 </c:if>
 

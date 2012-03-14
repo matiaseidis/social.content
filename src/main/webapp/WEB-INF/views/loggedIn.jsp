@@ -2,14 +2,20 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
-<a href="${ctx}/">Inicio</a>
-<a href="${ctx}/profile">Perfil</a>
-<a href="${ctx}/user/content">Mis cosas</a>
-<a href="${ctx}/user/content/add">Agregar contenido</a>
-<a href="${ctx}/relations">Relaciones</a>
-<a href="${ctx}/j_spring_security_logout">Logout</a>
-
+<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
+<div class="menu-left">
+		<a href="${ctx}/">Inicio</a>
+		<a href="${ctx}/user/content">Mis cosas</a> 
+		<a href="${ctx}/user/content/add">Agregar contenido</a>
+</div>
+<div class="menu-right">
+	<form action="search" class="search-form">
+	<input type="text" name="text">
+	<input type="submit" value="Buscar">
+	</form>
+	<a href="${ctx}/profile">Perfil</a> 
+	<a href="${ctx}/j_spring_security_logout">Logout</a>
+</div>
 
 <!-- <ul> -->
 <!-- 	<li class="green"> -->

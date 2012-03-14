@@ -11,8 +11,7 @@
     </head>
     <body>
         <form:form action="${action}" modelAttribute="user" method="post"  enctype="multipart/form-data">
-            <fieldset>
-                <legend>Ingrese sus datos...</legend>
+                <p>Ingrese sus datos...</p>
  				<c:if test="${not empty errors}">
  				<p>
 						<c:out value="${errors.unavailable}"></c:out>
@@ -45,7 +44,6 @@
                     <input type="submit" />
                 </p>
  
-            </fieldset>
         </form:form>
     </body>
 </html>

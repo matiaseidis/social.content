@@ -8,7 +8,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
-
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/layout.css" />
@@ -22,7 +21,7 @@
 <%-- 	src="${ctx}/js/jquery/jquery.easing.compatibility.js"></script> --%>
 <%-- <script type="text/javascript" src="${ctx}/js/menu.js"></script> --%>
 
-<title><sitemesh:write property='title' /></title>
+<title>Social Content :: <sitemesh:write property='title' /></title>
 <sitemesh:write property='head' />
 </head>
 <body>
@@ -48,7 +47,8 @@
 			<!-- 			sidebar right -->
 			<sec:authorize access="isAuthenticated()">
 				<c:out value="${user.userName}"></c:out>
-				<img src="${userPictureURI}" width="100px" height="100px" />
+				<myTags:userImg height="100" width="100" username="${user.userName}"></myTags:userImg>
+
 				<p></p>
 				<c:if test="${not empty followedContent}">
 				Contenido de gente a la que seguis
