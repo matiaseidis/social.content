@@ -4,21 +4,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+<title>Buscar</title>
 </head>
 <body>
-	<span>Lo que esta pasando</span>
-	<myTags:contentList contentList="${user.followedVideos}" title="Videos" ></myTags:contentList>
-	<myTags:contentList contentList="${user.followedPosts}" title="Posts" ></myTags:contentList>
-	
+<div>
+<span>Buscar contenido</span>
+<form action="${ctx}/search/content/" method="GET">
+<input type="text" name="pattern">
+<input type="submit" value="buscar" >
+</form>
+<myTags:contentList contentList="${searchResult}" title="Resultados"></myTags:contentList>
+</div>
 </body>
 </html>

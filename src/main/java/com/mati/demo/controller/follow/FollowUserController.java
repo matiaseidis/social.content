@@ -42,7 +42,7 @@ public class FollowUserController {
 			message = e.getMessage();
 		}	
 		session.setAttribute("errors", message);
-		m.setViewName("redirect:/profile");
+		m.setViewName("redirect:/profile/"+username);
 		return m;
 	}
 

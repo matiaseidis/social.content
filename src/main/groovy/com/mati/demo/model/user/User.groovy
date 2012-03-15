@@ -76,13 +76,17 @@ class User extends Taggable implements Followable, Follower{
 		getFollowedContent(Post.class)
 	}
 	
-	Collection<Content> getFollowedContent(Class clazz){
+	Collection<Content> getFollowedContent(Class type){
 		
 		def c = []
 		getFollowedUsers().each{
 			it.content.each { cont ->
 				println cont.class
-				if(c.class.equals(clazz)) c.add(cont)
+				println type
+				println c.class
+				if(cont.class == type){
+					 c.add(cont)
+				}
 			}
 		}
 		c

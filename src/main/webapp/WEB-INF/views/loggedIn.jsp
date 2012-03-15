@@ -7,6 +7,7 @@
 		<a href="${ctx}/">Inicio</a>
 		<a href="${ctx}/user/content">Mis cosas</a> 
 		<a href="${ctx}/user/content/add">Agregar contenido</a>
+		<a href="${ctx}/search">Buscar</a>
 </div>
 <div class="menu-right">
 	<form action="search" class="search-form">

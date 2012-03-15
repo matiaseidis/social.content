@@ -13,7 +13,7 @@
 
 <bean id="comment.controller" class="com.mati.demo.controller.content.CommentController"></bean>
 <bean id="admin.controller" class="com.mati.demo.controller.admin.AdminController"></bean>
-
+<bean id="search.controller" class="com.mati.demo.controller.search.SearchController"></bean>
 
 	<bean id="user.account.controller" class="com.mati.demo.controller.UserAccountController">
 			<property name="fileSystemBasePath" value="${static.content.file.system.base}"></property>

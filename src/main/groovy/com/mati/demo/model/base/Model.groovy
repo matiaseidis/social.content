@@ -3,6 +3,7 @@ package com.mati.demo.model.base
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lombok.Getter;
@@ -84,5 +85,16 @@ class Model implements Serializable{
    def boolean hasUser(User user){
 	   usersMap[user.userName] != null
   }
+public List<Content> searchContent(String pattern) {
+	def result = []
+	
+	contentMap.values().each { 
+		def m = it.title =~ pattern
+		if(m.getCount() > 0){
+			result.add(it)
+		}
+	}
+	return result;
+}
   
 }
