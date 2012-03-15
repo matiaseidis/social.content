@@ -7,11 +7,11 @@
 <html>
     <head>
         <META http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <title>Create account</title>
+        <title>Editar perfil</title>
     </head>
     <body>
         <form:form action="${action}" modelAttribute="user" method="post"  enctype="multipart/form-data">
-                <p>Ingrese sus datos...</p>
+                
  				<c:if test="${not empty errors}">
  				<p>
 						<c:out value="${errors.unavailable}"></c:out>
@@ -44,9 +44,10 @@
                     <form:textarea path="info"/>
                     
                 </p>
+                <p>
                 
-                
-                    <form:label for="image" path="image">Image: </form:label><br/>
+                    <form:label for="image" path="image">Image: 
+                    </form:label><br/>
                     <form:input path="image" type="file" />
 						<c:if test="${not empty errors}">
 						<c:out value="${errors.image}"></c:out>
@@ -54,7 +55,7 @@
 					
                 </p>
                 <p>
-                    <input type="submit" />
+                    <input type="submit" value="Actualizar perfil"/>
                 </p>
  
         </form:form>

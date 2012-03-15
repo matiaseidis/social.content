@@ -45,9 +45,6 @@ public class HomeController {
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public /*@ResponseBody*/ ModelAndView login(ModelAndView m){
 		m.setViewName("/login_stand_alone");
-
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
-
 		return m;
 	}
 

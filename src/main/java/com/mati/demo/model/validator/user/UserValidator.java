@@ -38,40 +38,6 @@ public class UserValidator extends AbstractValidator<User> {
 		if(StringUtils.isEmpty(user.getPassword())){
 			addError("password","tiene que tener una clave de seguridad");
 			problems = true;
-		}
-		if(user.getImage() == null || user.getImage().getSize() == 0){
-			addError("image","tiene que proveer una imagen");
-			problems = true;
-		}
-		/*
-		 * only do the img stuff if the rest is ok
-		 */
-		if(!problems){
-			/* 
-			 * TODO check image size 
-			 * */
-			CommonsMultipartFile multipartFile = user.getImage();
-
-			String destinationPath = fileSystemBasePath + File.separator + userPictureFolder + File.separator; 
-
-			String fileName = StringUtils.replace(user.getUserName().toLowerCase(), " ", "-");
-
-			File file = new File(destinationPath + fileName + ".png");
-			try {
-				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				
-				BufferedImage l_original_image  = ImageIO.read(multipartFile.getInputStream());
-				
-				ImageIO.write(l_original_image, "PNG", out);
-
-				byte[] imageBytes = out.toByteArray(); 
-				
-				FileUtils.writeByteArrayToFile(file, imageBytes);
-//				FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
-				
-			} catch (IOException e) {
-				addError("save", "No se puedo guardar la imagen del usuario");
-			}
 		} else {
 			addError("user", user);
 		}

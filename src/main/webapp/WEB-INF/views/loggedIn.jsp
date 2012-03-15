@@ -10,10 +10,10 @@
 		<a href="${ctx}/search">Buscar</a>
 </div>
 <div class="menu-right">
-	<form action="search" class="search-form">
-	<input type="text" name="text">
-	<input type="submit" value="Buscar">
-	</form>
+<!-- 	<form action="search" class="search-form"> -->
+<!-- 	<input type="text" name="text"> -->
+<!-- 	<input type="submit" value="Buscar"> -->
+<!-- 	</form> -->
 	<a href="${ctx}/profile">Perfil</a> 
 	<a href="${ctx}/j_spring_security_logout">Logout</a>
 </div>

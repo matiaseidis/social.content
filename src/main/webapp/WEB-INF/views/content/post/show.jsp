@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
 <html>
 <head>
@@ -11,8 +12,8 @@
 </head>
 <body>
 	<div>
-	<h6>Por <c:out value="${content.author.userName}" escapeXml="true"></c:out></h6>
-	<h6>publicado el <c:out value="${content.postDate}" escapeXml="true"></c:out></h6>
+	<h6>Publicado por <c:out value="${content.author.userName}" escapeXml="true"></c:out>, el <fmt:formatDate pattern="dd/MM/yyyy" dateStyle="short" type="date" value="${content.postDate}"
+							timeZone="es" /></h6>
 	<jsp:include page="../show-tags-box.jsp"></jsp:include>
 	<jsp:include page="../add-tag-box.jsp"></jsp:include>
 		<p>
@@ -25,3 +26,9 @@
 	<jsp:include page="../comments-box.jsp" />
 </body>
 </html>
+
+
+
+
+
+					

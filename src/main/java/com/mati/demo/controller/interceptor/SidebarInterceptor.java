@@ -51,7 +51,6 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 
 
 			modelAndView.addObject("tags", new ArrayList<Tag>(baseModel.getModel().getTags()));
-			System.out.println("asdasd");
 		}
 		super.postHandle(request, response, handler, modelAndView);
 

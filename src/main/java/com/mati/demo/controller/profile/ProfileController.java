@@ -22,7 +22,7 @@ public class ProfileController {
 		if(u == null){
 			//TODO handle
 		}		
-
+		m.addObject("own", true);
 		m.addObject("profileUser", u);
 
 		return m;
@@ -37,6 +37,7 @@ public class ProfileController {
 		}		
 
 		m.addObject("profileUser", u);
+		m.addObject("followed", baseModel.getModel().getLoggedInUser().isFollowing(u));
 
 		m.setViewName("profile");
 		return m;

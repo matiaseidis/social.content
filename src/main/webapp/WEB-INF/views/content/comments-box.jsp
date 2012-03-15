@@ -38,7 +38,7 @@
 			<h3>${c.title}</h3>
 			<h6>Por ${c.author.userName}</h6>
 			<h6>el ${c.postDate}</h6>
-			<h4>${c.body}</h4>
+			<h4><c:out value="${c.body}"></c:out></h4>
 			</div>
 		</c:forEach>
 		<sec:authorize access="isAnonymous()">registrese si quiere commentar...</sec:authorize>

@@ -68,6 +68,17 @@ public class UserController extends BaseController{
 		
 		return m;
 	}
+	
+	@RequestMapping("profile/edit")
+	public ModelAndView editProfile(ModelAndView m){
+		User u = baseModel.getModel().getLoggedInUser();
+
+		if(u == null){
+			//TODO handle
+		}		
+		m.addObject("profileUser", u);
+		return m;
+	}
 
 
 }

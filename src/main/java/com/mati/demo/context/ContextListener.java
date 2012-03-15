@@ -8,13 +8,11 @@ import org.apache.log4j.Logger;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.tag.CreateTag;
 import com.mati.demo.prevalence.transaction.user.CreateUser;
-import com.mati.demo.prevalence.transaction.user.StartFollowingUser;
 
 public class ContextListener implements ServletContextListener {
 
@@ -32,6 +30,9 @@ public class ContextListener implements ServletContextListener {
 		ServletContext ctx = sce.getServletContext();
 		WebApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(ctx);
 		BaseModel baseModel = (BaseModel) springContext.getBean("base.model");
+//		UserAccountController userAccountController = (UserAccountController) springContext.getBean("user.account.controller");
+		
+		
 		/*
 		 * check if admin user exists
 		 */
@@ -46,6 +47,7 @@ public class ContextListener implements ServletContextListener {
 			admin.getRoles().add(ROLE_ADMIN);
 			
 			baseModel.getPrevayler().execute(new CreateUser(admin));
+//			userAccountController.register(admin, null, null);
 			
 			String userName = "user-";
 			for(int i = 0; i < 5; i++){
@@ -55,6 +57,7 @@ public class ContextListener implements ServletContextListener {
 //				u.getRoles().add(ROLE_USER);
 				
 				baseModel.getPrevayler().execute(new CreateUser(u));
+//				userAccountController.register(admin, null, null);
 				
 			}
 		}

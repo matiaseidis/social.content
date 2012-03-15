@@ -30,6 +30,8 @@ class User extends Taggable implements Followable, Follower{
 	int id;
 	String userName;
 	String password;
+	String email
+	String info
 	transient CommonsMultipartFile image;
 	
 	List<String> roles = new ArrayList<String>();
@@ -205,6 +207,10 @@ class User extends Taggable implements Followable, Follower{
 	
 	public void removeFollower(User user) {
 		followedBy.remove(user.hashCode());
+	}
+
+	def isFollowing(User u) {
+		return followedUsers[u?.getUserName()] != null
 	}
 
 }

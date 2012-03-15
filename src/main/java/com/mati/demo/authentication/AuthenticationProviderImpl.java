@@ -44,7 +44,6 @@ public class AuthenticationProviderImpl extends AbstractUserDetailsAuthenticatio
 			UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
 		// TODO Auto-generated method stub
-		System.out.println();
 		
 	}
 

@@ -78,8 +78,8 @@
 
 				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList>
 				<myTags:userList title="followedBy" userList="${followedBy}">usuarios que te siguen</myTags:userList>
-				<myTags:tagList title="followedTags" tags="${followedTags}">etiquetas que estas siguiendo</myTags:tagList>
-				<%-- 				<myTags:tagList title="tags" tags="${tags}">etiquetas</myTags:tagList> --%>
+				<myTags:tagList title="followedTags" tagList="${followedTags}">etiquetas que estas siguiendo</myTags:tagList>
+				<%-- 				<myTags:tagList title="tags" tagList="${tags}">etiquetas</myTags:tagList> --%>
 			</sec:authorize>
 		</div>
 
