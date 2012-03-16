@@ -1,15 +1,11 @@
 package com.mati.demo.model.user
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-
-import com.mati.demo.model.content.Content
+import com.mati.demo.model.content.Content;
 import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.content.type.Video
 import com.mati.demo.model.relationships.Followable;
@@ -24,8 +20,8 @@ class User extends Taggable implements Followable, Follower{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final String ROLE_USER = "ROLE_USER";
-	public static final String ROLE_ADMIN = "ROLE_ADMIN";
+	final String ROLE_USER = "ROLE_USER";
+	final String ROLE_ADMIN = "ROLE_ADMIN";
 
 	int id;
 	String userName;
@@ -56,6 +52,11 @@ class User extends Taggable implements Followable, Follower{
 //		content.put(post.hashCode(), post);
 //	}
 	
+	/*
+	 * TODO check this
+	 */
+//	Collection<Tag> getTags(){	followedTags.values()}
+	
 	Collection<Content> getContent(){	content.values()}
 	Collection<Post> getPosts(){			getContent(Post.class)}
 	Collection<Post> getVideos(){		getContent(Video.class)}
@@ -70,8 +71,8 @@ class User extends Taggable implements Followable, Follower{
 		c
 	}
 	
-	Collection<Content> getFollowedVideos(){
-		getFollowedContent(Video.class)
+	def getFollowedVideos(){
+		getFollowedContent(Video)
 	}
 	
 	Collection<Content> getFollowedPosts(){
@@ -154,7 +155,7 @@ class User extends Taggable implements Followable, Follower{
 //	}
 
 	def Collection getContent(Class clazz) {
-		return content.values().findAll { it.class.equals(clazz) }
+		return content.values().findAll { it.class == clazz  }
 	}
 
 	def Content getContent(int nodeId) {

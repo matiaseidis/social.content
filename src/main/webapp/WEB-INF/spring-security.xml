@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.1.xsd 
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 	
@@ -56,8 +58,12 @@
 	</bean>
 
  
-	<bean id="user.details.service" class="com.mati.demo.authentication.UserDetailsServiceImpl">
-		<property name="baseModel" ref="base.model"></property>
-	</bean>
+ 	<lang:groovy id="user.details.service" 
+ 	script-source="classpath:com/mati/demo/authentication/UserDetailsServiceImpl.groovy"
+ 	></lang:groovy>
+ 
+<!-- 	<bean id="user.details.service" class="com.mati.demo.authentication.UserDetailsServiceImpl"> -->
+<!-- 		<property name="baseModel" ref="base.model"></property> -->
+<!-- 	</bean> -->
 
 </beans>

@@ -2,17 +2,13 @@ package com.mati.demo.model.base
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import lombok.Getter;
-
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder
 
 import com.mati.demo.model.content.Content;
 import com.mati.demo.model.tag.Tag;
-import com.mati.demo.model.tag.Taggable;
+import com.mati.demo.model.tag.Taggable
 import com.mati.demo.model.user.User;
 
 class Model implements Serializable{

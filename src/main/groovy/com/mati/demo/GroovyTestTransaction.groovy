@@ -1,6 +1,6 @@
 package com.mati.demo
 
-import java.util.Date
+import java.util.Date;
 
 import org.prevayler.Transaction;
 

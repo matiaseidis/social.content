@@ -2,7 +2,7 @@ package com.mati.demo.prevalence.query
 
 import java.util.Date;
 
-import org.prevayler.Query
+import org.prevayler.Query;
 
 class FollowedUsersContentQuery implements Query{
 	

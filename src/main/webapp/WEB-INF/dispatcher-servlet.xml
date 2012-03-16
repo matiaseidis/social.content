@@ -8,76 +8,152 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:component-scan base-package="com.mati.demo.controller.profile" />
+	<!-- <context:component-scan base-package="com.mati.demo.controller.profile" 
+		/> -->
 	<context:property-placeholder location="classpath:general.properties" />
 
-<bean id="comment.controller" class="com.mati.demo.controller.content.CommentController"></bean>
-<bean id="admin.controller" class="com.mati.demo.controller.admin.AdminController"></bean>
-<bean id="search.controller" class="com.mati.demo.controller.search.SearchController"></bean>
 
-	<bean id="user.account.controller" class="com.mati.demo.controller.UserAccountController">
-			<property name="fileSystemBasePath" value="${static.content.file.system.base}"></property>
-			<property name="userPictureFolder" value="${static.content.user.picture.folder}"></property>
-	</bean>
+	<!-- <bean id="user.account.controller" class="com.mati.demo.controller.UserAccountController"> -->
+	<!-- <property name="fileSystemBasePath" value="${static.content.file.system.base}"></property> -->
+	<!-- <property name="userPictureFolder" value="${static.content.user.picture.folder}"></property> -->
+	<!-- </bean> -->
 
-	<bean id="user.controller" class="com.mati.demo.controller.UserController">
-		<!-- <property name="baseModel" ref="base.model"></property> -->
-		<property name="entityName" value="user"></property>
-		<property name="entityPluralName" value="users"></property>
-		<!-- no aplica <property name="basePath" value="${user.base.path}"></property> -->
-	</bean>
+	<!-- <bean id="user.controller" class="com.mati.demo.controller.UserController"> -->
+	<!-- <property name="entityName" value="user"></property> -->
+	<!-- <property name="entityPluralName" value="users"></property> -->
+	<!-- </bean> -->
 
-	<bean id="follow.user.controller" class="com.mati.demo.controller.follow.FollowUserController"></bean>
-	<bean id="follow.tag.controller" class="com.mati.demo.controller.follow.FollowTagController"></bean>
-	<bean id="tag.controller" class="com.mati.demo.controller.TagController"></bean>
-
+	<!-- <bean id="follow.user.controller" class="com.mati.demo.controller.follow.FollowUserController"></bean> -->
+	<!-- <bean id="follow.tag.controller" class="com.mati.demo.controller.follow.FollowTagController"></bean> -->
+	<!-- <bean id="tag.controller" class="com.mati.demo.controller.TagController"></bean> -->
+	<!-- <bean id="home.controller" class="com.mati.demo.controller.HomeController"></bean> -->
+	<!-- <bean id="comment.controller" class="com.mati.demo.controller.content.CommentController"></bean> -->
+	<!-- <bean id="admin.controller" class="com.mati.demo.controller.admin.AdminController"></bean> -->
+	<!-- <bean id="search.controller" class="com.mati.demo.controller.search.SearchController"></bean> -->
 
 
-	<bean id="home.controller" class="com.mati.demo.controller.HomeController">
-		<!-- <property name="baseModel" ref="base.model"></property> -->
-	</bean>
+	<!-- <bean id="video.controller" class="com.mati.demo.controller.content.VideoController"> -->
+	<!-- <property name="staticContentBase" value="${static.content.server.base}"></property> -->
+	<!-- <property name="entityName" value="video"></property> -->
+	<!-- <property name="entityPluralName" value="videos"></property> -->
+	<!-- <property name="serverBasePath" value="${static.content.server.base}"></property> -->
+	<!-- <property name="fileSystemBasePath" value="${static.content.file.system.base}"></property> -->
+	<!-- <property name="basePath" value="${content.base.path}"></property> -->
+	<!-- </bean> -->
 
-	<bean id="video.controller" class="com.mati.demo.controller.content.VideoController">
-		<!-- <property name="baseModel" ref="base.model"></property> -->
-		<property name="staticContentBase" value="${static.content.server.base}"></property>
-		<property name="entityName" value="video"></property>
-		<property name="entityPluralName" value="videos"></property>
-		<property name="serverBasePath" value="${static.content.server.base}"></property>
-		<property name="fileSystemBasePath" value="${static.content.file.system.base}"></property>
-		<property name="basePath" value="${content.base.path}"></property>
-	</bean>
+	<!-- <bean id="post.controller" class="com.mati.demo.controller.content.PostController"> -->
+	<!-- <property name="staticContentBase" value="${static.content.server.base}"></property> -->
+	<!-- <property name="entityName" value="post"></property> -->
+	<!-- <property name="entityPluralName" value="posts"></property> -->
+	<!-- <property name="basePath" value="${content.base.path}"></property> -->
+	<!-- </bean> -->
 
-	<bean id="post.controller" class="com.mati.demo.controller.content.PostController">
-		<!-- <property name="baseModel" ref="base.model"></property> -->
-		<property name="staticContentBase" value="${static.content.server.base}"></property>
-		<property name="entityName" value="post"></property>
-		<property name="entityPluralName" value="posts"></property>
-		<property name="basePath" value="${content.base.path}"></property>
-	</bean>
-	
-	<lang:defaults proxy-target-class="true"/>
-	<lang:groovy  id="test.controller" script-source="classpath:com/mati/demo/controller/TestController.groovy"></lang:groovy>
+
+	<lang:groovy id="profile.controller"
+		script-source="classpath:com/mati/demo/controller/profile/ProfileController.groovy">
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+
+	</lang:groovy>
+
+	<lang:groovy id="user.account.controller"
+		script-source="classpath:com/mati/demo/controller/UserAccountController.groovy">
+		<lang:property name="fileSystemBasePath" value="${static.content.file.system.base}"></lang:property>
+		<lang:property name="userPictureFolder"
+			value="${static.content.user.picture.folder}"></lang:property>
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+
+	</lang:groovy>
+
+	<lang:groovy id="user.controller"
+		script-source="classpath:com/mati/demo/controller/UserController.groovy">
+		<lang:property name="entityName" value="user"></lang:property>
+		<lang:property name="entityPluralName" value="users"></lang:property>
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+
+	</lang:groovy>
+
+	<lang:groovy id="follow.user.controller"
+		script-source="classpath:com/mati/demo/controller/follow/FollowUserController.groovy">
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+
+	</lang:groovy>
+	<lang:groovy id="follow.tag.controller"
+		script-source="classpath:com/mati/demo/controller/follow/FollowTagController.groovy">
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+	</lang:groovy>
+	<lang:groovy id="tag.controller"
+		script-source="classpath:com/mati/demo/controller/TagController.groovy">
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+	</lang:groovy>
+	<lang:groovy id="home.controller"
+		script-source="classpath:com/mati/demo/controller/HomeController.groovy">
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+	</lang:groovy>
+	<lang:groovy id="comment.controller"
+		script-source="classpath:com/mati/demo/controller/content/CommentController.groovy">
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+	</lang:groovy>
+	<lang:groovy id="admin.controller"
+		script-source="classpath:com/mati/demo/controller/admin/AdminController.groovy">
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+	</lang:groovy>
+	<lang:groovy id="search.controller"
+		script-source="classpath:com/mati/demo/controller/search/SearchController.groovy">
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+	</lang:groovy>
+
+
+	<lang:groovy id="video.controller"
+		script-source="classpath:com/mati/demo/controller/content/VideoController.groovy">
+		<lang:property name="staticContentBase" value="${static.content.server.base}"></lang:property>
+		<lang:property name="entityName" value="video"></lang:property>
+		<lang:property name="entityPluralName" value="videos"></lang:property>
+		<lang:property name="serverBasePath" value="${static.content.server.base}"></lang:property>
+		<lang:property name="fileSystemBasePath" value="${static.content.file.system.base}"></lang:property>
+		<lang:property name="basePath" value="${content.base.path}"></lang:property>
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+
+	</lang:groovy>
+
+	<lang:groovy id="post.controller"
+		script-source="classpath:com/mati/demo/controller/content/PostController.groovy">
+		<lang:property name="staticContentBase" value="${static.content.server.base}"></lang:property>
+		<lang:property name="entityName" value="post"></lang:property>
+		<lang:property name="entityPluralName" value="posts"></lang:property>
+		<lang:property name="basePath" value="${content.base.path}"></lang:property>
+		<lang:property name="baseModel" ref="base.model"></lang:property>
+
+	</lang:groovy>
+
+	<!-- <lang:defaults proxy-target-class="true" /> -->
+	<lang:groovy id="test.controller"
+		script-source="classpath:com/mati/demo/controller/TestController.groovy"></lang:groovy>
 
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean id="sidebar.populator.interceptor"
-				class="com.mati.demo.controller.interceptor.SidebarInterceptor" >
+				class="com.mati.demo.controller.interceptor.SidebarInterceptor">
 				<property name="serverBasePath" value="${static.content.server.base}"></property>
 				<property name="userPictureFolder" value="${static.content.user.picture.folder}"></property>
-				</bean>
+				<property name="baseModel" ref="base.model"></property>
+			</bean>
 		</mvc:interceptor>
 
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*" />
 			<bean id="clean.session.interceptor"
-				class="com.mati.demo.controller.interceptor.CleanSessionInterceptor" />
+				class="com.mati.demo.controller.interceptor.CleanSessionInterceptor">
+<!-- 				<property name="baseModel" ref="base.model"></property> -->
+			</bean>
 		</mvc:interceptor>
 
 		<mvc:interceptor>
 			<mvc:mapping path="/content/*/show/**" />
 			<bean id="comment.form.interceptor"
-				class="com.mati.demo.controller.interceptor.CommentFormInterceptor" />
+				class="com.mati.demo.controller.interceptor.CommentFormInterceptor">
+				<property name="baseModel" ref="base.model"></property>
+			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->

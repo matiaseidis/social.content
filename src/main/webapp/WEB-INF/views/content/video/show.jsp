@@ -11,7 +11,7 @@
 <title>${content.title}</title>
 </head>
 <body>
-
+<c:out value="${content.videoRef}" ></c:out>
 <div id='mediaspace'>This text will be replaced</div>
 <script type='text/javascript'>
   jwplayer('mediaspace').setup({
