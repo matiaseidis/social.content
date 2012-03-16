@@ -3,6 +3,7 @@ package com.mati.demo.controller.content;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +55,11 @@ public class VideoController extends ContentController<Video>{
 //		
 		@Override
 		protected void processBeforeShow(Video content) {
-			content.setBaseUrl("http://"+serverBasePath+getEntityName()+"/");
+			if(StringUtils.isNotEmpty(content.getFileName())){
+				content.setVideoRef("http://"+serverBasePath+getEntityName()+"/"+content.getFileName());
+			} else {
+				content.setVideoRef(content.getUrl());
+			}
 		}
 		
 //		@Override

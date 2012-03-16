@@ -46,8 +46,8 @@
 		<div class='sidebar'>
 			<!-- 			sidebar right -->
 			<sec:authorize access="isAuthenticated()">
-				<c:out value="${user.userName}"></c:out>
 				<myTags:userImg height="100" width="100" username="${user.userName}"></myTags:userImg>
+				<c:out value="${user.userName}"></c:out>
 
 				<p></p>
 				<c:if test="${not empty followedContent}">

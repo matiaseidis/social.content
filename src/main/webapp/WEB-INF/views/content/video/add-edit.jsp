@@ -25,6 +25,11 @@
                     <form:input path="fileData" type="file" />
                     
                 </p>
+                <p>
+                    <form:label for="url" path="url">URL: <c:out value="${video.url}" /></form:label><br/>
+                    <form:input path="url" type="text" />
+                    
+                </p>
  
                 <p>
                     <input type="submit" />

@@ -4,7 +4,7 @@
 <%@ attribute name="tagList" required="true" rtexprvalue="true"
 	type="java.util.List"%>
 <%@ tag body-content="tagdependent"%>
-<c:if test="${not empty tags}">
+<c:if test="${not empty tagList}">
 	<div>
 				<h3>${title}</h3>
 			<ul>

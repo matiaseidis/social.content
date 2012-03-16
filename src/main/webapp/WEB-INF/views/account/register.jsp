@@ -32,6 +32,13 @@
 					</c:if>
                 </p>
                 <p>
+                    <form:label for="confirmPassword" path="confirmPassword">Confirm password</form:label><br/>
+                    <form:password path="confirmPassword"/>
+                    <c:if test="${not empty errors}">
+						<c:out value="${errors.confirmPassword}"></c:out>
+					</c:if>
+                </p>
+                <p>
                     <form:label for="email" path="email">email</form:label><br/>
                     <form:input path="email"/>
                     <c:if test="${not empty errors}">

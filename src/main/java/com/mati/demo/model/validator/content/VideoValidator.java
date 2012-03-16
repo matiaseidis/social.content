@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import lombok.Getter;
 
+import org.apache.bsf.util.IOUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -23,21 +24,32 @@ public class VideoValidator extends ContentValidator<Video> {
 
 	@Override
 	protected void performValidation() {
-		CommonsMultipartFile multipartFile = getContent().getFileData();
-		
-		String destinationPath = fileSystemBasePath + File.separator + "video" + File.separator; 
-		
-		String fileName = StringUtils.replace(multipartFile.getOriginalFilename().toLowerCase(), " ", "-");
-		
-		File file = new File(destinationPath + fileName);
-		try {
-			FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
-		} catch (IOException e) {
-			addError("save", "No se puedo guardar el video");
+
+		/*
+		 * only look up the uploaded file if url is not provided
+		 */
+		if(StringUtils.isEmpty(getContent().getUrl())){
+			try {
+				CommonsMultipartFile multipartFile = getContent().getFileData();
+
+				String destinationPath = fileSystemBasePath + File.separator + "video" + File.separator; 
+
+				String fileName = StringUtils.replace(multipartFile.getOriginalFilename().toLowerCase(), " ", "-");
+
+				File file = new File(destinationPath + fileName);
+
+				FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
+				
+				getContent().setFileName(fileName);
+				
+			} catch (IOException e) {
+				addError("save", "No se puedo guardar el video");
+			}
 		}
-		
-		getContent().setFileName(fileName);
-		
+
+
+
+
 	}
 
 

@@ -11,20 +11,9 @@
 			<form:form action="${pageContext.request.contextPath}/comment/add/${contentType}/${content.id}" modelAttribute="comment"
 				method="post">
 				<p>
-					<form:label for="title" path="title">Titulo</form:label>
-					<br />
-					<form:input path="title" />
-					<c:if test="${not empty errors}">
-						<c:out value="${errors.title}"></c:out>
-					</c:if>
-				</p>
-				<p>
 					<form:label for="body" path="body"></form:label>
 					<br />
-					<form:textarea cols="70" rows="10" path="body" />
-					<c:if test="${not empty errors}">
-						<c:out value="${errors.body}"></c:out>
-					</c:if>
+					<form:textarea cols="80" rows="4" path="body" />
 				</p>
 
 				<p>
@@ -35,9 +24,8 @@
 		</sec:authorize>
 		<c:forEach items="${content.comments}" var="c">
 			<div class="comment">
-			<h3>${c.title}</h3>
-			<h6>Por ${c.author.userName}</h6>
-			<h6>el ${c.postDate}</h6>
+			<h6>Por <c:out value="${c.author.userName}"></c:out></h6>
+			<h6>el <c:out value="${c.postDate}"></c:out></h6>
 			<h4><c:out value="${c.body}"></c:out></h4>
 			</div>
 		</c:forEach>

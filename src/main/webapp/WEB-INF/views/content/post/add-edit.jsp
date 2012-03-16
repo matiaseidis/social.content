@@ -19,7 +19,7 @@
 	<form action="<c:out value="${action}"></c:out>" method=POST>
 		<h3>Title</h3>
 		<p></p>
-		<input type="text" name="title"
+		<input type="text" name="title" class="title"
 			value="<c:out value="${post.title}"></c:out>">
 
 		<c:if test="${not empty errors}">

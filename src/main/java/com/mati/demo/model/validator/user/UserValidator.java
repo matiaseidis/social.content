@@ -1,28 +1,19 @@
 package com.mati.demo.model.validator.user;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.apache.commons.validator.GenericValidator;
 
 import com.mati.demo.model.base.Model;
-import com.mati.demo.model.user.User;
+import com.mati.demo.model.user.UserCommand;
 import com.mati.demo.model.validator.AbstractValidator;
 
-public class UserValidator extends AbstractValidator<User> {
+public class UserValidator extends AbstractValidator<UserCommand> {
 	
-	private final User user;
+	private final UserCommand user;
 	private final String fileSystemBasePath;
 	private final String userPictureFolder;
 	
-//	public UserValidator(){}
-	public UserValidator(User user, String fileSystemBasePath, String userPictureFolder){
+	public UserValidator(UserCommand user, String fileSystemBasePath, String userPictureFolder){
 		this.user = user;
 		this.fileSystemBasePath = fileSystemBasePath;
 		this.userPictureFolder = userPictureFolder;
@@ -35,10 +26,28 @@ public class UserValidator extends AbstractValidator<User> {
 			addError("userName","tiene que tener un nombre");
 			problems = true;
 		}
+		if(StringUtils.isEmpty(user.getEmail())){
+			addError("email","tiene que tener un email");
+			problems = true;
+		}
 		if(StringUtils.isEmpty(user.getPassword())){
 			addError("password","tiene que tener una clave de seguridad");
 			problems = true;
-		} else {
+		}
+		if(StringUtils.isEmpty(user.getConfirmPassword())){
+			addError("password","tiene que tener una clave de seguridad");
+			problems = true;
+		}
+		if(StringUtils.isNotEmpty(user.getPassword()) && StringUtils.isNotEmpty(user.getConfirmPassword()) && !user.getPassword().equals(user.getConfirmPassword())){
+			addError("confirmPassword","las contraseñas no coinciden");
+			problems = true;
+		}
+		
+		if(!GenericValidator.isEmail(user.getEmail())){
+			addError("email","el email no es valido");
+			problems = true;
+		}
+		else {
 			addError("user", user);
 		}
 		
@@ -49,16 +58,10 @@ public class UserValidator extends AbstractValidator<User> {
 		
 		if(user == null) return false;
 		
-		boolean unavailable = model.hasUser(user);
+		boolean unavailable = model.loadUserByUsername(user.getUserName()) != null;
 		if(unavailable){
 			addError("unavailable","El nombre ya esta siendo usado por otro usuario");
 		}
 		return unavailable;
 	}
-
-	public boolean validate(User t) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

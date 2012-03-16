@@ -1,7 +1,7 @@
 package com.mati.demo.controller;
 
 import java.io.File;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,17 +9,14 @@ import javax.servlet.http.HttpSession;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
-import org.prevayler.Transaction;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mati.demo.model.content.Content;
-import com.mati.demo.model.user.User;
+import com.mati.demo.model.validator.ValidationError;
 import com.mati.demo.prevalence.BaseModel;
 
 public abstract class BaseController<T> {
@@ -85,9 +82,9 @@ public abstract class BaseController<T> {
 
 	protected ModelAndView retrieveErrorsFromSession(HttpSession session) {
 		ModelAndView m = null;
-		Map<String, String> errors = (Map<String, String>)session.getAttribute(ERRORS);
+		List<ValidationError> errors = (List<ValidationError>)session.getAttribute(ERRORS);
 		
-		if(MapUtils.isNotEmpty(errors)){
+		if(CollectionUtils.isNotEmpty(errors)){
 			m = new ModelAndView(); 
 			m.addObject(ERRORS, errors);
 		}
@@ -96,9 +93,9 @@ public abstract class BaseController<T> {
 		return m;
 	}
 	
-	protected boolean sendErrorsToSession(HttpSession session, Map<String, Object> errors) {
+	protected boolean sendErrorsToSession(HttpSession session, List<ValidationError> errors) {
 		
-		if(MapUtils.isNotEmpty(errors)){
+		if(CollectionUtils.isNotEmpty(errors)){
 			session.setAttribute(ERRORS, errors);
 			return true;
 		}

@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.authentication.AuthenticationProviderImpl;
 import com.mati.demo.model.user.User;
+import com.mati.demo.model.user.UserCommand;
 import com.mati.demo.model.validator.ValidationError;
 import com.mati.demo.model.validator.Validator;
 import com.mati.demo.model.validator.user.UserValidator;
@@ -55,7 +56,7 @@ public class UserAccountController {
 
 	@RequestMapping(value="register", method=RequestMethod.GET)
 	public ModelAndView registerForm(ModelAndView m){
-		m.addObject("user", new User());
+		m.addObject("user", new UserCommand());
 		m.addObject("action", "register");
 		m.setViewName("account/register");
 		return m;
@@ -67,13 +68,17 @@ public class UserAccountController {
 	}
 
 	@RequestMapping(value="register", method=RequestMethod.POST)
-	public ModelAndView register(@ModelAttribute User user, HttpServletRequest request, ModelAndView m){
+	public ModelAndView register(@ModelAttribute UserCommand userCommand, HttpServletRequest request, ModelAndView m){
 
-		Validator v= new UserValidator(user, fileSystemBasePath, userPictureFolder);
+		Validator v = new UserValidator(userCommand, fileSystemBasePath, userPictureFolder);
 		boolean unavailable = v.exists(baseModel.getModel());
+		User user = null;
 		if(v.validate() && !unavailable){
 			try{
-				processImage(user, v);
+				processImage(userCommand, v);
+				
+				user = fromCommandToUser(userCommand);
+				
 				baseModel.getPrevayler().execute(new CreateUser(user));
 			}catch(Exception e){
 				v.addError("unavailable","El nombre ya esta siendo usado por otro usuario");
@@ -92,13 +97,23 @@ public class UserAccountController {
 
 		} else{
 			m.addObject("errors", toMap(v.getErrors()));
-			m.addObject("user", user);
+			m.addObject("user", userCommand);
 			m.setViewName("account/register");
 		}
 		return m;
 	}
 
-	private void processImage(User user, Validator v) {
+	private User fromCommandToUser(UserCommand userCommand) {
+		User user = new User();// TODO Auto-generated method stub
+		user.setUserName(userCommand.getUserName());
+		user.setPassword(userCommand.getPassword());
+		user.setEmail(userCommand.getEmail());
+		user.setInfo(userCommand.getInfo());
+		user.setImage(userCommand.getImage());
+		return user;
+	}
+
+	private void processImage(UserCommand user, Validator v) {
 
 		String destinationPath = fileSystemBasePath + File.separator + userPictureFolder + File.separator;
 
@@ -144,7 +159,7 @@ public class UserAccountController {
 		return is;
 	}
 
-	private void saveImage(User user, Validator v, String destinationPath, InputStream is) {
+	private void saveImage(UserCommand user, Validator v, String destinationPath, InputStream is) {
 
 		String fileName = StringUtils.replace(user.getUserName().toLowerCase(), " ", "-");
 

@@ -3,7 +3,8 @@ tinyMCE.init({
         mode : "textareas",
         theme : "advanced",
         plugins : "autolink,xhtmlxtras",
-
+        width:"640",
+        height:"540",
         // Theme options
         theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,link,unlink,anchor,image,cleanup,help,code,|,forecolor,backcolor",
         theme_advanced_toolbar_location : "top",

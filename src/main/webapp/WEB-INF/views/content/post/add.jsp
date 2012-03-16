@@ -19,7 +19,7 @@
 	</c:if>
 <p/>
 <h3>Body</h3><p></p>
-<textarea rows="20" cols="70" name="body" >${errors.post.body}</textarea>
+<textarea rows="40" cols="80" name="body" >${errors.post.body}</textarea>
 <p></p>
 <input type="submit">
 </form>
@@ -30,7 +30,8 @@ tinyMCE.init({
         mode : "textareas",
         theme : "advanced",
         plugins : "autolink,xhtmlxtras",
-
+//         height: "540"
+        width: "640",
         // Theme options
         theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,link,unlink,anchor,image,cleanup,help,code,|,forecolor,backcolor",
         theme_advanced_toolbar_location : "top",

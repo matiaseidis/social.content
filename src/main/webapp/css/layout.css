@@ -18,6 +18,7 @@
     width: 660px;
     padding: 0;
     padding-right:5px;
+    margin-bottom:30px;
 /*     padding: 10px; */
 /* 	border: 1px solid #555555; */
 }
@@ -25,6 +26,7 @@
 	  overflow: visible;
     word-wrap: break-word;
 }
+
 .sidebar{
 float: left;
     margin-left: 660px;
@@ -53,6 +55,7 @@ body {
 	color: #666666;
 	font-size: smaller;
 	clear:both;
+	
 }
 /*error block*/
 .errorblock {
@@ -62,3 +65,8 @@ body {
 	padding: 8px;
 	margin: 16px;
 }
+/*forms*/
+input{
+	border: 1px solid #CCC;
+	}
+input.title{width:640px;}
