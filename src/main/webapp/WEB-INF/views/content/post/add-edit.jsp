@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>
 <c:choose>
-			<c:when test="${not empty post}">Edit</c:when>
+			<c:when test="${new eq null}">Edit</c:when>
 			<c:otherwise>New</c:otherwise>
 		</c:choose>
 		 Post</title>
@@ -26,6 +26,9 @@
 			<c:out value="${errors.title}"></c:out>
 		</c:if>
 		<p />
+		<jsp:include page="../show-tags-box.jsp"></jsp:include>
+		<jsp:include page="../add-tag-box.jsp"></jsp:include>
+		<input type="hidden" name="plainTags" id="contentTags"/>
 		<h3>Body</h3>
 		<p></p>
 		<textarea rows="20" cols="70" name="body">

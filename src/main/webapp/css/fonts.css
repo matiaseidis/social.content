@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+@font-face {
+font-family: "sketch";
+src: url(../fonts/sketchley_bt-webfont.woff) format("truetype");
+}
+
+@font-face {
+font-family: "boycott";
+src: url(../fonts/boycott_-webfont.woff) format("truetype");
+}
+
+@font-face {
+font-family: "palsu";
+src: url(../fonts/palsu___-webfont.woff) format("truetype");
+}
+@font-face {
+font-family: "sketch-bt";
+src: url(../fonts/sketchley_swash_bt-webfont.woff) format("truetype");
+}
+@font-face {
+font-family: "old_stamper";
+src: url(../fonts/old_stamper-webfont.woff) format("truetype");
+}
+@font-face {
+font-family: "appendi3";
+src: url(../fonts/appendi3-webfont.woff) format("truetype");
+}
+@font-face {
+font-family: "specialelite";
+src: url(../fonts/specialelite-webfont.woff) format("truetype");
+}
+@font-face {
+font-family: "kingthings";
+src: url(../fonts/kingthings_printingkit-webfont.woff) format("truetype");
+}
+@font-face {
+font-family: "blackcasper";
+src: url(../fonts/BlackCasper.ttf) format("truetype");
+}
+@font-face {
+font-family: "scala-regular";
+src: url(../fonts/ScalaSansPro-Regular.woff) format("truetype");
+}
+@font-face {
+font-family: "scala-light";
+src: url(../fonts/ScalaSansPro-Light.woff) format("truetype");
+}
+@font-face {
+font-family: "scala-italic";
+src: url(../fonts/ScalaSansPro-Italic.woff) format("truetype");
+}
+@font-face {
+font-family: "scala-bold";
+src: url(../fonts/ScalaSansPro-Bold.woff) format("truetype");
+}
+/* body, caption, th, td, input, textarea, select, option, legend, fieldset { */
+/*     font-family: "scala-light","scala-light-local",Verdana,Tahoma,"DejaVu Sans",sans-serif; */
+/* } */

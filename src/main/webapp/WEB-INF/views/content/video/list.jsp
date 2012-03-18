@@ -20,12 +20,12 @@
 								href="<c:out value="show/${video.id}"></c:out>">ver</a></span></td>
 						<td><span><a
 								href="edit/<c:out value="${video.id}"></c:out>">editar</a></span></td>
-						<td><span>
-								<form action="delete/<c:out value='${video.id}'></c:out>"
-									method="POST">
-									<input type="submit" value="borrar">
-								</form>
-						</span></td>
+						<td>
+							<form action="delete/<c:out value='${video.id}'></c:out>"
+								method="POST">
+								<input type="submit" value="borrar">
+							</form>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

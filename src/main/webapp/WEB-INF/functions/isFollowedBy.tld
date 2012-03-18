@@ -1,0 +1,15 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+   
+ <tlib-version>1.0</tlib-version>
+    <short-name>isFollowedBy</short-name>
+    <uri>isFollowedBy</uri>         
+    <function>
+        <name>isFollowedBy</name> 
+        <function-class>com.mati.demo.util.UserUtils</function-class>
+        <function-signature>boolean isFollowedBy(com.mati.demo.model.user.User, com.mati.demo.model.user.User)</function-signature>
+    </function>
+  
+</taglib>

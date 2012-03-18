@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
+<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,15 +12,26 @@
 </head>
 <body>
 	<div>
-	<h6>Publicado por <c:out value="${content.author.userName}" escapeXml="true"></c:out>, el <fmt:formatDate pattern="dd/MM/yyyy" dateStyle="short" type="date" value="${content.postDate}"
-							timeZone="es" /></h6>
-	<jsp:include page="../show-tags-box.jsp"></jsp:include>
-	<jsp:include page="../add-tag-box.jsp"></jsp:include>
-		<p>
-		<h4>
+		<h6>
+			Publicado por
+			<c:out value="${content.author.userName}" escapeXml="true"></c:out>
+			, el
+			<fmt:formatDate pattern="dd/MM/yyyy" dateStyle="short" type="date"
+				value="${content.postDate}" timeZone="es" />
+		</h6>
+		<div>
+			<p>
+				<span>Etiquetas:</span>
+			</p>
+
+			<jsp:include page="../show-tags-box.jsp"></jsp:include>
+
+		</div>
+		<p><h4>
 			<c:out value="${content.body}" escapeXml="false"></c:out>
 		</h4>
-		</p>
+
+
 	</div>
 
 	<jsp:include page="../comments-box.jsp" />

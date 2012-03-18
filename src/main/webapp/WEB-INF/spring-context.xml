@@ -17,14 +17,14 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 <!-- 	<bean id="groovyContextProcessor" class="com.mati.demo.context.GroovyObjectTargetClassPreservingBeanFactoryPostProcessor" ></bean> -->
 
-<!-- 	<bean id="base.model" class="com.mati.demo.prevalence.BaseModel" init-method="init"> -->
-<!-- 		<property name="prevalenceDirectory" value="${user.home}/${prevalence.directory}"></property> -->
-<!-- 	</bean> -->
+	<bean id="base.model" class="com.mati.demo.prevalence.BaseModel" init-method="init">
+		<property name="prevalenceDirectory" value="${user.home}/${prevalence.directory}"></property>
+	</bean>
 	
 	
-	<lang:groovy  id="base.model" script-source="classpath:com/mati/demo/prevalence/BaseModel.groovy" init-method="init">
-		<lang:property name="prevalenceDirectory" value="${user.home}/${prevalence.directory}"></lang:property>
-	</lang:groovy >
+<!-- 	<lang:groovy  id="base.model" script-source="classpath:com/mati/demo/prevalence/BaseModel.groovy" init-method="init"> -->
+<!-- 		<lang:property name="prevalenceDirectory" value="${user.home}/${prevalence.directory}"></lang:property> -->
+<!-- 	</lang:groovy > -->
 
 
     <!-- Configure the multipart resolver -->

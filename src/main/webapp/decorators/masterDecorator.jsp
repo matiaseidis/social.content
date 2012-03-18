@@ -10,9 +10,11 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/css/fonts.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/css/layout.css" />
-<!-- <script type="text/javascript" -->
-<%-- 	src="${ctx}/js/jquery/jquery-1.7.1.min.js"></script> --%>
+<script type="text/javascript"
+	src="${ctx}/js/jquery/jquery-1.7.1.min.js"></script>
 
 <!-- <script type="text/javascript" -->
 <%-- 	src="${ctx}/js/jquery/jquery.easing.1.3.js"></script> --%>

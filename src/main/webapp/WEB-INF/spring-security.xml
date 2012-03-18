@@ -35,6 +35,7 @@
 <!-- 		<security:intercept-url pattern="/resources/**/*" access="permitAll" /> -->
 		<security:intercept-url pattern="/js/**/*.js" access="permitAll" />
 		<security:intercept-url pattern="/css/**/*.css" access="permitAll" />
+		<security:intercept-url pattern="/fonts/**/*" access="permitAll" />
 		<security:intercept-url pattern="/login_stand_alone.jsp" access="permitAll" />
 		<security:intercept-url pattern="/**" access='hasRole("ROLE_USER")' />
 		<security:form-login login-page="/login" 
@@ -58,12 +59,12 @@
 	</bean>
 
  
- 	<lang:groovy id="user.details.service" 
- 	script-source="classpath:com/mati/demo/authentication/UserDetailsServiceImpl.groovy"
- 	></lang:groovy>
+<!--  	<lang:groovy id="user.details.service"  -->
+<!--  	script-source="classpath:com/mati/demo/authentication/UserDetailsServiceImpl.groovy" -->
+<!--  	></lang:groovy> -->
  
-<!-- 	<bean id="user.details.service" class="com.mati.demo.authentication.UserDetailsServiceImpl"> -->
-<!-- 		<property name="baseModel" ref="base.model"></property> -->
-<!-- 	</bean> -->
+	<bean id="user.details.service" class="com.mati.demo.authentication.UserDetailsServiceImpl">
+		<property name="baseModel" ref="base.model"></property>
+	</bean>
 
 </beans>

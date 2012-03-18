@@ -20,13 +20,12 @@
 								href="<c:out value="show/${post.id}"></c:out>">ver</a></span></td>
 						<td><span><a
 								href="edit/<c:out value="${post.id}"></c:out>">editar</a></span></td>
-						<td><span> <a
-								href="delete/<c:out value="${post.id}"></c:out>">borrar</a>
-								<form action="delete/<c:out value='${post.id}'></c:out>"
-									method="POST">
-									<input type="submit" value="borrar">
-								</form>
-						</span></td>
+						<td>
+							<form action="delete/<c:out value='${post.id}'></c:out>"
+								method="POST">
+								<input type="submit" value="borrar">
+							</form>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

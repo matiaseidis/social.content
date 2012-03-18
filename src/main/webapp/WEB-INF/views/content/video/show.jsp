@@ -6,24 +6,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type='text/javascript' src='${pageContext.request.contextPath}/js/mediaplayer-5.9-viral/jwplayer.js'></script>	
+<script type='text/javascript'
+	src='${pageContext.request.contextPath}/js/mediaplayer-5.9-viral/jwplayer.js'></script>
 
 <title>${content.title}</title>
 </head>
 <body>
-<c:out value="${content.videoRef}" ></c:out>
-<div id='mediaspace'>This text will be replaced</div>
-<script type='text/javascript'>
-  jwplayer('mediaspace').setup({
-    'flashplayer': '${pageContext.request.contextPath}/js/mediaplayer-5.9-viral/player.swf',
-    'file': '<c:out value="${content.videoRef}" ></c:out>',
-    'controlbar': 'bottom',
-    'width': '640',
-    'height': '360',
-    'skin':'${pageContext.request.contextPath}/js/video-js/skins/grungetape.zip'
-  });
-</script>
-<%-- 'skin':'${pageContext.request.contextPath}/js/video-js/skins/playcasso/playcasso.zip'--%>
-<jsp:include page="../comments-box.jsp" />	
+	<div id='mediaspace'>This text will be replaced</div>
+	<script type='text/javascript'>
+		jwplayer('mediaspace')
+				.setup(
+						{
+							'flashplayer' : '${pageContext.request.contextPath}/js/mediaplayer-5.9-viral/player.swf',
+							'file' : '<c:out value="${content.videoRef}" ></c:out>',
+							'controlbar' : 'bottom',
+							'width' : '640',
+							'height' : '360',
+							'skin' : '${pageContext.request.contextPath}/js/video-js/skins/grungetape.zip'
+						});
+	</script>
+	<%-- 'skin':'${pageContext.request.contextPath}/js/video-js/skins/playcasso/playcasso.zip'--%>
+	<jsp:include page="../comments-box.jsp" />
 </body>
 </html>

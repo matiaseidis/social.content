@@ -5,18 +5,39 @@
 	type="java.util.List"%>
 <%@ tag body-content="tagdependent"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="myFunctions" uri="isFollowedBy"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
+		<sec:authorize access="isAuthenticated()">
 <c:if test="${not empty userList}">
 	<div>
 		<h3>${title}</h3>
 
 		<ul>
 			<c:forEach var="u" items="${userList}">
-				<li><a href="${ctx}/profile/${u.userName}">${u.userName}</a> <a
-					href="${ctx}/profile/${u.userName}"><myTags:userImg height="50"
-							width="50" username="${u.userName}"></myTags:userImg></a></li>
+				<li><a href="${ctx}/profile/${u.userName}"> <myTags:userImg
+							height="50" width="50" username="${u.userName}"></myTags:userImg></a>
+
+					<a href="${ctx}/profile/${u.userName}">${u.userName}</a> 
+						<c:choose>
+							<c:when test="${myFunctions:isFollowedBy(u, user)}">
+								<form class="follow" action="${ctx}/user/unfollow/${u.userName}"
+									method="POST">
+									<input type="submit" value="unfollow">
+								</form>
+							</c:when>
+							<c:otherwise>
+								<form class="follow" action="${ctx}/user/follow/${u.userName}"
+									method="POST">
+									<input type="submit" value="follow">
+								</form>
+							</c:otherwise>
+						</c:choose>
+				</li>
 			</c:forEach>
 		</ul>
 	</div>
 </c:if>
+					</sec:authorize>
 
