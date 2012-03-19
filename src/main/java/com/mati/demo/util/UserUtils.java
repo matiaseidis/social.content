@@ -5,7 +5,7 @@ import com.mati.demo.model.user.User;
 
 public class UserUtils {
 	
-	static boolean isFollowedBy(User followed, User follower){
+	public static boolean isFollowedBy(User followed, User follower){
 		return follower.isFollowing(followed);
 	}
 

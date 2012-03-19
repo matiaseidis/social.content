@@ -12,9 +12,9 @@ public class TagRepository {
 //	final 
 	private Map<String, Tag> tagsBag = new HashMap<String, Tag>();
 	
-	public static TagRepository INSTANCE = new TagRepository();
+//	public static final TagRepository INSTANCE = new TagRepository();
 	
-	private TagRepository(){}
+//	private TagRepository(){}
 	
 	public Collection<Tag> getAllTags(){
 		return tagsBag.values();

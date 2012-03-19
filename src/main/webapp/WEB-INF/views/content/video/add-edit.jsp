@@ -19,7 +19,9 @@
 						<c:out value="${errors.title}"></c:out>
 					</c:if>
                 </p>
- 
+ 		<jsp:include page="../show-tags-box.jsp"></jsp:include>
+		<jsp:include page="../add-tag-box.jsp"></jsp:include>
+		<input type="hidden" name="plainTags" id="contentTags"/>
                 <p>
                     <form:label for="fileData" path="fileData">File: <c:out value="${video.fileName}" /></form:label><br/>
                     <form:input path="fileData" type="file" />

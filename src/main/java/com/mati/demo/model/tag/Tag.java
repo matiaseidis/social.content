@@ -37,12 +37,7 @@ public class Tag implements Followable{
 		this.tagName = tagName;
 	}
 	
-//	@Getter 
-	private Set<Content> taggedContent = new HashSet<Content>();
-	
-	public Set<Content> getTaggedContent(){
-		return taggedContent;
-	}
+	@Getter private Set<Integer> taggedContent = new HashSet<Integer>();
 	
 	@Getter private Set<User> taggedUsers = new HashSet<User>();
 	
@@ -65,7 +60,7 @@ public class Tag implements Followable{
 	}
 
 	public void addTagged(Content taggable){
-		taggedContent.add((Content)taggable);
+		taggedContent.add(taggable.getId());
 	}
 	
 	public void removeTagged(User taggable){

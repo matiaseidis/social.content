@@ -12,18 +12,18 @@ public abstract class Taggable {
 	 */
 	@Getter private List<Tag> tags = new ArrayList<Tag>();
 	
-	public boolean addTag(Tag tag){
+	public boolean addTag(TagRepository tagRepository, Tag tag){
 		
 		/*
 		 * retrieve tag form repo
 		 */
-		Tag tagFromRepo = TagRepository.INSTANCE.getByTagName(tag.getTagName());
+		Tag tagFromRepo = tagRepository.getByTagName(tag.getTagName());
 		
 		if(tagFromRepo == null){
 			/*
 			 * add tag to repo if applies
 			 */
-			TagRepository.INSTANCE.addTag(tag);
+			tagRepository.addTag(tag);
 			tagFromRepo = tag;
 		}
 		/*
@@ -38,7 +38,7 @@ public abstract class Taggable {
 	
 	protected abstract void unregisterWithTag(Tag tag);
 
-	public boolean removeTag(Tag tag){
+	public boolean removeTag(TagRepository tagRepository, Tag tag){
 		
 		/*
 		 * remove this taggable form the tag
@@ -49,7 +49,7 @@ public abstract class Taggable {
 			/*
 			 * remove the tag form the repository if it is not tagging any content
 			 */
-			TagRepository.INSTANCE.removeTag(tag);
+			tagRepository.removeTag(tag);
 		}
 		
 		/*

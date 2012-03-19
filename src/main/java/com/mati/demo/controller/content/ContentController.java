@@ -132,10 +132,12 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath + File.separator;
 		m.setViewName(base + getEntityName() + File.separator + LIST);
 
-		m.addObject(getEntityPluralName(), list(getEntityClass()));
+		m.addObject(getEntityPluralName(), listContent(getBaseModel().getModel().getLoggedInUser()));
 
 		return m;
 	}
+
+	protected abstract List<T> listContent(User user);
 
 //	@RequestMapping(value=DELETE+"/{nodeId}", method=RequestMethod.POST)
 //	public ModelAndView delete(@PathVariable int nodeId){

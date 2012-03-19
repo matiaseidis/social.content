@@ -42,7 +42,8 @@ public class BaseModel {
 		try{
 		prevayler = prevaylerFactory.create(); 
 		}catch(Exception e){
-			System.err.println("FAILDE TO LOAD PREVALENT SYSTEM " + e);
+			System.err.println("FAILED TO LOAD PREVALENT SYSTEM " + e);
+			System.err.println(e.getMessage());
 			System.exit(1);
 		}
 	}

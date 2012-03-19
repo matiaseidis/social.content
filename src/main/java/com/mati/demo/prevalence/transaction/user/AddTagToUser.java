@@ -23,7 +23,7 @@ public class AddTagToUser implements Transaction {
 	public void executeOn(Object prevalentSystem, Date executionTime) {
 		Model model = (Model) prevalentSystem;
 		
-		model.getLoggedInUser().addTag(tag);
+		model.getLoggedInUser().addTag(model.getTagRepository(), tag);
 	}
 
 }

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Getter;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.mati.demo.model.content.Content;
@@ -25,7 +27,8 @@ public class Model implements Serializable{
 
 	Map<String, User> usersMap = new HashMap<String, User>();
 	
-	private TagRepository tagRepository = TagRepository.INSTANCE; 
+	@Getter private TagRepository tagRepository = new TagRepository(); 
+//			TagRepository.INSTANCE; 
 
 	public Collection<User> getUsers(){ 
 		return usersMap.values();
@@ -94,8 +97,10 @@ public class Model implements Serializable{
 	public List<User> searchUsers(String pattern) {
 		List<User> result = new ArrayList<User>();
 		
+		User loggedInUser = getLoggedInUser();
+		
 		for(User u : usersMap.values()){
-			if(u.getUserName().contains(pattern)){
+			if(u.getUserName().contains(pattern) && !u.equals(loggedInUser)){
 				result.add(u);
 			}
 		}
@@ -110,6 +115,16 @@ public class Model implements Serializable{
 				result.add(t);
 			}
 		}
+		return result;
+	}
+
+	public List<Content> getTaggedContent(Tag tag) {
+		List<Content> result = new ArrayList<Content>();
+		
+		for(Integer id : tag.getTaggedContent()){
+			result.add(loadContentById(id));
+		}
+		
 		return result;
 	}
 }

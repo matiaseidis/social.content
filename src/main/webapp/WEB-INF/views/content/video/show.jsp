@@ -12,6 +12,10 @@
 <title>${content.title}</title>
 </head>
 <body>
+
+<jsp:include page="../show-tags-box.jsp"></jsp:include>
+
+
 	<div id='mediaspace'>This text will be replaced</div>
 	<script type='text/javascript'>
 		jwplayer('mediaspace')

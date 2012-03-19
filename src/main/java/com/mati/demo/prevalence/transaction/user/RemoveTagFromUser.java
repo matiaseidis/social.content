@@ -25,9 +25,9 @@ public class RemoveTagFromUser implements Transaction {
 		
 		Model model = (Model) prevalentSystem;
 		
-		Tag tagFromRepo = TagRepository.INSTANCE.getByTagName(tag.getTagName());
+		Tag tagFromRepo = model.getTagRepository().getByTagName(tag.getTagName());
 		
-		model.getLoggedInUser().removeTag(tagFromRepo);
+		model.getLoggedInUser().removeTag(model.getTagRepository(), tagFromRepo);
 	}
 
 }

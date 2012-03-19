@@ -19,14 +19,10 @@
 			<fmt:formatDate pattern="dd/MM/yyyy" dateStyle="short" type="date"
 				value="${content.postDate}" timeZone="es" />
 		</h6>
-		<div>
-			<p>
-				<span>Etiquetas:</span>
-			</p>
+		
 
 			<jsp:include page="../show-tags-box.jsp"></jsp:include>
 
-		</div>
 		<p><h4>
 			<c:out value="${content.body}" escapeXml="false"></c:out>
 		</h4>

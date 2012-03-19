@@ -42,27 +42,34 @@
 				</c:choose>
 			</p>
 		</c:if>
+		<p>
+			<c:out value="${profileUser.userName}"></c:out>
+		</p>
 		<c:if test="${own}">
 			<form action="${ctx}/user/profile/edit"
 							method="GET">
 							<input type="submit" value="editar perfil">
 						</form>
 		</c:if>
-		<myTags:userImg height="300" width="300"
+		<myTags:userImg height="200" width="200"
 			username="${profileUser.userName}"></myTags:userImg>
-		<p>
-			<c:out value="${profileUser.userName}"></c:out>
-		</p>
 		<p>
 			<c:out value="${profileUser.info}"></c:out>
 		</p>
 		
 
-		<p>Siguiendo a ${fn:length(profileUser.followedUsers)} usuarios</p>
+		<p>Siguiendo a ${fn:length(profileUser.followedUsers)} usuario(s)</p>
 		<p>Lo estan siguiendo ${fn:length(profileUser.followedBy)}
-			usuarios</p>
-		<p>Siguiendo a ${fn:length(profileUser.followedTags)} etiquetas</p>
+			usuario(s)</p>
+		<p>Siguiendo a ${fn:length(profileUser.followedTags)} etiqueta(s)</p>
 
+	</div>
+	
+	<div>
+	<p>Contenido publicado:</p>
+		<myTags:contentList contentList="${profileUser.videos}" title="Videos"></myTags:contentList>
+		<myTags:contentList contentList="${profileUser.posts}" title="Posts"></myTags:contentList>
+	
 	</div>
 
 

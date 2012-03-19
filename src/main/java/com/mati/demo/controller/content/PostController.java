@@ -1,5 +1,7 @@
 package com.mati.demo.controller.content;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.type.Post;
+import com.mati.demo.model.user.User;
 import com.mati.demo.model.validator.content.ContentValidator;
 import com.mati.demo.model.validator.content.PostValidator;
 import com.mati.demo.prevalence.BaseModel;
@@ -38,5 +41,10 @@ public class PostController extends ContentController<Post>{
 	@Override
 	protected ContentValidator<Post> getValidator(Post post, Model model) {
 		return new PostValidator(post, model);
+	}
+
+	@Override
+	protected List<Post> listContent(User user) {
+		return user.getPosts();
 	}
 }

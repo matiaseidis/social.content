@@ -57,7 +57,7 @@ public class CreateContent<T extends Content> implements Transaction {
 //				}
 //				tagToAdd.addTagged(content);
 //				content.addTag(tagToAdd);
-				content.addTag(new Tag(tagName));
+				content.addTag(model.getTagRepository(), new Tag(tagName));
 			}
 		}
 	}

@@ -1,5 +1,7 @@
 package com.mati.demo.controller;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mati.demo.model.content.Content;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.prevalence.BaseModel;
 
@@ -22,9 +25,13 @@ public class TagController {
 
 	@RequestMapping(value="show/{tagName}", method=RequestMethod.GET)
 	public ModelAndView show(@PathVariable String tagName, ModelAndView m){
+
 		Tag tag = baseModel.getModel().loadTagByTagName(tagName);
-		
 		m.addObject("tag", tag);
+		
+		List<Content> taggedContent = baseModel.getModel().getTaggedContent(tag);
+		m.addObject("taggedContent", taggedContent);
+		
 		m.setViewName("tag/show");
 		return m;
 	}

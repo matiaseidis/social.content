@@ -31,11 +31,17 @@ public class ProfileController {
 	@RequestMapping("profile/{userName}")
 	public ModelAndView profile(@PathVariable String userName, ModelAndView m){
 		User u = baseModel.getModel().loadUserByUsername(userName);
+		User loggedInUser = baseModel.getModel().getLoggedInUser();
 		if(u == null){
-			//TODO handle
+			if(loggedInUser == null){
+				m.setViewName("redirect:/");
+			}else {
+				m.setViewName("redirect:/profile");
+			}
+			return m;
 		}		
-		if(u.equals(baseModel.getModel().getLoggedInUser())){
-			m.setViewName("redirect:profile");
+		if(loggedInUser != null && baseModel.getModel().getLoggedInUser().equals(u)){
+			m.setViewName("redirect:/profile");
 			return m;
 		}
 
