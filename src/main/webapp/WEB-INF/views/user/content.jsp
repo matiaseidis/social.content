@@ -6,5 +6,6 @@
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags" %>
 	<myTags:contentList contentList="${content}" title="Content" contentType="content"></myTags:contentList>
 	<myTags:contentList contentList="${videos}" title="Videos" contentType="video"></myTags:contentList>
+	<myTags:contentList contentList="${audios}" title="Audios" contentType="audio"></myTags:contentList>
 	<myTags:contentList contentList="${posts}" title="Posts" contentType="post"></myTags:contentList>
 	

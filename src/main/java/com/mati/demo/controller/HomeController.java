@@ -1,7 +1,9 @@
 package com.mati.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,20 @@ public class HomeController {
 			m.addObject("followedContent", followedPosts);
 		}
 
+		List<Video> videos = new ArrayList<Video>();
+		for(User u : baseModel.getModel().getUsers()){
+			
+			videos.addAll(u.getVideos());
+		}
+		
+		for(Video video : videos){
+			
+				video.setVideoRef(video.getUrl());
+//				content.setThumbnailUri(youTubeThumbnailUri(content));
+			
+		}
+		
+		m.addObject("lastVideos", videos);
 		m.setViewName("home");
 		return m;
 	} 	

@@ -1,6 +1,5 @@
 package com.mati.demo.controller.content;
 
-import java.util.Arrays;
 import java.util.List;
 
 import lombok.Getter;
@@ -12,60 +11,57 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mati.demo.model.base.Model;
-import com.mati.demo.model.content.type.Video;
+import com.mati.demo.model.content.type.Audio;
 import com.mati.demo.model.user.User;
+import com.mati.demo.model.validator.content.AudioValidator;
 import com.mati.demo.model.validator.content.ContentValidator;
-import com.mati.demo.model.validator.content.VideoValidator;
 import com.mati.demo.prevalence.BaseModel;
 
 @Controller
-@RequestMapping("content/video")
-public class VideoController extends ContentController<Video>{
+@RequestMapping("content/audio")
+public class AudioController extends ContentController<Audio>{
 
 	@Autowired @Setter @Getter private BaseModel baseModel;
 	@Setter String staticContentBase;
-
 	@Getter @Setter private String entityName;
 	@Getter @Setter private String entityPluralName;
 	@Getter @Setter	protected String serverBasePath;
 	@Getter @Setter	protected String fileSystemBasePath;
+
+	@Override
+	protected void transferMetaData(Audio oldContent, Audio updatedContent) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void updateContent(Audio oldContent, Audio updatedContent) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected ContentValidator<Audio> getValidator(Audio audio, Model model) {
+		return new AudioValidator(audio, model, fileSystemBasePath);
+	}
+
+	@Override
+	protected List<Audio> listContent(User user) {
+		// TODO Auto-generated method stub
+		return user.getAudios();
+	}
 	
 	@Override
-	protected void transferMetaData(Video oldContent, Video updatedContent) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void updateContent(Video oldContent, Video updatedContent) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	protected Video createEntity(){return new Video();}
-
-	@Override
-	protected ContentValidator getValidator(Video video, Model model) {
-		return new VideoValidator(video, model, fileSystemBasePath);
-	}
-
-	@Override
-	protected void processBeforeShow(Video content) {
-		
+	protected void processBeforeShow(Audio content) {
 		if(StringUtils.isNotEmpty(content.getFileName())){
-			content.setVideoRef("http://"+serverBasePath+getEntityName()+"/"+content.getFileName());
-		} else {
-			content.setVideoRef(content.getUrl());
-//			content.setThumbnailUri(youTubeThumbnailUri(content));
-		}
-
+			content.setAudioRef("http://"+serverBasePath+getEntityName()+"/"+content.getFileName());
+		} 
 		super.processBeforeShow(content);
 	}
 
-	
-
 	@Override
-	protected List<Video> listContent(User user) {
-		return user.getVideos();
+	protected Audio createEntity() {
+		return new Audio();
 	}
+
 }

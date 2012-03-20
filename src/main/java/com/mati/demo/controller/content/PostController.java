@@ -47,4 +47,9 @@ public class PostController extends ContentController<Post>{
 	protected List<Post> listContent(User user) {
 		return user.getPosts();
 	}
+
+	@Override
+	protected Post createEntity() {
+		return new Post(); 
+	}
 }

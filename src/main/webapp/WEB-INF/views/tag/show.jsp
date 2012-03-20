@@ -20,7 +20,7 @@
 </c:forEach>
 <br />
 <p>Tagged users</p>
-<c:forEach items="${tag.taggedUsers}" var="taggedUser">
+<c:forEach items="${taggedUsers}" var="taggedUser">
 <a href="${ctx}/profile/${taggedUser.userName}">
 <span>${taggedUser.userName}</span>
 </a>
@@ -28,7 +28,7 @@
 </c:forEach>
 <br />
 <p>Tag followers</p>
-<c:forEach items="${tag.followers}" var="follower">
+<c:forEach items="${followedBy}" var="follower">
 <a href="${ctx}/profile/${follower.userName}">
 <span>${follower.userName}</span>
 </a>

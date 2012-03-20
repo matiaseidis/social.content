@@ -86,7 +86,9 @@
 		<url-pattern>*.zip</url-pattern>
 		<url-pattern>*.xml</url-pattern>
 		<url-pattern>*.woff</url-pattern>
-		<url-pattern>/static/*</url-pattern>
+		<url-pattern>*.mp3</url-pattern>
+		<url-pattern>*.wav</url-pattern>
+<!-- 		<url-pattern>/static.social.content/*</url-pattern> -->
 	</servlet-mapping>
 
 	<welcome-file-list>

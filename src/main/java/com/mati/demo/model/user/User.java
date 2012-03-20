@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mati.demo.model.content.Content;
+import com.mati.demo.model.content.type.Audio;
 import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.content.type.Video;
 import com.mati.demo.model.tag.Tag;
@@ -43,8 +44,9 @@ public class User extends Taggable{
 	@Getter @Setter private List<String> roles = new ArrayList<String>();
 	
 	private Map<Integer, Content> content = new HashMap<Integer, Content>();
-	private Map<Integer, Post> posts = new HashMap<Integer, Post>();
-	private Map<Integer, Video> videos = new HashMap<Integer, Video>();
+//	private Map<Integer, Post> posts = new HashMap<Integer, Post>();
+//	private Map<Integer, Video> videos = new HashMap<Integer, Video>();
+//	private Map<Integer, Audio> audios = new HashMap<Integer, Audio>();
 	
 	Map<String, User> followedBy = new HashMap<String, User>();
 	
@@ -195,6 +197,10 @@ public class User extends Taggable{
 
 	public boolean isFollowing(User u) {
 		return followedUsers.get(u.getUserName()) != null;
+	}
+
+	public List<Audio> getAudios() {
+		return new GetContentQuery<Audio>().getContent(Audio.class, getContent());
 	}
 
 }

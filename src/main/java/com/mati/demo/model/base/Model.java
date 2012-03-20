@@ -127,4 +127,24 @@ public class Model implements Serializable{
 		
 		return result;
 	}
+
+	public List<User> getTaggedUsers(Tag tag) {
+		List<User> result = new ArrayList<User>();
+		
+		for(String userName : tag.getTaggedUsers()){
+			result.add(loadUserByUsername(userName));
+		}
+		
+		return result;
+	}
+
+	public List<User> getFollowedBy(Tag tag) {
+		List<User> result = new ArrayList<User>();
+		
+		for(String userName : tag.getFollowedBy()){
+			result.add(loadUserByUsername(userName));
+		}
+		
+		return result;
+	}
 }

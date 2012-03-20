@@ -39,24 +39,30 @@ public class Tag implements Followable{
 	
 	@Getter private Set<Integer> taggedContent = new HashSet<Integer>();
 	
-	@Getter private Set<User> taggedUsers = new HashSet<User>();
+	@Getter private Set<String> taggedUsers = new HashSet<String>();
 	
-	private Map<Integer, User> followedBy = new HashMap<Integer, User>();
+	@Getter private Set<String> followedBy = new HashSet<String>();
 	
-	public Collection<User> getFollowers(){
-		return followedBy.values();
-	}
+//	private Map<Integer, User> followedBy = new HashMap<Integer, User>();
+	
+//	public Collection<User> getFollowers(){
+//		return followedBy.values();
+//	}
 	
 	public boolean isNotTaggingAnything(){
 		return taggedUsers.isEmpty() && taggedContent.isEmpty();
 	}
 	
-	public boolean isTagged(Taggable taggable){
-		return taggedUsers.contains(taggable) || taggedContent.contains(taggable);
+	public boolean isTagged(User user){
+		return taggedUsers.contains(user.getUserName());
+	}
+	
+	public boolean isTagged(Content content){
+		return taggedContent.contains(content.getId());
 	}
 	
 	public void addTagged(User taggable){
-		taggedUsers.add((User)taggable);
+		taggedUsers.add(taggable.getUserName());
 	}
 
 	public void addTagged(Content taggable){
@@ -72,7 +78,8 @@ public class Tag implements Followable{
 	}
 
 	public void startFollowing(User follower) {
-		followedBy.put(follower.getId(), follower);
+//		followedBy.put(follower.getId(), follower);
+		followedBy.add(follower.getUserName());
 	}
 
 	public void stopFollowing(User follower) {

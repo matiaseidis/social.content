@@ -6,4 +6,7 @@
 		<li><a
 			href="${pageContext.request.contextPath}/content/video/add">Crear
 				Video</a></li>
+				<li><a
+			href="${pageContext.request.contextPath}/content/audio/add">Crear
+				Audio</a></li>
 	</ul>

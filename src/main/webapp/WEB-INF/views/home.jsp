@@ -16,11 +16,12 @@
 <title></title>
 </head>
 <body>
-${request.queryString}<br />
-${request.remoteHost}<br />
 	<span>Lo que esta pasando</span>
+	
 	<myTags:contentList contentList="${user.followedVideos}" title="Videos" ></myTags:contentList>
 	<myTags:contentList contentList="${user.followedPosts}" title="Posts" ></myTags:contentList>
+	
+	<myTags:lastVideos videoList="${lastVideos}" title="Videos publicados"></myTags:lastVideos>
 	
 </body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.content.Content;
 import com.mati.demo.model.tag.Tag;
+import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 
 @Controller
@@ -31,6 +32,14 @@ public class TagController {
 		
 		List<Content> taggedContent = baseModel.getModel().getTaggedContent(tag);
 		m.addObject("taggedContent", taggedContent);
+		
+		List<User> taggedUsers = baseModel.getModel().getTaggedUsers(tag);
+		m.addObject("taggedUsers", taggedUsers);
+		
+		List<User> followedBy = baseModel.getModel().getFollowedBy(tag);
+		m.addObject("followedBy", followedBy);
+		
+		
 		
 		m.setViewName("tag/show");
 		return m;

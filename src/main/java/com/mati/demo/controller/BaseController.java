@@ -53,7 +53,7 @@ public abstract class BaseController<T> {
 		return  m;
 	}
 
-	protected T createEntity(){return null;}
+	protected abstract T createEntity();
 
 	protected ModelAndView retrieveErrorsFromSession(HttpSession session) {
 		ModelAndView m = null;

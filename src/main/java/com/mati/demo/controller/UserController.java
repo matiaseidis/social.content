@@ -46,7 +46,7 @@ public class UserController extends BaseController{
 		User user = getBaseModel().getModel().loadUserByUsername(username);
 		List<Content> content = null;
 		if(user != null){
-			content = new ArrayList<Content>(user.getContent());
+			content = user.getContent();
 		}
 		
  		mav.addObject("content", content);
@@ -64,6 +64,7 @@ public class UserController extends BaseController{
 	public ModelAndView content(ModelAndView m){
 		
 		m.addObject("videos", baseModel.getModel().getLoggedInUser().getVideos());
+		m.addObject("audios", baseModel.getModel().getLoggedInUser().getAudios());
 		m.addObject("posts", baseModel.getModel().getLoggedInUser().getPosts());
 		
 		return m;
@@ -78,6 +79,11 @@ public class UserController extends BaseController{
 		}		
 		m.addObject("profileUser", u);
 		return m;
+	}
+
+	@Override
+	protected Object createEntity() {
+		return new User();
 	}
 
 
