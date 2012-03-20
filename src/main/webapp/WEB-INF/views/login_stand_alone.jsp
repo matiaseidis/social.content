@@ -36,8 +36,8 @@
 				<td>Password:</td>
 				<td><input type='password' name='j_password' /></td>
 				<td colspan='2'><input name="submit" type="submit"
-					value="submit" /></td>
-				<td colspan='2'><input name="reset" type="reset" /></td>
+					value="submit" class="button"/></td>
+<!-- 				<td colspan='2'><input name="reset" type="reset" /></td> -->
 			</tr>
 		</table>
 

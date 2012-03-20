@@ -73,7 +73,7 @@
 								<fmt:formatDate pattern="yyyy, HH:mm" type="time"
 									value="${c.postDate}" timeZone="es" />
 							</p>
-							</p>
+							
 						</c:forEach>
 					</div>
 				</c:if>

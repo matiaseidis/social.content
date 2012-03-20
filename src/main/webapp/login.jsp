@@ -25,16 +25,21 @@
  
 		<table>
 			<tr>
-				<td>User:</td>
-				<td><input type='text' name='j_username' value=''></td>
-				<td>Password:</td>
-				<td><input type='password' name='j_password' />
+<!-- 				<td>User:</td> -->
+				<td><label for="j_username" path="j_username">Usuario: </label>
+<!-- 				</td> -->
+<!-- 				<td> -->
+				<input type='text' name='j_username' value='' class="fixed-height"></td>
+<!-- 				<td>Password:</td> -->
+				<td><label for="j_password" path="j_password">&nbsp&nbspContraseña: </label>
+<!-- 				<td> -->
+				<input type='password' name='j_password' class="fixed-height"/>
 				</td>
-				<td colspan='2'><input name="submit" type="submit"
-					value="submit" />
+				<td colspan='2'>&nbsp&nbsp<input name="submit" type="submit"
+					value="entrar" class="button"/>
 				</td>
-				<td colspan='2'><input name="reset" type="reset" />
-				</td>
+<!-- 				<td colspan='2'><input name="reset" type="reset" /> -->
+<!-- 				</td> -->
 			</tr>
 		</table>
  
@@ -42,3 +47,7 @@
 	<a href="register">Crear cuenta</a>
 </body>
 </html>
+
+	<form:label for="title" path="title">Título</form:label>
+	<br />
+	<form:input path="title" class="long fixed-height" />

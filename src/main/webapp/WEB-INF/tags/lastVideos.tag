@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="myFunctions" uri="videoThumbnail"%>
+<%@ taglib prefix="myFunctions" uri="contentUtils"%>
 <%@ attribute name="title" required="true" rtexprvalue="true"%>
 <%@ attribute name="videoList" required="true" rtexprvalue="true"
 	type="java.util.List"%>

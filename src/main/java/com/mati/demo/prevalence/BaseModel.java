@@ -57,11 +57,11 @@ public class BaseModel {
 	}
 	
 	public void addTagToUser(Tag tag){
-		prevayler.execute(new AddTagToUser(tag));
+		prevayler.execute(new AddTagToUser(tag, getModel().getLoggedInUser().getUserName()));
 	}
 	
 	public void removeTagFromUser(Tag tag){
-		prevayler.execute(new RemoveTagFromUser(tag));
+		prevayler.execute(new RemoveTagFromUser(tag, getModel().getLoggedInUser().getUserName()));
 	}
 	
 //	public void addContent(Post post) {

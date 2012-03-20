@@ -22,7 +22,7 @@
 
 						<form action="${ctx}/user/unfollow/${profileUser.userName}"
 							method="POST">
-							<input type="submit" value="unfollow">
+							<input  class="button"  type="submit" value="no seguir">
 						</form>
 
 
@@ -32,7 +32,7 @@
 
 						<form action="${ctx}/user/follow/${profileUser.userName}"
 							method="POST">
-							<input type="submit" value="follow">
+							<input  class="button" type="submit" value="seguir">
 						</form>
 
 

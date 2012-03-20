@@ -30,7 +30,7 @@ public class FollowUserController {
 		try{
 			//			session.setAttribute("errors", null);
 			if(user != null){
-				getBaseModel().getPrevayler().execute(new StartFollowingUser(user.getUserName()));
+				getBaseModel().getPrevayler().execute(new StartFollowingUser(user.getUserName(), baseModel.getModel().getLoggedInUser().getUserName()));
 			} else{
 				/*
 				 * TODO handle
@@ -53,7 +53,7 @@ public class FollowUserController {
 		try{
 			//			session.setAttribute("errors", null);
 			if(user != null){
-				getBaseModel().getPrevayler().execute(new StopFollowingUser(user.getUserName()));
+				getBaseModel().getPrevayler().execute(new StopFollowingUser(user.getUserName(), baseModel.getModel().getLoggedInUser().getUserName()));
 			} else{
 				/*
 				 * TODO handle

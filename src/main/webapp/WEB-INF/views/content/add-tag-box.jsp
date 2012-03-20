@@ -9,3 +9,4 @@
 		<jsp:include page="add-tag-new-content-box.jsp"></jsp:include>
 	</c:otherwise>
 </c:choose>
+<input type="hidden" name="plainTags" id="contentTags" />

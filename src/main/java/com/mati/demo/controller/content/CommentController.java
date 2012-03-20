@@ -29,7 +29,7 @@ public class CommentController {
 			//TODO handle
 		}
 		
-		baseModel.getPrevayler().execute(new CreateComment(comment, id));
+		baseModel.getPrevayler().execute(new CreateComment(comment, id, baseModel.getModel().getLoggedInUser().getUserName()));
 		
 		m.setViewName("redirect:/content/"+contentType+"/show/"+id);
 		return m;

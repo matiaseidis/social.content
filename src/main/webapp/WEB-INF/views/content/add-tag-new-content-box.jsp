@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
 <div>
-<input type="text" id="inputTag" /><span><a href="#" id="addTag">Agregar etiqueta</a></span>
+<input type="text" id="inputTag" class="medium fixed-height"/><span><a href="#" id="addTag">Agregar etiqueta</a></span>
 <p id="tagsPreview"></p>
 </div>
 <script>

@@ -7,6 +7,7 @@ import org.prevayler.Transaction;
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.tag.TagRepository;
+import com.mati.demo.model.user.User;
 
 public class RemoveTagFromUser implements Transaction {
 
@@ -14,11 +15,14 @@ public class RemoveTagFromUser implements Transaction {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
+	private final String loggedInUserName;
 	private final Tag tag;
 
-	public RemoveTagFromUser(Tag tag) {
+	public RemoveTagFromUser(Tag tag, String loggedInUserName) {
 		this.tag = tag;
+		this.loggedInUserName = loggedInUserName;
+
 	}
 
 	public void executeOn(Object prevalentSystem, Date executionTime) {
@@ -26,8 +30,9 @@ public class RemoveTagFromUser implements Transaction {
 		Model model = (Model) prevalentSystem;
 		
 		Tag tagFromRepo = model.getTagRepository().getByTagName(tag.getTagName());
-		
-		model.getLoggedInUser().removeTag(model.getTagRepository(), tagFromRepo);
+		User loggedInUser = model.loadUserByUsername(loggedInUserName);
+
+		loggedInUser.removeTag(model.getTagRepository(), tagFromRepo);
 	}
 
 }

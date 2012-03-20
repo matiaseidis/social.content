@@ -42,12 +42,12 @@
 						<td>${fn:length(user.followedBy)}</td>
 						<td>
 							<form action="${ctx}/user/follow/${user.userName}" method="POST">
-								<input type="submit" value="follow">
+								<input class="button" type="submit" value="seguir">
 							</form>
 						</td>
 						<td>
 							<form action="${ctx}/user/unfollow/${user.userName}" method="POST">
-								<input type="submit" value="unfollow">
+								<input class="button" type="submit" value="no seguir">
 							</form>
 						</td>
 					</tr>
@@ -72,12 +72,12 @@
 						<td>${fn:length(tag.taggedUsers)}</td>
 						<td>
 							<form action="${ctx}/tag/follow/${tag.tagName}" method="POST">
-								<input type="submit" value="follow">
+								<input class="button" type="submit" value="seguir">
 							</form>
 						</td>
 						<td>
 							<form action="${ctx}/tag/unfollow/${tag.tagName}" method="POST">
-								<input type="submit" value="unfollow">
+								<input class="button" type="submit" value="no seguir">
 							</form>
 						</td>
 					</tr>

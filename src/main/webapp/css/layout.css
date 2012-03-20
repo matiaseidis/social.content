@@ -1,7 +1,9 @@
 .page-wrapper {
 	
 }
-
+.player-1{}
+.player-2{}
+.player-2 object{}
 .page-wrapper,.barrita {
 	margin-left: auto;
 	margin-right: auto;
@@ -12,7 +14,7 @@
 .barrita {
 	
 }
-
+.edit-link{float:right;}
 .menu-left {
 	float: left;
 }
@@ -95,11 +97,23 @@ ul {
 	margin: 16px;
 }
 /*forms*/
+input.fixed-height{height:25px;}
 input,textarea {
 	border: 1px solid #CCC;
 	margin-top: 15px;
 }
-
+input.long{width:640px;}
+input.medium{
+	width:400px;
+	margin-right:10px;
+	}
+input.button, .edit-link{
+    border: 3px solid #CCCCCC;
+    padding: 5px;
+}
+input.button{
+	height: 40px;
+}
 textarea {
 	
 }

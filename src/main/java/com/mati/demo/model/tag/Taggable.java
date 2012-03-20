@@ -1,12 +1,17 @@
 package com.mati.demo.model.tag;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Getter;
 
-public abstract class Taggable {
+public abstract class Taggable implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/*
 	 * the tags for this taggable
 	 */

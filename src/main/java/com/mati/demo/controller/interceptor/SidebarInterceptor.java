@@ -42,16 +42,15 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 			modelAndView.addObject("followedContent", cl);
 			modelAndView.addObject("followedBy", new ArrayList<User>(user.getFollowedBy()));
 			
-			String userPictureURI = "http://"+serverBasePath+userPictureFolder+"/";
-			
-			String userPictureExt = ".png";
-			
-			request.setAttribute("userPictureURI", userPictureURI);
-			request.setAttribute("userPictureExt", userPictureExt);
-
-
 			modelAndView.addObject("tags", new ArrayList<Tag>(baseModel.getModel().getTags()));
 		}
+
+		String userPictureURI = "http://"+serverBasePath+userPictureFolder+"/";
+		String userPictureExt = ".png";
+		
+		request.setAttribute("userPictureURI", userPictureURI);
+		request.setAttribute("userPictureExt", userPictureExt);
+
 		super.postHandle(request, response, handler, modelAndView);
 
 	}

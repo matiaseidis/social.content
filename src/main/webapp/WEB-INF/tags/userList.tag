@@ -24,13 +24,13 @@
 							<c:when test="${myFunctions:isFollowedBy(u, user)}">
 								<form class="follow" action="${ctx}/user/unfollow/${u.userName}"
 									method="POST">
-									<input type="submit" value="unfollow">
+									<input class="button" type="submit" value="no seguir">
 								</form>
 							</c:when>
 							<c:otherwise>
 								<form class="follow" action="${ctx}/user/follow/${u.userName}"
 									method="POST">
-									<input type="submit" value="follow">
+									<input class="button" type="submit" value="seguir">
 								</form>
 							</c:otherwise>
 						</c:choose>

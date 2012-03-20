@@ -37,33 +37,16 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 
 		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
 
-		T content = retrieveContent(nodeId);
+		T content = (T)getBaseModel().getModel().loadContentById(nodeId);
 
 		if(content != null){
-			m.addObject(getEntityName(), content);
+			m.addObject("content", content);
+			m.addObject("contentType", getEntityName());
 			m.addObject(ACTION, "../"+UPDATE+"/"+nodeId);
 		}
 		return  m;
 
 
-	}
-
-	protected T retrieveContent(int contentHash){
-
-		Content c = getBaseModel().getModel().loadContentById(contentHash);
-
-		if(c != null){
-			try{
-
-				T t = (T)c;
-				return t;
-
-			}catch(Exception e){
-				//TODO log in the right way
-				System.err.println("unable to cast "+c.getClass());
-			}
-		}
-		return null;
 	}
 
 	protected List<Content> list(String username, Class clazz) {
@@ -210,6 +193,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			 */
 		}
 		processBeforeShow(content);
+		m.addObject("model", getBaseModel().getModel());
 		m.addObject("content", content);
 		m.addObject("contentType", getEntityName());
 		m.addObject("tag", new Tag());

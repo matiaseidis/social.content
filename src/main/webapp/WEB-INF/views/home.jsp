@@ -17,7 +17,15 @@
 </head>
 <body>
 	<span>Lo que esta pasando</span>
+	<br />
+	-------------------------------------------------------------------------------------	
 	
+	<p>TODO</p>
+	<p>eventos / calendario</p>
+	<p>update content</p>
+	<p>update user profile</p>
+	<p>datos de perfil -> redes sociales???</p>
+-------------------------------------------------------------------------------------	
 	<myTags:contentList contentList="${user.followedVideos}" title="Videos" ></myTags:contentList>
 	<myTags:contentList contentList="${user.followedPosts}" title="Posts" ></myTags:contentList>
 	
