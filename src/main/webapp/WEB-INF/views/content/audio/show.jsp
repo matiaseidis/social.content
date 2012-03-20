@@ -10,7 +10,7 @@
 <script type='text/javascript'
 	src='${ctx}/js/mediaplayer-5.9-viral/jwplayer.js'></script>
 
-<title>${content.title}</title>
+<title><c:out value="${content.title}"></c:out></title>
 </head>
 <body>
 <%-- <audio autoplay="autoplay" src="<c:out value="${content.audioRef}" ></c:out>" controls="controls"></audio> --%>
@@ -25,7 +25,7 @@
  							'file' : '<c:out value="${content.audioRef}" ></c:out>',
  							'controlbar' : 'bottom',
  							'width' : '640',
- 							'height' : '24',
+ 							'height' : '240',
  							'skin' : '${ctx}/js/video-js/skins/grungetape.zip'
  						});
  	</script> 
