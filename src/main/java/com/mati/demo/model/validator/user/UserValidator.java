@@ -23,6 +23,9 @@ public class UserValidator extends AbstractValidator<UserCommand> {
 
 	public boolean validate() {
 
+		/*
+		 * TODO ver disponibilidad de nombre aca
+		 */
 		boolean problems = false; 
 		if(StringUtils.isEmpty(user.getUserName())){
 			addError("userName","tiene que tener un nombre");
