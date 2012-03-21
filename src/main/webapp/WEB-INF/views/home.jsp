@@ -21,6 +21,7 @@
 	-------------------------------------------------------------------------------------	
 	
 	<p>TODO</p>
+	<p>submit content sin titulo boom</p>
 	<p>eventos / calendario</p>
 	<p>update content</p>
 	<p>update user profile</p>
