@@ -147,4 +147,38 @@ public class Model implements Serializable{
 		
 		return result;
 	}
+	
+	public void updateContent(Content oldContent) {
+		if(oldContent.getId() != oldContent.hashCode()){
+			
+			/*
+			 * cambio el titulo, reemplazo
+			 */
+			int oldContentId = oldContent.getId();
+			deleteContent(oldContentId);
+			oldContent.setId(oldContent.hashCode());
+			addContent(oldContent);
+
+			/*
+			 * fowards the update to logged in user
+			 */
+			getLoggedInUser().updateContent(oldContentId, oldContent);
+
+			
+		} else {
+			/*
+			 * solo actualizo
+			 */
+			addContent(oldContent);
+			/*
+			 * fowards the update to logged in user
+			 */
+			getLoggedInUser().updateContent(oldContent);
+		}
+
+	}
+	
+	public boolean deleteContent(int id) {
+		return contentMap.remove(id) == null;
+	}
 }

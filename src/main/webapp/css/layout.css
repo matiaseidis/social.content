@@ -14,7 +14,10 @@
 .barrita {
 	
 }
-.edit-link{float:right;}
+.edit-link{
+width:80px;
+margin-bottom:5px;
+/*float:right;*/}
 .menu-left {
 	float: left;
 }
@@ -111,6 +114,10 @@ input.button, .edit-link{
     border: 3px solid #CCCCCC;
     padding: 5px;
 }
+.error-field{
+	color:red;
+	font-weight:bold;
+	}
 input.button{
 	height: 40px;
 }

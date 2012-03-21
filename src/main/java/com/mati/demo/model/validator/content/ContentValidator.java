@@ -2,7 +2,7 @@ package com.mati.demo.model.validator.content;
 
 import lombok.Getter;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.validator.GenericValidator;
 
 import com.mati.demo.model.base.Model;
@@ -14,6 +14,11 @@ public abstract class ContentValidator<T extends Content> extends AbstractValida
 	
 	@Getter private final T content;
 	@Getter private final Model model;
+	private boolean ok;
+	
+	public boolean isOk(){
+		return ok;
+	}
 	
 	public ContentValidator(T content, Model model){
 		this.content = content;
@@ -21,23 +26,29 @@ public abstract class ContentValidator<T extends Content> extends AbstractValida
 	}
 	
 	public boolean validate(){
-		boolean withErrors = false;
 		
 		String title = content.getTitle();
+		
+		if(exists()){
+			addError("title", "ya existe un contenido con el mismo titulo");
+		}
+		
 		if(GenericValidator.isBlankOrNull(title) || !GenericValidator.maxLength(title, 64)){
 			addError("title", "el titulo es obligatorio");
 		}
 		
 		performValidation();
-		
-		if(CollectionUtils.isNotEmpty(getErrors())) throw new RuntimeException("Validation failed");
-		return true;
+		ok = MapUtils.isEmpty(getErrors());
+		if(!isOk()){
+			addError("model", content);
+		}
+		return isOk();
 	}
 	
 	protected abstract void performValidation();
 	
-	public boolean exists(Model model){
-		return model.loadContentById(content.getId()) != null;
+	public boolean exists(){
+		return model.getLoggedInUser().getContent(content.getId()) != null;
 	}
 	
 }

@@ -12,7 +12,7 @@
 <body>
 <p>Tagged content</p>
 <c:forEach items="${taggedContent}" var="taggedContent">
-	<a href="${ctx}/content/${taggedContent.contentType}/show/${taggedContent.id}">
+	<a href="${ctx}/content/${taggedContent.contentType}/show/${taggedcontent.id}">
 	<span>${taggedContent.title}</span>
 	</a>
 	<span>${taggedContent.author.userName}</span>

@@ -3,6 +3,7 @@
 <%-- <%@ page session="false"%> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
 <div>
 
@@ -18,4 +19,5 @@ Falta ver los tags existentes y poder ABM
 <!-- 					<input type="submit" /> -->
 <!-- 				</p> -->
 <%-- 			</form:form> --%>
+<myTags:errorField field="tags"></myTags:errorField>
 </div>

@@ -57,7 +57,7 @@
 			'controlbar' : 'bottom',
 			'width' : '440',
 			'height' : '260',
-			'skin' : '${ctx}/js/video-js/skins/grungetape.zip',
+			'skin' : '${ctx}/js/video-js/skins/playcasso.zip',
 			'image' : '${userPictureURI}${fn:toLowerCase(content.author.userName)}${userPictureExt}'
 		});
 	</script>

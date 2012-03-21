@@ -36,7 +36,6 @@ public class CreateContent<T extends Content> implements Transaction {
 			
 			setTags(content, model);
 			
-			
 			user.addContent(content);
 			model.addContent(content);
 	}
@@ -46,17 +45,6 @@ public class CreateContent<T extends Content> implements Transaction {
 			String [] tagNames = plainTags.split(",");
 			
 			for(String tagName : tagNames){
-				
-//				Tag tagToAdd = null;
-//				Tag tagFromRepo = model.getTagRepository().getByTagName(tagName); 
-//				if(tagFromRepo != null){
-//					tagToAdd  = tagFromRepo;
-//				} else {
-//					tagToAdd = new Tag(tagName);
-//					model.addTag(tagToAdd);
-//				}
-//				tagToAdd.addTagged(content);
-//				content.addTag(tagToAdd);
 				content.addTag(model.getTagRepository(), new Tag(tagName));
 			}
 		}

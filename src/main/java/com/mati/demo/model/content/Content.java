@@ -21,6 +21,8 @@ public abstract class Content extends Taggable implements Commentable{
 	private static final long serialVersionUID = 1L;
 	@Getter @Setter private int id;
 	@Getter @Setter private Date postDate;
+	
+//	@Getter @Setter private MetaData meta = new MetaData();
 	@Getter @Setter private String title;
 	@Getter @Setter private User author;
 	@Getter final private String contentType = getClass().getSimpleName().toLowerCase();
@@ -47,7 +49,7 @@ public abstract class Content extends Taggable implements Commentable{
 	
 	@Override
 	public int hashCode() {
-		return getTitle().hashCode();
+		return getAuthor().getUserName().hashCode() + getTitle().hashCode();
 	}
 	
 	@Override

@@ -29,18 +29,6 @@ public class AudioController extends ContentController<Audio>{
 	@Getter @Setter	protected String fileSystemBasePath;
 
 	@Override
-	protected void transferMetaData(Audio oldContent, Audio updatedContent) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void updateContent(Audio oldContent, Audio updatedContent) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	protected ContentValidator<Audio> getValidator(Audio audio, Model model) {
 		return new AudioValidator(audio, model, fileSystemBasePath);
 	}

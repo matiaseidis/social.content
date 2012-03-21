@@ -2,6 +2,13 @@
 <%@page pageEncoding="UTF-8" %>
 <%@ page session="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
+
+
+
+
+
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
  
 <html>
@@ -18,25 +25,13 @@
 					</p>
 					</c:if>
                 <p>
-                    <form:label for="userName" path="userName">Name</form:label><br/>
-                    <form:input path="userName"/>
-                    <c:if test="${not empty errors}">
-						<c:out value="${errors.userName}"></c:out>
-					</c:if>
+                <c:out value="${user.userName}"></c:out>
                 </p>
-                <p>
-                    <form:label for="password" path="password">Password</form:label><br/>
-                    <form:password path="password"/>
-                    <c:if test="${not empty errors}">
-						<c:out value="${errors.password}"></c:out>
-					</c:if>
-                </p>
+                <a href="passwordEdit">Cambiar contraseña</a> 
                 <p>
                     <form:label for="email" path="email">email</form:label><br/>
                     <form:input path="email"/>
-                    <c:if test="${not empty errors}">
-						<c:out value="${errors.email}"></c:out>
-					</c:if>
+                    <myTags:errorField field="email"></myTags:errorField>
                 </p>
                 
                 <p>
@@ -49,9 +44,8 @@
                     <form:label for="image" path="image">Image: 
                     </form:label><br/>
                     <form:input path="image" type="file" />
-						<c:if test="${not empty errors}">
-						<c:out value="${errors.image}"></c:out>
-					</c:if>
+					<myTags:errorField field="image"></myTags:errorField>
+					
 					
                 </p>
                 <p>

@@ -29,16 +29,6 @@ public class PostController extends ContentController<Post>{
 	@Getter @Setter private String entityPluralName;
 	
 	@Override
-	protected void transferMetaData(Post oldContent, Post updatedContent) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	protected void updateContent(Post oldContent, Post updatedContent) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	protected ContentValidator<Post> getValidator(Post post, Model model) {
 		return new PostValidator(post, model);
 	}

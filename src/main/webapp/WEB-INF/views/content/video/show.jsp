@@ -13,6 +13,8 @@
 <title><c:out value="${content.title}"></c:out></title>
 </head>
 <body>
+<jsp:include page="../edit-link.jsp"></jsp:include>
+
 <jsp:include page="../show-tags-box.jsp"></jsp:include>
 
 
@@ -26,10 +28,13 @@
 							'controlbar' : 'bottom',
 							'width' : '640',
 							'height' : '360',
-							'skin' : '${ctx}/js/video-js/skins/playcasso.zip'
+							'skin' : '${ctx}/js/video-js/skins/grungetape.zip'
 						});
 	</script>
 	<%-- 'skin':'${pageContext.request.contextPath}/js/video-js/skins/playcasso/playcasso.zip'--%>
+	<div class="content-description">
+	<p><c:out value="${content.body}" escapeXml="false"></c:out></p>
+	</div>
 	<jsp:include page="../comments-box.jsp" />
 </body>
 </html>

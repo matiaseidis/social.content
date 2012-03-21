@@ -1,6 +1,7 @@
 package com.mati.demo.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,15 +43,12 @@ public abstract class BaseController<T> {
 	@RequestMapping(value=ADD, method=RequestMethod.GET)
 	public ModelAndView add(HttpSession session){
 		ModelAndView m = retrieveErrorsFromSession(session);
-		
-		if(m == null){
-			m = new ModelAndView();
-		}
+	
 		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath;
 		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
 		m.addObject(ACTION, CREATE);
 		m.addObject("new", true);
-		m.addObject("content", createEntity());
+//		m.addObject("content", createEntity());
 		m.addObject("entityName", getEntityName());
 		return  m;
 	}
@@ -57,14 +56,15 @@ public abstract class BaseController<T> {
 	protected abstract T createEntity();
 
 	protected ModelAndView retrieveErrorsFromSession(HttpSession session) {
-		ModelAndView m = null;
-		List<ValidationError> errors = (List<ValidationError>)session.getAttribute(ERRORS);
+		ModelAndView m = new ModelAndView(); 
+		HashMap<String, Object> errors = (HashMap<String, Object>)session.getAttribute(ERRORS);
 		
-		if(CollectionUtils.isNotEmpty(errors)){
-			m = new ModelAndView(); 
+		if(MapUtils.isNotEmpty(errors)){
 			m.addObject(ERRORS, errors);
+			m.addObject("content", errors.get("model"));
+		} else{
+			m.addObject("content", createEntity());
 		}
-		
 		session.setAttribute(ERRORS, null);
 		return m;
 	}

@@ -12,11 +12,13 @@ public class UserValidator extends AbstractValidator<UserCommand> {
 	private final UserCommand user;
 	private final String fileSystemBasePath;
 	private final String userPictureFolder;
+	private final Model model;
 
-	public UserValidator(UserCommand user, String fileSystemBasePath, String userPictureFolder){
+	public UserValidator(UserCommand user, String fileSystemBasePath, String userPictureFolder, Model model){
 		this.user = user;
 		this.fileSystemBasePath = fileSystemBasePath;
 		this.userPictureFolder = userPictureFolder;
+		this.model = model;
 	}
 
 	public boolean validate() {
@@ -54,7 +56,7 @@ public class UserValidator extends AbstractValidator<UserCommand> {
 		return !problems;
 	}
 
-	public boolean exists(Model model) {
+	public boolean exists() {
 
 		if(user == null) return false;
 

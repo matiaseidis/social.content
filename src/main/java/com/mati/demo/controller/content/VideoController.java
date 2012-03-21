@@ -1,6 +1,5 @@
 package com.mati.demo.controller.content;
 
-import java.util.Arrays;
 import java.util.List;
 
 import lombok.Getter;
@@ -31,21 +30,10 @@ public class VideoController extends ContentController<Video>{
 	@Getter @Setter	protected String fileSystemBasePath;
 	
 	@Override
-	protected void transferMetaData(Video oldContent, Video updatedContent) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void updateContent(Video oldContent, Video updatedContent) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	protected Video createEntity(){return new Video();}
 
 	@Override
-	protected ContentValidator getValidator(Video video, Model model) {
+	protected ContentValidator<Video> getValidator(Video video, Model model) {
 		return new VideoValidator(video, model, fileSystemBasePath);
 	}
 
@@ -56,13 +44,21 @@ public class VideoController extends ContentController<Video>{
 			content.setVideoRef("http://"+serverBasePath+getEntityName()+"/"+content.getFileName());
 		} else {
 			content.setVideoRef(content.getUrl());
-//			content.setThumbnailUri(youTubeThumbnailUri(content));
 		}
 
 		super.processBeforeShow(content);
 	}
 
-	
+	@Override
+	protected void updateContent(Video oldContent, Video updatedContent) {
+		
+		oldContent.setBody(updatedContent.getBody());;
+		oldContent.setFileData(updatedContent.getFileData());
+		oldContent.setFileName(updatedContent.getFileName());
+		oldContent.setUrl(updatedContent.getUrl());
+		
+		super.updateContent(oldContent, updatedContent);
+	}
 
 	@Override
 	protected List<Video> listContent(User user) {

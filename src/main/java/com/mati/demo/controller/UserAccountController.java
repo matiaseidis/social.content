@@ -70,8 +70,8 @@ public class UserAccountController {
 	@RequestMapping(value="register", method=RequestMethod.POST)
 	public ModelAndView register(@ModelAttribute UserCommand userCommand, HttpServletRequest request, ModelAndView m){
 
-		Validator v = new UserValidator(userCommand, fileSystemBasePath, userPictureFolder);
-		boolean unavailable = v.exists(baseModel.getModel());
+		Validator v = new UserValidator(userCommand, fileSystemBasePath, userPictureFolder, getBaseModel().getModel());
+		boolean unavailable = v.exists();
 		User user = null;
 		if(v.validate() && !unavailable){
 			try{
@@ -82,7 +82,7 @@ public class UserAccountController {
 				baseModel.getPrevayler().execute(new CreateUser(user));
 			}catch(Exception e){
 				v.addError("unavailable","El nombre ya esta siendo usado por otro usuario");
-				m.addObject("errors", toMap(v.getErrors()));
+				m.addObject("errors", v.getErrors());
 				m.setViewName("account/register");
 				return m;
 			}
@@ -96,7 +96,7 @@ public class UserAccountController {
 			}
 
 		} else{
-			m.addObject("errors", toMap(v.getErrors()));
+			m.addObject("errors", v.getErrors());
 			m.addObject("user", userCommand);
 			m.setViewName("account/register");
 		}

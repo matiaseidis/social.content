@@ -1,16 +1,16 @@
 package com.mati.demo.model.validator;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import lombok.Getter;
 
 public abstract class AbstractValidator<T> implements Validator<T> {
 	
-	@Getter final List<ValidationError> errors = new ArrayList<ValidationError>();
+	@Getter final Map<String, Object> errors = new HashMap<String, Object>();
 	
 	public void addError(String code, Object message){
-		getErrors().add(new ValidationError(code, message));
+		getErrors().put(code, message);
 	}
 
 }

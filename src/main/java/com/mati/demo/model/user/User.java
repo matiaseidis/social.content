@@ -99,49 +99,26 @@ public class User extends Taggable{
 		tag.removeTagged(this);
 	}
 
-//	public Post getPost(int nodeId) {
-//		return content.get(nodeId);
-//	}
-
-	public void updateContent(Content oldContent, Content updatedContent) {
-		int oldContentId = oldContent.getTitle().hashCode();
-		
-		if(updatedContent == null){
-			content.put(oldContentId, oldContent);
-		} else {
-			deleteContent(oldContentId);
-			content.put(updatedContent.getTitle().hashCode(), updatedContent);
-		}
-		
+	public void updateContent(Content oldContent) {
+	
+			/*
+			 * solo actualizo
+			 */
+			addContent(oldContent);
 	}
 	
-//	public void updateVideo(Video oldVideo, Video updatedVideo) {
-//		int oldVideoId = oldVideo.getTitle().hashCode();
-//		
-//		if(updatedVideo == null){
-//			videos.put(oldVideoId, oldVideo);
-//		} else {
-//			deleteVideo(oldVideoId);
-//			videos.put(updatedVideo.getTitle().hashCode(), updatedVideo);
-//		}
-//		
-//	}
-
+	public void updateContent(int idToReplace, Content newContent) {
+			/*
+			 * cambio el titulo, reemplazo
+			 */
+			deleteContent(idToReplace);
+			newContent.setId(newContent.hashCode());
+			updateContent(newContent);
+	}
+	
 	public boolean deleteContent(int id) {
 		return content.remove(id) == null;
 	}
-
-//	public void addVideo(Video video) {
-//		content.put(video.hashCode(), video);
-//	}
-//	
-//	public boolean deleteVideo(int id) {
-//		return videos.remove(id) == null;
-//	}
-
-//	def Collection getContent(Class clazz) {
-//		return content.values().findAll { it.class == clazz  }
-//	}
 
 	public Content getContent(int nodeId) {
 		return content.get(nodeId);

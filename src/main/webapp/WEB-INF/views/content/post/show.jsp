@@ -11,6 +11,8 @@
 <title><c:out value="${content.title}" escapeXml="true"></c:out></title>
 </head>
 <body>
+<jsp:include page="../edit-link.jsp"></jsp:include>
+
 	<div>
 		<h6>
 			Publicado por

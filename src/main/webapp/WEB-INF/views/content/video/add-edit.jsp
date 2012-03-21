@@ -3,7 +3,7 @@
 <%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -27,7 +27,7 @@
 					value="${video.url}" />
 			</form:label>
 			<form:input path="url" type="text" class="medium fixed-height" />
-
+			<myTags:errorField field="url"></myTags:errorField>
 		</p>
 
 

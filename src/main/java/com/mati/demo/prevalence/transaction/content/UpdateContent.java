@@ -7,37 +7,44 @@ import org.prevayler.Transaction;
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.Content;
 import com.mati.demo.model.user.User;
-import com.mati.demo.model.validator.content.ContentValidator;
 
 public class UpdateContent implements Transaction{
 
-	private final Content oldContent;
-	private final Content updatedContent;
-	private final ContentValidator _validator;
-	private final String loggedInUserName;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
-	public UpdateContent(Content oldContent, Content updatedContent, ContentValidator validator, String loggedInUserName) {
+	private final Content oldContent;
+//	private final Content updatedContent;
+	private final String loggedInUserName;
+	
+	/*
+	 * constructor for title change 
+	 */
+//	public UpdateContent(Content oldContent, Content updatedContent, String loggedInUserName) {
+//		this.loggedInUserName = loggedInUserName;
+//		this.oldContent = oldContent;
+//		this.updatedContent = updatedContent;
+//	}
+	
+	/*
+	 * cons for title not changed
+	 */
+	public UpdateContent(Content oldContent, String loggedInUserName) {
 		this.loggedInUserName = loggedInUserName;
-
 		this.oldContent = oldContent;
-		this.updatedContent = updatedContent;
-		_validator = validator;
-	}
-	public UpdateContent(Content oldContent, ContentValidator validator, String loggedInUserName) {
-		this(oldContent, null, validator, loggedInUserName);
+//		this.updatedContent = null;
 	}
 
 	public void executeOn(Object prevalentSystem, Date executionTime) {
 		Model model = (Model) prevalentSystem;
 		User loggedInUser = model.loadUserByUsername(loggedInUserName);
 
-		// TODO validator goes out of here
-		if(_validator.validate(/*oldContent*/)){
-			if(updatedContent != null && _validator.validate(/*updatedContent*/)){
-				loggedInUser.updateContent(oldContent, updatedContent);
-			}
-		}
+//		if(updatedContent != null){ // title changed
+//			loggedInUser.updateContent(oldContent, updatedContent);
+//		} else {
+			model.updateContent(oldContent);
+//		}
 	}
-	
 }

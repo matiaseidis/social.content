@@ -29,28 +29,25 @@ public class VideoValidator extends ContentValidator<Video> {
 		 */
 		if(StringUtils.isEmpty(getContent().getUrl())){
 			try {
+				
 				CommonsMultipartFile multipartFile = getContent().getFileData();
-
-				String destinationPath = fileSystemBasePath + File.separator + "video" + File.separator; 
-
-				String fileName = StringUtils.replace(multipartFile.getOriginalFilename().toLowerCase(), " ", "-");
-
-				File file = new File(destinationPath + fileName);
-
-				FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
 				
-				getContent().setFileName(fileName);
-				
+				if(multipartFile == null){
+					addError("url", "Debe cargar un video.");
+				}else{
+					String destinationPath = fileSystemBasePath + File.separator + "video" + File.separator; 
+
+					String fileName = StringUtils.replace(multipartFile.getOriginalFilename().toLowerCase(), " ", "-");
+
+					File file = new File(destinationPath + fileName);
+
+					FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
+					
+					getContent().setFileName(fileName);
+				}
 			} catch (IOException e) {
 				addError("save", "No se puedo guardar el video");
 			}
 		}
-
-
-
-
 	}
-
-
-
 }
