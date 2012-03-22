@@ -14,10 +14,7 @@
 .barrita {
 	
 }
-.edit-link{
-width:80px;
-margin-bottom:5px;
-/*float:right;*/}
+.edit-link{}
 .menu-left {
 	float: left;
 }
@@ -110,7 +107,7 @@ input.medium{
 	width:400px;
 	margin-right:10px;
 	}
-input.button, .edit-link{
+input.button{
     border: 3px solid #CCCCCC;
     padding: 5px;
 }

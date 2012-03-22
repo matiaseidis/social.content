@@ -1,16 +1,11 @@
 package com.mati.demo.controller.content;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import lombok.Getter;
-import lombok.Setter;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -23,13 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.controller.BaseController;
 import com.mati.demo.model.base.Model;
-import com.mati.demo.model.content.Comment;
 import com.mati.demo.model.content.Content;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.model.validator.content.ContentValidator;
 import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.content.CreateContent;
+import com.mati.demo.prevalence.transaction.content.DeleteContent;
 import com.mati.demo.prevalence.transaction.content.UpdateContent;
 
 public abstract class ContentController<T extends Content> extends BaseController<T> {
@@ -38,8 +33,9 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 	
 	
 	@RequestMapping(value="edit/{nodeId}", method=RequestMethod.GET)
-	public ModelAndView edit(@PathVariable int nodeId, ModelAndView m){
+	public ModelAndView edit(@PathVariable int nodeId, HttpSession session){
 
+		ModelAndView m = retrieveErrorsFromSession(session);
 		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath;
 
 		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
@@ -49,7 +45,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		if(content != null){
 			m.addObject("content", content);
 			m.addObject("contentType", getEntityName());
-			m.addObject(ACTION, "../"+UPDATE+"/"+nodeId);
+			m.addObject(ACTION, "../"+UPDATE/*+"/"+nodeId*/);
 		}
 		return  m;
 
@@ -105,7 +101,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			getBaseModel().getPrevayler().execute(create);
 		} else {
 			request.getSession().setAttribute("errors", validator.getErrors());
-			return new ModelAndView("redirect:"+"/"+ADD);
+			return new ModelAndView("redirect:"+ADD);
 		}
 		return new ModelAndView("redirect:"+LIST);
 	}
@@ -140,29 +136,37 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 
 	protected abstract List<T> listContent(User user);
 
-//	@RequestMapping(value=DELETE+"/{nodeId}", method=RequestMethod.POST)
-//	public ModelAndView delete(@PathVariable int nodeId){
-//
-//		User user = getBaseModel().loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-//
-//		getBaseModel().getPrevayler().execute(new DeleteContent(nodeId));
-//
-//		return new ModelAndView("redirect:"+LIST, getEntityPluralName(), list(getEntityClass()));
-//	}
+	@RequestMapping(value=DELETE+"/{nodeId}", method=RequestMethod.POST)
+	public ModelAndView delete(@PathVariable int nodeId){
 
-	@RequestMapping(value=UPDATE+"/{nodeId}", method=RequestMethod.POST)
-	public ModelAndView update(@ModelAttribute T updatedContent, @PathVariable int nodeId, @RequestParam String plainTags, HttpSession session){
+		User user = getBaseModel().getModel().getLoggedInUser();
+		
+		if(user.getContent(nodeId) != null){
+			getBaseModel().getPrevayler().execute(new DeleteContent(nodeId, user.getUserName()));
+		}
+		
+		return new ModelAndView("redirect:"+LIST, getEntityPluralName(), list(getEntityClass()));
+	}
 
-		T initialContent = (T)getBaseModel().getModel().getLoggedInUser().getContent(nodeId);
+	@RequestMapping(value=UPDATE/*+"/{nodeId}"*/, method=RequestMethod.POST)
+	public ModelAndView update(@ModelAttribute T updatedContent, /*@PathVariable int nodeId,*/ @RequestParam String plainTags, HttpSession session){
+
+		final int updatedContentId = updatedContent.getId();
+		
+		T initialContent = (T)getBaseModel().getModel().getLoggedInUser().getContent(updatedContentId);
 
 		User loggedInUser = getBaseModel().getModel().getLoggedInUser();
+		
+		updatedContent.setAuthor(loggedInUser);
 
 		ContentValidator<T> validator = getValidator(updatedContent, getBaseModel().getModel());
+
+//		updateContent(initialContent, updatedContent);
 		
 		if(validator.exists()){
 			if(updatedContent.getTitle().equals(initialContent.getTitle())){
 				/*
-				 * 
+				 * puede ser que este actualizando otros campos? ver bien esto
 				 */
 			}
 		}
@@ -173,10 +177,10 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			updateContent(initialContent, updatedContent);
 		
 //		updatedContent.setId(nodeId);
-			getBaseModel().getPrevayler().execute(new UpdateContent(initialContent, loggedInUser.getUserName()));
+			getBaseModel().getPrevayler().execute(new UpdateContent(updatedContent, loggedInUser.getUserName()));
 		}else{
 			session.setAttribute("errors", validator.getErrors());
-			return new ModelAndView("redirect:"+"/"+ADD);
+			return new ModelAndView("redirect:edit/"+updatedContentId);
 		}
 		
 		ModelAndView m = new ModelAndView();

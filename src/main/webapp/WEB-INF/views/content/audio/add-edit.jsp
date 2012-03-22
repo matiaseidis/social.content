@@ -12,6 +12,7 @@
 	<form:form action="${action}" modelAttribute="content" method="post"
 		enctype="multipart/form-data">
 
+		<jsp:include page="../id.jsp"></jsp:include>
 		<jsp:include page="../title.jsp"></jsp:include>
 		<jsp:include page="../show-tags-box.jsp"></jsp:include>
 		<jsp:include page="../add-tag-box.jsp"></jsp:include>

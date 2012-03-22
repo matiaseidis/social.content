@@ -29,9 +29,30 @@ public abstract class ContentValidator<T extends Content> extends AbstractValida
 		
 		String title = content.getTitle();
 		
-		if(exists()){
-			addError("title", "ya existe un contenido con el mismo titulo");
+//		if(exists()){
+//			addError("title", "ya existe un contenido con el mismo titulo");
+//		}
+		String updatedTitle = content.getTitle(); 
+		T originalContent = (T)model.getLoggedInUser().getContent(content.getId());
+		String originalTitle = null;
+		
+		if(originalContent != null){
+			/*
+			 * we are editing, not creating
+			 */
+			originalTitle = model.getLoggedInUser().getContent(content.hashCode()).getTitle();
+			if(!updatedTitle.equals(originalTitle)){
+				/*
+				 * los titulos no son iguales ->
+				 * puede ser que el nuevo titulo no este disponible
+				 */
+				int newContentId = content.hashCode();
+				if(model.getLoggedInUser().getContent(newContentId) != null){
+					addError("title", "ya existe un contenido con el mismo titulo");
+				}
+			}
 		}
+		
 		
 		if(GenericValidator.isBlankOrNull(title) || !GenericValidator.maxLength(title, 64)){
 			addError("title", "el titulo es obligatorio");
