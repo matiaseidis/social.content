@@ -29,7 +29,9 @@ public class TagRepository {
 	}
 
 	public void addTag(Tag tag){
-		tagsBag.put(tag.getTagName(), tag);
+		if(!tagsBag.containsKey(tag.getTagName())){
+			tagsBag.put(tag.getTagName(), tag);
+		}
 	}
 	
 	public void removeTag(Tag tag){

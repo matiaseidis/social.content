@@ -9,14 +9,14 @@ import com.mati.demo.model.content.Content;
 public class GetContentQuery<T extends Content> {
 
 	
-	public List<T> getContent(Class clazz, Collection<Content> allFollowedContent){
-		List<T> followedContent  = new ArrayList<T>();
+	public List<T> getContent(Class clazz, Collection<Content> contentCollection){
+		List<T> result  = new ArrayList<T>();
 		
-		for(Content c : allFollowedContent){
+		for(Content c : contentCollection){
 			if(c.getClass().isAssignableFrom(clazz)){
-				followedContent.add((T)c);
+				result.add((T)c);
 			}
 		}
-		return followedContent;
+		return result;
 	}
 }

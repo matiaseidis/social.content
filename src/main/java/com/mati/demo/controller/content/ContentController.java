@@ -7,8 +7,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +35,10 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 
 	String packageName = "com.mati.demo.model.content.type";
 	
+	@Autowired @Setter @Getter private BaseModel baseModel;
+
+	@Getter @Setter	protected String serverBasePath;
+	@Getter @Setter	protected String fileSystemBasePath;
 	
 	@RequestMapping(value="edit/{nodeId}", method=RequestMethod.GET)
 	public ModelAndView edit(@PathVariable int nodeId, HttpSession session){
@@ -65,9 +73,6 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		return getBaseModel().getModel().getLoggedInUser().getContent();
 	}
 
-	protected abstract BaseModel getBaseModel();
-	//	protected abstract boolean isValidContent(T content, Map<String, Object> errors);
-	
 	/*
 	 * llamo metadata a las properties que no estan en el form (post date, etc)
 	 */
@@ -116,6 +121,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			c = Class.forName(packageName +"."+ entityClassName);
 		}catch(ClassNotFoundException e){
 			//TODO log
+			
 			e.printStackTrace();
 		}
 		return c;

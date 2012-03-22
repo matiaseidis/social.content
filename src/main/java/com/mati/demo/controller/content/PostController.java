@@ -22,11 +22,11 @@ import com.mati.demo.prevalence.BaseModel;
 @RequestMapping("content/post")
 public class PostController extends ContentController<Post>{
 	
-	@Autowired @Getter @Setter private BaseModel baseModel;
-	@Setter private String staticContentBase;
+//	@Autowired @Getter @Setter private BaseModel baseModel;
+//	@Setter private String staticContentBase;
 	
-	@Getter @Setter private String entityName;
-	@Getter @Setter private String entityPluralName;
+//	@Getter @Setter private String entityName;
+//	@Getter @Setter private String entityPluralName;
 	
 	@Override
 	protected ContentValidator<Post> getValidator(Post post, Model model) {

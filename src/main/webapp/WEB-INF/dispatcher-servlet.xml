@@ -32,7 +32,7 @@
 
 
 	<bean id="video.controller" class="com.mati.demo.controller.content.VideoController">
-		<property name="staticContentBase" value="${static.content.server.base}"></property>
+<!-- 		<property name="staticContentBase" value="${static.content.server.base}"></property> -->
 		<property name="entityName" value="video"></property>
 		<property name="entityPluralName" value="videos"></property>
 		<property name="serverBasePath" value="${static.content.server.base}"></property>
@@ -41,7 +41,7 @@
 	</bean>
 
 	<bean id="audio.controller" class="com.mati.demo.controller.content.AudioController">
-		<property name="staticContentBase" value="${static.content.server.base}"></property>
+<!-- 		<property name="staticContentBase" value="${static.content.server.base}"></property> -->
 		<property name="entityName" value="audio"></property>
 		<property name="entityPluralName" value="audios"></property>
 		<property name="serverBasePath" value="${static.content.server.base}"></property>
@@ -50,9 +50,16 @@
 	</bean>
 
 	<bean id="post.controller" class="com.mati.demo.controller.content.PostController">
-		<property name="staticContentBase" value="${static.content.server.base}"></property>
+<!-- 		<property name="staticContentBase" value="${static.content.server.base}"></property> -->
 		<property name="entityName" value="post"></property>
 		<property name="entityPluralName" value="posts"></property>
+		<property name="basePath" value="${content.base.path}"></property>
+	</bean>
+	
+	<bean id="event.controller" class="com.mati.demo.controller.content.EventController">
+<!-- 		<property name="staticContentBase" value="${static.content.server.base}"></property> -->
+		<property name="entityName" value="event"></property>
+		<property name="entityPluralName" value="events"></property>
 		<property name="basePath" value="${content.base.path}"></property>
 	</bean>
 

@@ -21,11 +21,9 @@
 	-------------------------------------------------------------------------------------	
 	
 	<p>TODO</p>
-	<p>submit content sin titulo boom</p>
 	<p>eventos / calendario</p>
-	<p>update content</p>
 	<p>update user profile</p>
-	<p>datos de perfil -> redes sociales???</p>
+	<p>datos de perfil -> agregar redes sociales (?)</p>
 -------------------------------------------------------------------------------------	
 	<myTags:contentList contentList="${user.followedVideos}" title="Videos" ></myTags:contentList>
 	<myTags:contentList contentList="${user.followedPosts}" title="Posts" ></myTags:contentList>

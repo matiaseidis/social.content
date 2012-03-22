@@ -21,27 +21,19 @@ import com.mati.demo.prevalence.BaseModel;
 @RequestMapping("content/video")
 public class VideoController extends ContentController<Video>{
 
-	@Autowired @Setter @Getter private BaseModel baseModel;
-	@Setter String staticContentBase;
-
-	@Getter @Setter private String entityName;
-	@Getter @Setter private String entityPluralName;
-	@Getter @Setter	protected String serverBasePath;
-	@Getter @Setter	protected String fileSystemBasePath;
-	
 	@Override
 	protected Video createEntity(){return new Video();}
 
 	@Override
 	protected ContentValidator<Video> getValidator(Video video, Model model) {
-		return new VideoValidator(video, model, fileSystemBasePath);
+		return new VideoValidator(video, model, getFileSystemBasePath());
 	}
 
 	@Override
 	protected void processBeforeShow(Video content) {
 		
 		if(StringUtils.isNotEmpty(content.getFileName())){
-			content.setVideoRef("http://"+serverBasePath+getEntityName()+"/"+content.getFileName());
+			content.setVideoRef("http://"+getServerBasePath()+getEntityName()+"/"+content.getFileName());
 		} else {
 			content.setVideoRef(content.getUrl());
 		}

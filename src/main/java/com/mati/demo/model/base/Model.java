@@ -70,6 +70,7 @@ public class Model implements Serializable{
 
 	public void addContent(Content c){
 		contentMap.put(c.hashCode(), c);
+		getLoggedInUser().addContent(c);
 		System.out.println("added content model");
 	}
 

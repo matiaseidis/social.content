@@ -9,4 +9,7 @@
 				<li><a
 			href="${pageContext.request.contextPath}/content/audio/add">Crear
 				Audio</a></li>
+				<li><a
+			href="${pageContext.request.contextPath}/content/event/add">Crear
+				Evento</a></li>
 	</ul>

@@ -11,11 +11,11 @@
 </head>
 <body>
 <p>Tagged content</p>
-<c:forEach items="${taggedContent}" var="taggedContent">
-	<a href="${ctx}/content/${taggedContent.contentType}/show/${taggedcontent.id}">
-	<span>${taggedContent.title}</span>
+<c:forEach items="${taggedContent}" var="tagged">
+	<a href="${ctx}/content/${tagged.contentType}/show/${tagged.id}">
+	<span>${tagged.title}</span>
 	</a>
-	<span>${taggedContent.author.userName}</span>
+	<span>${tagged.author.userName}</span>
 	<br />
 </c:forEach>
 <br />

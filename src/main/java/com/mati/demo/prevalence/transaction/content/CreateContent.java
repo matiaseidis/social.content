@@ -29,15 +29,14 @@ public class CreateContent<T extends Content> implements Transaction {
 
 	public void executeOn(Object prevalentSystem, Date executionTime) {
 		Model model = (Model)prevalentSystem;
-			content.setId(content.hashCode());
-			User user = model.loadUserByUsername(userName);
-			content.setAuthor(user);
-			content.setPostDate(new Date());
+		content.setId(content.hashCode());
+		User user = model.loadUserByUsername(userName);
+		content.setAuthor(user);
+		content.setPostDate(new Date());
 			
-			setTags(content, model);
-			
-			user.addContent(content);
-			model.addContent(content);
+		setTags(content, model);
+		
+		model.addContent(content);
 	}
 
 	private void setTags(T content, Model model) {

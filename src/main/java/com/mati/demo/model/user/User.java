@@ -13,6 +13,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mati.demo.model.content.Content;
 import com.mati.demo.model.content.type.Audio;
+import com.mati.demo.model.content.type.Event;
 import com.mati.demo.model.content.type.Post;
 import com.mati.demo.model.content.type.Video;
 import com.mati.demo.model.tag.Tag;
@@ -65,14 +66,6 @@ public class User extends Taggable{
 		return fc;
 	}
 	
-	public List<Video> getVideos(){
-		return new GetContentQuery<Video>().getContent(Video.class, getContent());
-	}
-	
-	public List<Post> getPosts(){
-		return new GetContentQuery<Post>().getContent(Post.class, getContent());
-	}
-	
 	public List<Content> getFollowedContent(){	
 		List<Content> fc = new ArrayList<Content>(); 
 		for(User u : followedUsers.values()){
@@ -87,6 +80,14 @@ public class User extends Taggable{
 	
 	public List<Post> getFollowedPosts(){
 		return new GetContentQuery<Post>().getContent(Post.class, getFollowedContent());
+	}
+	
+	public List<Audio> getFollowedAudios(){
+		return new GetContentQuery<Audio>().getContent(Audio.class, getFollowedContent());
+	}
+	
+	public List<Event> getFollowedEvents(){
+		return new GetContentQuery<Event>().getContent(Event.class, getFollowedContent());
 	}
 	
 	@Override
@@ -176,8 +177,20 @@ public class User extends Taggable{
 		return followedUsers.get(u.getUserName()) != null;
 	}
 
+	public List<Video> getVideos(){
+		return new GetContentQuery<Video>().getContent(Video.class, getContent());
+	}
+	
+	public List<Post> getPosts(){
+		return new GetContentQuery<Post>().getContent(Post.class, getContent());
+	}
+	
 	public List<Audio> getAudios() {
 		return new GetContentQuery<Audio>().getContent(Audio.class, getContent());
+	}
+	
+	public List<Event> getEvents() {
+		return new GetContentQuery<Event>().getContent(Event.class, getContent());
 	}
 
 }

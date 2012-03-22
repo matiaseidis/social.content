@@ -21,16 +21,13 @@ import com.mati.demo.prevalence.BaseModel;
 @RequestMapping("content/audio")
 public class AudioController extends ContentController<Audio>{
 
-	@Autowired @Setter @Getter private BaseModel baseModel;
-	@Setter String staticContentBase;
-	@Getter @Setter private String entityName;
-	@Getter @Setter private String entityPluralName;
-	@Getter @Setter	protected String serverBasePath;
-	@Getter @Setter	protected String fileSystemBasePath;
+//	@Autowired @Setter @Getter private BaseModel baseModel;
+
+//	@Setter String staticContentBase;
 
 	@Override
 	protected ContentValidator<Audio> getValidator(Audio audio, Model model) {
-		return new AudioValidator(audio, model, fileSystemBasePath);
+		return new AudioValidator(audio, model, getFileSystemBasePath());
 	}
 
 	@Override
@@ -42,7 +39,7 @@ public class AudioController extends ContentController<Audio>{
 	@Override
 	protected void processBeforeShow(Audio content) {
 		if(StringUtils.isNotEmpty(content.getFileName())){
-			content.setAudioRef("http://"+serverBasePath+getEntityName()+"/"+content.getFileName());
+			content.setAudioRef("http://"+getServerBasePath()+getEntityName()+"/"+content.getFileName());
 		} 
 		super.processBeforeShow(content);
 	}

@@ -26,6 +26,7 @@ public abstract class BaseController<T> {
 	@Getter @Setter private String entityName;
 	@Getter @Setter private String entityPluralName;
 	@Getter @Setter	protected String basePath;
+	
 	protected static final String ADD = "add";
 	protected static final String ADD_EDIT = "add-edit";
 	protected static final String CREATE = "create";

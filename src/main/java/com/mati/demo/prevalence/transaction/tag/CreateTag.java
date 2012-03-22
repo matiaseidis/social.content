@@ -16,11 +16,11 @@ public class CreateTag implements Transaction {
 	}
 
 	public void executeOn(Object prevalentSystem, Date executionTime) {
-//		Model model = (Model) prevalentSystem;
+		Model model = (Model) prevalentSystem;
 //		if(model.hasTag(tag)){
 //			throw new RuntimeException("Tag already exist");
 //		}
-//		model.addTag(tag);
+		model.addTag(tag);
 	}
 
 }
