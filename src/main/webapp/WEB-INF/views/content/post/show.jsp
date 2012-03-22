@@ -12,6 +12,8 @@
 </head>
 <body>
 <jsp:include page="../edit-link.jsp"></jsp:include>
+<jsp:include page="../delete-link.jsp"></jsp:include>
+
 
 	<div>
 		<h6>

@@ -179,6 +179,7 @@ public class Model implements Serializable{
 	}
 	
 	public boolean deleteContent(int id) {
+		getLoggedInUser().deleteContent(id);
 		return contentMap.remove(id) == null;
 	}
 }

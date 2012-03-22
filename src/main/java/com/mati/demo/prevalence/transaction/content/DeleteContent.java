@@ -26,8 +26,8 @@ public class DeleteContent implements Transaction {
 	public void executeOn(Object prevalentSystem, Date executionTime) {
 		Model model = (Model) prevalentSystem;
 		User loggedInUser = model.loadUserByUsername(loggedInUserName);
-
-		loggedInUser.deleteContent(id);
+		
+		model.deleteContent(id);
 	}
 
 

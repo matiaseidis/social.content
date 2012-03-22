@@ -145,7 +145,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			getBaseModel().getPrevayler().execute(new DeleteContent(nodeId, user.getUserName()));
 		}
 		
-		return new ModelAndView("redirect:"+LIST, getEntityPluralName(), list(getEntityClass()));
+		return new ModelAndView("redirect:../"+LIST, getEntityPluralName(), list(getEntityClass()));
 	}
 
 	@RequestMapping(value=UPDATE/*+"/{nodeId}"*/, method=RequestMethod.POST)
@@ -161,25 +161,14 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 
 		ContentValidator<T> validator = getValidator(updatedContent, getBaseModel().getModel());
 
-//		updateContent(initialContent, updatedContent);
-		
-		if(validator.exists()){
-			if(updatedContent.getTitle().equals(initialContent.getTitle())){
-				/*
-				 * puede ser que este actualizando otros campos? ver bien esto
-				 */
-			}
-		}
-		
-		
 		if(validator.validate()){
 			
 			updateContent(initialContent, updatedContent);
 		
-//		updatedContent.setId(nodeId);
 			getBaseModel().getPrevayler().execute(new UpdateContent(updatedContent, loggedInUser.getUserName()));
 		}else{
 			session.setAttribute("errors", validator.getErrors());
+			
 			return new ModelAndView("redirect:edit/"+updatedContentId);
 		}
 		
