@@ -18,20 +18,23 @@
 <body>
 	<span>Lo que esta pasando</span>
 	<br />
-	-------------------------------------------------------------------------------------	
-	
+	-------------------------------------------------------------------------------------
+
 	<p>TODO</p>
 	<p>eventos / calendario</p>
 	<p>update user profile</p>
 	<p>datos de perfil -> agregar redes sociales (?)</p>
--------------------------------------------------------------------------------------	
-	
-	<myTags:paginatedContentList contentList="${followedContent}" title="paged content" page="1"></myTags:paginatedContentList>
-	
-	<myTags:contentList contentList="${user.followedVideos}" title="Videos" ></myTags:contentList>
-	<myTags:contentList contentList="${user.followedPosts}" title="Posts" ></myTags:contentList>
-	
+	-------------------------------------------------------------------------------------
+
+	<%-- 	<myTags:paginatedContentList contentList="${followedContent}" title="paged content" page="1"></myTags:paginatedContentList> --%>
+	<sec:authorize access="isAuthenticated()">
+<!-- 	<div id="paginatedContent"></div> -->
+
+
+<%-- 	<myTags:contentList contentList="${user.followedVideos}" title="Videos"></myTags:contentList> --%>
+<%-- 	<myTags:contentList contentList="${user.followedPosts}" title="Posts"></myTags:contentList> --%>
+
+</sec:authorize>
 	<myTags:lastVideos videoList="${lastVideos}" title="Videos publicados"></myTags:lastVideos>
-	
 </body>
 </html>

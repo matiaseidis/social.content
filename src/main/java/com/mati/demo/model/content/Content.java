@@ -1,10 +1,9 @@
 package com.mati.demo.model.content;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +26,14 @@ public abstract class Content extends Taggable implements Commentable{
 	@Getter @Setter private User author;
 	@Getter final private String contentType = getClass().getSimpleName().toLowerCase();
 	
-	@Getter private final List<Comment> comments = new ArrayList<Comment>(); 
+//	@Getter private final List<Comment> comments = new ArrayList<Comment>(); 
+	@Getter private final SortedSet<Comment> comments = new TreeSet<Comment>(new Comparator<Comment>(){
+
+		@Override
+		public int compare(Comment c1, Comment c2) {
+			return c2.getPostDate().compareTo(c1.getPostDate());
+		}
+	}); 
 	
 //	private Map<String, Tag> tagsMap = new HashMap<String, Tag>();
 

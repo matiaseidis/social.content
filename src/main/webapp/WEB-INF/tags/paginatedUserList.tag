@@ -2,53 +2,62 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
-
-<%@ attribute name="title" required="true" rtexprvalue="true"%>
-<%@ attribute name="contentType" required="false" rtexprvalue="true"%>
-<%@ attribute name="page" required="true" rtexprvalue="true"%>
-<%@ attribute name="updatedTagId" required="true" rtexprvalue="true"%>
-<%@ attribute name="contentList" required="true" rtexprvalue="true"
-	type="java.util.List"%>
+<%@ taglib prefix="myFunctions" uri="isFollowedBy"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 
+<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
+<%@ attribute name="title" required="true" rtexprvalue="true"%>
+<%@ attribute name="page" required="true" rtexprvalue="true"%>
+<%@ attribute name="updatedTagId" required="true" rtexprvalue="true"%>
+<%@ attribute name="userList" required="true" rtexprvalue="true"
+	type="java.util.List"%>
+
 <%@ tag body-content="tagdependent"%>
-<c:if test="${not empty contentList}">
-<!-- 	<div id="paginatedContent"> -->
-		<div>
-			<h3>${title} (${fn:length(contentList)})</h3>
+<c:if test="${not empty userList}">
+	<div>
+			<h3>${title} (${fn:length(userList)})</h3>
+
 			<ul>
-				<c:forEach var="content" items="${contentList}">
-					<li><span> <myTags:userImg height="50" width="50"
-								username="${content.author.userName}"></myTags:userImg>
-					</span> <span> <a
-							href="${ctx}/content/${content.contentType}/show/${content.id}">${content.title}</a>
-					</span> - <span>publicado por <a
-							href="${ctx}/profile/${content.author.userName}">${content.author.userName}</a>
-					</span> <span>el <fmt:formatDate dateStyle="short" type="date"
-								value="${content.postDate}" timeZone="es" />
-					</span></li>
+				<c:forEach var="u" items="${userList}">
+					<li><a href="${ctx}/profile/${u.userName}"> <myTags:userImg
+								height="50" width="50" username="${u.userName}"></myTags:userImg></a>
+
+						<a href="${ctx}/profile/${u.userName}">${u.userName}</a> <c:choose>
+							<c:when test="${myFunctions:isFollowedBy(u, user)}">
+								<form class="follow" action="${ctx}/user/unfollow/${u.userName}"
+									method="POST">
+									<input class="button" type="submit" value="no seguir">
+								</form>
+							</c:when>
+							<c:otherwise>
+								<form class="follow" action="${ctx}/user/follow/${u.userName}"
+									method="POST">
+									<input class="button" type="submit" value="seguir">
+								</form>
+							</c:otherwise>
+						</c:choose></li>
 				</c:forEach>
 			</ul>
 		</div>
 		<div class="pager">
-			<span><a id="previous" href="${prevPage}">
+			<span><a class="previous" href="${prevPage}">
 			<c:if test="${prevPage gt -1}">
 			<c:out value="<<"></c:out>
 			</c:if>
 			</a></span>
-			<span><a id="next" href="${nextPage}">
+			<span><a class="next" href="${nextPage}">
 			<c:if test="${nextPage gt 0}">
 			<c:out value=">>"></c:out>
 			</c:if>
 			</a></span>
 		</div>
-<!-- 	</div> -->
+	
 </c:if>
 <script>
 $(function(){
-	$('#previous').click(function(e){
+	$('#${updatedTagId} .previous').click(function(e){
 		e.preventDefault();
+// 		alert(44);
 		var prevPage = ${prevPage};
 		if(prevPage == -1){
 			return;
@@ -66,7 +75,7 @@ $(function(){
 		        }
 	      });
 	});
-	$('#next').click(function(e){
+	$('#${updatedTagId} .next').click(function(e){
 		e.preventDefault();
 		var nextPage = ${nextPage};
 		if(nextPage == 0){

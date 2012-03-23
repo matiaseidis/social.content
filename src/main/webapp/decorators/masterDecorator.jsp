@@ -7,7 +7,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
+<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/reset.css" />
@@ -52,36 +52,37 @@
 				<c:out value="${user.userName}"></c:out>
 
 				<p></p>
-				<c:if test="${not empty followedContent}">
-				Contenido de gente a la que seguis
-				<div>
-						<c:forEach items="${followedContent}" var="c">
-							<p>
-								<a href="${ctx}/content/${c.contentType}/show/${c.id}"><c:out
-										value="${c.title}"></c:out></a>
-							</p>
+				<div id="followedContent"></div>
+				<div id="followedUsers"></div>
+				<div id="followedBy"></div>
 
-							<p>
-								<c:out value="${c.author.userName}"></c:out>
-								-
-								<fmt:formatDate pattern="dd" type="date" value="${c.postDate}"
-									timeZone="es" />
-								de
-								<fmt:formatDate pattern="MM" type="date" value="${c.postDate}"
-									timeZone="es" />
-								de
-								<fmt:formatDate pattern="yyyy, HH:mm" type="time"
-									value="${c.postDate}" timeZone="es" />
-							</p>
-							
-						</c:forEach>
-					</div>
-				</c:if>
-
-				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList>
-				<myTags:userList title="followedBy" userList="${followedBy}">usuarios que te siguen</myTags:userList>
-				<myTags:tagList title="followedTags" tagList="${followedTags}">etiquetas que estas siguiendo</myTags:tagList>
+				<%-- 				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList> --%>
+				<%-- 				<myTags:userList title="followedBy" userList="${followedBy}">usuarios que te siguen</myTags:userList> --%>
+				<%-- 				<myTags:tagList title="followedTags" tagList="${followedTags}">etiquetas que estas siguiendo</myTags:tagList> --%>
 				<%-- 				<myTags:tagList title="tags" tagList="${tags}">etiquetas</myTags:tagList> --%>
+				<script>
+					$(function() {
+						var paginations = [ "followedContent", "followedUsers",
+								"followedBy" ];
+						var paginate = function(value) {
+							var elementId = "#" + value;
+							$.ajax({
+								url : '${ctx}/ajax/' + value + '/0/100',
+								success : function(data) {
+									$(elementId).html(data);
+								},
+								error : function(data) {
+									alert(data);
+									$(elementId).html(data);
+								}
+							});
+						};
+
+						$.each(paginations, function(index, value) {
+							paginate(value);
+						});
+					});
+				</script>
 			</sec:authorize>
 		</div>
 

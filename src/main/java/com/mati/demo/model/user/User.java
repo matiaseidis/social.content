@@ -82,9 +82,19 @@ public class User extends Taggable{
 			
 		});
 		
-		return fc.subList(page * total, (page * total) + total);
+		return fc.subList(from(fc, page, total), to(fc, page, total));
 	}
-
+	
+	private int from(Collection c, int page, int total){
+		int from = (c.isEmpty() || page * total > c.size()) ? 0 : page * total; 
+		return from;
+	}
+	
+	private int to(Collection c, int page, int total){
+		int to = (((page * total) + total) < c.size()) ? (page * total) + total : c.size();
+		return to;
+	}
+	
 	public List<Content> getFollowedContent(){	
 		List<Content> fc = new ArrayList<Content>(); 
 		for(User u : followedUsers.values()){
@@ -94,7 +104,7 @@ public class User extends Taggable{
 	}
 	
 	public List<Video> getFollowedVideos(int total, int page){
-		return getFollowedVideos().subList(page * total, (page * total) + total);
+		return getFollowedVideos().subList(from(getFollowedVideos(), page, total), to(getFollowedVideos(), page, total));
 	}
 	
 	public List<Video> getFollowedVideos(){
@@ -178,6 +188,22 @@ public class User extends Taggable{
 	
 	public Collection<User> getFollowedUsers(){
 		return followedUsers.values();
+	}
+	
+	public List<User> getFollowedUsers(int total, int page){	
+		List<User> fu = new ArrayList<User>(); 
+		
+		fu.addAll(followedUsers.values());
+		
+		return fu.subList(from(fu, page, total), to(fu, page, total));
+	}
+	
+	public List<User> getFollowedBy(int total, int page){	
+		List<User> fu = new ArrayList<User>(); 
+		
+		fu.addAll(followedBy.values());
+		
+		return fu.subList(from(fu, page, total), to(fu, page, total));
 	}
 
 	public Collection<Tag> getFollowedTags(){
