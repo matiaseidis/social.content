@@ -2,6 +2,8 @@ package com.mati.demo.model.user;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,12 +68,33 @@ public class User extends Taggable{
 		return fc;
 	}
 	
+	public List<Content> getFollowedContent(int total, int page){	
+		List<Content> fc = new ArrayList<Content>(); 
+		for(User u : followedUsers.values()){
+			fc.addAll(u.getContent());
+		}
+		Collections.sort(fc, new Comparator<Content>(){
+
+			@Override
+			public int compare(Content c1, Content c2) {
+				return c1.getPostDate().compareTo(c2.getPostDate());
+			}
+			
+		});
+		
+		return fc.subList(page * total, (page * total) + total);
+	}
+
 	public List<Content> getFollowedContent(){	
 		List<Content> fc = new ArrayList<Content>(); 
 		for(User u : followedUsers.values()){
 			fc.addAll(u.getContent());
 		}
 		return fc;
+	}
+	
+	public List<Video> getFollowedVideos(int total, int page){
+		return getFollowedVideos().subList(page * total, (page * total) + total);
 	}
 	
 	public List<Video> getFollowedVideos(){

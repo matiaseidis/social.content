@@ -38,8 +38,14 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 			modelAndView.addObject("followedUsers", followedUsers);
 			modelAndView.addObject("followedTags", new ArrayList<Tag>(user.getFollowedTags()));
 			
-			List<Content> cl = new ArrayList<Content>(baseModel.getModel().getLoggedInUser().getFollowedContent());
-			modelAndView.addObject("followedContent", cl);
+//			List<Content> cl = new ArrayList<Content>(baseModel.getModel().getLoggedInUser().getFollowedContent());
+//			modelAndView.addObject("followedContent", cl);
+			/*
+			 * test followed paged content
+			 */
+			List<Content> followedContent = user.getFollowedContent(3,1);
+			modelAndView.addObject("followedContent", followedContent);
+			
 			modelAndView.addObject("followedBy", new ArrayList<User>(user.getFollowedBy()));
 			
 			modelAndView.addObject("tags", new ArrayList<Tag>(baseModel.getModel().getTags()));

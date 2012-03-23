@@ -13,7 +13,7 @@ $(function(){
 	$('#inputTag').val("");
 	
 	$('#addTag').click(function(){
-		var tag = $('#inputTag').val()
+		var tag = $('#inputTag').val();
 		if(tag){
 			var newTag = $.trim(tag) + ",";
 			

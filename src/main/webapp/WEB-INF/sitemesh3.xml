@@ -3,6 +3,8 @@
   
 <!--   <mapping path="/content/**/show/**" exclude="false" decorator="/decorators/contentDecorator.jsp"/> -->
   
+  
+  <mapping path="/ajax/*" exclude="true"/>
   <mapping path="/login" exclude="true"/>
   <mapping path="/register" exclude="true"/>
 </sitemesh>

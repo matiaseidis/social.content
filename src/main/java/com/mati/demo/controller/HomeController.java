@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.authentication.AuthenticationProviderImpl;
+import com.mati.demo.model.content.Content;
 import com.mati.demo.model.content.type.Audio;
 import com.mati.demo.model.content.type.Event;
 import com.mati.demo.model.content.type.Post;

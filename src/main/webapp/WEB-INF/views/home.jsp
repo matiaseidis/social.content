@@ -25,6 +25,9 @@
 	<p>update user profile</p>
 	<p>datos de perfil -> agregar redes sociales (?)</p>
 -------------------------------------------------------------------------------------	
+	
+	<myTags:paginatedContentList contentList="${followedContent}" title="paged content" page="1"></myTags:paginatedContentList>
+	
 	<myTags:contentList contentList="${user.followedVideos}" title="Videos" ></myTags:contentList>
 	<myTags:contentList contentList="${user.followedPosts}" title="Posts" ></myTags:contentList>
 	
