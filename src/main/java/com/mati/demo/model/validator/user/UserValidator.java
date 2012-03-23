@@ -44,7 +44,7 @@ public class UserValidator extends AbstractValidator<UserCommand> {
 //			problems = true;
 		}
 		if(StringUtils.isNotEmpty(user.getPassword()) && StringUtils.isNotEmpty(user.getConfirmPassword()) && !user.getPassword().equals(user.getConfirmPassword())){
-			addError("confirmPassword","las contraseñas no coinciden");
+			addError("confirmPassword","las contrase��as no coinciden");
 //			problems = true;
 		}
 
@@ -52,7 +52,7 @@ public class UserValidator extends AbstractValidator<UserCommand> {
 			addError("email","el email no es valido");
 //			problems = true;
 		}
-		else {
+		if(!isOk())	{
 			addError("user", user);
 		}
 
