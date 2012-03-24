@@ -32,10 +32,6 @@ public class User extends Taggable{
 
 	final String ROLE_USER = "ROLE_USER";
 	final String ROLE_ADMIN = "ROLE_ADMIN";
-	/*
-	 * tengo que tener una lista por cada tipo de content y una de content
-	 * todo el contenido con referencias duplicadas
-	 */
 
 	@Getter @Setter private int id;
 	@Getter @Setter private String userName;
@@ -51,6 +47,9 @@ public class User extends Taggable{
 //	private Map<Integer, Video> videos = new HashMap<Integer, Video>();
 //	private Map<Integer, Audio> audios = new HashMap<Integer, Audio>();
 	
+	/*
+	 * como se desde cuando esta siguiendo o es seguido por un usuario???
+	 */
 	Map<String, User> followedBy = new HashMap<String, User>();
 	
 	Map<String, User> followedUsers = new HashMap<String, User>();

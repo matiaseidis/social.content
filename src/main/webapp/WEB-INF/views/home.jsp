@@ -23,6 +23,12 @@
 	<p>TODO</p>
 	<p>eventos / calendario</p>
 	<p>update user profile</p>
+	<p>audio create no muestra mensajes de error</p>
+	<p>
+	en caso de error en create, las etiquetas se borran
+	ver editor de etiquetas
+	
+	</p>
 	<p>datos de perfil -> agregar redes sociales (?)</p>
 	-------------------------------------------------------------------------------------
 

@@ -15,7 +15,7 @@
 <%@ tag body-content="tagdependent"%>
 <c:if test="${not empty userList}">
 	<div>
-			<h3>${title} (${fn:length(userList)})</h3>
+			<h3>${title}</h3>
 
 			<ul>
 				<c:forEach var="u" items="${userList}">

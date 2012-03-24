@@ -16,7 +16,7 @@
 <c:if test="${not empty contentList}">
 <!-- 	<div id="paginatedContent"> -->
 		<div>
-			<h3>${title} (${fn:length(contentList)})</h3>
+			<h3>${title}</h3>
 			<ul>
 				<c:forEach var="content" items="${contentList}">
 					<li><span> <myTags:userImg height="50" width="50"

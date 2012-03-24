@@ -69,6 +69,7 @@ form.follow {
 body {
 	font-family: "scala-regular", "sketch", Georgia, arial, sans-serif;
 	/* 	background-color: #ffffcc; */
+	 line-height: 25px;
 }
 a {    text-decoration: none;}
 ul {
