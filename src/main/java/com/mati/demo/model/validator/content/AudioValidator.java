@@ -24,21 +24,27 @@ public class AudioValidator extends ContentValidator<Audio> {
 	@Override
 	protected void performValidation() {
 
-		try {
-			CommonsMultipartFile multipartFile = getContent().getFileData();
 
-			String destinationPath = fileSystemBasePath + File.separator + "audio" + File.separator; 
 
-			String fileName = StringUtils.replace(multipartFile.getOriginalFilename().toLowerCase(), " ", "-");
+		CommonsMultipartFile multipartFile = getContent().getFileData();
+		if(multipartFile == null || multipartFile.getSize() == 0){
+			addError("url", "Debe cargar un audio.");
+		}else{
+			try {
 
-			File file = new File(destinationPath + fileName);
+				String destinationPath = fileSystemBasePath + File.separator + "audio" + File.separator; 
 
-			FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
+				String fileName = StringUtils.replace(multipartFile.getOriginalFilename().toLowerCase(), " ", "-");
 
-			getContent().setFileName(fileName);
+				File file = new File(destinationPath + fileName);
 
-		} catch (IOException e) {
-			addError("save", "No se puedo guardar el audio");
+				FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
+
+				getContent().setFileName(fileName);
+
+			} catch (IOException e) {
+				addError("save", "No se puedo guardar el audio");
+			}
 		}
 	}
 }

@@ -32,7 +32,7 @@ public class VideoValidator extends ContentValidator<Video> {
 				
 				CommonsMultipartFile multipartFile = getContent().getFileData();
 				
-				if(multipartFile == null){
+				if(multipartFile == null || multipartFile.getSize() == 0){
 					addError("url", "Debe cargar un video.");
 				}else{
 					String destinationPath = fileSystemBasePath + File.separator + "video" + File.separator; 

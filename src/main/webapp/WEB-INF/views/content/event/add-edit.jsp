@@ -14,6 +14,8 @@
 <title>
 <jsp:include page="../content-form-title.jsp"></jsp:include>
 </title>
+<script type="text/javascript" src="${ctx}/js/app/tags.js"></script>
+
 </head>
 <body>
 
@@ -39,7 +41,8 @@
 		<p type="text" id="alternate" />
 
 		
-		<jsp:include page="../show-tags-box.jsp"></jsp:include>
+		<!-- 		TODO borrar este jsp si ya no va -->
+<%-- 		<jsp:include page="../show-tags-box.jsp"></jsp:include> --%>
 		<jsp:include page="../add-tag-box.jsp"></jsp:include>
 		<jsp:include page="../description.jsp"></jsp:include>
 <%-- 		<jsp:include page="../upload.jsp"></jsp:include> --%>

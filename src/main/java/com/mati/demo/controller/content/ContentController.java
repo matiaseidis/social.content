@@ -90,6 +90,14 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		
 		oldContent.setTitle(updatedContent.getTitle());
 		
+		/*
+		 * TODO
+		 * pasar tags -> actualizar
+		 * contemplar casos: 
+		 * 1 - tags nuevos
+		 * 2 - tags que se eliminaron en la edicion 
+		 */
+		
 	}
 
 	protected void processBeforeShow(T content) {}
