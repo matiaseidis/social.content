@@ -108,6 +108,7 @@ public class HomeController {
 				SecurityContextHolder.getContext().setAuthentication(auth);
 
 				baseModel.getPrevayler().execute(new StartFollowingUser(u.getUserName(), admin.getUserName()));
+				baseModel.getPrevayler().execute(new StartFollowingUser(admin.getUserName(), u.getUserName() ));
 
 				baseModel.getPrevayler().execute(new CreateContent<Video>(video(i, u), u.getUserName(), null));
 				baseModel.getPrevayler().execute(new CreateContent<Audio>(audio(i, u), u.getUserName(), null));
