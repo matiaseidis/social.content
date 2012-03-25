@@ -8,5 +8,7 @@
 
 	<form:input path="fileData" type="file" />
 	<myTags:errorField field="url"></myTags:errorField>
+	
+	<form:hidden path="fileName" />
 
 </p>

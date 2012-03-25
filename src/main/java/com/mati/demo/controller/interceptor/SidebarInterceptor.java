@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.mati.demo.model.content.Content;
+import com.mati.demo.model.content.type.Event;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
@@ -29,14 +30,14 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+			ModelAndView m) throws Exception {
 		
 		User user = baseModel.getModel().getLoggedInUser();
-		if(user != null && modelAndView != null && SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getName() != null){
-			modelAndView.addObject("user", user);
+		if(user != null && m != null && SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getName() != null){
+			m.addObject("user", user);
 			List<User> followedUsers = new ArrayList<User>(user.getFollowedUsers());
-			modelAndView.addObject("followedUsers", followedUsers);
-			modelAndView.addObject("followedTags", new ArrayList<Tag>(user.getFollowedTags()));
+			m.addObject("followedUsers", followedUsers);
+			m.addObject("followedTags", new ArrayList<Tag>(user.getFollowedTags()));
 			
 //			List<Content> cl = new ArrayList<Content>(baseModel.getModel().getLoggedInUser().getFollowedContent());
 //			modelAndView.addObject("followedContent", cl);
@@ -44,11 +45,11 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 			 * test followed paged content
 			 */
 			List<Content> followedContent = user.getFollowedContent(3,1);
-			modelAndView.addObject("followedContent", followedContent);
+			m.addObject("followedContent", followedContent);
+
+			m.addObject("followedBy", new ArrayList<User>(user.getFollowedBy()));
 			
-			modelAndView.addObject("followedBy", new ArrayList<User>(user.getFollowedBy()));
-			
-			modelAndView.addObject("tags", new ArrayList<Tag>(baseModel.getModel().getTags()));
+			m.addObject("tags", new ArrayList<Tag>(baseModel.getModel().getTags()));
 		}
 
 		String userPictureURI = "http://"+serverBasePath+userPictureFolder+"/";
@@ -57,7 +58,7 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 		request.setAttribute("userPictureURI", userPictureURI);
 		request.setAttribute("userPictureExt", userPictureExt);
 
-		super.postHandle(request, response, handler, modelAndView);
+		super.postHandle(request, response, handler, m);
 
 	}
 	

@@ -26,6 +26,7 @@ public class CleanSessionInterceptor extends HandlerInterceptorAdapter{
 					// vengo de un get
 					if(request.getSession() != null){
 						request.getSession().setAttribute("errors", null);
+						request.getSession().setAttribute("message", null);
 //						System.out.println("errors nulled");
 					}
 				}

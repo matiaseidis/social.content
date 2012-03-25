@@ -33,6 +33,12 @@
 		</div>
 	</div>
 	<div class="page-wrapper">
+		<c:if test="${message ne null}">
+			<div class="message">
+				<p>${message}</p>
+			</div>
+		</c:if>
+		
 		<br />
 		<c:if test="${sessionScope.errors ne null}">
 			<div class="errorblock">
@@ -55,6 +61,7 @@
 				<div id="followedContent"></div>
 				<div id="followedUsers"></div>
 				<div id="followedBy"></div>
+				<div id="followedEvents"></div>
 
 				<%-- 				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList> --%>
 				<%-- 				<myTags:userList title="followedBy" userList="${followedBy}">usuarios que te siguen</myTags:userList> --%>
@@ -63,7 +70,7 @@
 				<script>
 					$(function() {
 						var paginations = [ "followedContent", "followedUsers",
-								"followedBy" ];
+								"followedBy", "followedEvents" ];
 						var paginate = function(value) {
 							var elementId = "#" + value;
 							$.ajax({

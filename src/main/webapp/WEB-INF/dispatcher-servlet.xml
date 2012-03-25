@@ -31,13 +31,18 @@
 	<bean id="admin.controller" class="com.mati.demo.controller.admin.AdminController"></bean>
 	<bean id="search.controller" class="com.mati.demo.controller.search.SearchController"></bean>
 
+	<bean id="media.utils" class="com.mati.demo.util.MediaUtils">
+		<property name="fileSystemBasePath" value="${static.content.file.system.base}"></property>
+	</bean>
+	
+
 
 	<bean id="video.controller" class="com.mati.demo.controller.content.VideoController">
 <!-- 		<property name="staticContentBase" value="${static.content.server.base}"></property> -->
 		<property name="entityName" value="video"></property>
 		<property name="entityPluralName" value="videos"></property>
 		<property name="serverBasePath" value="${static.content.server.base}"></property>
-		<property name="fileSystemBasePath" value="${static.content.file.system.base}"></property>
+		
 		<property name="basePath" value="${content.base.path}"></property>
 	</bean>
 

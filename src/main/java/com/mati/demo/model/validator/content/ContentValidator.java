@@ -50,7 +50,6 @@ public abstract class ContentValidator<T extends Content> extends AbstractValida
 		}
 		
 		performValidation();
-//		ok = MapUtils.isEmpty(getErrors());
 		if(!isOk()){
 			addError("model", content);
 		}

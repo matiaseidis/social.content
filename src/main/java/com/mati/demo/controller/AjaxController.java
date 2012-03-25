@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.content.Comment;
 import com.mati.demo.model.content.Content;
+import com.mati.demo.model.content.type.Event;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.content.comment.CreateComment;
@@ -42,6 +43,36 @@ public class AjaxController {
 		return m;
 	}
 	
+	
+	@RequestMapping(value="followedEvents/{page}/{total}", method=RequestMethod.GET)
+	public ModelAndView followedEvents(@PathVariable int page, @PathVariable int total, ModelAndView m){
+		/*
+		 * TODO parameterize this
+		 * limit max value returned
+		 */
+		total = (total <= fixedTotal) ? total : fixedTotal;
+		
+		
+//		List<Event> followedEvents = user.getFollowedEvents();
+//		m.addObject("followedEvents", followedEvents);
+		
+		
+		int totalFollowedEvents = getBaseModel().getModel().getLoggedInUser().getFollowedEvents().size();
+		int prevPage = (page > 0) ? page -1 : -1;
+		int nextPage = ((page * total) + total) < totalFollowedEvents ? page + 1 : 0;
+		List<Event> result = getBaseModel().getModel().getLoggedInUser().getFollowedEvents(total, page);
+		m.addObject("title", "Proximos eventos de gente que seguis");
+		m.addObject("followedList", result);
+		m.addObject("prevPage", prevPage);
+		m.addObject("nextPage", nextPage);
+		m.addObject("updatedTagId", "followedEvents");
+		m.addObject("page", page);
+		m.addObject("total", total);
+		m.setViewName("paginated/events");
+		return m;
+	}
+	
+	
 	@RequestMapping(value="followedContent/{page}/{total}", method=RequestMethod.GET)
 	public ModelAndView followedContent(@PathVariable int page, @PathVariable int total, ModelAndView m){
 		/*
@@ -56,7 +87,7 @@ public class AjaxController {
 		int nextPage = ((page * total) + total) < totalFollowedContent ? page + 1 : 0;
 		List<Content> result = getBaseModel().getModel().getLoggedInUser().getFollowedContent(total, page);
 		m.addObject("title", "Contenido de gente que seguis");
-		m.addObject("paginatedContent", result);
+		m.addObject("followedList", result);
 		m.addObject("prevPage", prevPage);
 		m.addObject("nextPage", nextPage);
 		m.addObject("updatedTagId", "followedContent");
@@ -80,7 +111,7 @@ public class AjaxController {
 		int nextPage = ((page * total) + total) < totalFollowedUsers ? page + 1 : 0;
 		List<User> result = getBaseModel().getModel().getLoggedInUser().getFollowedUsers(total, page);
 		m.addObject("title", "Usuarios que seguis");
-		m.addObject("paginatedUsers", result);
+		m.addObject("followedList", result);
 		m.addObject("prevPage", prevPage);
 		m.addObject("nextPage", nextPage);
 		m.addObject("updatedTagId", "followedUsers");
@@ -104,7 +135,7 @@ public class AjaxController {
 		int nextPage = ((page * total) + total) < totalFollowedBy ? page + 1 : 0;
 		List<User> result = getBaseModel().getModel().getLoggedInUser().getFollowedBy(total, page);
 		m.addObject("title", "Usuarios que te siguen");
-		m.addObject("paginatedUsers", result);
+		m.addObject("followedList", result);
 		m.addObject("prevPage", prevPage);
 		m.addObject("nextPage", nextPage);
 		m.addObject("updatedTagId", "followedBy");

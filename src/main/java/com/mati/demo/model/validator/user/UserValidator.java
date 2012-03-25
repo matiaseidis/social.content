@@ -26,37 +26,32 @@ public class UserValidator extends AbstractValidator<UserCommand> {
 		/*
 		 * TODO ver disponibilidad de nombre aca
 		 */
-//		boolean problems = false; 
 		if(StringUtils.isEmpty(user.getUserName())){
 			addError("userName","tiene que tener un nombre");
-//			problems = true;
 		}
+		
 		if(StringUtils.isEmpty(user.getEmail())){
 			addError("email","tiene que tener un email");
-//			problems = true;
+		} else if(!GenericValidator.isEmail(user.getEmail())){
+			addError("email","el email no es valido");
 		}
+		
 		if(StringUtils.isEmpty(user.getPassword())){
 			addError("password","tiene que tener una clave de seguridad");
-//			problems = true;
 		}
 		if(StringUtils.isEmpty(user.getConfirmPassword())){
 			addError("password","tiene que tener una clave de seguridad");
-//			problems = true;
 		}
 		if(StringUtils.isNotEmpty(user.getPassword()) && StringUtils.isNotEmpty(user.getConfirmPassword()) && !user.getPassword().equals(user.getConfirmPassword())){
 			addError("confirmPassword","las contrase��as no coinciden");
-//			problems = true;
 		}
 
-		if(!GenericValidator.isEmail(user.getEmail())){
-			addError("email","el email no es valido");
-//			problems = true;
-		}
+		
 		if(!isOk())	{
 			addError("user", user);
 		}
 
-		return isOk(); //!problems;
+		return isOk(); 
 	}
 
 	public boolean exists() {

@@ -23,7 +23,8 @@
 		<jsp:include page="../id.jsp"></jsp:include>
 		<jsp:include page="../title.jsp"></jsp:include>
 		
-<!-- 		TODO borrar este jsp si ya no va -->
+<!-- 		TODO borrar este jsp si ya no va 
+(puede ir en las vistas de contenido que no sean ni add ni edit)-->
 <%-- 		<jsp:include page="../show-tags-box.jsp"></jsp:include> --%>
 		<jsp:include page="../add-tag-box.jsp"></jsp:include>
 		<jsp:include page="../description.jsp"></jsp:include>

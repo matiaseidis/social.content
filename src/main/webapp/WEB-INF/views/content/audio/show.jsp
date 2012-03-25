@@ -42,7 +42,7 @@
 		id="dewplayer" name="dewplayer">
 		<param name="movie" value="${ctx}/js/dewplayer/dewplayer.swf" />
 		<param name="flashvars"
-			value="mp3=<c:out value="${content.audioRef}" ></c:out>" />
+			value="mp3=<c:out value="${content.mediaFileRef}" ></c:out>" />
 		<param name="wmode" value="transparent" />
 	</object>
 </div>
@@ -54,7 +54,7 @@
 	<script type='text/javascript'>
 		jwplayer('mediaspace').setup({
 			'flashplayer' : '${ctx}/js/mediaplayer-5.9-viral/player.swf',
-			'file' : '<c:out value="${content.audioRef}" ></c:out>',
+			'file' : '<c:out value="${content.mediaFileRef}" ></c:out>',
 			'controlbar' : 'bottom',
 			'width' : '440',
 			'height' : '260',

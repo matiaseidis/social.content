@@ -1,5 +1,5 @@
 $(function(){
-	$('#contentTags').val("");
+//	$('#contentTags').val("");
 	$('#inputTag').val("");
 	
 	$('#addTag').click(function(){

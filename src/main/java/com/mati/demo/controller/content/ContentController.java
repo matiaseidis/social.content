@@ -1,6 +1,7 @@
 package com.mati.demo.controller.content;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.controller.BaseController;
@@ -77,27 +77,20 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 	/*
 	 * llamo metadata a las properties que no estan en el form (post date, etc)
 	 */
-	protected void transferMetaData(T oldContent, T updatedContent){
-
-		BeanUtils.copyProperties(updatedContent, oldContent, getEntityClass());
-		updatedContent.setId(updatedContent.hashCode());
-	}
+//	protected void transferMetaData(T oldContent, T updatedContent){
+//
+//		BeanUtils.copyProperties(updatedContent, oldContent, getEntityClass());
+//		updatedContent.setId(updatedContent.hashCode());
+//	}
 	
 	/*
 	 * pasaje de las properties de un objeto al otro, pero la metadata no
 	 */
 	protected void updateContent(T oldContent, T updatedContent){
 		
+		updatedContent.setAuthor(getBaseModel().getModel().getLoggedInUser());
+		
 		oldContent.setTitle(updatedContent.getTitle());
-		
-		/*
-		 * TODO
-		 * pasar tags -> actualizar
-		 * contemplar casos: 
-		 * 1 - tags nuevos
-		 * 2 - tags que se eliminaron en la edicion 
-		 */
-		
 	}
 
 	protected void processBeforeShow(T content) {}
@@ -114,10 +107,23 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		if(validator.validate()){
 			getBaseModel().getPrevayler().execute(create);
 		} else {
+			validator.addError("plainTags", plainTags);
+			validator.addError("plainTagsList", tags(plainTags));
+
 			request.getSession().setAttribute("errors", validator.getErrors());
 			return new ModelAndView("redirect:"+ADD);
 		}
 		return new ModelAndView("redirect:"+LIST);
+	}
+
+	private List<Tag> tags(String plainTags) {
+		List<Tag> result = new ArrayList<Tag>();
+		for(String tag : plainTags.split(",")){
+			if(StringUtils.isNotEmpty(tag)){
+				result.add(new Tag(tag));
+			}
+		}
+		return result;
 	}
 
 	protected abstract ContentValidator<T> getValidator(T content, Model model);
@@ -163,24 +169,30 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		return new ModelAndView("redirect:../"+LIST, getEntityPluralName(), list(getEntityClass()));
 	}
 
-	@RequestMapping(value=UPDATE/*+"/{nodeId}"*/, method=RequestMethod.POST)
-	public ModelAndView update(@ModelAttribute T updatedContent, /*@PathVariable int nodeId,*/ @RequestParam String plainTags, HttpSession session){
+	@RequestMapping(value=UPDATE, method=RequestMethod.POST)
+	public ModelAndView update(@ModelAttribute T updatedContent, @RequestParam String plainTags, HttpSession session){
 
 		final int updatedContentId = updatedContent.getId();
 		
 		T initialContent = (T)getBaseModel().getModel().getLoggedInUser().getContent(updatedContentId);
 
-		User loggedInUser = getBaseModel().getModel().getLoggedInUser();
-		
-		updatedContent.setAuthor(loggedInUser);
+		updateContent(initialContent, updatedContent);
 
 		ContentValidator<T> validator = getValidator(updatedContent, getBaseModel().getModel());
 
 		if(validator.validate()){
 			
-			updateContent(initialContent, updatedContent);
+//			updateContent(initialContent, updatedContent);
 		
-			getBaseModel().getPrevayler().execute(new UpdateContent(updatedContent, loggedInUser.getUserName()));
+			/*
+			 * TODO FIXME
+			 * de algun modo, en este momento tengo que saber 
+			 * cuales son las etiquetas que tenia el content y ahora no tiene mas (que se borraron en la edicion)
+			 * 
+			 * si las etiquetas borradas no estan referenciando a otro content u algun user, deberian ser borradas del tag repository
+			 */
+			
+			getBaseModel().getPrevayler().execute(new UpdateContent(updatedContent, baseModel.getModel().getLoggedInUser().getUserName()));
 		}else{
 			session.setAttribute("errors", validator.getErrors());
 			

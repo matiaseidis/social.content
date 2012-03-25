@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.authentication.AuthenticationProviderImpl;
-import com.mati.demo.model.content.Content;
 import com.mati.demo.model.content.type.Audio;
 import com.mati.demo.model.content.type.Event;
 import com.mati.demo.model.content.type.Post;
@@ -49,11 +49,16 @@ public class HomeController {
 		User user = baseModel.getModel().getLoggedInUser();
 		if(user != null){
 
-			List<Video> followedVideos = user.getFollowedVideos();
-			m.addObject("followedVideos", followedVideos);
-
-			List<Post> followedPosts = user.getFollowedPosts();
-			m.addObject("followedContent", followedPosts);
+//			List<Video> followedVideos = user.getFollowedVideos();
+//			m.addObject("followedVideos", followedVideos);
+//
+//			List<Post> followedPosts = user.getFollowedPosts();
+//			m.addObject("followedPosts", followedPosts);
+//			
+//			List<Event> followedEvents = user.getFollowedEvents();
+//			m.addObject("followedEvents", followedEvents);
+//			
+			
 		} else if(baseModel.loadUserByUsername("admin") == null){
 
 			mockContent(session);
@@ -66,7 +71,7 @@ public class HomeController {
 		}
 
 		for(Video video : videos){
-			video.setVideoRef(video.getUrl());
+			video.setMediaFileRef(video.getUrl());
 		}
 
 		m.addObject("lastVideos", videos);
@@ -144,7 +149,7 @@ public class HomeController {
 		content.addTag(baseModel.getModel().getTagRepository(), tag(i));
 		return content;
 	}
-
+	
 	private Tag tag(int i) {
 		Tag tag = new Tag();
 		tag.setTagName("tag mock " + i);
@@ -175,7 +180,10 @@ public class HomeController {
 		content.setTitle("Un event - "+i);
 		content.setAuthor(user);
 		content.setId(content.hashCode());
-		content.setStart(new Date());
+		
+		DateTime date = new DateTime(new Date());
+		date = date.plusMonths(1);
+		content.setStart(date.toDate());
 		content.addTag(baseModel.getModel().getTagRepository(), tag(i));
 		return content;
 	}

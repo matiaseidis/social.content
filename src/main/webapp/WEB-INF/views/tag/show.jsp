@@ -28,7 +28,7 @@
 </c:forEach>
 <br />
 <p>Tag followers</p>
-<c:forEach items="${followedBy}" var="follower">
+<c:forEach items="${tagFollowedBy}" var="follower">
 <a href="${ctx}/profile/${follower.userName}">
 <span>${follower.userName}</span>
 </a>

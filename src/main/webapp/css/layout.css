@@ -67,9 +67,11 @@ form.follow {
 
 /*sitemesh*/
 body {
-	font-family: "scala-regular", "sketch", Georgia, arial, sans-serif;
+/* 	font-family: "scala-regular", "sketch", Georgia, arial, sans-serif; */
+font-family: Times New Roman,sans-serif, monospace, sans;
 	/* 	background-color: #ffffcc; */
 	 line-height: 25px;
+	 font-size:12px;
 }
 a {    text-decoration: none;}
 ul {

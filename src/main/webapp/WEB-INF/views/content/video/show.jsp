@@ -26,7 +26,7 @@
 				.setup(
 						{
 							'flashplayer' : '${ctx}/js/mediaplayer-5.9-viral/player.swf',
-							'file' : '<c:out value="${content.videoRef}" ></c:out>',
+							'file' : '<c:out value="${content.mediaFileRef}" ></c:out>',
 							'controlbar' : 'bottom',
 							'width' : '640',
 							'height' : '360',

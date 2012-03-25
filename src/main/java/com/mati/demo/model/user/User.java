@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +83,27 @@ public class User extends Taggable{
 		});
 		
 		return fc.subList(from(fc, page, total), to(fc, page, total));
+	}
+	
+	public List<Event> getFollowedEvents(int total, int page){	
+		List<Event> fe = new ArrayList<Event>(); 
+		for(User u : followedUsers.values()){
+			for(Event e : u.getEvents()){
+				if(e.getStart().after(new Date())){
+					fe.add(e);
+				}
+			}
+		}
+		Collections.sort(fe, new Comparator<Event>(){
+
+			@Override
+			public int compare(Event e1, Event e2) {
+				return e1.getStart().compareTo(e2.getStart());
+			}
+			
+		});
+		
+		return fe.subList(from(fe, page, total), to(fe, page, total));
 	}
 	
 	private int from(Collection c, int page, int total){

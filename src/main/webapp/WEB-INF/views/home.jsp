@@ -22,14 +22,12 @@
 
 	<p>TODO</p>
 	<p>eventos / calendario</p>
-	<p>update user profile</p>
-	<p>audio create no muestra mensajes de error</p>
+	<p>update user password</p>
 	<p>
-	en caso de error en create, las etiquetas se borran
-	ver editor de etiquetas
-	
+	ver caso de update para etiquetas
 	</p>
 	<p>datos de perfil -> agregar redes sociales (?)</p>
+	<p>desproteger links de lectura (show, etc)</p>
 	-------------------------------------------------------------------------------------
 
 	<%-- 	<myTags:paginatedContentList contentList="${followedContent}" title="paged content" page="1"></myTags:paginatedContentList> --%>

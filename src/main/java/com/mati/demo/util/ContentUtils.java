@@ -12,7 +12,7 @@ public class ContentUtils {
 	
 	
 	public static String youTubeThumbnailUri(Video video) {
-		String[] s = video.getVideoRef().split("/");
+		String[] s = video.getMediaFileRef().split("/");
 		return thumbnailPre + s[s.length-1] + thumbnailPos;
 	}
 	

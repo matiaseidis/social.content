@@ -37,7 +37,7 @@ public class TagController {
 		m.addObject("taggedUsers", taggedUsers);
 		
 		List<User> followedBy = baseModel.getModel().getFollowedBy(tag);
-		m.addObject("followedBy", followedBy);
+		m.addObject("tagFollowedBy", followedBy);
 		
 		
 		

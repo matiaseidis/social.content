@@ -40,6 +40,7 @@ public abstract class BaseController<T> {
 	@Getter protected final String ERRORS = "errors";
 	
 	@Getter protected static final String ACTION = "action";
+	@Getter protected static final String MESSAGE = "message";
 	
 	@RequestMapping(value=ADD, method=RequestMethod.GET)
 	public ModelAndView add(HttpSession session){

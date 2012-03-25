@@ -11,14 +11,18 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.type.Video;
+import com.mati.demo.util.MediaUtils;
 
 public class VideoValidator extends ContentValidator<Video> {
 
-	@Getter private final String fileSystemBasePath;
+//	@Getter private final String fileSystemBasePath;
+	private final MediaUtils mediaUtils;
+
 	
-	public VideoValidator(Video video, Model model, String fileSystemBasePath) {
+	public VideoValidator(Video video, Model model, MediaUtils mediaUtils) {
 		super(video, model);
-		this.fileSystemBasePath = fileSystemBasePath;
+		this.mediaUtils = mediaUtils;
+//		this.fileSystemBasePath = fileSystemBasePath;
 	}
 
 	@Override
@@ -28,25 +32,13 @@ public class VideoValidator extends ContentValidator<Video> {
 		 * only look up the uploaded file if url is not provided
 		 */
 		if(StringUtils.isEmpty(getContent().getUrl())){
-			try {
+			if(mediaUtils.hasUploadedFile(getContent())){
 				
-				CommonsMultipartFile multipartFile = getContent().getFileData();
+				mediaUtils.saveMediaFile(getContent(), this);
 				
-				if(multipartFile == null || multipartFile.getSize() == 0){
-					addError("url", "Debe cargar un video.");
-				}else{
-					String destinationPath = fileSystemBasePath + File.separator + "video" + File.separator; 
-
-					String fileName = StringUtils.replace(multipartFile.getOriginalFilename().toLowerCase(), " ", "-");
-
-					File file = new File(destinationPath + fileName);
-
-					FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
-					
-					getContent().setFileName(fileName);
-				}
-			} catch (IOException e) {
-				addError("save", "No se puedo guardar el video");
+			} else {
+				
+				addError("url", "Debe cargar un video.");
 			}
 		}
 	}

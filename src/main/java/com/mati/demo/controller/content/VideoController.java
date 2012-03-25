@@ -2,6 +2,8 @@ package com.mati.demo.controller.content;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,26 +18,30 @@ import com.mati.demo.model.user.User;
 import com.mati.demo.model.validator.content.ContentValidator;
 import com.mati.demo.model.validator.content.VideoValidator;
 import com.mati.demo.prevalence.BaseModel;
+import com.mati.demo.util.MediaUtils;
 
 @Controller
 @RequestMapping("content/video")
 public class VideoController extends ContentController<Video>{
 
+	@Resource
+	private MediaUtils mediaUtils;
+	
 	@Override
 	protected Video createEntity(){return new Video();}
 
 	@Override
 	protected ContentValidator<Video> getValidator(Video video, Model model) {
-		return new VideoValidator(video, model, getFileSystemBasePath());
+		return new VideoValidator(video, model, mediaUtils);
 	}
 
 	@Override
 	protected void processBeforeShow(Video content) {
 		
 		if(StringUtils.isNotEmpty(content.getFileName())){
-			content.setVideoRef("http://"+getServerBasePath()+getEntityName()+"/"+content.getFileName());
+			content.setMediaFileRef("http://"+getServerBasePath()+getEntityName()+"/"+content.getFileName());
 		} else {
-			content.setVideoRef(content.getUrl());
+			content.setMediaFileRef(content.getUrl());
 		}
 
 		super.processBeforeShow(content);

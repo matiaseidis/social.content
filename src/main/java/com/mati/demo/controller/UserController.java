@@ -1,7 +1,8 @@
 package com.mati.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,12 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.content.Content;
 import com.mati.demo.model.content.type.Video;
 import com.mati.demo.model.user.User;
+import com.mati.demo.model.validator.Validator;
+import com.mati.demo.model.validator.user.UserProfileUpdateValidator;
 import com.mati.demo.prevalence.BaseModel;
+import com.mati.demo.prevalence.transaction.user.UpdateProfile;
 
 @Controller
 @RequestMapping("user")
@@ -78,6 +83,33 @@ public class UserController extends BaseController{
 			//TODO handle
 		}		
 		m.addObject("profileUser", u);
+		m.addObject(ACTION, UPDATE);
+		return m;
+	}
+	
+	@RequestMapping(value="profile/update", method=RequestMethod.POST)
+	public ModelAndView updateProfile(/*@ModelAttribute User user,*/@RequestParam String email, @RequestParam String info,  ModelAndView m, HttpSession session){
+		User u = baseModel.getModel().getLoggedInUser();
+		
+		/*
+		 * TODO ver de cambiar esto
+		 */
+		u.setEmail(email);
+		u.setInfo(info);
+
+		Validator v = new UserProfileUpdateValidator(u);
+
+		if(v.validate()){
+			baseModel.getPrevayler().execute(new UpdateProfile(u.getUserName(), email, info));
+			session.setAttribute(MESSAGE, "Su perfil se actualizo");
+			m.setViewName("redirect:/profile");
+		} else {
+			m.addObject(ERRORS, v.getErrors());
+			m.addObject("profileUser", u);
+			m.addObject(ACTION, UPDATE);
+			m.setViewName("user/profile/edit");
+		}
+		
 		return m;
 	}
 

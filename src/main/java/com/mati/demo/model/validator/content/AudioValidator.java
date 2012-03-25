@@ -11,40 +11,31 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.type.Audio;
+import com.mati.demo.util.MediaUtils;
 
 public class AudioValidator extends ContentValidator<Audio> {
 
-	@Getter private final String fileSystemBasePath;
+	
+	private final MediaUtils mediaUtils;
 
-	public AudioValidator(Audio audio, Model model, String fileSystemBasePath) {
+	public AudioValidator(Audio audio, Model model, MediaUtils mediaUtils) {
 		super(audio, model);
-		this.fileSystemBasePath = fileSystemBasePath;
+		this.mediaUtils = mediaUtils;
 	}
 
 	@Override
 	protected void performValidation() {
 
+		if(mediaUtils.hasUploadedFile(getContent())){
 
-
-		CommonsMultipartFile multipartFile = getContent().getFileData();
-		if(multipartFile == null || multipartFile.getSize() == 0){
+			mediaUtils.saveMediaFile(getContent(), this);
+		
+		} else if(StringUtils.isEmpty(getContent().getFileName())){
+			/*
+			 * file does not exist, so this is new content.
+			 * Have to report error
+			 */
 			addError("url", "Debe cargar un audio.");
-		}else{
-			try {
-
-				String destinationPath = fileSystemBasePath + File.separator + "audio" + File.separator; 
-
-				String fileName = StringUtils.replace(multipartFile.getOriginalFilename().toLowerCase(), " ", "-");
-
-				File file = new File(destinationPath + fileName);
-
-				FileUtils.writeByteArrayToFile(file, multipartFile.getBytes());
-
-				getContent().setFileName(fileName);
-
-			} catch (IOException e) {
-				addError("save", "No se puedo guardar el audio");
-			}
 		}
 	}
 }
