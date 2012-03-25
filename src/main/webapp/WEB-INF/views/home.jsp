@@ -27,7 +27,6 @@
 	ver caso de update para etiquetas
 	</p>
 	<p>datos de perfil -> agregar redes sociales (?)</p>
-	<p>desproteger links de lectura (show, etc)</p>
 	-------------------------------------------------------------------------------------
 
 	<%-- 	<myTags:paginatedContentList contentList="${followedContent}" title="paged content" page="1"></myTags:paginatedContentList> --%>

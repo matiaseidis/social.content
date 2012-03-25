@@ -27,6 +27,9 @@
 	disable-url-rewriting="true">
 		<security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/" access="permitAll" 	/>
+		<security:intercept-url pattern="/**/show/*" access="permitAll" />
+		<security:intercept-url pattern="/profile/*" access="permitAll" />
+		
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/register" access="permitAll" />
 		
@@ -38,8 +41,9 @@
 		<security:intercept-url pattern="/fonts/**/*" access="permitAll" />
 		<security:intercept-url pattern="/login_stand_alone.jsp" access="permitAll" />
 		<security:intercept-url pattern="/**" access='hasRole("ROLE_USER")' />
-		<security:form-login login-page="/login" 
-			default-target-url="/" authentication-failure-url="/login"/>
+<!-- 		authentication-success-handler-ref="authentication-success-handler" -->
+<!-- always-use-default-target="true" -->
+		<security:form-login login-page="/login" authentication-failure-url="/login" always-use-default-target="false"/>
 		<security:logout logout-success-url="/" invalidate-session="true" />
 	</security:http>
 
@@ -58,6 +62,7 @@
 		<property name="userDetailsService" ref="user.details.service" />
 	</bean>
 
+<bean id="authentication-success-handler" class="com.mati.demo.authentication.AuthenticationSuccessHandler"></bean>
  
 <!--  	<lang:groovy id="user.details.service"  -->
 <!--  	script-source="classpath:com/mati/demo/authentication/UserDetailsServiceImpl.groovy" -->

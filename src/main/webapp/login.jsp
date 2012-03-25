@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
 <title>Login Page</title>
@@ -20,9 +21,8 @@
 		</div>
 	</c:if>
  
-	<form name='f' action="<c:url value='j_spring_security_check' />"
+	<form name='f' action="<c:url value='/j_spring_security_check' />"
 		method='POST'>
- 
 		<table>
 			<tr>
 <!-- 				<td>User:</td> -->
@@ -44,7 +44,10 @@
 		</table>
  
 	</form>
-	<a href="register">Crear cuenta</a>
+	<form action="<c:url value='/register' />" >
+		<input type="submit" value="Crear cuenta" class="button">
+	</form>
+<!-- 	<a href="register">Crear cuenta</a> -->
 </body>
 </html>
 

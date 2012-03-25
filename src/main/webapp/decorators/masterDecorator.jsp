@@ -2,27 +2,20 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="${ctx}/css/reset.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/css/fonts.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/css/layout.css" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/reset.css' />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/fonts.css' />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/layout.css' />" />
 <script type="text/javascript"
-	src="${ctx}/js/jquery/jquery-1.7.1.min.js"></script>
-
-<!-- <script type="text/javascript" -->
-<%-- 	src="${ctx}/js/jquery/jquery.easing.1.3.js"></script> --%>
-
-<!-- <script type="text/javascript" -->
-<%-- 	src="${ctx}/js/jquery/jquery.easing.compatibility.js"></script> --%>
-<%-- <script type="text/javascript" src="${ctx}/js/menu.js"></script> --%>
-
+	src="<c:url value='/js/jquery/jquery-1.7.1.min.js' />"></script>
 <title>Social Content :: <sitemesh:write property='title' /></title>
 <sitemesh:write property='head' />
 </head>
@@ -38,7 +31,7 @@
 				<p>${message}</p>
 			</div>
 		</c:if>
-		
+
 		<br />
 		<c:if test="${sessionScope.errors ne null}">
 			<div class="errorblock">

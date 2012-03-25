@@ -32,6 +32,9 @@ public class ProfileController {
 	public ModelAndView profile(@PathVariable String userName, ModelAndView m){
 		User u = baseModel.getModel().loadUserByUsername(userName);
 		User loggedInUser = baseModel.getModel().getLoggedInUser();
+		/*
+		 * FIXME anonimo tiene que poder ver profiles 
+		 */
 		if(u == null){
 			if(loggedInUser == null){
 				m.setViewName("redirect:/");
@@ -46,8 +49,9 @@ public class ProfileController {
 		}
 
 		m.addObject("profileUser", u);
-		m.addObject("followed", baseModel.getModel().getLoggedInUser().isFollowing(u));
-
+		if(loggedInUser != null){
+			m.addObject("followed", baseModel.getModel().getLoggedInUser().isFollowing(u));
+		}
 		m.setViewName("profile");
 		return m;
 	}
