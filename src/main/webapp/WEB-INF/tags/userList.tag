@@ -21,7 +21,7 @@
 								height="50" width="50" username="${u.userName}"></myTags:userImg></a>
 
 						<a href="${ctx}/profile/${u.userName}">${u.userName}</a> <c:choose>
-							<c:when test="${myFunctions:isFollowedBy(u, user)}">
+							<c:when test="${myFunctions:isUserFollowedBy(u, user)}">
 								<form class="follow" action="${ctx}/user/unfollow/${u.userName}"
 									method="POST">
 									<input class="button" type="submit" value="no seguir">

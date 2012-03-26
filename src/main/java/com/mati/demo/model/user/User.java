@@ -246,6 +246,10 @@ public class User extends Taggable{
 	public boolean isFollowing(User u) {
 		return followedUsers.get(u.getUserName()) != null;
 	}
+	
+	public boolean isFollowing(Tag t) {
+		return followedTags.get(t.getTagName()) != null;
+	}
 
 	public List<Video> getVideos(){
 		return new GetContentQuery<Video>().getContent(Video.class, getContent());

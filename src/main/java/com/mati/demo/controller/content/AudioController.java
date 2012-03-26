@@ -19,10 +19,6 @@ import com.mati.demo.util.MediaUtils;
 @RequestMapping("content/audio")
 public class AudioController extends ContentController<Audio>{
 
-//	@Autowired @Setter @Getter private BaseModel baseModel;
-
-//	@Setter String staticContentBase;
-	
 	@Resource
 	private MediaUtils mediaUtils;
 
@@ -33,7 +29,6 @@ public class AudioController extends ContentController<Audio>{
 
 	@Override
 	protected List<Audio> listContent(User user) {
-		// TODO Auto-generated method stub
 		return user.getAudios();
 	}
 	
@@ -54,9 +49,7 @@ public class AudioController extends ContentController<Audio>{
 	protected void updateContent(Audio oldContent, Audio updatedContent) {
 		
 		oldContent.setBody(updatedContent.getBody());;
-//		oldContent.setFileData(updatedContent.getFileData());
 		oldContent.setFileName(updatedContent.getFileName());
-//		oldContent.setUrl(updatedContent.getUrl());
 		
 		super.updateContent(oldContent, updatedContent);
 	}

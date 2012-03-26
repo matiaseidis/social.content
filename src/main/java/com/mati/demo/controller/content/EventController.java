@@ -36,15 +36,6 @@ public class EventController extends ContentController<Event>{
 		return new Event();
 	}
 	
-//	@InitBinder
-//	public void initBinder(WebDataBinder binder) {
-//	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//	    dateFormat.setLenient(false);
-//
-//	    // true passed to CustomDateEditor constructor means convert empty String to null
-//	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-//	}
-	
 	@InitBinder
 	public void allowEmptyDateBinding( WebDataBinder binder ){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

@@ -7,9 +7,14 @@
     <short-name>isFollowedBy</short-name>
     <uri>isFollowedBy</uri>         
     <function>
-        <name>isFollowedBy</name> 
+        <name>isUserFollowedBy</name> 
         <function-class>com.mati.demo.util.UserUtils</function-class>
-        <function-signature>boolean isFollowedBy(com.mati.demo.model.user.User, com.mati.demo.model.user.User)</function-signature>
+        <function-signature>boolean isUserFollowedBy(com.mati.demo.model.user.User, com.mati.demo.model.user.User)</function-signature>
+    </function>
+     <function>
+        <name>isTagFollowedBy</name> 
+        <function-class>com.mati.demo.util.UserUtils</function-class>
+        <function-signature>boolean isTagFollowedBy(com.mati.demo.model.tag.Tag, com.mati.demo.model.user.User)</function-signature>
     </function>
   
 </taglib>

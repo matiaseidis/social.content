@@ -26,7 +26,9 @@
 form.follow {
 	display: inline;
 }
-
+.register-form-link,
+.login-form-barrita{float:left;}
+.register-form-link{margin-left:15px;}
 .search-form {
 	display: inline;
 }

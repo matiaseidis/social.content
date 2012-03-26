@@ -13,7 +13,7 @@ Publicado por
 	<c:out value="${content.author.userName}"></c:out></a>, el <myTags:shortDate date="${content.postDate}" ></myTags:shortDate><myTags:time date="${content.postDate}" title="a las"></myTags:time>
 <sec:authorize access="isAuthenticated()">
 	<c:choose>
-		<c:when test="${myFunctions:isFollowedBy(content.author, user)}">
+		<c:when test="${myFunctions:isUserFollowedBy(content.author, user)}">
 			<form class="follow" action='<c:url value="/user/unfollow/${content.author.userName}" />' 
 				method="POST">
 				<input class="button" type="submit" value="no seguir">

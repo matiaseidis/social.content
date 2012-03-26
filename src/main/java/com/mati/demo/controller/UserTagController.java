@@ -13,36 +13,21 @@ import com.mati.demo.prevalence.BaseModel;
 @RequestMapping("user/tags/")
 public class UserTagController {
 
-		@Resource
-		private BaseModel modelProvider;
-		
-//		@RequestMapping(value="list", method=RequestMethod.GET)
-//		public ModelAndView list(){
-//			ModelAndView mav = new ModelAndView();
-//			mav.addObject("tags", modelProvider.getModel().getLoggedInUser().getTags());
-//			return mav;
-//		}
-		
-		@RequestMapping(value="add", method=RequestMethod.GET)
-		public ModelAndView add(){
-			return null;
-		}
-		
-//		@RequestMapping(value="create", method=RequestMethod.POST)
-//		public ModelAndView save(@ModelAttribute Tag tag){
-//
-//
-//			/*
-//			 * TODO tag validation
-//			 */
-//
-////			modelProvider.addTagToUser(tag);
-//			modelProvider.getPrevayler().execute(new AddTagToUser(tag));
-//
-//			User user = modelProvider.getModel().getLoggedInUser();
-//			
-//			return new ModelAndView("redirect:list", "tags", user.getTags());
-//		}
+	@Resource
+	private BaseModel modelProvider;
 
-		
+	/*
+	 * TODO enable this
+	 */
+	//		@RequestMapping(value="list", method=RequestMethod.GET)
+	//		public ModelAndView list(){
+	//			ModelAndView mav = new ModelAndView();
+	//			mav.addObject("tags", modelProvider.getModel().getLoggedInUser().getTags());
+	//			return mav;
+	//		}
+
+	@RequestMapping(value="add", method=RequestMethod.GET)
+	public ModelAndView add(){
+		return null;
+	}
 }

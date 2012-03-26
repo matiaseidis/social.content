@@ -21,7 +21,7 @@
 		</div>
 	</c:if>
  
-	<form name='f' action="<c:url value='/j_spring_security_check' />"
+	<form class="login-form-barrita" name='f' action="<c:url value='/j_spring_security_check' />"
 		method='POST'>
 		<table>
 			<tr>
@@ -44,7 +44,7 @@
 		</table>
  
 	</form>
-	<form action="<c:url value='/register' />" >
+	<form class="register-form-link" action="<c:url value='/register' />" >
 		<input type="submit" value="Crear cuenta" class="button">
 	</form>
 <!-- 	<a href="register">Crear cuenta</a> -->

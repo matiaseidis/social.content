@@ -44,39 +44,4 @@ public class TagController {
 		m.setViewName("tag/show");
 		return m;
 	}
-	
-//		@RequestMapping(value="list", method=RequestMethod.GET)
-//		public ModelAndView list(){
-//			ModelAndView mav = new ModelAndView();
-//			mav.addObject("tags", baseModel.getModel().getLoggedInUser().getTags());
-//			return mav;
-//		}
-//		
-//		@RequestMapping(value="add/{id}", method=RequestMethod.POST)
-//		public ModelAndView add(@ModelAttribute Tag tag, @PathVariable int id, ModelAndView m){
-//			Content c = baseModel.getModel().loadContentById(id);
-//			if(c == null || tag == null || StringUtils.isEmpty(tag.getTagName())){
-//				//TODO handle
-//			} else{
-//				baseModel.getPrevayler().execute(new AddTag(tag, id));
-//				//	TODO log
-//			}
-//			
-//			m.setViewName("redirect:/content/"+c.getContentType()+"/show/"+id);
-//			return m;
-//		}
-		
-//		@RequestMapping(value="remove/{id}", method=RequestMethod.POST)
-//		public ModelAndView remove(@ModelAttribute Tag tag, @PathVariable int id, ModelAndView m){
-//			Content c = baseModel.getModel().loadContentById(id);
-//			if(c == null || tag == null){
-//				//TODO handle
-//			}
-//			baseModel.getPrevayler().execute(new RemoveTag(tag, id));
-//			//TODO log
-//			
-//			m.setViewName("redirect:/content/"+c.getContentType()+"/show/"+id);
-//			return m;
-//		}
-		
 }

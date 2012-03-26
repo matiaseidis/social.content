@@ -52,11 +52,6 @@ public class AjaxController {
 		 */
 		total = (total <= fixedTotal) ? total : fixedTotal;
 		
-		
-//		List<Event> followedEvents = user.getFollowedEvents();
-//		m.addObject("followedEvents", followedEvents);
-		
-		
 		int totalFollowedEvents = getBaseModel().getModel().getLoggedInUser().getFollowedEvents().size();
 		int prevPage = (page > 0) ? page -1 : -1;
 		int nextPage = ((page * total) + total) < totalFollowedEvents ? page + 1 : 0;

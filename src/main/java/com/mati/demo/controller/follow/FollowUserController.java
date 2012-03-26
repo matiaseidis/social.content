@@ -28,14 +28,12 @@ public class FollowUserController {
 		User user = getBaseModel().getModel().loadUserByUsername(username);
 		String message = null;
 		try{
-			//			session.setAttribute("errors", null);
 			if(user != null){
 				getBaseModel().getPrevayler().execute(new StartFollowingUser(user.getUserName(), baseModel.getModel().getLoggedInUser().getUserName()));
 			} else{
 				/*
 				 * TODO handle
 				 */
-				//				return null;
 				message = "Bad user";
 			}
 		}catch(RuntimeException e){
@@ -51,14 +49,12 @@ public class FollowUserController {
 		User user = getBaseModel().getModel().loadUserByUsername(username);
 		String message = null;
 		try{
-			//			session.setAttribute("errors", null);
 			if(user != null){
 				getBaseModel().getPrevayler().execute(new StopFollowingUser(user.getUserName(), baseModel.getModel().getLoggedInUser().getUserName()));
 			} else{
 				/*
 				 * TODO handle
 				 */
-				//				return null;
 				message = "Bad user";
 			}
 		}catch(RuntimeException e){

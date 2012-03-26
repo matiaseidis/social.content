@@ -30,26 +30,21 @@ public class ContextListener implements ServletContextListener {
 
 	
 	public void contextInitialized(ServletContextEvent sce) {
-		
 		logger.info("Staring web app");
-
-//		ServletContext ctx = sce.getServletContext();
-//		WebApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(ctx);
-//		BaseModel baseModel = (BaseModel) springContext.getBean("base.model");
 	}
 	
 
 	public void contextDestroyed(ServletContextEvent sce) {
-		/*
-		 * take snapshot on context shutdown
-		 */
+		logger.info("Shutting down web app");
 		ServletContext ctx = sce.getServletContext();
 		WebApplicationContext springContext = WebApplicationContextUtils.getWebApplicationContext(ctx);
 		BaseModel baseModel = (BaseModel) springContext.getBean("base.model");
 		try {
+			/*
+			 * take snapshot on context shutdown
+			 */
 			baseModel.getPrevayler().takeSnapshot();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

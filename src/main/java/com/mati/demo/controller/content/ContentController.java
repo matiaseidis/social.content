@@ -186,8 +186,6 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 
 		if(validator.validate()){
 			
-//			updateContent(initialContent, updatedContent);
-		
 			/*
 			 * TODO FIXME
 			 * de algun modo, en este momento tengo que saber 

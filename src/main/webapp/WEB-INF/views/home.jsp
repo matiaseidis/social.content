@@ -25,6 +25,9 @@
 	<p>
 	ver caso de update para etiquetas
 	</p>
+	<p>
+	tag follow - Followtagcontroller
+	</p>
 	<p>datos de perfil -> agregar redes sociales (?)</p>
 	-------------------------------------------------------------------------------------
 

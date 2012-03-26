@@ -39,8 +39,6 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 			m.addObject("followedUsers", followedUsers);
 			m.addObject("followedTags", new ArrayList<Tag>(user.getFollowedTags()));
 			
-//			List<Content> cl = new ArrayList<Content>(baseModel.getModel().getLoggedInUser().getFollowedContent());
-//			modelAndView.addObject("followedContent", cl);
 			/*
 			 * test followed paged content
 			 */

@@ -50,7 +50,6 @@ public abstract class BaseController<T> {
 		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
 		m.addObject(ACTION, CREATE);
 		m.addObject("new", true);
-//		m.addObject("content", createEntity());
 		m.addObject("entityName", getEntityName());
 		return  m;
 	}

@@ -75,12 +75,11 @@ public class Tag implements Followable{
 	}
 
 	public void startFollowing(User follower) {
-//		followedBy.put(follower.getId(), follower);
 		followedBy.add(follower.getUserName());
 	}
 
 	public void stopFollowing(User follower) {
-		followedBy.remove(follower.getId());
+		followedBy.remove(follower.getUserName());
 		
 	}
 }

@@ -10,7 +10,6 @@ public class CleanSessionInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		// TODO Auto-generated method stub
 		boolean post = request.getMethod().equalsIgnoreCase("post");
 
 		if(post){
@@ -27,7 +26,6 @@ public class CleanSessionInterceptor extends HandlerInterceptorAdapter{
 					if(request.getSession() != null){
 						request.getSession().setAttribute("errors", null);
 						request.getSession().setAttribute("message", null);
-//						System.out.println("errors nulled");
 					}
 				}
 			}

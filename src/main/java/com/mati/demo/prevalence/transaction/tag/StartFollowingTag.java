@@ -10,18 +10,22 @@ import com.mati.demo.model.user.User;
 
 public class StartFollowingTag implements Transaction {
 
-	private final String _tagName;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final String tagName;
 	private final String loggedInUserName;
 
 	public StartFollowingTag(String tagName, String loggedInUserName) {
-		this._tagName = tagName;
+		this.tagName = tagName;
 		this.loggedInUserName = loggedInUserName;
 
 	}
 
 	public void executeOn(Object prevalentSystem, Date executionTime) {
 		Model model = (Model) prevalentSystem;
-		Tag tagToStartFollowing = model.loadTagByTagName(_tagName);
+		Tag tagToStartFollowing = model.loadTagByTagName(tagName);
 		
 		if(tagToStartFollowing == null){
 			throw new RuntimeException("the tag to follow does not exist");
@@ -33,7 +37,7 @@ public class StartFollowingTag implements Transaction {
 		}
 		
 		loggedInUser.follow(tagToStartFollowing);
-		tagToStartFollowing.addTagged(loggedInUser);
+		tagToStartFollowing.startFollowing(loggedInUser);
 	}
 
 }

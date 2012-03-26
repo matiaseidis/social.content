@@ -4,13 +4,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
+<%@ taglib prefix="myFunctions" uri="isFollowedBy"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+
+Tag: <c:out value="${tag.tagName}"></c:out>
+<myTags:followUnfollowTag tag="${tag}" user="${user}"></myTags:followUnfollowTag>
+
 <p>Tagged content</p>
+
+
 <c:forEach items="${taggedContent}" var="tagged">
 	<a href="${ctx}/content/${tagged.contentType}/show/${tagged.id}">
 	<span>${tagged.title}</span>
