@@ -50,7 +50,3 @@
 <!-- 	<a href="register">Crear cuenta</a> -->
 </body>
 </html>
-
-	<form:label for="title" path="title">Título</form:label>
-	<br />
-	<form:input path="title" class="long fixed-height" />

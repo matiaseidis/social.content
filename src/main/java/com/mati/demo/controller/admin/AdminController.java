@@ -31,6 +31,17 @@ public class AdminController {
 	
 	}
 	
+	@RequestMapping(value="/admin/content", method = RequestMethod.GET)
+	public ModelAndView content(ModelAndView m){
+		
+		/*
+		 * TODO this is just for devel
+		 */
+		m.addObject("content", baseModel.getModel().getContent());
+		return m;
+	
+	}
+	
 	
 	
 

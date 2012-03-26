@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,17 +44,22 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 	public ModelAndView edit(@PathVariable int nodeId, HttpSession session){
 
 		ModelAndView m = retrieveErrorsFromSession(session);
-		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath;
-
-		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
 
 		T content = (T)getBaseModel().getModel().loadContentById(nodeId);
 
-		if(content != null){
-			m.addObject("content", content);
-			m.addObject("contentType", getEntityName());
-			m.addObject(ACTION, "../"+UPDATE/*+"/"+nodeId*/);
-		}
+		if(content == null){
+			session.setAttribute(MESSAGE, "No existe el contenido de ID " + nodeId);
+			m.setViewName("redirect:/");
+			return m;
+		} 
+		
+		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath;
+		
+		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
+		
+		m.addObject("content", content);
+		m.addObject("contentType", getEntityName());
+		m.addObject(ACTION, "../"+UPDATE/*+"/"+nodeId*/);
 		return  m;
 
 
@@ -90,7 +94,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		
 		updatedContent.setAuthor(getBaseModel().getModel().getLoggedInUser());
 		
-		oldContent.setTitle(updatedContent.getTitle());
+//		oldContent.setTitle(updatedContent.getTitle());
 	}
 
 	protected void processBeforeShow(T content) {}
@@ -210,13 +214,13 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 	}
 
 	@RequestMapping(value="show/{id}", method=RequestMethod.GET)
-	public ModelAndView show(@PathVariable int id, ModelAndView m){
+	public ModelAndView show(@PathVariable int id, ModelAndView m, HttpSession session){
 		T content = (T)getBaseModel().getModel().loadContentById(id);
 
 		if(content == null){
-			/*
-			 * TODO handle
-			 */
+			session.setAttribute(MESSAGE, "No existe el contenido de ID " + id);
+			m.setViewName("redirect:/");
+			return m;
 		}
 		processBeforeShow(content);
 		m.addObject("model", getBaseModel().getModel());

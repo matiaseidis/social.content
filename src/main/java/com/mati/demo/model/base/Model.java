@@ -70,7 +70,7 @@ public class Model implements Serializable{
 
 	public void addContent(Content c){
 		contentMap.put(c.hashCode(), c);
-		getLoggedInUser().addContent(c);
+		c.getAuthor().addContent(c);
 		System.out.println("added content model");
 	}
 
@@ -182,5 +182,11 @@ public class Model implements Serializable{
 	public boolean deleteContent(int id) {
 		getLoggedInUser().deleteContent(id);
 		return contentMap.remove(id) == null;
+	}
+
+	public List<Content> getContent() {
+		List<Content> result = new ArrayList<Content>();
+		result.addAll(contentMap.values());
+		return result;
 	}
 }

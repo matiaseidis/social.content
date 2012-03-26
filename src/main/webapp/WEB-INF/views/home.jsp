@@ -21,7 +21,6 @@
 	-------------------------------------------------------------------------------------
 
 	<p>TODO</p>
-	<p>eventos / calendario</p>
 	<p>update user password</p>
 	<p>
 	ver caso de update para etiquetas

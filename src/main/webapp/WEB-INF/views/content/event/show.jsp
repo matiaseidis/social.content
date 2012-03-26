@@ -22,8 +22,8 @@
 	<c:set var="dateTitle" value="El"></c:set>
 	</c:otherwise>
 	</c:choose>	
-	<myTags:shotDate date="${content.start}" title="${dateTitle}"></myTags:shotDate>
-	<myTags:shotDate date="${content.end}" title="Hasta"></myTags:shotDate>
+	<myTags:shortDate date="${content.start}" title="${dateTitle}"></myTags:shortDate>
+	<myTags:shortDate date="${content.end}" title="Hasta"></myTags:shortDate>
 
 	<jsp:include page="../show-tags-box.jsp"></jsp:include>
 

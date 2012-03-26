@@ -13,6 +13,7 @@
 <title><c:out value="${content.title}"></c:out></title>
 </head>
 <body>
+<jsp:include page="../author.jsp"></jsp:include>
 <jsp:include page="../edit-link.jsp"></jsp:include>
 <jsp:include page="../delete-link.jsp"></jsp:include>
 
