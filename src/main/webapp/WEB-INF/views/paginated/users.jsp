@@ -12,7 +12,7 @@
 		<ul>
 			<c:forEach var="u" items="${followedList}">
 				<li><a href="${ctx}/profile/${u.userName}"> <myTags:userImg
-							height="50" width="50" username="${u.userName}"></myTags:userImg></a>
+							height="${imgSize}" width="${imgSize}" username="${u.userName}"></myTags:userImg></a>
 
 					<a href="${ctx}/profile/${u.userName}">${u.userName}</a> <c:choose>
 						<c:when test="${myFunctions:isUserFollowedBy(u, user)}">

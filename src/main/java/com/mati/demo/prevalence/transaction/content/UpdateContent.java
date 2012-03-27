@@ -1,12 +1,14 @@
 package com.mati.demo.prevalence.transaction.content;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.prevayler.Transaction;
 
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.Content;
-import com.mati.demo.model.user.User;
+import com.mati.demo.model.tag.Tag;
 
 public class UpdateContent implements Transaction{
 
@@ -15,36 +17,38 @@ public class UpdateContent implements Transaction{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private final Content oldContent;
-//	private final Content updatedContent;
+	private final Content content;
 	private final String loggedInUserName;
 	
-	/*
-	 * constructor for title change 
-	 */
-//	public UpdateContent(Content oldContent, Content updatedContent, String loggedInUserName) {
-//		this.loggedInUserName = loggedInUserName;
-//		this.oldContent = oldContent;
-//		this.updatedContent = updatedContent;
-//	}
+
 	
 	/*
 	 * cons for title not changed
 	 */
-	public UpdateContent(Content oldContent, String loggedInUserName) {
+	public UpdateContent(Content content, String loggedInUserName) {
 		this.loggedInUserName = loggedInUserName;
-		this.oldContent = oldContent;
-//		this.updatedContent = null;
+		this.content = content;
 	}
 
 	public void executeOn(Object prevalentSystem, Date executionTime) {
 		Model model = (Model) prevalentSystem;
-		User loggedInUser = model.loadUserByUsername(loggedInUserName);
+		
+		List<Tag> originalTags = model.loadContentById(content.getId()).getTags();
+		
+		List<Tag> updatedTags = content.getTags();
+		
+		if(!originalTags.equals(updatedTags)){
+			System.out.println("NOT SAME");
+			
+			List<Tag> diff = new ArrayList<Tag>(originalTags);
+			diff.removeAll(updatedTags);
+			
+			for(Tag t : diff){
+				t.removeTagged(content);
+				content.removeTag(model.getTagRepository(), t);
+			}
+		} 
 
-//		if(updatedContent != null){ // title changed
-//			loggedInUser.updateContent(oldContent, updatedContent);
-//		} else {
-			model.updateContent(oldContent);
-//		}
+		model.updateContent(content);
 	}
 }

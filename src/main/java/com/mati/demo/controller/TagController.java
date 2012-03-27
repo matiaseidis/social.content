@@ -28,6 +28,12 @@ public class TagController {
 	public ModelAndView show(@PathVariable String tagName, ModelAndView m){
 
 		Tag tag = baseModel.getModel().loadTagByTagName(tagName);
+		m.setViewName("tag/show");
+		if(tag == null){
+			m.addObject("message", "Esa etiqueta ("+tagName+") no existe");
+			return m;
+		}
+		
 		m.addObject("tag", tag);
 		
 		List<Content> taggedContent = baseModel.getModel().getTaggedContent(tag);
@@ -39,9 +45,6 @@ public class TagController {
 		List<User> followedBy = baseModel.getModel().getFollowedBy(tag);
 		m.addObject("tagFollowedBy", followedBy);
 		
-		
-		
-		m.setViewName("tag/show");
 		return m;
 	}
 }

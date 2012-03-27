@@ -149,32 +149,32 @@ public class Model implements Serializable{
 		return result;
 	}
 	
-	public void updateContent(Content oldContent) {
-		if(oldContent.getId() != oldContent.hashCode()){
+	public void updateContent(Content content) {
+		if(content.getId() != content.hashCode()){
 			
 			/*
 			 * cambio el titulo, reemplazo
 			 */
-			int oldContentId = oldContent.getId();
+			int oldContentId = content.getId();
 			deleteContent(oldContentId);
-			oldContent.setId(oldContent.hashCode());
-			addContent(oldContent);
+			content.setId(content.hashCode());
+			addContent(content);
 
 			/*
 			 * fowards the update to logged in user
 			 */
-			getLoggedInUser().updateContent(oldContentId, oldContent);
+			content.getAuthor().updateContent(oldContentId, content);
 
 			
 		} else {
 			/*
 			 * solo actualizo
 			 */
-			addContent(oldContent);
+			addContent(content);
 			/*
 			 * fowards the update to logged in user
 			 */
-			getLoggedInUser().updateContent(oldContent);
+			content.getAuthor().updateContent(content);
 		}
 
 	}

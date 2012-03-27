@@ -4,16 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
-<%-- <c:choose> --%>
-<%-- 	<c:when test="${new eq null}"> --%>
-<%-- 		<jsp:include page="add-tag-existent-content-box.jsp"></jsp:include> --%>
-<%-- 	</c:when> --%>
-<%-- 	<c:otherwise> --%>
-<%-- 		<jsp:include page="add-tag-new-content-box.jsp"></jsp:include> --%>
-<%-- 	</c:otherwise> --%>
-<%-- </c:choose> --%>
-<!-- <input type="hidden" name="plainTags" id="contentTags" /> -->
-<script type="text/javascript" src="${ctx}/js/app/tags.js"></script>
+<script type="text/javascript" src='<c:url value="/js/app/tags.js" />' ></script>
 <div>
 	<input type="text" id="inputTag" class="medium fixed-height" /><span><a
 		href="#" id="addTag">Agregar etiqueta</a></span>
@@ -25,7 +16,6 @@
 		</c:when>
 		<c:otherwise>
 			<c:set var="tags" value="${content.tags}"></c:set>
-			<c:set var="plainTags" value=""></c:set>
 		</c:otherwise>
 	</c:choose>
 
@@ -37,5 +27,5 @@
 			</span>
 		</c:forEach>
 	</p>
-	<input type="hidden" name="plainTags" id="contentTags" value="${plainTags}"/>
+	<input type="hidden" name="plainTags" id="contentTags" value='<c:out value="${plainTags}" ></c:out>'/>
 </div>

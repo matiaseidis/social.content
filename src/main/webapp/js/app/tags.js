@@ -1,5 +1,4 @@
 $(function(){
-//	$('#contentTags').val("");
 	$('#inputTag').val("");
 	
 	$('#addTag').click(function(){
@@ -15,10 +14,7 @@ $(function(){
 				var removeLink = "<a href='#' class='removeTagPreview'>x</a>";
 				$('#tagsPreview').append("<span class='tagPreview'><span class='tagName'>"+tag+"</span>"+removeLink+"</span>");	
 			}
-		} else{
-			//ignore
-		}
-		
+		} 
 	});
 	$('.removeTagPreview').live('click', function(e){
 		
@@ -28,6 +24,5 @@ $(function(){
 		$('#contentTags').val(result);
 		
 		$(this).parent().remove();
-		
 	});
 });

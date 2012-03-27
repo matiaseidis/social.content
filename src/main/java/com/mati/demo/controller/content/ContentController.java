@@ -58,11 +58,20 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		m.setViewName(base + File.separator + getEntityName() + File.separator + ADD_EDIT);
 		
 		m.addObject("content", content);
+		m.addObject("plainTags", plainTags(content));
 		m.addObject("contentType", getEntityName());
 		m.addObject(ACTION, "../"+UPDATE/*+"/"+nodeId*/);
 		return  m;
 
 
+	}
+
+	private String plainTags(T content) {
+		StringBuilder sb = new StringBuilder();
+		for(Tag t : content.getTags()){
+			sb.append(t.getTagName()).append(",");
+		}
+		return sb.toString();
 	}
 
 	protected List<Content> list(String username, Class clazz) {
@@ -98,6 +107,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 	}
 
 	protected void processBeforeShow(T content) {}
+	
 	protected boolean processContentBeforeSave(T content, HttpServletRequest request) {return true;}
 
 	@RequestMapping(value=CREATE, method=RequestMethod.POST)
@@ -181,6 +191,8 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		T initialContent = (T)getBaseModel().getModel().getLoggedInUser().getContent(updatedContentId);
 
 		updateContent(initialContent, updatedContent);
+		
+		addTags(updatedContent, plainTags);
 
 		ContentValidator<T> validator = getValidator(updatedContent, getBaseModel().getModel());
 
@@ -209,6 +221,16 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		m.addObject(getEntityPluralName(), list(getEntityClass()));
 
 		return m;
+	}
+
+	private void addTags(T updatedContent, String plainTags) {
+		if(StringUtils.isEmpty(plainTags)) return;
+		
+		for(String tagName : plainTags.split(",")){
+			if(StringUtils.isNotEmpty(tagName)){
+				updatedContent.addTag(baseModel.getModel().getTagRepository(), new Tag(tagName));
+			} 
+		}
 	}
 
 	@RequestMapping(value="show/{id}", method=RequestMethod.GET)

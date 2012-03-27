@@ -40,12 +40,6 @@ public class Tag implements Followable{
 	
 	@Getter private Set<String> followedBy = new HashSet<String>();
 	
-//	private Map<Integer, User> followedBy = new HashMap<Integer, User>();
-	
-//	public Collection<User> getFollowers(){
-//		return followedBy.values();
-//	}
-	
 	public boolean isNotTaggingAnything(){
 		return taggedUsers.isEmpty() && taggedContent.isEmpty();
 	}
@@ -67,11 +61,11 @@ public class Tag implements Followable{
 	}
 	
 	public void removeTagged(User taggable){
-		taggedUsers.remove((User)taggable);
+		taggedUsers.remove(taggable.getId());
 	}
 	
 	public void removeTagged(Content taggable){
-		taggedContent.remove((Content)taggable);
+		taggedContent.remove(taggable.getId());
 	}
 
 	public void startFollowing(User follower) {

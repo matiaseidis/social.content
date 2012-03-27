@@ -27,6 +27,7 @@ public class AjaxController {
 	@Autowired @Setter @Getter private BaseModel baseModel;
 	
 	int fixedTotal = 3; // max items to show in paginated view 
+	int imgSize = 27;
 
 	
 	@RequestMapping(value="comment/{id}", method=RequestMethod.POST)
@@ -39,6 +40,7 @@ public class AjaxController {
 		
 		baseModel.getPrevayler().execute(new CreateComment(comment, id, baseModel.getModel().getLoggedInUser().getUserName()));
 		m.addObject("content", content);
+		m.addObject("imgSize", imgSize);
 		m.setViewName("content/comments-box");
 		return m;
 	}
@@ -63,6 +65,7 @@ public class AjaxController {
 		m.addObject("updatedTagId", "followedEvents");
 		m.addObject("page", page);
 		m.addObject("total", total);
+		m.addObject("imgSize", imgSize);
 		m.setViewName("paginated/events");
 		return m;
 	}
@@ -88,6 +91,7 @@ public class AjaxController {
 		m.addObject("updatedTagId", "followedContent");
 		m.addObject("page", page);
 		m.addObject("total", total);
+		m.addObject("imgSize", imgSize);
 		m.setViewName("paginated/content");
 		return m;
 	}
@@ -112,6 +116,7 @@ public class AjaxController {
 		m.addObject("updatedTagId", "followedUsers");
 		m.addObject("page", page);
 		m.addObject("total", total);
+		m.addObject("imgSize", imgSize);
 		m.setViewName("paginated/users");
 		return m;
 	}
@@ -136,6 +141,7 @@ public class AjaxController {
 		m.addObject("updatedTagId", "followedBy");
 		m.addObject("page", page);
 		m.addObject("total", total);
+		m.addObject("imgSize", imgSize);
 		m.setViewName("paginated/users");
 		return m;
 	}

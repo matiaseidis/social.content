@@ -19,7 +19,7 @@
 			<h3>${title}</h3>
 			<ul>
 				<c:forEach var="content" items="${contentList}">
-					<li><span> <myTags:userImg height="50" width="50"
+					<li><span> <myTags:userImg height="25" width="25"
 								username="${content.author.userName}"></myTags:userImg>
 					</span> <span> <a
 							href="${ctx}/content/${content.contentType}/show/${content.id}">${content.title}</a>
