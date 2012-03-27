@@ -39,6 +39,8 @@
 		<security:intercept-url pattern="/js/**/*.js" access="permitAll" />
 		<security:intercept-url pattern="/css/**/*.css" access="permitAll" />
 		<security:intercept-url pattern="/fonts/**/*" access="permitAll" />
+		<security:intercept-url pattern="/js/**/*.swf" access="permitAll" />
+		
 		<security:intercept-url pattern="/login_stand_alone.jsp" access="permitAll" />
 		<security:intercept-url pattern="/**" access='hasRole("ROLE_USER")' />
 <!-- 		authentication-success-handler-ref="authentication-success-handler" -->
