@@ -111,7 +111,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 	protected boolean processContentBeforeSave(T content, HttpServletRequest request) {return true;}
 
 	@RequestMapping(value=CREATE, method=RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute T content, @RequestParam String plainTags, HttpServletRequest request){
+	public ModelAndView create(@ModelAttribute T content, @RequestParam String plainTags, HttpServletRequest request){
 
 		content.setAuthor(getBaseModel().getModel().getLoggedInUser());
 		content.setId(content.hashCode());
@@ -127,7 +127,9 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			request.getSession().setAttribute("errors", validator.getErrors());
 			return new ModelAndView("redirect:"+ADD);
 		}
-		return new ModelAndView("redirect:"+LIST);
+//		return new ModelAndView("redirect:"+LIST);
+		return new ModelAndView("redirect:/user/content");
+		
 	}
 
 	private List<Tag> tags(String plainTags) {

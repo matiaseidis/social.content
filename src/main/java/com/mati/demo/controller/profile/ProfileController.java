@@ -15,33 +15,33 @@ public class ProfileController {
 
 	@Resource(name="base.model") private BaseModel baseModel;
 
-	@RequestMapping("profile")
-	public ModelAndView profile(ModelAndView m){
-		User u = baseModel.getModel().getLoggedInUser();
-
-		if(u == null){
-			//TODO handle
-		} 	
-		m.addObject("own", true);
-		m.addObject("profileUser", u);
-
-		return m;
-	}
+//	@RequestMapping("profile")
+//	public ModelAndView profile(ModelAndView m){
+//		User u = baseModel.getModel().getLoggedInUser();
+//
+//		if(u == null){
+//			//TODO handle
+//		} 	
+//		m.addObject("own", true);
+//		m.addObject("profileUser", u);
+//
+//		return m;
+//	}
 
 	@RequestMapping("profile/{userName}")
 	public ModelAndView profile(@PathVariable String userName, ModelAndView m){
 		User u = baseModel.getModel().loadUserByUsername(userName);
 		User loggedInUser = baseModel.getModel().getLoggedInUser();
 		
-		if(loggedInUser != null){
+//		if(loggedInUser != null){
+			// LO HAGO EN EL TAG
+//			m.addObject("followed", baseModel.getModel().getLoggedInUser().isFollowing(u));
 			
-			m.addObject("followed", baseModel.getModel().getLoggedInUser().isFollowing(u));
-			
-			if(loggedInUser.equals(u)){
-				m.setViewName("redirect:/profile");
-				return m;
-			} 
-		} 
+//			if(loggedInUser.equals(u)){
+//				m.setViewName("redirect:/profile");
+//				return m;
+//			} 
+//		} 
 		m.setViewName("profile");
 		m.addObject("profileUser", u);
 		return m;

@@ -20,22 +20,25 @@
 			<ul>
 				<c:forEach var="u" items="${userList}">
 					<li><a href="${ctx}/profile/${u.userName}"> <myTags:userImg
-								height="25" width="25followedContent" username="${u.userName}"></myTags:userImg></a>
+								height="25" width="25" username="${u.userName}"></myTags:userImg></a>
 
-						<a href="${ctx}/profile/${u.userName}">${u.userName}</a> <c:choose>
-							<c:when test="${myFunctions:isUserFollowedBy(u, user)}">
-								<form class="follow" action="${ctx}/user/unfollow/${u.userName}"
-									method="POST">
-									<input class="button" type="submit" value="no seguir">
-								</form>
-							</c:when>
-							<c:otherwise>
-								<form class="follow" action="${ctx}/user/follow/${u.userName}"
-									method="POST">
-									<input class="button" type="submit" value="seguir">
-								</form>
-							</c:otherwise>
-						</c:choose></li>
+						<a href="${ctx}/profile/${u.userName}">${u.userName}</a> 
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${myFunctions:isUserFollowedBy(u, user)}"> --%>
+<%-- 								<form class="follow" action="${ctx}/user/unfollow/${u.userName}" --%>
+<!-- 									method="POST"> -->
+<!-- 									<input class="button" type="submit" value="no seguir"> -->
+<!-- 								</form> -->
+<%-- 							</c:when> --%>
+<%-- 							<c:otherwise> --%>
+<%-- 								<form class="follow" action="${ctx}/user/follow/${u.userName}" --%>
+<!-- 									method="POST"> -->
+<!-- 									<input class="button" type="submit" value="seguir"> -->
+<!-- 								</form> -->
+<%-- 							</c:otherwise> --%>
+<%-- 						</c:choose> --%>
+						<myTags:followUnfollowUser followed="${u}" follower="${user}"></myTags:followUnfollowUser>
+						</li>
 				</c:forEach>
 			</ul>
 		</div>
@@ -57,14 +60,12 @@
 $(function(){
 	$('#${updatedTagId} .previous').click(function(e){
 		e.preventDefault();
-// 		alert(44);
 		var prevPage = ${prevPage};
 		if(prevPage == -1){
 			return;
 		}
 		$.ajax({
 	        url: '${ctx}/ajax/${updatedTagId}/'+prevPage+'/'+3,
-// 	        data: ({name : "me"}),
 	        success: function(data) {
 	          
 	        	$('#${updatedTagId}').html(data);
@@ -84,7 +85,6 @@ $(function(){
 		var nextPage = $('#next').attr('href');
 		$.ajax({
 	        url: '${ctx}/ajax/${updatedTagId}/'+nextPage+'/'+3,
-// 	        data: ({name : "me"}),
 	        success: function(data) {
 	          
 	        	$('#${updatedTagId}').html(data);

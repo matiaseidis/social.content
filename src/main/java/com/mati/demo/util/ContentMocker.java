@@ -27,6 +27,8 @@ public class ContentMocker {
 
 	final private BaseModel baseModel;
 	
+	int number = 500;
+	
 	
 	public ContentMocker(BaseModel baseModel/*, AuthenticationProviderImpl authenticationProvider*/){
 		this.baseModel = baseModel;
@@ -46,7 +48,7 @@ public class ContentMocker {
 		baseModel.getPrevayler().execute(new CreateUser(admin));
 
 		String userName = "user-";
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < number; i++){
 			User u = new User();
 			u.setUserName(userName+i);
 			u.setPassword(userName+i);

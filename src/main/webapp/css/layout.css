@@ -74,7 +74,7 @@ body {
 font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 	/* 	background-color: #ffffcc; */
 	 line-height: 25px;
-	 font-size:12px;
+	 font-size:10px;
 }
 a {    text-decoration: none;}
 ul {
@@ -114,16 +114,21 @@ input.medium{
 	margin-right:10px;
 	}
 input.button{
-    border: 3px solid #CCCCCC;
-    padding: 5px;
+    border: 1px solid #CCCCCC;
+    padding: 3px;
 }
 .error-field{
 	color:red;
 	font-weight:bold;
 	}
 input.button{
-	height: 40px;
+/* 	height: 40px; */
 }
+.left{
+	float:right;
+	margin-left:5px;
+}
+.left input{}
 textarea {
 	
 }

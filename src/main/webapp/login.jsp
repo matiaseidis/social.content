@@ -21,11 +21,11 @@
 		</div>
 	</c:if>
  
-	<form class="login-form-barrita" name='f' action="<c:url value='/j_spring_security_check' />"
+ 	<form class="login-form-barrita" name='f' action="<c:url value='/j_spring_security_check' />"
 		method='POST'>
 		<table>
 			<tr>
-<!-- 				<td>User:</td> -->
+ 				<td><span><a href='<c:url value="/" />'>Inicio</a></span></td> 
 				<td><label for="j_username" path="j_username">Usuario: </label>
 <!-- 				</td> -->
 <!-- 				<td> -->

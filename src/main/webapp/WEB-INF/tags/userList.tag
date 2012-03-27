@@ -20,20 +20,9 @@
 					<li><a href="${ctx}/profile/${u.userName}"> <myTags:userImg
 								height="50" width="50" username="${u.userName}"></myTags:userImg></a>
 
-						<a href="${ctx}/profile/${u.userName}">${u.userName}</a> <c:choose>
-							<c:when test="${myFunctions:isUserFollowedBy(u, user)}">
-								<form class="follow" action="${ctx}/user/unfollow/${u.userName}"
-									method="POST">
-									<input class="button" type="submit" value="no seguir">
-								</form>
-							</c:when>
-							<c:otherwise>
-								<form class="follow" action="${ctx}/user/follow/${u.userName}"
-									method="POST">
-									<input class="button" type="submit" value="seguir">
-								</form>
-							</c:otherwise>
-						</c:choose></li>
+						<a href="${ctx}/profile/${u.userName}">${u.userName}</a> 
+						<myTags:followUnfollowUser followed="${u}" follower="${user}"></myTags:followUnfollowUser>
+						</li>
 				</c:forEach>
 			</ul>
 		</div>

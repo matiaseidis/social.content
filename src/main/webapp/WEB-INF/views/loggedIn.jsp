@@ -14,7 +14,7 @@
 <!-- 	<input type="text" name="text"> -->
 <!-- 	<input type="submit" value="Buscar"> -->
 <!-- 	</form> -->
-	<a href="${ctx}/profile">Perfil</a> 
+	<a href="${ctx}/profile/${user.userName}">Perfil</a> 
 	<a href="${ctx}/j_spring_security_logout">Logout</a>
 </div>
 

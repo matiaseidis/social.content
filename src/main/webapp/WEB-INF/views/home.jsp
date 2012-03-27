@@ -16,19 +16,19 @@
 <title></title>
 </head>
 <body>
+<p>
+ </p>
 	<span>Lo que esta pasando</span>
 	<br />
 	-------------------------------------------------------------------------------------
 
 	<p>TODO</p>
 	<p>update user password</p>
-	<p>
-	ver caso de update para etiquetas
-	</p>
-	<p>
-	tag follow - Followtagcontroller
-	</p>
 	<p>datos de perfil -> agregar redes sociales (?)</p>
+	<p>poder borrar usuario</p>
+	<p>el evento debe ser suscribible</p>
+	<p>no sep uede borrar contenido en la vista de edit (o mandar el link de delete a user/content)!!!!</p>
+	<p>interfaz de admin?</p>
 	-------------------------------------------------------------------------------------
 
 	<%-- 	<myTags:paginatedContentList contentList="${followedContent}" title="paged content" page="1"></myTags:paginatedContentList> --%>

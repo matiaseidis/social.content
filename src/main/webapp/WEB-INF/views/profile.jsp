@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
-<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,34 +14,35 @@
 </head>
 <body>
 	<div class="user-profile">
-		<c:if test="${followed ne null}">
+<%-- 		<c:if test="${followed ne null}"> --%>
 			<p>
-				<c:choose>
-					<c:when test="${followed}">
-				Estas siguiendo a <c:out value="${profileUser.userName}"></c:out>
+			<myTags:followUnfollowUser followed="${profileUser}" follower="${user}"></myTags:followUnfollowUser>
+<%-- 				<c:choose> --%>
+<%-- 					<c:when test="${followed}"> --%>
+<%-- 				Estas siguiendo a <c:out value="${profileUser.userName}"></c:out> --%>
 
-						<form action="${ctx}/user/unfollow/${profileUser.userName}"
-							method="POST">
-							<input  class="button"  type="submit" value="no seguir">
-						</form>
-
-
-					</c:when>
-					<c:otherwise>
-				No estas siguiendo a <c:out value="${profileUser.userName}"></c:out>
-
-						<form action="${ctx}/user/follow/${profileUser.userName}"
-							method="POST">
-							<input  class="button" type="submit" value="seguir">
-						</form>
+<%-- 						<form action="${ctx}/user/unfollow/${profileUser.userName}" --%>
+<!-- 							method="POST"> -->
+<!-- 							<input  class="button"  type="submit" value="no seguir"> -->
+<!-- 						</form> -->
 
 
+<%-- 					</c:when> --%>
+<%-- 					<c:otherwise> --%>
+<%-- 				No estas siguiendo a <c:out value="${profileUser.userName}"></c:out> --%>
 
-					</c:otherwise>
+<%-- 						<form action="${ctx}/user/follow/${profileUser.userName}" --%>
+<!-- 							method="POST"> -->
+<!-- 							<input  class="button" type="submit" value="seguir"> -->
+<!-- 						</form> -->
 
-				</c:choose>
+
+
+<%-- 					</c:otherwise> --%>
+
+<%-- 				</c:choose> --%>
 			</p>
-		</c:if>
+<%-- 		</c:if> --%>
 		<p>
 			<c:out value="${profileUser.userName}"></c:out>
 		</p>
@@ -51,7 +52,7 @@
 							<input type="submit" value="editar perfil">
 						</form>
 		</c:if>
-		<myTags:userImg height="200" width="200"
+		<myTags:userImg height="50" width="50"
 			username="${profileUser.userName}"></myTags:userImg>
 		<p>
 			<c:out value="${profileUser.info}"></c:out>
