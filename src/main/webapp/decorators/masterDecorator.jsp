@@ -51,10 +51,10 @@
 				<c:out value="${user.userName}"></c:out>
 
 				<p></p>
-				<div id="followedContent"></div>
-				<div id="followedUsers"></div>
-				<div id="followedBy"></div>
-				<div id="followedEvents"></div>
+				<div id="followedContent" class="sidebar-box"></div>
+				<div id="followedUsers" class="sidebar-box"></div>
+				<div id="followedBy" class="sidebar-box"></div>
+				<div id="followedEvents" class="sidebar-box"></div>
 
 				<%-- 				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList> --%>
 				<%-- 				<myTags:userList title="followedBy" userList="${followedBy}">usuarios que te siguen</myTags:userList> --%>
@@ -64,24 +64,24 @@
 					$(function() {
 						var paginations = [ "followedContent", "followedUsers",
 								"followedBy", "followedEvents" ];
-						var paginate = function(value) {
-							var elementId = "#" + value;
-							$.ajax({
-								url : '${ctx}/ajax/' + value + '/0/100',
-								success : function(data) {
-									$(elementId).html(data);
-								},
-								error : function(data) {
-									alert(data);
-									$(elementId).html(data);
-								}
-							});
-						};
-
+						
 						$.each(paginations, function(index, value) {
 							paginate(value);
 						});
 					});
+					var paginate = function(value) {
+						var elementId = "#" + value;
+						$.ajax({
+							url : '${ctx}/ajax/' + value + '/0/100',
+							success : function(data) {
+								$(elementId).html(data);
+							},
+							error : function(data) {
+								alert(data);
+								$(elementId).html(data);
+							}
+						});
+					};
 				</script>
 			</sec:authorize>
 		</div>

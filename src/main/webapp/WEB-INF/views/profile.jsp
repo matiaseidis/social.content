@@ -66,12 +66,12 @@
 
 	</div>
 	
-	<div>
-	<p>Contenido publicado:</p>
-		<myTags:contentList contentList="${profileUser.videos}" title="Videos"></myTags:contentList>
-		<myTags:contentList contentList="${profileUser.posts}" title="Posts"></myTags:contentList>
+<!-- 	<div> -->
+<!-- 	<p>Contenido publicado:</p> -->
+<%-- 		<myTags:contentList contentList="${profileUser.videos}" title="Videos"></myTags:contentList> --%>
+<%-- 		<myTags:contentList contentList="${profileUser.posts}" title="Posts"></myTags:contentList> --%>
 		
-	</div>
+<!-- 	</div> -->
 
 
 </body>

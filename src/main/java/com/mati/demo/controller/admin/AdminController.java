@@ -37,7 +37,7 @@ public class AdminController {
 		/*
 		 * TODO this is just for devel
 		 */
-		m.addObject("content", baseModel.getModel().getContent());
+//		m.addObject("content", baseModel.getModel().getContent());
 		return m;
 	
 	}

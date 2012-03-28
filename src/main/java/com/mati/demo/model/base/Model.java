@@ -1,11 +1,18 @@
 package com.mati.demo.model.base;
 
+import static com.mati.demo.util.NavigationUtils.from;
+import static com.mati.demo.util.NavigationUtils.to;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import lombok.Getter;
 
@@ -23,8 +30,8 @@ public class Model implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	Map<Integer, Content> contentMap = new HashMap<Integer, Content>();
-
+	private Map<Integer, Content> contentMap = new HashMap<Integer, Content>();
+	
 	Map<String, User> usersMap = new HashMap<String, User>();
 	
 	@Getter private TagRepository tagRepository = new TagRepository(); 
@@ -188,5 +195,25 @@ public class Model implements Serializable{
 		List<Content> result = new ArrayList<Content>();
 		result.addAll(contentMap.values());
 		return result;
+	}
+	
+	public List<Content> getContent(int total, int page){	
+		List<Content> c = new ArrayList<Content>(); 
+			c.addAll(contentMap.values());
+		/*
+		 * 
+		 *	TODO pasar este ordenamiento a la declaracion del Map en Model y en User
+		 *	para no tener que ordenar en cada llamado
+		 */
+			Collections.sort(c, new Comparator<Content>(){
+
+			@Override
+			public int compare(Content c1, Content c2) {
+				return c1.getPostDate().compareTo(c2.getPostDate());
+			}
+			
+		});
+		
+		return c.subList(from(c, page, total), to(c, page, total));
 	}
 }

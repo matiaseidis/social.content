@@ -14,14 +14,14 @@
 		<c:choose>
 			<c:when test="${myFunctions:isUserFollowedBy(followed, follower)}">
 				<form id="user-unfollow" class="follow"
-					action='<c:url value="/user/unfollow/${user.userName}" />'
+					action='<c:url value="/user/unfollow/${followed.userName}" />'
 					method="POST">
 					<input class="button" type="submit" value="no seguir">
 				</form>
 			</c:when>
 			<c:otherwise>
 				<form id="user-follow" class="follow"
-					action='<c:url value="/user/follow/${user.userName}" />'
+					action='<c:url value="/user/follow/${followed.userName}" />'
 					method="POST">
 					<input class="button" type="submit" value="seguir">
 				</form>

@@ -20,5 +20,5 @@
 				</c:forEach>
 			</ul>
 		</div>
-<myTags:pager nextPage="${nextPage}" prevPage="${prevPage}" updatedTagId="${updatedTagId}"></myTags:pager>
+<myTags:pager nextPage="${nextPage}" prevPage="${prevPage}" updatedTagId="${updatedTagId}"  total="${total}"></myTags:pager>
 </c:if>

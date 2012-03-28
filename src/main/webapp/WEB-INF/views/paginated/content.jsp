@@ -7,7 +7,7 @@
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <c:if test="${not empty followedList}">
 	<div>
-		<h3>${title}</h3>
+		<h3>${title} (${total})</h3>
 		<ul>
 			<c:forEach var="content" items="${followedList}">
 				<li><span> <myTags:userImg height="${imgSize}" width="${imgSize}"
@@ -22,6 +22,6 @@
 			</c:forEach>
 		</ul>
 	</div>
-	<myTags:pager nextPage="${nextPage}" prevPage="${prevPage}"
+	<myTags:pager nextPage="${nextPage}" prevPage="${prevPage}" total="${total}"
 		updatedTagId="${updatedTagId}"></myTags:pager>
 </c:if>

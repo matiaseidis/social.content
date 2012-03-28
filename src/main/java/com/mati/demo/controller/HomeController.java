@@ -46,7 +46,7 @@ public class HomeController {
 		for(Video video : videos){
 			video.setMediaFileRef(video.getUrl());
 		}
-		m.addObject("lastVideos", videos);
+		m.addObject("lastVideos", videos.subList(0, 10));
 		
 		
 		m.setViewName("home");

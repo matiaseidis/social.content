@@ -153,7 +153,30 @@ div {
 span {
 	
 }
-
+.pager div {
+    float: left;
+    width: 50%;
+}
+.pager div a{
+    border: 1px solid #EDEDED;
+    margin-left: 60px;
+    padding: 3px;
+	}
+.red{color:red;}
+.sidebar-box{
+	border: 1px solid #EDEDED;
+    clear: both;
+    margin-bottom: 10px;
+    padding: 10px 10px 28px;
+}
+/*
+inline forms
+*/
+.unfollow-user, .follow-user{
+	display:inline;
+	border: 1px solid #999;
+	padding:2px 3px;
+	}
 input.title {
 	width: 640px;
 }

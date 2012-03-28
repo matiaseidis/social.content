@@ -22,7 +22,7 @@ import com.mati.demo.model.content.type.Video;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.tag.Taggable;
 import com.mati.demo.util.GetContentQuery;
-
+import static com.mati.demo.util.NavigationUtils.*;
 
 public class User extends Taggable{
 
@@ -106,15 +106,7 @@ public class User extends Taggable{
 		return fe.subList(from(fe, page, total), to(fe, page, total));
 	}
 	
-	private int from(Collection c, int page, int total){
-		int from = (c.isEmpty() || page * total > c.size()) ? 0 : page * total; 
-		return from;
-	}
 	
-	private int to(Collection c, int page, int total){
-		int to = (((page * total) + total) < c.size()) ? (page * total) + total : c.size();
-		return to;
-	}
 	
 	public List<Content> getFollowedContent(){	
 		List<Content> fc = new ArrayList<Content>(); 
