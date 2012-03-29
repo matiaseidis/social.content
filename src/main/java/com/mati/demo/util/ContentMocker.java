@@ -1,13 +1,21 @@
 package com.mati.demo.util;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.security.core.AuthenticationException;
 
-import com.mati.demo.authentication.AuthenticationProviderImpl;
 import com.mati.demo.model.content.type.Audio;
 import com.mati.demo.model.content.type.Event;
 import com.mati.demo.model.content.type.Post;
@@ -27,7 +35,7 @@ public class ContentMocker {
 
 	final private BaseModel baseModel;
 	
-	int number = 500;
+	int number = 200;
 	
 	
 	public ContentMocker(BaseModel baseModel/*, AuthenticationProviderImpl authenticationProvider*/){
@@ -52,23 +60,68 @@ public class ContentMocker {
 			User u = new User();
 			u.setUserName(userName+i);
 			u.setPassword(userName+i);
+			processImage(u);
 
 			baseModel.getPrevayler().execute(new CreateUser(u));
 			try {
 
 				baseModel.getPrevayler().execute(new StartFollowingUser(u.getUserName(), admin.getUserName()));
 				baseModel.getPrevayler().execute(new StartFollowingUser(admin.getUserName(), u.getUserName() ));
-
-				baseModel.getPrevayler().execute(new CreateContent<Video>(video(i, u), u.getUserName(), null));
-				baseModel.getPrevayler().execute(new CreateContent<Audio>(audio(i, u), u.getUserName(), null));
-				baseModel.getPrevayler().execute(new CreateContent<Post>(post(i, u), u.getUserName(), null));
-				baseModel.getPrevayler().execute(new CreateContent<Event>(event(i, u), u.getUserName(), null));
+				for(int c = 0; i<5;i++){
+					baseModel.getPrevayler().execute(new CreateContent<Video>(video(c, u), u.getUserName(), null));
+					baseModel.getPrevayler().execute(new CreateContent<Audio>(audio(c, u), u.getUserName(), null));
+					baseModel.getPrevayler().execute(new CreateContent<Post>(post(c, u), u.getUserName(), null));
+					baseModel.getPrevayler().execute(new CreateContent<Event>(event(c, u), u.getUserName(), null));
+				}
 
 			}catch(AuthenticationException ae){
 				//TODO handle this
 				
 				System.out.println(ae);
 			}
+		}
+
+	}
+	
+	private void processImage(User user) {
+
+		String destinationPath = "/var/www/static.social.content/user-pictures/";
+
+		/*
+		 * the user did not upload any image, setting a default one
+		 */
+		InputStream is = defaultImage(destinationPath);
+		saveImage(user, destinationPath, is);
+	}
+
+	private InputStream defaultImage(String destinationPath) {
+		InputStream is = null;
+		try{
+			is = new FileInputStream(destinationPath + "default.png");
+		}catch (Exception e) {
+			System.out.println("unable to load the default img at " + destinationPath + "default.png");
+		}
+		return is;
+	}
+
+	private void saveImage(User user, String destinationPath, InputStream is) {
+
+		String fileName = StringUtils.replace(user.getUserName().toLowerCase(), " ", "-");
+
+		File file = new File(destinationPath + fileName + ".png");
+		try {
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+			BufferedImage l_original_image  = ImageIO.read(is);
+
+			ImageIO.write(l_original_image, "PNG", out);
+
+			byte[] imageBytes = out.toByteArray(); 
+
+			FileUtils.writeByteArrayToFile(file, imageBytes);
+
+		} catch (IOException e) {
+			System.err.println("save - No se puedo guardar la imagen, intente cargarla en otro momento.");
 		}
 
 	}

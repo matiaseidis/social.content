@@ -6,7 +6,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <c:if test="${not empty content.tags}">
-	<div>
+	<div class="show-tags-box">
 		<p>
 			<span>Etiquetas:</span>
 		</p>

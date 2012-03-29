@@ -29,6 +29,7 @@
 	<p>el evento debe ser suscribible</p>
 	<p>no sep uede borrar contenido en la vista de edit (o mandar el link de delete a user/content)!!!!</p>
 	<p>interfaz de admin?</p>
+	<p>class="show-tags-box" ajax en etiquetas seguir - no seguir en show (igual que en user -> follow / unfollow)</p>
 	-------------------------------------------------------------------------------------
 
 	<%-- 	<myTags:paginatedContentList contentList="${followedContent}" title="paged content" page="1"></myTags:paginatedContentList> --%>
@@ -40,6 +41,6 @@
 <%-- 	<myTags:contentList contentList="${user.followedPosts}" title="Posts"></myTags:contentList> --%>
 
 </sec:authorize>
-	<myTags:lastVideos videoList="${lastVideos}" title="Videos publicados"></myTags:lastVideos>
+<%-- 	<myTags:lastVideos videoList="${lastVideos}" title="Videos publicados"></myTags:lastVideos> --%>
 </body>
 </html>

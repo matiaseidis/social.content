@@ -14,7 +14,7 @@
 							username="${content.author.userName}"></myTags:userImg>
 				</span> <span> <a
 						href="${ctx}/content/${content.contentType}/show/${content.id}">${content.title}</a>
-				</span> - <span>publicado por <a
+				</span> - <span>por <a
 						href="${ctx}/profile/${content.author.userName}">${content.author.userName}</a>
 				</span> <span>el <fmt:formatDate dateStyle="short" type="date"
 							value="${content.postDate}" timeZone="es" />

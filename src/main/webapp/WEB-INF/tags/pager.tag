@@ -7,10 +7,14 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 
 <div class="pager">
-	<div><a class="previous <c:if test="${prevPage ge -1}">red</c:if>" href="${prevPage}"> 
+	<div><a class="previous 
+<%-- 	<c:if test="${prevPage ge -1}">red</c:if> --%>
+	" href="${prevPage}"> 
 				<c:out value="<<"></c:out>
 		</a>
-	</div> <div><a class="next <c:if test="${nextPage lt 0}"> red</c:if>" href="${nextPage}"> 
+	</div> <div><a class="next 
+<%-- 	<c:if test="${nextPage lt 0}"> red</c:if> --%>
+	" href="${nextPage}"> 
 				<c:out value=">>"></c:out>
 	</a></div>
 </div>
@@ -24,7 +28,13 @@ $(function(){
 		$.ajax({
 	        url: '${ctx}/ajax/${updatedTagId}/${prevPage}/${total}',
 	        success: function(data) {
+	        	$('#${updatedTagId}').fadeOut('fast', function() {
 	        	$('#${updatedTagId}').html(data);
+	        		$('#${updatedTagId}').fadeIn('fast', function() {
+	        		
+	        		});
+	        	});
+				
 	        },
 	        error: function(data) {
 		          alert(data);
@@ -39,7 +49,12 @@ $(function(){
 		$.ajax({
 	        url: '${ctx}/ajax/${updatedTagId}/${nextPage}/${total}',
 	        success: function(data) {
-	        	$('#${updatedTagId}').html(data);
+	        	$('#${updatedTagId}').fadeOut('fast', function() {
+		        	$('#${updatedTagId}').html(data);
+		        		$('#${updatedTagId}').fadeIn('fast', function() {
+		        		
+		        		});
+		        	});
 	        },
 	        error: function(data) {
 		          alert(data);

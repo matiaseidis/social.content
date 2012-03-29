@@ -51,10 +51,18 @@
 				<c:out value="${user.userName}"></c:out>
 
 				<p></p>
-				<div id="followedContent" class="sidebar-box"></div>
-				<div id="followedUsers" class="sidebar-box"></div>
-				<div id="followedBy" class="sidebar-box"></div>
-				<div id="followedEvents" class="sidebar-box"></div>
+				<div class="sidebar-box-wrapper">
+					<div id="followedContent" class="sidebar-box"></div>
+				</div>
+				<div class="sidebar-box-wrapper">
+					<div id="followedUsers" class="sidebar-box"></div>
+				</div>
+				<div class="sidebar-box-wrapper">
+					<div id="followedBy" class="sidebar-box"></div>
+				</div>
+				<div class="sidebar-box-wrapper">
+					<div id="followedEvents" class="sidebar-box"></div>
+				</div>
 
 				<%-- 				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList> --%>
 				<%-- 				<myTags:userList title="followedBy" userList="${followedBy}">usuarios que te siguen</myTags:userList> --%>
@@ -74,7 +82,13 @@
 						$.ajax({
 							url : '${ctx}/ajax/' + value + '/0/100',
 							success : function(data) {
-								$(elementId).html(data);
+								$(elementId).fadeOut('fast', function() {
+									$(elementId).html(data);
+									$(elementId).fadeIn('fast', function() {
+										
+									});
+								});
+								
 							},
 							error : function(data) {
 								alert(data);

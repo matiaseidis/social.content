@@ -176,7 +176,7 @@ public class UserAccountController {
 			FileUtils.writeByteArrayToFile(file, imageBytes);
 
 		} catch (IOException e) {
-			v.addError("save", "No se puedo guardar la imagen, inetente cargarla en otro momento.");
+			v.addError("save", "No se puedo guardar la imagen, intente cargarla en otro momento.");
 		}
 
 	}

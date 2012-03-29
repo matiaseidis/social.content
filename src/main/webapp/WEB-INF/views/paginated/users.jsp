@@ -19,22 +19,14 @@
 							<c:when test="${updatedTagId eq 'followedBy'}">
 								<c:if test="${myFunctions:isUserFollowedBy(u, user) ne true}">
 									<a href="#" class="follow-user" name="${u.userName}" 
-									onclick='process("<c:out value="${u.userName}"></c:out>", "follow", "${updatedTagId}", ${page}, ${total})'>seguir</a>
+									onclick='process(event, "<c:out value="${u.userName}"></c:out>", "follow", "${updatedTagId}", ${page}, ${total})'>seguir</a>
 								</c:if>
 							</c:when>
 							<c:otherwise>
 								<a href="#" class="unfollow-user" name="${u.userName}" 
-								onclick='process("<c:out value="${u.userName}"></c:out>", "unfollow", "${updatedTagId}", ${page}, ${total})'>no seguir</a>
+								onclick='process(event, "<c:out value="${u.userName}"></c:out>", "unfollow", "${updatedTagId}", ${page}, ${total})'>no seguir</a>
 							</c:otherwise>
 						</c:choose>
-<%-- 						<c:choose> --%>
-<%-- 						<c:when test="${myFunctions:isUserFollowedBy(u, user)}"> --%>
-<%-- 							<a href="#" class="unfollow-user" name="${u.userName}" onclick='process("<c:out value="${u.userName}"></c:out>", "unfollow", "${updatedTagId}", ${page}, ${total})'>no seguir</a> --%>
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-<%-- 							<a href="#" class="follow-user" name="${u.userName}" onclick='process("<c:out value="${u.userName}"></c:out>", "follow", "${updatedTagId}", ${page}, ${total})'>seguir</a> --%>
-<%-- 						</c:otherwise> --%>
-<%-- 					</c:choose> --%>
 					</li>
 			</c:forEach>
 		</ul>
@@ -46,8 +38,9 @@
 		var followedBy = 'followedBy';
 		var followedUsers = 'followedUsers';
 
-		var process = function(name, action, id, page, total){
-// 		event.preventDefault();
+		var process = function(event, name, action, id, page, total){
+			event.preventDefault();
+			
 			$.ajax({
 				type: "POST",
 		        url: '${ctx}/ajax/'+action+'/user/'+name,
@@ -57,9 +50,15 @@
 		        	total:total
 		        },
 		        success: function(data) {
-		        	$('#'+id).html(data);
-					var action = (id  == followedBy) ? followedUsers : followedBy;
-					paginate(action);
+		        	$('#'+id).fadeOut('fast', function() {
+			        	$('#'+id).html(data);
+			        	$('#'+id).fadeIn('fast', function() {
+			        		var action = (id  == followedBy) ? followedUsers : followedBy;
+// 			        		$('#'+action).fadeOut('fast', function() {
+// 								paginate(action);	
+// 			        		});
+			        	});
+		      		});
 		        },
 		        error: function(data) {
 			          alert(data);

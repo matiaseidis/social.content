@@ -1,5 +1,8 @@
 package com.mati.demo.model.user;
 
+import static com.mati.demo.util.NavigationUtils.from;
+import static com.mati.demo.util.NavigationUtils.to;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,6 +15,8 @@ import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mati.demo.model.content.Content;
@@ -22,7 +27,6 @@ import com.mati.demo.model.content.type.Video;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.tag.Taggable;
 import com.mati.demo.util.GetContentQuery;
-import static com.mati.demo.util.NavigationUtils.*;
 
 public class User extends Taggable{
 
@@ -82,7 +86,14 @@ public class User extends Taggable{
 			
 		});
 		
-		return fc.subList(from(fc, page, total), to(fc, page, total));
+		Collection<Content> result = CollectionUtils.selectRejected(fc, new Predicate(){
+
+			@Override
+			public boolean evaluate(Object object) {
+				return object instanceof Event;
+			}});
+		
+		return new ArrayList<Content>(result).subList(from(fc, page, total), to(fc, page, total));
 	}
 	
 	public List<Event> getFollowedEvents(int total, int page){	

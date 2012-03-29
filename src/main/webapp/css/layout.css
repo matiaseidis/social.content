@@ -57,6 +57,9 @@ form.follow {
 	overflow: visible;
 	word-wrap: break-word;
 }
+.sidebar-box-wrapper{
+/* 	min-height:160px; */
+	}
 
 .sidebar {
 	float: left;
