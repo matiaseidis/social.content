@@ -53,10 +53,8 @@
 				<c:out value="${user.userName}"></c:out>
 
 				<p></p>
-				<div class="sidebar-box-wrapper">
-					<div id="pp" class="sidebar-box">zzzz</div>
+				<div class="sidebar-box-wrapper" id="content-sidebar-box-wrapper">
 					<div id="followedContent" class="sidebar-box"></div>
-					<div id="nn" class="sidebar-box">xxxx</div>
 				</div>
 				<div class="sidebar-box-wrapper">
 					<div id="followedUsers" class="sidebar-box"></div>

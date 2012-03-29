@@ -26,13 +26,13 @@
 	        url: '${ctx}/ajax/'+element+'/'+ref+'/${total}',
 	        success: function(data) {
 	        	var elementId = '#'+element;
-// 	        	$(elementId).fadeOut('fast', function() {
+	        	$(elementId).fadeOut('fast', function() {
 	        	$(elementId).html(data);
-// 	        		$(elementId).fadeIn('fast', function() {
-					enableCycle(elementId);
+	        		$(elementId).fadeIn('fast', function() {
+// 					enableCycle(elementId);
 				
-// 	        		});
-// 	        	});
+	        		});
+	        	});
 				
 	        },
 	        error: function(data) {
@@ -43,7 +43,7 @@
 	};
 	var enableCycle = function(elementId){
 		//$(elementId).parent().attr('class')
-		var r = '.'+$(elementId).parent().attr("class")+' .sidebar-box';
+		var r = '#'+$(elementId).parent().attr("id")+' .sidebar-box';
 		console.log(r);
 		$(r).cycle({
 			fx:     'scrollHorz', 
@@ -57,18 +57,10 @@
 	};
 $(function(){
 	
-// 	$('#${updatedTagId}').cycle({
-// 		fx:     'scrollRight', 
-// //		    delay:  -2000,
-// 	    speed:  'fast',
-// 	    pause:   1,
-// 	    next:   '#${updatedTagId} .previous', 
-// 	    prev:   '#${updatedTagId} .next' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-// 	});
-		
 	$('#${updatedTagId} .previous').click(function(e){
 		pager(e, '${updatedTagId}', '${prevPage}', -1);
 	});
+	
 	$('#${updatedTagId} .next').click(function(e){
 		pager(e, '${updatedTagId}', '${nextPage}', 0);
 	});
