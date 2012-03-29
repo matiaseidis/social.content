@@ -110,6 +110,7 @@ public class UserAccountController {
 		user.setEmail(userCommand.getEmail());
 		user.setInfo(userCommand.getInfo());
 		user.setImage(userCommand.getImage());
+		user.setHasOwnImage(userCommand.isUploadedImage());
 		return user;
 	}
 
@@ -133,6 +134,9 @@ public class UserAccountController {
 			/* 
 			 * TODO check image size 
 			 * */
+			
+			user.setUploadedImage(true);
+			
 			CommonsMultipartFile multipartFile = user.getImage();
 
 			InputStream is = null;

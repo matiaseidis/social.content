@@ -53,7 +53,7 @@
 						</form>
 		</c:if>
 		<myTags:userImg height="50" width="50"
-			username="${profileUser.userName}"></myTags:userImg>
+			username="${profileUser.userName}"  hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
 		<p>
 			<c:out value="${profileUser.info}"></c:out>
 		</p>

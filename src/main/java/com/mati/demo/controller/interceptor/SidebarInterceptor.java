@@ -51,8 +51,10 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 		}
 
 		String userPictureURI = "http://"+serverBasePath+userPictureFolder+"/";
+		String userDefaultImgFileName = "default";
 		String userPictureExt = ".png";
 		
+		request.setAttribute("userDefaultImgFileName", userDefaultImgFileName);
 		request.setAttribute("userPictureURI", userPictureURI);
 		request.setAttribute("userPictureExt", userPictureExt);
 

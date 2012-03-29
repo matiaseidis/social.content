@@ -47,7 +47,7 @@
 		<div class='sidebar'>
 			<!-- 			sidebar right -->
 			<sec:authorize access="isAuthenticated()">
-				<myTags:userImg height="50" width="50" username="${user.userName}"></myTags:userImg>
+				<myTags:userImg height="50" width="50" username="${user.userName}" hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
 				<c:out value="${user.userName}"></c:out>
 
 				<p></p>

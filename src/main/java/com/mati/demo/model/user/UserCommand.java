@@ -14,5 +14,6 @@ public class UserCommand {
 	@Getter @Setter private String email;
 	@Getter @Setter private String info;
 	@Getter @Setter private CommonsMultipartFile image;
+	@Getter @Setter private boolean uploadedImage;
 
 }

@@ -23,7 +23,7 @@
 	<c:forEach items="${content.comments}" var="c">
 		<div class="comment">
 			<myTags:userImg height="50" width="50"
-				username="${c.author.userName}"></myTags:userImg>
+				username="${c.author.userName}"  hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
 			<p>
 				<c:out value="${c.body}"></c:out>
 			</p>

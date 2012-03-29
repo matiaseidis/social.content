@@ -43,6 +43,9 @@ public class User extends Taggable{
 	@Getter @Setter private String password;
 	@Getter @Setter private String email;
 	@Getter @Setter private String info;
+	
+	@Getter @Setter private boolean hasOwnImage;
+	
 	@Getter @Setter private transient CommonsMultipartFile image;
 	
 	@Getter @Setter private List<String> roles = new ArrayList<String>();

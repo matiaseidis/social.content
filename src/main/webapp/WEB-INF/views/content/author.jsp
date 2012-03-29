@@ -7,7 +7,7 @@
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 
 <a href='<c:url value="/profile/${content.author.userName}"/>'> <myTags:userImg
-		height="50" width="50" username="${content.author.userName}"></myTags:userImg></a>
+		height="50" width="50" username="${content.author.userName}"  hasOwnImage="${user.hasOwnImage}"></myTags:userImg></a>
 Publicado por 
 <a href='<c:url value="/profile/${content.author.userName}"/>'>
 	<c:out value="${content.author.userName}"></c:out></a>, el <myTags:shortDate date="${content.postDate}" ></myTags:shortDate><myTags:time date="${content.postDate}" title="a las"></myTags:time>

@@ -12,7 +12,7 @@
 		<ul>
 			<c:forEach var="u" items="${followedList}">
 				<li class="${u.userName}"><a href="${ctx}/profile/${u.userName}"> <myTags:userImg
-							height="${imgSize}" width="${imgSize}" username="${u.userName}"></myTags:userImg></a>
+							height="${imgSize}" width="${imgSize}" username="${u.userName}"  hasOwnImage="${user.hasOwnImage}"></myTags:userImg></a>
 
 					<a href="${ctx}/profile/${u.userName}">${u.userName}</a> 
 						<c:choose >
