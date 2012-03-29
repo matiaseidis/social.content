@@ -30,6 +30,7 @@
 	<p>no sep uede borrar contenido en la vista de edit (o mandar el link de delete a user/content)!!!!</p>
 	<p>interfaz de admin?</p>
 	<p>class="show-tags-box" ajax en etiquetas seguir - no seguir en show (igual que en user -> follow / unfollow)</p>
+	<p>se pueden meter comments vacios</p>
 	-------------------------------------------------------------------------------------
 
 	<%-- 	<myTags:paginatedContentList contentList="${followedContent}" title="paged content" page="1"></myTags:paginatedContentList> --%>

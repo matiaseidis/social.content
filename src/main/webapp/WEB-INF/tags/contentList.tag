@@ -16,7 +16,7 @@
 		<ul>
 			<c:forEach var="content" items="${contentList}">
 				<li><span> <myTags:userImg height="25" width="25"
-							username="${content.author.userName}"></myTags:userImg>
+							username="${content.author.userName}" hasOwnImage="${content.author.hasOwnImage}"></myTags:userImg>
 				</span> <span> <a
 						href="${pageContext.request.contextPath}/content/${content.contentType}/show/${content.id}">${content.title}</a>
 				</span> - <span>publicado por <a

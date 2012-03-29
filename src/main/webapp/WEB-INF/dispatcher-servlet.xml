@@ -22,7 +22,12 @@
 		<property name="entityPluralName" value="users"></property>
 	</bean>
 
-	<bean id="ajax.controller" class="com.mati.demo.controller.AjaxController"></bean>
+	<bean id="ajax.controller" class="com.mati.demo.controller.AjaxController">
+		<property name="usersFixedTotal" value="5" />
+		<property name="contentFixedTotal" value="5" />
+		<property name="longFixedTotal" value="20" />
+		<property name="imgSize" value="27" />
+	</bean>
 	<bean id="follow.user.controller" class="com.mati.demo.controller.follow.FollowUserController"></bean>
 	<bean id="follow.tag.controller" class="com.mati.demo.controller.follow.FollowTagController"></bean>
 	<bean id="tag.controller" class="com.mati.demo.controller.TagController"></bean>

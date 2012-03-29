@@ -16,6 +16,8 @@
 	href="<c:url value='/css/layout.css' />" />
 <script type="text/javascript"
 	src="<c:url value='/js/jquery/jquery-1.7.1.min.js' />"></script>
+	<script src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js" type="text/javascript"></script>
+	
 <title>Social Content :: <sitemesh:write property='title' /></title>
 <sitemesh:write property='head' />
 </head>
@@ -52,7 +54,9 @@
 
 				<p></p>
 				<div class="sidebar-box-wrapper">
+					<div id="pp" class="sidebar-box">zzzz</div>
 					<div id="followedContent" class="sidebar-box"></div>
+					<div id="nn" class="sidebar-box">xxxx</div>
 				</div>
 				<div class="sidebar-box-wrapper">
 					<div id="followedUsers" class="sidebar-box"></div>

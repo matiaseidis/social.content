@@ -54,9 +54,11 @@
 			        	$('#'+id).html(data);
 			        	$('#'+id).fadeIn('fast', function() {
 			        		var action = (id  == followedBy) ? followedUsers : followedBy;
-// 			        		$('#'+action).fadeOut('fast', function() {
-// 								paginate(action);	
-// 			        		});
+							/*
+							$('#'+action).fadeOut('fast', function() {
+ 								paginate(action);	
+ 			        		});
+			        		*/
 			        	});
 		      		});
 		        },

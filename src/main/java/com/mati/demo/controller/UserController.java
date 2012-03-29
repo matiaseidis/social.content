@@ -71,6 +71,7 @@ public class UserController extends BaseController{
 		m.addObject("videos", baseModel.getModel().getLoggedInUser().getVideos());
 		m.addObject("audios", baseModel.getModel().getLoggedInUser().getAudios());
 		m.addObject("posts", baseModel.getModel().getLoggedInUser().getPosts());
+		m.addObject("events", baseModel.getModel().getLoggedInUser().getEvents());
 		
 		return m;
 	}

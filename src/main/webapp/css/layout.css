@@ -166,7 +166,7 @@ span {
     padding: 3px;
 	}
 .red{color:red;}
-.sidebar-box{
+.sidebar-box-wrapper{
 	border: 1px solid #EDEDED;
     clear: both;
     margin-bottom: 10px;

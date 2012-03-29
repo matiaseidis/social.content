@@ -8,4 +8,5 @@
 	<myTags:contentList contentList="${videos}" title="Videos" contentType="video"></myTags:contentList>
 	<myTags:contentList contentList="${audios}" title="Audios" contentType="audio"></myTags:contentList>
 	<myTags:contentList contentList="${posts}" title="Posts" contentType="post"></myTags:contentList>
+	<myTags:contentList contentList="${events}" title="Eventos" contentType="event"></myTags:contentList>
 	

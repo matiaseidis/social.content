@@ -18,7 +18,7 @@
 			<ul>
 				<c:forEach var="u" items="${userList}">
 					<li><a href="${ctx}/profile/${u.userName}"> <myTags:userImg
-								height="50" width="50" username="${u.userName}"></myTags:userImg></a>
+								height="50" width="50" username="${u.userName}" hasOwnImage="${u.hasOwnImage}"></myTags:userImg></a>
 
 						<a href="${ctx}/profile/${u.userName}">${u.userName}</a> 
 						<myTags:followUnfollowUser followed="${u}" follower="${user}"></myTags:followUnfollowUser>

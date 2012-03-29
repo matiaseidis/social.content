@@ -5,7 +5,6 @@
 <%@ attribute name="updatedTagId" required="true" rtexprvalue="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
-
 <div class="pager">
 	<div><a class="previous 
 <%-- 	<c:if test="${prevPage ge -1}">red</c:if> --%>
@@ -20,47 +19,58 @@
 </div>
 
 <script>
-$(function(){
-	$('#${updatedTagId} .previous').click(function(e){
+	var pager = function(e, element, ref, next){
 		e.preventDefault();
-		var prevPage = ${prevPage};
-		if(prevPage == -1){ return;	}
+		if(ref == next){ return;}
 		$.ajax({
-	        url: '${ctx}/ajax/${updatedTagId}/${prevPage}/${total}',
+	        url: '${ctx}/ajax/'+element+'/'+ref+'/${total}',
 	        success: function(data) {
-	        	$('#${updatedTagId}').fadeOut('fast', function() {
-	        	$('#${updatedTagId}').html(data);
-	        		$('#${updatedTagId}').fadeIn('fast', function() {
-	        		
-	        		});
-	        	});
+	        	var elementId = '#'+element;
+// 	        	$(elementId).fadeOut('fast', function() {
+	        	$(elementId).html(data);
+// 	        		$(elementId).fadeIn('fast', function() {
+					enableCycle(elementId);
+				
+// 	        		});
+// 	        	});
 				
 	        },
 	        error: function(data) {
 		          alert(data);
-		        	$('#${updatedTagId}').html(data);
+		        	$(elementId).html(data);
 		        }
 	      });
+	};
+	var enableCycle = function(elementId){
+		//$(elementId).parent().attr('class')
+		var r = '.'+$(elementId).parent().attr("class")+' .sidebar-box';
+		console.log(r);
+		$(r).cycle({
+			fx:     'scrollHorz', 
+//			    delay:  -2000,
+		    speed:  'fast',
+		    timeout:  0,
+		    pause:   1,
+		    next:   elementId+' .previous', 
+		    prev:   elementId+' .next' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+		});
+	};
+$(function(){
+	
+// 	$('#${updatedTagId}').cycle({
+// 		fx:     'scrollRight', 
+// //		    delay:  -2000,
+// 	    speed:  'fast',
+// 	    pause:   1,
+// 	    next:   '#${updatedTagId} .previous', 
+// 	    prev:   '#${updatedTagId} .next' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+// 	});
+		
+	$('#${updatedTagId} .previous').click(function(e){
+		pager(e, '${updatedTagId}', '${prevPage}', -1);
 	});
 	$('#${updatedTagId} .next').click(function(e){
-		e.preventDefault();
-		var nextPage = ${nextPage};
-		if(nextPage == 0){ return; }
-		$.ajax({
-	        url: '${ctx}/ajax/${updatedTagId}/${nextPage}/${total}',
-	        success: function(data) {
-	        	$('#${updatedTagId}').fadeOut('fast', function() {
-		        	$('#${updatedTagId}').html(data);
-		        		$('#${updatedTagId}').fadeIn('fast', function() {
-		        		
-		        		});
-		        	});
-	        },
-	        error: function(data) {
-		          alert(data);
-		        	$('#${updatedTagId}').html(data);
-		        }
-	      });
+		pager(e, '${updatedTagId}', '${nextPage}', 0);
 	});
 });
 </script>

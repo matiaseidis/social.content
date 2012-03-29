@@ -31,10 +31,25 @@ public class AjaxController {
 	
 	@Autowired @Setter @Getter private BaseModel baseModel;
 	
-	int shortFixedTotal = 3; // max items to show in paginated view
-	int longFixedTotal = 20; // max items to show in paginated view
-	int imgSize = 27;
+//	@Setter @Getter private int shortFixedTotal;
+	@Setter @Getter private int usersFixedTotal;
+	@Setter @Getter private int contentFixedTotal;
+	
+	@Setter @Getter private int longFixedTotal;
+	@Setter @Getter private int imgSize;
 
+	private int total(int total, int fixed){
+		return (total <= fixed) ? total : fixed;
+	}
+	
+	private int prev(int page){
+		return (page > 0) ? page -1 : -1;
+	}
+	
+	private int next(int page, int total, int listSize){
+		return ((page * total) + total) < listSize ? page + 1 : 0;
+	}
+	
 	
 	@RequestMapping(value="comment/{id}", method=RequestMethod.POST)
 	public ModelAndView add(@ModelAttribute Comment comment, @PathVariable int id, ModelAndView m){
@@ -58,14 +73,13 @@ public class AjaxController {
 		 * TODO parameterize this
 		 * limit max value returned
 		 */
-		total = (total <= shortFixedTotal) ? total : shortFixedTotal;
+		total = total(total, contentFixedTotal);
 		
 		int totalFollowedEvents = getBaseModel().getModel().getLoggedInUser().getFollowedEvents().size();
-		int prevPage = (page > 0) ? page -1 : -1;
-		int nextPage = ((page * total) + total) < totalFollowedEvents ? page + 1 : 0;
+		
 		List<Event> result = getBaseModel().getModel().getLoggedInUser().getFollowedEvents(total, page);
 		
-		setPagination(m, "Proximos eventos de gente que seguis", result, prevPage, nextPage, "followedEvents", page, total, totalFollowedEvents, imgSize);
+		setPagination(m, "Proximos eventos de gente que seguis", result, prev(page), next(page, total, totalFollowedEvents), "followedEvents", page, total, totalFollowedEvents, imgSize);
 
 		m.setViewName("paginated/events");
 		return m;
@@ -78,15 +92,13 @@ public class AjaxController {
 		 * TODO parameterize this
 		 * limit max value returned
 		 */
-		total = (total <= shortFixedTotal) ? total : shortFixedTotal;
-		
+		total = total(total, contentFixedTotal);
 		
 		int totalFollowedContent = getBaseModel().getModel().getLoggedInUser().getFollowedContent().size();
-		int prevPage = (page > 0) ? page -1 : -1;
-		int nextPage = ((page * total) + total) < totalFollowedContent ? page + 1 : 0;
+		
 		List<Content> result = getBaseModel().getModel().getLoggedInUser().getFollowedContent(total, page);
 		
-		setPagination(m, "Contenido de gente que seguis", result, prevPage, nextPage, "followedContent", page, total, totalFollowedContent, imgSize);
+		setPagination(m, "Contenido de gente que seguis", result, prev(page), next(page, total, totalFollowedContent), "followedContent", page, total, totalFollowedContent, imgSize);
 
 		m.setViewName("paginated/content");
 		return m;
@@ -95,15 +107,13 @@ public class AjaxController {
 	@RequestMapping(value="allContent/{page}/{total}", method=RequestMethod.GET)
 	public ModelAndView allContent(@PathVariable Integer page, @PathVariable Integer total, ModelAndView m){
 
-		total = (total <= longFixedTotal) ? total : longFixedTotal;
-		
+		total = total(total, longFixedTotal);
 		
 		int totalContent = getBaseModel().getModel().getContent().size();
-		int prevPage = (page > 0) ? page -1 : -1;
-		int nextPage = ((page * total) + total) < totalContent ? page + 1 : 0;
+
 		List<Content> result = getBaseModel().getModel().getContent(total, page);
 		
-		setPagination(m, "Todo el contenido", result, prevPage, nextPage, "allContent", page, total, totalContent, imgSize);
+		setPagination(m, "Todo el contenido", result, prev(page), next(page, total, totalContent), "allContent", page, total, totalContent, imgSize);
 
 		m.setViewName("paginated/content");
 		return m;
@@ -115,15 +125,12 @@ public class AjaxController {
 		 * TODO parameterize this
 		 * limit max value returned
 		 */
-		total = (total <= shortFixedTotal) ? total : shortFixedTotal;
-		
+		total = total(total, usersFixedTotal);
 		
 		int totalFollowedUsers = getBaseModel().getModel().getLoggedInUser().getFollowedUsers().size();
-		int prevPage = (page > 0) ? page -1 : -1;
-		int nextPage = ((page * total) + total) < totalFollowedUsers ? page + 1 : 0;
 		List<User> result = getBaseModel().getModel().getLoggedInUser().getFollowedUsers(total, page);
 		
-		setPagination(m, "Usuarios que seguis", result, prevPage, nextPage, "followedUsers", page, total, totalFollowedUsers, imgSize);
+		setPagination(m, "Usuarios que seguis", result, prev(page), next(page, total, totalFollowedUsers), "followedUsers", page, total, totalFollowedUsers, imgSize);
 		
 		m.setViewName("paginated/users");
 		return m;
@@ -135,15 +142,12 @@ public class AjaxController {
 		 * TODO parameterize this
 		 * limit max value returned
 		 */
-		total = (total <= shortFixedTotal) ? total : shortFixedTotal;
-		
+		total = total(total, usersFixedTotal);
 		
 		int totalFollowedBy = getBaseModel().getModel().getLoggedInUser().getFollowedBy().size();
-		int prevPage = (page > 0) ? page -1 : -1;
-		int nextPage = ((page * total) + total) < totalFollowedBy ? page + 1 : 0;
 		List<User> result = getBaseModel().getModel().getLoggedInUser().getFollowedBy(total, page);
 		
-		setPagination(m, "Usuarios que te siguen", result, prevPage, nextPage, "followedBy", page, total, totalFollowedBy, imgSize);
+		setPagination(m, "Usuarios que te siguen", result, prev(page), next(page, total, totalFollowedBy), "followedBy", page, total, totalFollowedBy, imgSize);
 		
 		m.setViewName("paginated/users");
 		return m;
