@@ -225,6 +225,14 @@ public class User extends Taggable{
 		return fu.subList(from(fu, page, total), to(fu, page, total));
 	}
 	
+	public List<Tag> getFollowedTags(int total, int page){	
+		List<Tag> ft = new ArrayList<Tag>(); 
+		
+		ft.addAll(followedTags.values());
+		
+		return ft.subList(from(ft, page, total), to(ft, page, total));
+	}
+	
 	public List<User> getFollowedBy(int total, int page){	
 		List<User> fu = new ArrayList<User>(); 
 		

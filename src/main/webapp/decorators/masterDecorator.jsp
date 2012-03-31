@@ -33,6 +33,11 @@
 				<p>${message}</p>
 			</div>
 		</c:if>
+		<c:if test="${sessionScope.message ne null}">
+			<div class="message">
+				<p>${sessionScope.message}</p>
+			</div>
+		</c:if>
 
 		<br />
 		<c:if test="${sessionScope.errors ne null}">
@@ -49,21 +54,24 @@
 		<div class='sidebar'>
 			<!-- 			sidebar right -->
 			<sec:authorize access="isAuthenticated()">
-				<myTags:userImg height="50" width="50" username="${user.userName}" hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
+				<myTags:userImg height="27" width="27" username="${user.userName}" hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
 				<c:out value="${user.userName}"></c:out>
 
 				<p></p>
 				<div class="sidebar-box-wrapper" id="content-sidebar-box-wrapper">
 					<div id="followedContent" class="sidebar-box"></div>
 				</div>
-				<div class="sidebar-box-wrapper">
+				<div class="sidebar-box-wrapper users-sidebar-box-wrapper">
 					<div id="followedUsers" class="sidebar-box"></div>
 				</div>
-				<div class="sidebar-box-wrapper">
+				<div class="sidebar-box-wrapper users-sidebar-box-wrapper">
 					<div id="followedBy" class="sidebar-box"></div>
 				</div>
 				<div class="sidebar-box-wrapper">
 					<div id="followedEvents" class="sidebar-box"></div>
+				</div>
+				<div class="sidebar-box-wrapper">
+					<div id="followedTags" class="sidebar-box"></div>
 				</div>
 
 				<%-- 				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList> --%>
@@ -73,7 +81,7 @@
 				<script>
 					$(function() {
 						var paginations = [ "followedContent", "followedUsers",
-								"followedBy", "followedEvents" ];
+								"followedBy", "followedEvents", "followedTags" ];
 						
 						$.each(paginations, function(index, value) {
 							paginate(value);
@@ -97,6 +105,24 @@
 								$(elementId).html(data);
 							}
 						});
+					};
+					var followUnfollow = function(event, name, entity){
+						event.preventDefault();
+						var $target = $(event.target).closest('div');
+						$.ajax({
+							type: "POST",
+					        url: '${ctx}/ajax/'+entity+'/followUnfollow/'+name,
+					        success: function(data) {
+					        	$target.fadeOut('fast', function() {
+					        		$target.html(data);
+					        		$target.fadeIn('fast', function() {});
+					      		});
+					        },
+					        error: function(data) {
+						          alert(data);
+						          $target.html(data);
+						        }
+					      });
 					};
 				</script>
 			</sec:authorize>

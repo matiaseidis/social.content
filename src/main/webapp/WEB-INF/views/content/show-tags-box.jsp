@@ -7,10 +7,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 <c:if test="${not empty content.tags}">
 	<div class="show-tags-box">
-		<p>
-			<span>Etiquetas:</span>
-		</p>
-
+		
+<img src='<c:url value="/img/symbolize-icons-set/png/16x16/flag.png" />' />
 		<ul>
 			<c:forEach var="tag" items="${content.tags}">
 				<li><a href='<c:url value="/tag/show/${tag.tagName}"/>'><c:out

@@ -21,7 +21,6 @@ public class StopFollowingTag implements Transaction {
 	public StopFollowingTag(String tagName, String loggedInUserName) {
 		this.tagName = tagName;
 		this.loggedInUserName = loggedInUserName;
-
 	}
 
 	public void executeOn(Object prevalentSystem, Date executionTime) {

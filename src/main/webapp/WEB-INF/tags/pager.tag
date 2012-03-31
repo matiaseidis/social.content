@@ -9,12 +9,14 @@
 	<div><a class="previous 
 <%-- 	<c:if test="${prevPage ge -1}">red</c:if> --%>
 	" href="${prevPage}"> 
-				<c:out value="<<"></c:out>
+<%-- 				<c:out value="<<"></c:out> --%>
+<img src='<c:url value="/img/symbolize-icons-set/png/16x16/rewind.png" />'/>
 		</a>
 	</div> <div><a class="next 
 <%-- 	<c:if test="${nextPage lt 0}"> red</c:if> --%>
 	" href="${nextPage}"> 
-				<c:out value=">>"></c:out>
+<%-- 				<c:out value=">>"></c:out> --%>
+<img src='<c:url value="/img/symbolize-icons-set/png/16x16/fast_forward.png" />' />
 	</a></div>
 </div>
 

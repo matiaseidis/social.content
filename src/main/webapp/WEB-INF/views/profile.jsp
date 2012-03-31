@@ -16,7 +16,9 @@
 	<div class="user-profile">
 <%-- 		<c:if test="${followed ne null}"> --%>
 			<p>
-			<myTags:followUnfollowUser followed="${profileUser}" follower="${user}"></myTags:followUnfollowUser>
+			<c:if test="${profileUser ne user}"> 
+				<myTags:followUnfollowUser followed="${profileUser}" follower="${user}"></myTags:followUnfollowUser>
+			</c:if>
 <%-- 				<c:choose> --%>
 <%-- 					<c:when test="${followed}"> --%>
 <%-- 				Estas siguiendo a <c:out value="${profileUser.userName}"></c:out> --%>

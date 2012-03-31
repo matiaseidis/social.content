@@ -7,21 +7,24 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.content.Comment;
 import com.mati.demo.model.content.Content;
 import com.mati.demo.model.content.type.Event;
+import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.content.comment.CreateComment;
+import com.mati.demo.prevalence.transaction.tag.StartFollowingTag;
+import com.mati.demo.prevalence.transaction.tag.StopFollowingTag;
 import com.mati.demo.prevalence.transaction.user.StartFollowingUser;
 import com.mati.demo.prevalence.transaction.user.StopFollowingUser;
 
@@ -34,6 +37,7 @@ public class AjaxController {
 //	@Setter @Getter private int shortFixedTotal;
 	@Setter @Getter private int usersFixedTotal;
 	@Setter @Getter private int contentFixedTotal;
+	@Setter @Getter private int tagsFixedTotal;
 	
 	@Setter @Getter private int longFixedTotal;
 	@Setter @Getter private int imgSize;
@@ -52,17 +56,18 @@ public class AjaxController {
 	
 	
 	@RequestMapping(value="comment/{id}", method=RequestMethod.POST)
-	public ModelAndView add(@ModelAttribute Comment comment, @PathVariable int id, ModelAndView m){
+	public ModelAndView comment(@ModelAttribute Comment comment, @PathVariable int id, ModelAndView m){
 		Content content = baseModel.getModel().loadContentById(id);
 		
-		if(content == null){
-			//TODO handle
-		}
-		
-		baseModel.getPrevayler().execute(new CreateComment(comment, id, baseModel.getModel().getLoggedInUser().getUserName()));
+		m.setViewName("content/comments-box");
 		m.addObject("content", content);
 		m.addObject("imgSize", imgSize);
-		m.setViewName("content/comments-box");
+		if(content == null || comment == null || StringUtils.isEmpty(comment.getBody())){
+			m.addObject("message", "No puede agregar comentarios vacios");
+			return m;
+		} 
+		
+		baseModel.getPrevayler().execute(new CreateComment(comment, id, baseModel.getModel().getLoggedInUser().getUserName()));
 		return m;
 	}
 	
@@ -136,6 +141,20 @@ public class AjaxController {
 		return m;
 	}
 	
+	@RequestMapping(value="followedTags/{page}/{total}", method=RequestMethod.GET)
+	public ModelAndView followedTags(@PathVariable Integer page, @PathVariable Integer total, ModelAndView m){
+		
+		total = total(total, tagsFixedTotal);
+		
+		int totalFollowedTags = getBaseModel().getModel().getLoggedInUser().getFollowedTags().size();
+		List<Tag> result = getBaseModel().getModel().getLoggedInUser().getFollowedTags(total, page);
+		
+		setPagination(m, "Etiquetas que seguis", result, prev(page), next(page, total, totalFollowedTags), "followedTags", page, total, totalFollowedTags, imgSize);
+		
+		m.setViewName("paginated/tags");
+		return m;
+	}
+	
 	@RequestMapping(value="followedBy/{page}/{total}", method=RequestMethod.GET)
 	public ModelAndView followedBy(@PathVariable Integer page, @PathVariable Integer total, ModelAndView m){
 		/*
@@ -153,27 +172,108 @@ public class AjaxController {
 		return m;
 	}
 	
-	@RequestMapping(value="follow/user/{userName}", method=RequestMethod.POST)
-	public ModelAndView followUSer(@PathVariable String userName, @RequestParam String refresh, @RequestParam int page, @RequestParam int total, ModelAndView m){
+//	@RequestMapping(value="follow/user/{userName}", method=RequestMethod.POST)
+//	public ModelAndView followUSer(@PathVariable String userName, @RequestParam String refresh, @RequestParam int page, @RequestParam int total, ModelAndView m){
+//		
+//		User user = getBaseModel().getModel().getLoggedInUser();
+//		
+//		if(!user.isFollowing(getBaseModel().getModel().loadUserByUsername(userName))){
+//			getBaseModel().getPrevayler().execute(new StartFollowingUser(userName, user.getUserName()));
+//		}
+//		return processForward(refresh, page, total, m);
+//	}
+//	
+//	@RequestMapping(value="unfollow/user/{userName}", method=RequestMethod.POST)
+//	public ModelAndView unfollowUSer(@PathVariable String userName, @RequestParam String refresh, @RequestParam int page, @RequestParam int total, ModelAndView m){
+//		
+//		User user = getBaseModel().getModel().getLoggedInUser();
+//		
+//		if(user.isFollowing(getBaseModel().getModel().loadUserByUsername(userName))){
+//			getBaseModel().getPrevayler().execute(new StopFollowingUser(userName, user.getUserName()));
+//		}
+//		
+//		return processForward(refresh, page, total, m);
+//	}
+	
+	@RequestMapping(value="user/followUnfollow/{userName}", method=RequestMethod.POST)
+	public ModelAndView followUnfollowUser(@PathVariable String userName, ModelAndView m){
 		
-		User user = getBaseModel().getModel().getLoggedInUser();
+		User follower = getBaseModel().getModel().getLoggedInUser();
+		User followed = getBaseModel().getModel().loadUserByUsername(userName);
 		
-		if(!user.isFollowing(getBaseModel().getModel().loadUserByUsername(userName))){
-			getBaseModel().getPrevayler().execute(new StartFollowingUser(userName, user.getUserName()));
+		if(follower == null || followed == null){
+			return m;
 		}
-		return processForward(refresh, page, total, m);
+		
+		if(follower.isFollowing(followed)){
+			getBaseModel().getPrevayler().execute(new StopFollowingUser(userName, follower.getUserName()));
+		} else{
+			getBaseModel().getPrevayler().execute(new StartFollowingUser(userName, follower.getUserName()));
+		}
+		
+		m.addObject("follower", follower);
+		m.addObject("followed", followed);
+		m.setViewName("/ajax/followUnfollowUser");
+		return m;
 	}
 	
-	@RequestMapping(value="unfollow/user/{userName}", method=RequestMethod.POST)
-	public ModelAndView unfollowUSer(@PathVariable String userName, @RequestParam String refresh, @RequestParam int page, @RequestParam int total, ModelAndView m){
+//	@RequestMapping(value="follow/user/{userName}", method=RequestMethod.POST)
+//	public ModelAndView followUser(@PathVariable String userName, ModelAndView m){
+//		
+//		User follower = getBaseModel().getModel().getLoggedInUser();
+//		User followed = getBaseModel().getModel().loadUserByUsername(userName);
+//		
+//		if(!follower.isFollowing(followed)){
+//			getBaseModel().getPrevayler().execute(new StartFollowingUser(userName, follower.getUserName()));
+//		}
+//		
+//		m.addObject("follower", follower);
+//		m.addObject("followed", followed);
+//		m.setViewName("/ajax/followUnfollowUser");
+//		return m;
+//		
+//	}
+//	
+//	@RequestMapping(value="unfollow/user/{userName}", method=RequestMethod.POST)
+//	public ModelAndView unfollowUser(@PathVariable String userName, ModelAndView m){
+//		
+//		User follower = getBaseModel().getModel().getLoggedInUser();
+//		User followed = getBaseModel().getModel().loadUserByUsername(userName);
+//		
+//		if(follower.isFollowing(followed)){
+//			getBaseModel().getPrevayler().execute(new StopFollowingUser(userName, follower.getUserName()));
+//		}
+//		
+//		m.addObject("follower", follower);
+//		m.addObject("followed", followed);
+//		m.setViewName("/ajax/followUnfollowUser");
+//		return m;
+//	}
+//	
+	/*
+	 * works for follow and unfollow
+	 */
+	@RequestMapping(value="/tag/followUnfollow/{tagName}", method=RequestMethod.POST)
+	public ModelAndView followUnfollowTag(@PathVariable String tagName, ModelAndView m){
 		
-		User user = getBaseModel().getModel().getLoggedInUser();
+		User follower = getBaseModel().getModel().getLoggedInUser();
+		Tag tag = getBaseModel().getModel().loadTagByTagName(tagName);
 		
-		if(user.isFollowing(getBaseModel().getModel().loadUserByUsername(userName))){
-			getBaseModel().getPrevayler().execute(new StopFollowingUser(userName, user.getUserName()));
+		if(follower == null || tag == null){
+			return m;
 		}
 		
-		return processForward(refresh, page, total, m);
+		if(!follower.isFollowing(tag)){
+			getBaseModel().getPrevayler().execute(new StartFollowingTag(tagName, follower.getUserName()));
+		} else {
+			getBaseModel().getPrevayler().execute(new StopFollowingTag(tagName, follower.getUserName()));
+		}
+		
+		m.addObject("follower", follower);
+		m.addObject("tag", tag);
+		m.setViewName("/ajax/followUnfollowTag");
+		return m;
+		
 	}
 	
 	private ModelAndView processForward(String methodName, int page, int total, ModelAndView m){
@@ -207,7 +307,7 @@ public class AjaxController {
 		m.addObject("nextPage", nextPage);
 		m.addObject("updatedTagId", updatedTagId);
 		m.addObject("page", page);
-		m.addObject("total", total);
+		m.addObject("total", (total<fullTotal) ? total : fullTotal);
 		m.addObject("fullTotal", fullTotal);
 		m.addObject("imgSize", imgSize);
 		return m;

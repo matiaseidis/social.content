@@ -174,15 +174,19 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 	protected abstract List<T> listContent(User user);
 
 	@RequestMapping(value=DELETE+"/{nodeId}", method=RequestMethod.POST)
-	public ModelAndView delete(@PathVariable int nodeId){
+	public ModelAndView delete(@PathVariable int nodeId, ModelAndView m, HttpSession session){
 
 		User user = getBaseModel().getModel().getLoggedInUser();
 		
-		if(user.getContent(nodeId) != null){
-			getBaseModel().getPrevayler().execute(new DeleteContent(nodeId, user.getUserName()));
-		}
+		Content c = user.getContent(nodeId);
 		
-		return new ModelAndView("redirect:../"+LIST, getEntityPluralName(), list(getEntityClass()));
+		if(c != null){
+			getBaseModel().getPrevayler().execute(new DeleteContent(nodeId, user.getUserName()));
+			session.setAttribute(MESSAGE, "El "+c.getContentType()+" "+c.getTitle()+" ha sido borrado.");
+		}
+		m.addObject(getEntityPluralName(), list(getEntityClass()));
+		m.setViewName("redirect:../"+LIST );
+		return m;
 	}
 
 	@RequestMapping(value=UPDATE, method=RequestMethod.POST)

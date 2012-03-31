@@ -10,8 +10,8 @@
 <script type='text/javascript'
 	src='${ctx}/js/mediaplayer-5.9-viral/jwplayer.js'></script>
 
-<script type="text/javascript" language="javascript"
-	src="${ctx}/js/niftyplayer/niftyplayer.js"></script>
+<!-- <script type="text/javascript" language="javascript" -->
+<%-- 	src="${ctx}/js/niftyplayer/niftyplayer.js"></script> --%>
 
 
 <title><c:out value="${content.title}"></c:out></title>
@@ -36,16 +36,16 @@
 <!-- 	</object> -->
 <!-- 	</div> -->
 <!-- 	<p></p> -->
-<div class="player-2">
-	<object type="application/x-shockwave-flash"
-		data="${ctx}/js/dewplayer/dewplayer.swf" width="200" height="20"
-		id="dewplayer" name="dewplayer">
-		<param name="movie" value="${ctx}/js/dewplayer/dewplayer.swf" />
-		<param name="flashvars"
-			value="mp3=<c:out value="${content.mediaFileRef}" ></c:out>" />
-		<param name="wmode" value="transparent" />
-	</object>
-</div>
+<!-- <div class="player-2"> -->
+<!-- 	<object type="application/x-shockwave-flash" -->
+<%-- 		data="${ctx}/js/dewplayer/dewplayer.swf" width="200" height="20" --%>
+<!-- 		id="dewplayer" name="dewplayer"> -->
+<%-- 		<param name="movie" value="${ctx}/js/dewplayer/dewplayer.swf" /> --%>
+<!-- 		<param name="flashvars" -->
+<%-- 			value="mp3=<c:out value="${content.mediaFileRef}" ></c:out>" /> --%>
+<!-- 		<param name="wmode" value="transparent" /> -->
+<!-- 	</object> -->
+<!-- </div> -->
 
 	<%-- <audio autoplay="autoplay" src="<c:out value="${content.audioRef}" ></c:out>" controls="controls"></audio> --%>
 	<jsp:include page="../show-tags-box.jsp"></jsp:include>

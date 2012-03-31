@@ -7,7 +7,7 @@
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <c:if test="${not empty followedList}">
 	<div>
-		<h3>${title} (${total})</h3>
+		<h3>${title} (${total} de ${fullTotal})</h3>
 		<ul>
 			<c:forEach var="content" items="${followedList}">
 				<li><span> <myTags:userImg  hasOwnImage="${user.hasOwnImage}" height="${imgSize}" width="${imgSize}"

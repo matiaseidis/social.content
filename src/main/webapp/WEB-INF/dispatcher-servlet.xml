@@ -23,7 +23,8 @@
 	</bean>
 
 	<bean id="ajax.controller" class="com.mati.demo.controller.AjaxController">
-		<property name="usersFixedTotal" value="5" />
+		<property name="usersFixedTotal" value="6" />
+		<property name="tagsFixedTotal" value="6" />
 		<property name="contentFixedTotal" value="5" />
 		<property name="longFixedTotal" value="20" />
 		<property name="imgSize" value="27" />
@@ -166,6 +167,7 @@
 			</bean>
 		</mvc:interceptor>
 
+<!-- hay que borrar este interceptor y cada vez que en el master decorator rendereo errors o message borrarlos de session ahi mismo despues de pintarlos -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*" />
 			<bean id="clean.session.interceptor"

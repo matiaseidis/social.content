@@ -18,11 +18,11 @@ public class CleanSessionInterceptor extends HandlerInterceptorAdapter{
 			if(request.getSession().getAttribute("count") != null){
 				int count = Integer.valueOf(request.getSession().getAttribute("count").toString());   
 				if(count == 1){
-					//vengo de un post
+					//el anterior request fue un post
 					request.getSession().setAttribute("count", 0);
 				} else {
 					// count == 0
-					// vengo de un get
+					//el anterior request fue un get
 					if(request.getSession() != null){
 						request.getSession().setAttribute("errors", null);
 						request.getSession().setAttribute("message", null);

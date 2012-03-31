@@ -8,67 +8,20 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <c:if test="${not empty followedList}">
 	<div>
-		<h3>${title}</h3>
+		<h3>${title} (${total} de ${fullTotal})</h3>
 		<ul>
 			<c:forEach var="u" items="${followedList}">
-				<li class="${u.userName}"><a href="${ctx}/profile/${u.userName}"> <myTags:userImg
-							height="${imgSize}" width="${imgSize}" username="${u.userName}"  hasOwnImage="${user.hasOwnImage}"></myTags:userImg></a>
-
-					<a href="${ctx}/profile/${u.userName}">${u.userName}</a> 
-						<c:choose >
-							<c:when test="${updatedTagId eq 'followedBy'}">
-								<c:if test="${myFunctions:isUserFollowedBy(u, user) ne true}">
-									<a href="#" class="follow-user" name="${u.userName}" 
-									onclick='process(event, "<c:out value="${u.userName}"></c:out>", "follow", "${updatedTagId}", ${page}, ${total})'>seguir</a>
-								</c:if>
-							</c:when>
-							<c:otherwise>
-								<a href="#" class="unfollow-user" name="${u.userName}" 
-								onclick='process(event, "<c:out value="${u.userName}"></c:out>", "unfollow", "${updatedTagId}", ${page}, ${total})'>no seguir</a>
-							</c:otherwise>
-						</c:choose>
-					</li>
+				<li class="${u.userName}"><a
+					href="${ctx}/profile/${u.userName}"> <myTags:userImg
+							height="${imgSize}" width="${imgSize}" username="${u.userName}"
+							hasOwnImage="${u.hasOwnImage}"></myTags:userImg></a> <a
+					href="${ctx}/profile/${u.userName}">${u.userName}</a> 
+					<myTags:followUnfollowUser
+ 						followed="${u}" follower="${user}"></myTags:followUnfollowUser> 
+						</li>
 			</c:forEach>
 		</ul>
 	</div>
-	<myTags:pager nextPage="${nextPage}" prevPage="${prevPage}" total="${total}"
-		updatedTagId="${updatedTagId}"></myTags:pager>
-
-	<script>
-		var followedBy = 'followedBy';
-		var followedUsers = 'followedUsers';
-
-		var process = function(event, name, action, id, page, total){
-			event.preventDefault();
-			
-			$.ajax({
-				type: "POST",
-		        url: '${ctx}/ajax/'+action+'/user/'+name,
-		        data: {
-		        	refresh:id,
-		        	page:page,
-		        	total:total
-		        },
-		        success: function(data) {
-		        	$('#'+id).fadeOut('fast', function() {
-			        	$('#'+id).html(data);
-			        	$('#'+id).fadeIn('fast', function() {
-			        		var action = (id  == followedBy) ? followedUsers : followedBy;
-							/*
-							$('#'+action).fadeOut('fast', function() {
- 								paginate(action);	
- 			        		});
-			        		*/
-			        	});
-		      		});
-		        },
-		        error: function(data) {
-			          alert(data);
-			        	$('#'+id).html(data);
-			        }
-		      });
-		};
-	</script>
-
-
+	<myTags:pager nextPage="${nextPage}" prevPage="${prevPage}"
+		total="${total}" updatedTagId="${updatedTagId}"></myTags:pager>
 </c:if>

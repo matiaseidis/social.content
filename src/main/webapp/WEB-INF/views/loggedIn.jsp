@@ -4,18 +4,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <div class="menu-left">
-		<a href="${ctx}/">Inicio</a>
-		<a href="${ctx}/user/content">Mis cosas</a> 
-		<a href="${ctx}/user/content/add">Agregar contenido</a>
-		<a href="${ctx}/search">Buscar</a>
+		<a href="${ctx}/" title="Inicio">
+		<img src="<c:url value='/img/symbolize-icons-set/png/32x32/home.png' />" /></a>
+		<a href="${ctx}/user/content" title="Mis cosas">
+		<img src="<c:url value='/img/symbolize-icons-set/png/32x32/briefcase.png' />" /></a> 
+		<a href="${ctx}/user/content/add" title="Agregar contenido">
+		<img src="<c:url value='/img/symbolize-icons-set/png/32x32/new.png' />" /></a>
+		<a href="${ctx}/search" title="Buscar">
+		<img src="<c:url value='/img/symbolize-icons-set/png/32x32/search.png' />" /></a>
 </div>
 <div class="menu-right">
 <!-- 	<form action="search" class="search-form"> -->
 <!-- 	<input type="text" name="text"> -->
 <!-- 	<input type="submit" value="Buscar"> -->
 <!-- 	</form> -->
-	<a href="${ctx}/profile/${user.userName}">Perfil</a> 
-	<a href="${ctx}/j_spring_security_logout">Logout</a>
+	<a href="${ctx}/profile/${user.userName}" title="Perfil">
+	<img src="<c:url value='/img/symbolize-icons-set/png/32x32/user.png' />" />
+	</a> 
+	<a href="${ctx}/j_spring_security_logout" title="Logout">
+	<img src="<c:url value='/img/symbolize-icons-set/png/32x32/stop.png' />" /></a>
 </div>
 
 <!-- <ul> -->
