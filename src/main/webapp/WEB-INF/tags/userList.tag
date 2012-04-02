@@ -7,10 +7,7 @@
 <%@ tag body-content="tagdependent"%>
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="myFunctions" uri="isFollowedBy"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
-<sec:authorize access="isAuthenticated()">
 	<c:if test="${not empty userList}">
 		<div>
 			<h3>${title} (${fn:length(userList)})</h3>
@@ -27,5 +24,4 @@
 			</ul>
 		</div>
 	</c:if>
-</sec:authorize>
 

@@ -7,7 +7,9 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <div id="comments-box">
-	<h3>Comente esto viejo!</h3>
+	<h3>
+	<img src='<c:url value="/img/symbolize-icons-set/png/16x16/comments.png" />' />
+	Comente esto viejo!</h3>
 	<sec:authorize access="isAuthenticated()">
 		<form:form action="${ctx}/comment/add/${contentType}/${content.id}"
 			modelAttribute="comment" method="post">
@@ -22,7 +24,8 @@
 	</sec:authorize>
 	<c:forEach items="${content.comments}" var="c">
 		<div class="comment">
-			<myTags:userImg height="50" width="50"
+		<img src='<c:url value="/img/symbolize-icons-set/png/16x16/comments.png" />' />
+			<myTags:userImg height="25" width="25"
 				username="${c.author.userName}"  hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
 			<p>
 				<c:out value="${c.body}"></c:out>

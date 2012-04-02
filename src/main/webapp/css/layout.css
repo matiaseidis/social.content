@@ -10,7 +10,9 @@
 	width: 960px;
 	clear: both;
 }
-
+.content-delete input, 
+.content-edit input, 
+.content-show input{border: none;} 
 .barrita {
 	
 }
@@ -114,6 +116,7 @@ input,textarea {
 	border: 1px solid #CCC;
 	margin-top: 15px;
 }
+ .img-input{border:none;} 
 input.long{width:640px;}
 input.medium{
 	width:400px;
@@ -181,7 +184,7 @@ div.pager {
 .users-sidebar-box-wrapper ul{height:106px}
 .users-sidebar-box-wrapper ul li{
 	float:left;
-	padding-right:20px;
+	width:50%;
 	}
 /*
 inline forms
@@ -211,6 +214,7 @@ input.title {
     padding: 0 5px;
 }
 .show-tags-box{margin-bottom:10px;}
+.show-tags-box ul{display:inline;}
 .show-tags-box ul li{
 /* 	 border: 1px solid green; */
     display: inline;

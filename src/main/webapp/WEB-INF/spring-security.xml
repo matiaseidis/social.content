@@ -33,11 +33,17 @@
 		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/register" access="permitAll" />
 		
+<!-- 		<security:intercept-url pattern="/ajax/search/*" access="permitAll" /> -->
+		<security:intercept-url pattern="/ajax/search/**/*" access="permitAll" />
+		<security:intercept-url pattern="/ajax/search*" access="permitAll" />
+		
 		<security:intercept-url pattern="/*" access='hasRole("ROLE_USER")' />
+		
 		
 <!-- 		<security:intercept-url pattern="/resources/**/*" access="permitAll" /> -->
 		<security:intercept-url pattern="/js/**/*.js" access="permitAll" />
-		<security:intercept-url pattern="/css/**/*.css" access="permitAll" />
+		<security:intercept-url pattern="/img/**/*" access="permitAll" />
+		<security:intercept-url pattern="/**/*.css" access="permitAll" />
 		<security:intercept-url pattern="/fonts/**/*" access="permitAll" />
 		<security:intercept-url pattern="/js/**/*.swf" access="permitAll" />
 		

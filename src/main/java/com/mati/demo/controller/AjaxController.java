@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.content.Comment;
@@ -34,7 +37,6 @@ public class AjaxController {
 	
 	@Autowired @Setter @Getter private BaseModel baseModel;
 	
-//	@Setter @Getter private int shortFixedTotal;
 	@Setter @Getter private int usersFixedTotal;
 	@Setter @Getter private int contentFixedTotal;
 	@Setter @Getter private int tagsFixedTotal;
@@ -53,6 +55,14 @@ public class AjaxController {
 	private int next(int page, int total, int listSize){
 		return ((page * total) + total) < listSize ? page + 1 : 0;
 	}
+	
+
+	@RequestMapping(value="searchBox", method=RequestMethod.GET)
+	public ModelAndView searchBox(ModelAndView m){
+		m.setViewName("search/box");
+		return m;
+	}
+
 	
 	
 	@RequestMapping(value="comment/{id}", method=RequestMethod.POST)
@@ -172,29 +182,6 @@ public class AjaxController {
 		return m;
 	}
 	
-//	@RequestMapping(value="follow/user/{userName}", method=RequestMethod.POST)
-//	public ModelAndView followUSer(@PathVariable String userName, @RequestParam String refresh, @RequestParam int page, @RequestParam int total, ModelAndView m){
-//		
-//		User user = getBaseModel().getModel().getLoggedInUser();
-//		
-//		if(!user.isFollowing(getBaseModel().getModel().loadUserByUsername(userName))){
-//			getBaseModel().getPrevayler().execute(new StartFollowingUser(userName, user.getUserName()));
-//		}
-//		return processForward(refresh, page, total, m);
-//	}
-//	
-//	@RequestMapping(value="unfollow/user/{userName}", method=RequestMethod.POST)
-//	public ModelAndView unfollowUSer(@PathVariable String userName, @RequestParam String refresh, @RequestParam int page, @RequestParam int total, ModelAndView m){
-//		
-//		User user = getBaseModel().getModel().getLoggedInUser();
-//		
-//		if(user.isFollowing(getBaseModel().getModel().loadUserByUsername(userName))){
-//			getBaseModel().getPrevayler().execute(new StopFollowingUser(userName, user.getUserName()));
-//		}
-//		
-//		return processForward(refresh, page, total, m);
-//	}
-	
 	@RequestMapping(value="user/followUnfollow/{userName}", method=RequestMethod.POST)
 	public ModelAndView followUnfollowUser(@PathVariable String userName, ModelAndView m){
 		
@@ -217,39 +204,6 @@ public class AjaxController {
 		return m;
 	}
 	
-//	@RequestMapping(value="follow/user/{userName}", method=RequestMethod.POST)
-//	public ModelAndView followUser(@PathVariable String userName, ModelAndView m){
-//		
-//		User follower = getBaseModel().getModel().getLoggedInUser();
-//		User followed = getBaseModel().getModel().loadUserByUsername(userName);
-//		
-//		if(!follower.isFollowing(followed)){
-//			getBaseModel().getPrevayler().execute(new StartFollowingUser(userName, follower.getUserName()));
-//		}
-//		
-//		m.addObject("follower", follower);
-//		m.addObject("followed", followed);
-//		m.setViewName("/ajax/followUnfollowUser");
-//		return m;
-//		
-//	}
-//	
-//	@RequestMapping(value="unfollow/user/{userName}", method=RequestMethod.POST)
-//	public ModelAndView unfollowUser(@PathVariable String userName, ModelAndView m){
-//		
-//		User follower = getBaseModel().getModel().getLoggedInUser();
-//		User followed = getBaseModel().getModel().loadUserByUsername(userName);
-//		
-//		if(follower.isFollowing(followed)){
-//			getBaseModel().getPrevayler().execute(new StopFollowingUser(userName, follower.getUserName()));
-//		}
-//		
-//		m.addObject("follower", follower);
-//		m.addObject("followed", followed);
-//		m.setViewName("/ajax/followUnfollowUser");
-//		return m;
-//	}
-//	
 	/*
 	 * works for follow and unfollow
 	 */
@@ -272,6 +226,48 @@ public class AjaxController {
 		m.addObject("follower", follower);
 		m.addObject("tag", tag);
 		m.setViewName("/ajax/followUnfollowTag");
+		return m;
+		
+	}
+	
+	@RequestMapping(value="/search/content", method = RequestMethod.GET)
+	public ModelAndView searchContent(ModelAndView m, @RequestParam String pattern, HttpSession session){ 
+		
+		List<Content> content = null;
+		
+		if(StringUtils.isNotEmpty(pattern)){
+			content = baseModel.getModel().searchContent(pattern); 
+		}
+		session.setAttribute("contentSearchResult", content);
+		m.setViewName("/search/content-result");
+		return m;
+		
+	}
+	
+	@RequestMapping(value="/search/user", method = RequestMethod.GET)
+	public ModelAndView searchUsers(ModelAndView m, @RequestParam String pattern, HttpSession session){ 
+		
+		List<User> users = null;
+		
+		if(StringUtils.isNotEmpty(pattern)){
+			users = baseModel.getModel().searchUsers(pattern); 
+		}
+		session.setAttribute("usersSearchResult", users);
+		m.setViewName("/search/user-result");
+		return m;
+		
+	}
+	
+	@RequestMapping(value="/search/tag", method = RequestMethod.GET)
+	public ModelAndView searchTags(ModelAndView m, @RequestParam String pattern, HttpSession session){ 
+		
+		List<Tag> tags = null;
+		
+		if(StringUtils.isNotEmpty(pattern)){
+			tags = baseModel.getModel().searchTags(pattern); 
+		}
+		session.setAttribute("tagsSearchResult", tags);
+		m.setViewName("/search/tag-result");
 		return m;
 		
 	}

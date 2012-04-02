@@ -28,19 +28,22 @@
 					<form
 						action='<c:url value="/content/${content.contentType}/delete/${content.id}" />'
 						method="POST" class="left content-delete">
-						<input type="submit" value="borrar">
+<!-- 						<input type="submit" value="borrar"> -->
+						<input type="image" src='<c:url value="/img/symbolize-icons-set/png/16x16/delete.png" />' >
 					</form>
 
 					<form
 						action='<c:url value="/content/${content.contentType}/edit/${content.id}" />'
 						class="left content-edit">
-						<input type="submit" value="editar">
+<!-- 						<input type="submit" value="editar"> -->
+<input type="image" src='<c:url value="/img/symbolize-icons-set/png/16x16/edit.png" />' >
 					</form>
 
 					<form
 						action='<c:url value="/content/${content.contentType}/show/${content.id}" />'
 						class="left content-show">
-						<input type="submit" value="ver">
+<!-- 						<input type="submit" value="ver"> -->
+<input type="image" src='<c:url value="/img/symbolize-icons-set/png/16x16/play.png" />' >
 					</form></li>
 			</c:forEach>
 		</ul>
