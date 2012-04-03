@@ -30,7 +30,7 @@
 		
 		<form:label for="start" path="start">Comienza:</form:label>
 		<form:input path="start" id="datepicker-start" class="fixed-height" />
-		
+		<myTags:errorField field="start"></myTags:errorField>
 		<br />
 		
 <%-- 		<form:label for="end" path="end">Finaliza:</form:label> --%>

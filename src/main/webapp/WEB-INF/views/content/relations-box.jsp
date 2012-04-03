@@ -8,12 +8,11 @@
 	uri="http://www.springframework.org/security/tags"%>
 <div id="comments-box">
 	<h3>
-	<img src='<c:url value="/img/symbolize-icons-set/png/16x16/comments.png" />' />
-	Comente esto viejo!</h3>
+	<img src='<c:url value="/img/symbolize-icons-set/png/16x16/link.png" />' />
+	Relacionar esto</h3>
 	<sec:authorize access="isAuthenticated()">
-		<form:form action="${ctx}/comment/add/${contentType}/${content.id}"
-			modelAttribute="comment" method="post">
-			<form:label for="body" path="body"></form:label>
+		<form:form action='<c:url value="/ajax/relation/add" />' modelAttribute="relation" method="post">
+			<form:label for="name" path="name"></form:label>
 			<form:textarea cols="80" rows="4" path="body" id="new-comment-body" />
 			<input type="hidden" id="comment-content-id" value="${content.id}" />
 			<p>

@@ -10,7 +10,7 @@ public class NavigationUtils {
 	}
 	
 	public static int to(Collection c, int page, int total){
-		int size = c.isEmpty() ? 0 : c.size()-1;
+		int size = c.isEmpty() ? 0 : c.size();
 		
 		int to = (((page * total) + total) <= size) ? (page * total) + total : size;
 		return to;

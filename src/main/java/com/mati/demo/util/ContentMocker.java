@@ -55,8 +55,8 @@ public class ContentMocker {
 			baseModel.getPrevayler().execute(new CreateUser(u));
 			try {
 
-				baseModel.getPrevayler().execute(new StartFollowingUser(u.getUserName(), admin.getUserName()));
-				baseModel.getPrevayler().execute(new StartFollowingUser(admin.getUserName(), u.getUserName() ));
+//				baseModel.getPrevayler().execute(new StartFollowingUser(u.getUserName(), admin.getUserName()));
+//				baseModel.getPrevayler().execute(new StartFollowingUser(admin.getUserName(), u.getUserName() ));
 				for(int c = 0; i<5;i++){
 					baseModel.getPrevayler().execute(new CreateContent<Video>(video(c, u), u.getUserName(), null));
 					baseModel.getPrevayler().execute(new CreateContent<Audio>(audio(c, u), u.getUserName(), null));

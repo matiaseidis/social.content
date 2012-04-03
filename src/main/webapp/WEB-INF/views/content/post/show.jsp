@@ -33,7 +33,7 @@
 
 
 	</div>
-
+<%-- 	<jsp:include page="../relations-box.jsp" /> --%>
 	<jsp:include page="../comments-box.jsp" />
 </body>
 </html>

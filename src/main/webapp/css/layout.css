@@ -1,5 +1,5 @@
 .page-wrapper {
-	
+	    padding-top: 10px;
 }
 .player-1{}
 .player-2{}
@@ -34,6 +34,13 @@ form.follow, .follow-link {
 .register-form-link,
 .login-form-barrita{float:left;}
 .register-form-link{margin-left:15px;}
+
+.ui-menu-item {
+    background: none repeat scroll 0 0 green;
+    border: 1px solid #333333;
+    width: 400px;
+}
+.ui-menu-item a{background:red;}
 .search-form {
 	display: inline;
 }
@@ -42,10 +49,33 @@ form.follow, .follow-link {
 	display: inline;
 }
 
+/*
+a
+*/
+#search-box-trigger,
+#search-box-trigger img{
+   outline: 0;
+}
 .barrita-wrapper {
 	padding-top:5px;
 }
-
+.tabNavigation li{
+	display:inline;
+}
+.tabNavigation li a{
+	padding:6px;
+}
+.tab{
+	padding:10px;
+	border:1px solid #EDEDED;}
+.selected{
+/* 	font-weight:bold; */
+	background-color: #EDEDED;
+}
+#search-box-trigger{
+	float:left;
+	padding-right:10px;
+}
 .mainBody {
 	float: left;
 	margin-left: 0;
@@ -59,6 +89,7 @@ form.follow, .follow-link {
 }
 
 .mainBody,.sidebar {
+	
 	overflow: visible;
 	word-wrap: break-word;
 }
@@ -167,7 +198,7 @@ span {
     width: 50%;
 }
 .pager div a{
-    border: 1px solid #EDEDED;
+/*     border: 1px solid #EDEDED; */
     margin-left: 60px;
     padding: 3px;
 	}
@@ -181,7 +212,9 @@ div.pager {
     padding: 10px 10px 28px;
 }
 .users-sidebar-box-wrapper{}
-.users-sidebar-box-wrapper ul{height:106px}
+.users-sidebar-box-wrapper ul{
+/* 	height:106px; */
+	}
 .users-sidebar-box-wrapper ul li{
 	float:left;
 	width:50%;
@@ -194,6 +227,7 @@ inline forms
 	border: 1px solid #999;
 	padding:2px 3px;
 	}
+div.title{clear:both;}
 input.title {
 	width: 640px;
 }

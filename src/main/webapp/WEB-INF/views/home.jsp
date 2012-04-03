@@ -23,23 +23,7 @@
 	-------------------------------------------------------------------------------------
 
 	<p>TODO</p>
-	<p>en la vista de view agregar un cubo con info de tags:
-	<pre>
-	tagged
-javascript × 193601
-jquery × 167367
-html × 87025
-forms × 16626
-webkit × 2653
 
-y del contenido:
-
-asked 3 years ago
-
-viewed 72,128 times
-
-active 11 months ago
-	</pre></p>
 	<p>update user password</p>
 	<p>datos de perfil -> agregar redes sociales (?)</p>
 	<p>poder borrar usuario</p>

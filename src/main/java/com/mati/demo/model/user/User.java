@@ -89,6 +89,23 @@ public class User extends Taggable{
 			
 		});
 		
+		return fc.subList(from(fc, page, total), to(fc, page, total));
+	}
+	
+	public List<Content> getFollowedNonEventContent(int total, int page){	
+		List<Content> fc = new ArrayList<Content>(); 
+		for(User u : followedUsers.values()){
+			fc.addAll(u.getContent());
+		}
+		Collections.sort(fc, new Comparator<Content>(){
+
+			@Override
+			public int compare(Content c1, Content c2) {
+				return c1.getPostDate().compareTo(c2.getPostDate());
+			}
+			
+		});
+		
 		Collection<Content> result = CollectionUtils.selectRejected(fc, new Predicate(){
 
 			@Override
@@ -98,6 +115,8 @@ public class User extends Taggable{
 		
 		return new ArrayList<Content>(result).subList(from(fc, page, total), to(fc, page, total));
 	}
+	
+	
 	
 	public List<Event> getFollowedEvents(int total, int page){	
 		List<Event> fe = new ArrayList<Event>(); 
@@ -127,8 +146,24 @@ public class User extends Taggable{
 		for(User u : followedUsers.values()){
 			fc.addAll(u.getContent());
 		}
+		
 		return fc;
 	}
+
+	public List<Content> getFollowedNonEventContent(){	
+		List<Content> fc = new ArrayList<Content>(); 
+		for(User u : followedUsers.values()){
+			fc.addAll(u.getContent());
+		}
+		Collection<Content> result = CollectionUtils.selectRejected(fc, new Predicate(){
+
+			@Override
+			public boolean evaluate(Object object) {
+				return object instanceof Event;
+			}});
+		return new ArrayList<Content>(result);
+	}
+
 	
 	public List<Video> getFollowedVideos(int total, int page){
 		return getFollowedVideos().subList(from(getFollowedVideos(), page, total), to(getFollowedVideos(), page, total));

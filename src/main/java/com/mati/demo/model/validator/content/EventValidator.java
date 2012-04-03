@@ -11,7 +11,11 @@ public class EventValidator extends ContentValidator<Event> {
 
 	@Override
 	protected void performValidation() {
-		// TODO Auto-generated method stub
+		Event e = (Event)getContent();
+		
+		if(e.getStart() == null){
+			addError("start", "Debe ingresar una fecha de inicio");
+		}
 		
 	}
 

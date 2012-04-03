@@ -2,6 +2,7 @@ package com.mati.demo.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,13 +11,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import org.apache.commons.lang.StringUtils;
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mati.demo.model.content.Comment;
@@ -106,11 +110,11 @@ public class AjaxController {
 		 * TODO parameterize this
 		 * limit max value returned
 		 */
-		int totalFollowedContent = getBaseModel().getModel().getLoggedInUser().getFollowedContent().size();
+		int totalFollowedContent = getBaseModel().getModel().getLoggedInUser().getFollowedNonEventContent().size();
 
 		total = total(total, contentFixedTotal, totalFollowedContent);
 		
-		List<Content> result = getBaseModel().getModel().getLoggedInUser().getFollowedContent(total, page);
+		List<Content> result = getBaseModel().getModel().getLoggedInUser().getFollowedNonEventContent(total, page);
 		
 		setPagination(m, "Contenido de gente que seguis", result, prev(page), next(page, total, totalFollowedContent), "followedContent", page, total, totalFollowedContent, imgSize);
 
@@ -240,6 +244,24 @@ public class AjaxController {
 		
 	}
 	
+	@RequestMapping(value="/search/autocomplete/content", method = RequestMethod.GET)
+	public @ResponseBody List<AutoCompleteItem> autoSearchContent(ModelAndView m, @RequestParam String term, HttpSession session){ 
+		List<AutoCompleteItem> result = new ArrayList<AutoCompleteItem>();
+		
+		List<Content> content = null;
+		
+		if(StringUtils.isNotEmpty(term)){
+			content = baseModel.getModel().searchContent(term); 
+		}
+		for(Content c : content){
+			AutoCompleteItem item = new AutoCompleteItem();
+			item.setValue(c.getTitle());
+			item.setId(c.getId());
+			result.add(item);
+		}
+		return result;
+	}
+	
 	@RequestMapping(value="/search/user", method = RequestMethod.GET)
 	public ModelAndView searchUsers(ModelAndView m, @RequestParam String pattern, HttpSession session){ 
 		
@@ -273,22 +295,17 @@ public class AjaxController {
 		Method method = null;
 		Object[] o = new Object[]{page, total, m};
 		try {
-			  method = this.getClass().getMethod(methodName, Integer.class, Integer.class, ModelAndView.class);
-			} catch (SecurityException e) {
-			  // ...
-			} catch (NoSuchMethodException e) {
-			  // ...
-			}
-			try {
-				result = (ModelAndView)method.invoke(this, o);
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
-			return result;
+			method = this.getClass().getMethod(methodName, Integer.class, Integer.class, ModelAndView.class);
+		} catch (SecurityException e) {e.printStackTrace();} 
+		  catch (NoSuchMethodException e) {e.printStackTrace();}
+		
+		try {
+			result = (ModelAndView)method.invoke(this, o);
+		} catch (IllegalArgumentException e) {e.printStackTrace();} 
+		catch (IllegalAccessException e) {e.printStackTrace();} 
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		
+		return result;
 	}
 	
 	
@@ -304,4 +321,9 @@ public class AjaxController {
 		m.addObject("imgSize", imgSize);
 		return m;
 	}
+}
+
+class AutoCompleteItem{
+	@Getter @Setter String value;
+	@Getter @Setter int id;
 }

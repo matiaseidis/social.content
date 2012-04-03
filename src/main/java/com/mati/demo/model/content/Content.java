@@ -1,13 +1,16 @@
 package com.mati.demo.model.content;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import com.mati.demo.model.relationships.Relation;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.tag.Taggable;
 import com.mati.demo.model.user.User;
@@ -23,12 +26,12 @@ public abstract class Content extends Taggable implements Commentable{
 	
 	@Getter @Setter private int visited;
 	
-//	@Getter @Setter private MetaData meta = new MetaData();
 	@Getter @Setter private String title;
 	@Getter @Setter private User author;
 	@Getter final private String contentType = getClass().getSimpleName().toLowerCase();
 	
-//	@Getter private final List<Comment> comments = new ArrayList<Comment>(); 
+	@Getter private List<Relation> relations = new ArrayList<Relation>();
+	
 	@Getter private final SortedSet<Comment> comments = new TreeSet<Comment>(new Comparator<Comment>(){
 
 		@Override
@@ -37,8 +40,6 @@ public abstract class Content extends Taggable implements Commentable{
 		}
 	}); 
 	
-//	private Map<String, Tag> tagsMap = new HashMap<String, Tag>();
-
 	@Override
 	protected void registerWithTag(Tag tag) {
 		tag.addTagged(this);
@@ -48,8 +49,6 @@ public abstract class Content extends Taggable implements Commentable{
 	protected void unregisterWithTag(Tag tag) {
 		tag.removeTagged(this);
 	}
-	
-//	protected abstract String getContentType();
 	
 	public void comment(Comment comment) {
 		comments.add(comment);
@@ -70,6 +69,10 @@ public abstract class Content extends Taggable implements Commentable{
 
 	public boolean hasTag(Tag tag) {
 		return getTags().contains(tag);
+	}
+
+	public void addRelation(Relation relation) {
+		relations.add(relation);
 	}
 	
 }
