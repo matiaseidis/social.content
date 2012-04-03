@@ -225,4 +225,5 @@ input.title {
 .follow-tag-link img{
 	border: 1px solid #333333;
     padding: 2px;
+    border-radius:7px;
 }

@@ -98,7 +98,11 @@
 					
 				});
 			</script>
-			
+			<c:if test="${content ne null}">
+			<div class="sidebar-box-wrapper" id="content-info-box-wrapper">
+				<myTags:contentInfo content="${content}"></myTags:contentInfo>
+			</div>
+			</c:if>
 			<sec:authorize access="isAuthenticated()">
 				<myTags:userImg height="27" width="27" username="${user.userName}" hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
 				<c:out value="${user.userName}"></c:out>

@@ -21,6 +21,8 @@ public abstract class Content extends Taggable implements Commentable{
 	@Getter @Setter private int id;
 	@Getter @Setter private Date postDate;
 	
+	@Getter @Setter private int visited;
+	
 //	@Getter @Setter private MetaData meta = new MetaData();
 	@Getter @Setter private String title;
 	@Getter @Setter private User author;
@@ -69,5 +71,5 @@ public abstract class Content extends Taggable implements Commentable{
 	public boolean hasTag(Tag tag) {
 		return getTags().contains(tag);
 	}
-
+	
 }

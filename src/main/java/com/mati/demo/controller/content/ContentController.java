@@ -29,6 +29,7 @@ import com.mati.demo.model.validator.content.ContentValidator;
 import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.content.CreateContent;
 import com.mati.demo.prevalence.transaction.content.DeleteContent;
+import com.mati.demo.prevalence.transaction.content.RegisterView;
 import com.mati.demo.prevalence.transaction.content.UpdateContent;
 
 public abstract class ContentController<T extends Content> extends BaseController<T> {
@@ -248,6 +249,18 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			m.setViewName("redirect:/");
 			return m;
 		}
+		
+		String attName = "sessionViews";
+		List<Integer> sessionViews = (List<Integer>)session.getAttribute(attName);
+		if(sessionViews == null){
+			sessionViews = new ArrayList<Integer>();
+		}
+		if(!sessionViews.contains(content.getId())){
+			getBaseModel().getPrevayler().execute(new RegisterView(id));
+			sessionViews.add(content.getId());
+			session.setAttribute(attName, sessionViews);
+		}
+		
 		processBeforeShow(content);
 		m.addObject("model", getBaseModel().getModel());
 		m.addObject("content", content);

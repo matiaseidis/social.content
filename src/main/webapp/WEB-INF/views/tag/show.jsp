@@ -11,12 +11,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title><c:out value="${tag.tagName}"></c:out><myTags:followUnfollowTag tag="${tag}" user="${user}"></myTags:followUnfollowTag></title>
 </head>
 <body>
 
-Tag: <c:out value="${tag.tagName}"></c:out>
-<myTags:followUnfollowTag tag="${tag}" user="${user}"></myTags:followUnfollowTag>
+
 
 <p>Tagged content</p>
 

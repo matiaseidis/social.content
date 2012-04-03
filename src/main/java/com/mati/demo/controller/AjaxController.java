@@ -44,8 +44,10 @@ public class AjaxController {
 	@Setter @Getter private int longFixedTotal;
 	@Setter @Getter private int imgSize;
 
-	private int total(int total, int fixed){
-		return (total <= fixed) ? total : fixed;
+	private int total(int total, int fixed, int maxAllowed){
+		int tot = (total <= fixed) ? total : fixed; 
+		
+		return (tot <= maxAllowed) ? tot : maxAllowed;
 	}
 	
 	private int prev(int page){
@@ -84,13 +86,10 @@ public class AjaxController {
 	
 	@RequestMapping(value="followedEvents/{page}/{total}", method=RequestMethod.GET)
 	public ModelAndView followedEvents(@PathVariable Integer page, @PathVariable Integer total, ModelAndView m){
-		/*
-		 * TODO parameterize this
-		 * limit max value returned
-		 */
-		total = total(total, contentFixedTotal);
-		
+
 		int totalFollowedEvents = getBaseModel().getModel().getLoggedInUser().getFollowedEvents().size();
+
+		total = total(total, contentFixedTotal, totalFollowedEvents);
 		
 		List<Event> result = getBaseModel().getModel().getLoggedInUser().getFollowedEvents(total, page);
 		
@@ -107,9 +106,9 @@ public class AjaxController {
 		 * TODO parameterize this
 		 * limit max value returned
 		 */
-		total = total(total, contentFixedTotal);
-		
 		int totalFollowedContent = getBaseModel().getModel().getLoggedInUser().getFollowedContent().size();
+
+		total = total(total, contentFixedTotal, totalFollowedContent);
 		
 		List<Content> result = getBaseModel().getModel().getLoggedInUser().getFollowedContent(total, page);
 		
@@ -122,9 +121,9 @@ public class AjaxController {
 	@RequestMapping(value="allContent/{page}/{total}", method=RequestMethod.GET)
 	public ModelAndView allContent(@PathVariable Integer page, @PathVariable Integer total, ModelAndView m){
 
-		total = total(total, longFixedTotal);
-		
 		int totalContent = getBaseModel().getModel().getContent().size();
+
+		total = total(total, longFixedTotal, totalContent);
 
 		List<Content> result = getBaseModel().getModel().getContent(total, page);
 		
@@ -136,13 +135,11 @@ public class AjaxController {
 	
 	@RequestMapping(value="followedUsers/{page}/{total}", method=RequestMethod.GET)
 	public ModelAndView followedUsers(@PathVariable Integer page, @PathVariable Integer total, ModelAndView m){
-		/*
-		 * TODO parameterize this
-		 * limit max value returned
-		 */
-		total = total(total, usersFixedTotal);
 		
 		int totalFollowedUsers = getBaseModel().getModel().getLoggedInUser().getFollowedUsers().size();
+
+		total = total(total, usersFixedTotal, totalFollowedUsers);
+		
 		List<User> result = getBaseModel().getModel().getLoggedInUser().getFollowedUsers(total, page);
 		
 		setPagination(m, "Usuarios que seguis", result, prev(page), next(page, total, totalFollowedUsers), "followedUsers", page, total, totalFollowedUsers, imgSize);
@@ -154,9 +151,10 @@ public class AjaxController {
 	@RequestMapping(value="followedTags/{page}/{total}", method=RequestMethod.GET)
 	public ModelAndView followedTags(@PathVariable Integer page, @PathVariable Integer total, ModelAndView m){
 		
-		total = total(total, tagsFixedTotal);
-		
 		int totalFollowedTags = getBaseModel().getModel().getLoggedInUser().getFollowedTags().size();
+
+		total = total(total, tagsFixedTotal, totalFollowedTags);
+		
 		List<Tag> result = getBaseModel().getModel().getLoggedInUser().getFollowedTags(total, page);
 		
 		setPagination(m, "Etiquetas que seguis", result, prev(page), next(page, total, totalFollowedTags), "followedTags", page, total, totalFollowedTags, imgSize);
@@ -167,13 +165,11 @@ public class AjaxController {
 	
 	@RequestMapping(value="followedBy/{page}/{total}", method=RequestMethod.GET)
 	public ModelAndView followedBy(@PathVariable Integer page, @PathVariable Integer total, ModelAndView m){
-		/*
-		 * TODO parameterize this
-		 * limit max value returned
-		 */
-		total = total(total, usersFixedTotal);
-		
+
 		int totalFollowedBy = getBaseModel().getModel().getLoggedInUser().getFollowedBy().size();
+		
+		total = total(total, usersFixedTotal, totalFollowedBy);
+		
 		List<User> result = getBaseModel().getModel().getLoggedInUser().getFollowedBy(total, page);
 		
 		setPagination(m, "Usuarios que te siguen", result, prev(page), next(page, total, totalFollowedBy), "followedBy", page, total, totalFollowedBy, imgSize);

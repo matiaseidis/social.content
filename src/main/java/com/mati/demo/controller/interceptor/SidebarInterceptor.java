@@ -35,19 +35,19 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 		User user = baseModel.getModel().getLoggedInUser();
 		if(user != null && m != null && SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().getName() != null){
 			m.addObject("user", user);
-			List<User> followedUsers = new ArrayList<User>(user.getFollowedUsers());
-			m.addObject("followedUsers", followedUsers);
-			m.addObject("followedTags", new ArrayList<Tag>(user.getFollowedTags()));
+//			List<User> followedUsers = new ArrayList<User>(user.getFollowedUsers());
+//			m.addObject("followedUsers", followedUsers);
+//			m.addObject("followedTags", new ArrayList<Tag>(user.getFollowedTags()));
 			
 			/*
 			 * test followed paged content
 			 */
-			List<Content> followedContent = user.getFollowedContent(3,1);
-			m.addObject("followedContent", followedContent);
-
-			m.addObject("followedBy", new ArrayList<User>(user.getFollowedBy()));
-			
-			m.addObject("tags", new ArrayList<Tag>(baseModel.getModel().getTags()));
+//			List<Content> followedContent = user.getFollowedContent(3,1);
+//			m.addObject("followedContent", followedContent);
+//
+//			m.addObject("followedBy", new ArrayList<User>(user.getFollowedBy()));
+//			
+//			m.addObject("tags", new ArrayList<Tag>(baseModel.getModel().getTags()));
 		}
 
 		String userPictureURI = "http://"+serverBasePath+userPictureFolder+"/";

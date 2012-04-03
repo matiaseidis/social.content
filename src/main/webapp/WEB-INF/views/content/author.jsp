@@ -8,7 +8,9 @@
 
 <a href='<c:url value="/profile/${content.author.userName}"/>'> <myTags:userImg
 		height="27" width="27" username="${content.author.userName}"  hasOwnImage="${user.hasOwnImage}"></myTags:userImg></a>
-Publicado por 
+Por 
 <a href='<c:url value="/profile/${content.author.userName}"/>'>
-	<c:out value="${content.author.userName}"></c:out></a>, el <myTags:shortDate date="${content.postDate}" ></myTags:shortDate><myTags:time date="${content.postDate}" title="a las"></myTags:time>
-<myTags:followUnfollowUser followed="${content.author}" follower="${user}"></myTags:followUnfollowUser>
+	<c:out value="${content.author.userName}"></c:out></a>
+	<myTags:followUnfollowUser followed="${content.author}" follower="${user}"></myTags:followUnfollowUser>
+	, el <myTags:shortDate date="${content.postDate}" ></myTags:shortDate><myTags:time date="${content.postDate}" title="a las"></myTags:time>
+
