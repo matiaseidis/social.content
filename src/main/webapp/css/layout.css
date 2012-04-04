@@ -34,13 +34,13 @@ form.follow, .follow-link {
 .register-form-link,
 .login-form-barrita{float:left;}
 .register-form-link{margin-left:15px;}
-
+/*
 .ui-menu-item {
     background: none repeat scroll 0 0 green;
     border: 1px solid #333333;
     width: 400px;
-}
-.ui-menu-item a{background:red;}
+}*/
+/* .ui-menu-item a{background:red;} */
 .search-form {
 	display: inline;
 }

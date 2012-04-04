@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/layout.css' />" />
 <!-- <link rel="stylesheet" type="text/css" -->
 <%-- 	href="<c:url value='/js/jquery/ui/css/hot-sneaks/jquery-ui-1.8.18.custom.css' />" /> --%>
+	<link rel="stylesheet" type="text/css"
+	href="<c:url value='/js/jquery/ui/css/custom/jquery-ui-1.8.18.custom.css' />" />
 	
 <script type="text/javascript"
 	src="<c:url value='/js/jquery/jquery-1.7.1.min.js' />"></script>

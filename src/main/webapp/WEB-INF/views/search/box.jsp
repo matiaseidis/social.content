@@ -54,13 +54,29 @@
 	<div id="tag-result"></div>
 	</div>
 </div>
+<style>
+	.ui-autocomplete {
+		max-height: 100px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+		/* add padding to account for vertical scrollbar */
+		padding-right: 20px;
+	}
+	/* IE 6 doesn't support max-height
+	 * we use height instead, but this forces the menu to always be this tall
+	 */
+	* html .ui-autocomplete {
+		height: 100px;
+	}
+	</style>
 <script>
 $(function(){
 	$( "#content-search-pattern" ).autocomplete({
 		source: '<c:url value="/ajax/search/autocomplete/content" />',
 		minLength: 2,
 		select: function( event, ui ) {
-			log( ui.item ?
+			console.log( ui.item ?
 				"Selected: " + ui.item.value + " aka " + ui.item.id :
 				"Nothing selected, input was " + this.value );
 		}
