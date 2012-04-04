@@ -68,6 +68,12 @@ public class AjaxController {
 		m.setViewName("search/box");
 		return m;
 	}
+	
+	@RequestMapping(value="relationsBox", method=RequestMethod.GET)
+	public ModelAndView autoBox(ModelAndView m){
+		m.setViewName("search/autocomplete");
+		return m;
+	}
 
 	
 	

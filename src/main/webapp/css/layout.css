@@ -1,6 +1,28 @@
 .page-wrapper {
 	    padding-top: 10px;
 }
+#over-all-box-wrapper{
+	position:absolute;
+	top:0;
+	width:100%;
+	height:100%;
+	background: green;
+	display:none;
+/* 	opacity:0.4; */
+/* filter:alpha(opacity=40); For IE8 and earlier */
+background:url(../img/background.png);
+	}
+#over-all-box{
+/* 	opacity:1; */
+	margin-top:100px;
+	width:50%;
+	margin-left:25%;
+	text-align:left;
+	padding:15px;
+	border:1px dashed #333;
+	background-color:#eee;
+	
+}
 .player-1{}
 .player-2{}
 .player-2 object{}
@@ -44,7 +66,10 @@ form.follow, .follow-link {
 .search-form {
 	display: inline;
 }
-
+.relation-result span {
+	margin-right:10px;
+	margin-left:10px;
+	}
 .search-form input {
 	display: inline;
 }

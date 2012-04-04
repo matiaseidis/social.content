@@ -6,64 +6,49 @@
 
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<div id="comments-box">
-	<h3>
-	<img src='<c:url value="/img/symbolize-icons-set/png/16x16/link.png" />' />
-	Relacionar esto</h3>
+<div id="relations-box">
 	<sec:authorize access="isAuthenticated()">
-		<form:form action='<c:url value="/ajax/relation/add" />' modelAttribute="relation" method="post">
-			<form:label for="name" path="name"></form:label>
-			<form:textarea cols="80" rows="4" path="body" id="new-comment-body" />
-			<input type="hidden" id="comment-content-id" value="${content.id}" />
-			<p>
-				<input type="submit" id="comment" value="comentar" />
-			</p>
-
-		</form:form>
-		<script>
+	<a href="#" id="relations-trigger">
+	<img src='<c:url value="/img/symbolize-icons-set/png/16x16/link.png" />' />
+	Relacionar esto</a>
+	
+<script>
 	$(function() {
-		$('#comment').bind('submit', function(e) {
-			e.preventDefault();
-			var newComment = $('#new-comment-body').val();
-			var contentType = $('#comment-content-type').val();
-			var contentId = $('#comment-content-id').val();
-
-			var c = {
-				body : newComment
-			};
+		$('#relations-trigger').click(function(e) {
 			$.ajax({
-				type : 'POST',
-				url : '${ctx}/ajax/comment/' + contentId,
-				data : c,
+				type : 'GET',
+				url : '<c:url value="/ajax/relationsBox" />',
 				success : function(data) {
-					$('#comments-box').html(data);
-					$('#new-comment-body').val('').focus();
+					$('#over-all-box').html(data);
+					$('#over-all-box-wrapper').show()
 				},
 				error : function(data) {
 					alert(data);
 				}
 			});
+			return false;
+			
 		});
 	});
 </script>
-	</sec:authorize>
-	<c:forEach items="${content.comments}" var="c">
-		<div class="comment">
-		<img src='<c:url value="/img/symbolize-icons-set/png/16x16/comments.png" />' />
+</sec:authorize>
+	<c:forEach items="${content.relations}" var="r">
+		<div class="relation">
+		<img src='<c:url value="/img/symbolize-icons-set/png/16x16/link.png" />' />
 			<myTags:userImg height="25" width="25"
-				username="${c.author.userName}"  hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
+				username="${r}"  hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
 			<p>
-				<c:out value="${c.body}"></c:out>
+				<c:out value="${r}"></c:out>
 			</p>
 			<h6>
-				Comentado por
-				<c:out value="${c.author.userName}"></c:out>
+				Relacionado por
+				<c:out value="${r}"></c:out>
 				, el
-				<fmt:formatDate pattern="dd/MM/yyyy" dateStyle="short" type="date"
-					value="${c.postDate}" timeZone="es" />
+<%-- 				<fmt:formatDate pattern="dd/MM/yyyy" dateStyle="short" type="date" --%>
+<%-- 					value="${c.postDate}" timeZone="es" /> --%>
 
 			</h6>
 		</div>
 	</c:forEach>
-	<sec:authorize access="isAnonymous()">registrese si quiere comentar...</sec:authorize>
+	<sec:authorize access="isAnonymous()">registrese si quiere relacionar esto...</sec:authorize>
 </div>

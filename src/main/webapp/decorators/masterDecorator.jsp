@@ -184,5 +184,8 @@
 
 		<div class='disclaimer'>Site disclaimer. This is an example.</div>
 	</div>
+	<div id="over-all-box-wrapper">
+		<div id="over-all-box"></div>
+	</div>
 </body>
 </html>
