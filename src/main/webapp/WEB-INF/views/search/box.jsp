@@ -65,5 +65,32 @@ $(function(){
 				"Nothing selected, input was " + this.value );
 		}
 	});
+	
+	$('.trigger-search').submit(function(e){
+		       e.preventDefault();
+		       console.log($(e.target));
+		       var parentId = $(e.target).parent();
+		       console.log(parentId);
+		       var what = $(e.target).attr('name');
+		       console.log(what);
+		       var url = "${ctx}/ajax/search/"+what;
+		       console.log(url);
+		       var key = $('#'+what+'-search-pattern').val();
+		       console.log(key);
+		       if(key){
+		               $.ajax({
+		                       url : url,
+		                       data:{pattern:key},
+		                       success : function(data) {
+		                               $("#"+what+"-result").html(data);
+		                               console.log($("#"+what+"-result"));
+		                       },
+		                       error : function(data) {
+		                               alert(data);
+		                       }
+		               });
+		       }
+		});
+
 });
 </script>

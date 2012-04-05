@@ -3,18 +3,19 @@ package com.mati.demo.controller;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
-import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mati.demo.model.content.Comment;
 import com.mati.demo.model.content.Content;
 import com.mati.demo.model.content.type.Event;
+import com.mati.demo.model.relationships.Relation;
+import com.mati.demo.model.relationships.RelationType;
 import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
+import com.mati.demo.prevalence.transaction.content.AddRelation;
 import com.mati.demo.prevalence.transaction.content.comment.CreateComment;
 import com.mati.demo.prevalence.transaction.tag.StartFollowingTag;
 import com.mati.demo.prevalence.transaction.tag.StopFollowingTag;
@@ -74,8 +78,29 @@ public class AjaxController {
 		m.setViewName("search/autocomplete");
 		return m;
 	}
-
 	
+	@RequestMapping(value="relations/add", method=RequestMethod.POST)
+	public @ResponseBody List<Relation> addRelations(@RequestParam int contentId, @RequestParam String relations, ModelAndView m){
+		
+		Content c = getBaseModel().getModel().loadContentById(contentId);
+		
+		String[] rel = relations.split("R");
+		
+		for(String relationString : rel){
+			if(StringUtils.isNotEmpty(relationString)){
+				String[] elements = relationString.split("_");
+				int id = Integer.valueOf(elements[0]);
+				int type = Integer.valueOf(elements[1]);
+				
+				Relation r = new Relation();
+				r.setType(RelationType.get(type));
+				r.setRelatedId(id);
+				r.setAuthor(getBaseModel().getModel().getLoggedInUser());
+				getBaseModel().getPrevayler().execute(new AddRelation(contentId, r));
+			}
+		}
+		return c.getRelations();
+	}
 	
 	@RequestMapping(value="comment/{id}", method=RequestMethod.POST)
 	public ModelAndView comment(@ModelAttribute Comment comment, @PathVariable int id, ModelAndView m){

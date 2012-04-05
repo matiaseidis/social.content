@@ -69,43 +69,49 @@
 	</style>
 <script>
 $(function(){
-	
+
 	$('.relation-submit span a').click(function(e){
 		var target = $(e.target).parent().parent().parent();
-		console.log(target);
+// 		console.log(target);
 		var tId = target.attr('id');
 		
-		var data = {};
+		var relations = "";
 		
 		$.each($('#'+tId+' .relation-result').children(), function(index, value) { 
-			console.log($(value));
 			var c = $(value).attr('class');
-			var id = $('.'+c+' span.id').html();
-			console.log(id);
+			var id = $('.'+c+' span.id').text();
+// 			alert(id);
 			var rel = $('.'+c+' .relations option:selected').attr('value');
-			console.log(rel);
-			data[id] = rel;
+			relations+=id+"_"+rel+"R";
 		});
-		console.log(data);
+		console.log(relations);
 		
-// 		$.ajax({
-// 			type: "POST",
-// 	        url: '${ctx}/ajax/'+entity+'/followUnfollow/'+name,
-// 	        success: function(data) {
-// 	        	$target.fadeOut('fast', function() {
-// 	        		$target.html(data);
-// 	        		$target.fadeIn('fast', function() {});
-// 	      		});
-// 	        },
-// 	        error: function(data) {
-// 		          alert(data);
-// 		          $target.html(data);
-// 		        }
-// 	      });
+		$.ajax({
+			type: "POST",
+	        url: '${ctx}/ajax/relations/add/',
+	        data:{
+	        	'relations':relations,
+	        	'contentId':$('.content-id').attr('value')
+	        	},
+	        success: function(data) {
+	        	
+	        	$target.fadeOut('fast', function() {
+	        		$target.html(data);
+	        		$target.fadeIn('fast', function() {});
+	      		});
+	        },
+	        error: function(data) {
+		          alert(data);
+		          $target.html(data);
+		        }
+	      });
 		
 	});
 	
-	var relationTypes = ["tiene que ver con", "es horrible igual que"];
+	var relationTypes = {
+			1:"tiene que ver con", 
+			2:"es horrible igual que"
+			};
 	
 	$( "#content-relation-pattern" ).autocomplete({
 		source: '<c:url value="/ajax/search/autocomplete/content" />',
@@ -150,9 +156,9 @@ $(function(){
 		 * relation types select
 		 */
 		var relations = $(document.createElement('select'));
-		$.each(relationTypes, function(index, value) { 
+		$.each(relationTypes, function(key, value) { 
 			var option = $(document.createElement('option'));
-			option.attr('value', value);
+			option.attr('value', key);
 			option.append(value);
 			relations.append(option);
 		});
