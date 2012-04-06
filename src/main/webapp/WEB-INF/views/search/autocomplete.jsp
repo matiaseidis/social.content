@@ -5,11 +5,7 @@
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <script>
-/* TODO mejores tabs, sun jquery UI
- * http://jqueryfordesigners.com/video.php?f=jquery-tabs-part1.flv
- */
 	$(function() {
-// 		$( "#searchTabs" ).tabs();
 		var tabContainers = $('div.tabs > div');
 		tabContainers.hide().filter(':first').show();
 		
@@ -69,7 +65,21 @@
 	</style>
 <script>
 $(function(){
-
+	var relationTypes;
+	$.ajax({
+		type: "GET",
+        url: '${ctx}/ajax/relations/list',
+        success: function(data) {
+        	console.log(data);
+        	$.each(data, function(index, value) {
+        		relationTypes = data;
+        	});
+        },
+        error: function(data) {
+	          alert(data);
+	        }
+      });
+	
 	$('.relation-submit span a').click(function(e){
 		var target = $(e.target).parent().parent().parent();
 // 		console.log(target);
@@ -94,11 +104,11 @@ $(function(){
 	        	'contentId':$('.content-id').attr('value')
 	        	},
 	        success: function(data) {
-	        	
-	        	$target.fadeOut('fast', function() {
-	        		$target.html(data);
-	        		$target.fadeIn('fast', function() {});
-	      		});
+	        	console.log(data);
+				$('#over-all-box-wrapper').fadeOut('fast', function(){
+					$('#over-all-box').html('');	
+		        	$('#relation-box-wrapper').hide().html(data).fadeIn('fast');
+				});
 	        },
 	        error: function(data) {
 		          alert(data);
@@ -108,22 +118,17 @@ $(function(){
 		
 	});
 	
-	var relationTypes = {
-			1:"tiene que ver con", 
-			2:"es horrible igual que"
-			};
-	
 	$( "#content-relation-pattern" ).autocomplete({
 		source: '<c:url value="/ajax/search/autocomplete/content" />',
 		minLength: 2,
 		select: function( event, ui ) {
-			console.log($(event.target));
 			$('#'+$(event.target).parent().attr('id')+' .relation-element-id').val(ui.item.id);
 			addRelationElement(ui.item.id, ui.item.value, 'content');
-			
-			console.log( ui.item ?
-				"Selected: " + ui.item.value + " aka " + ui.item.id :
-				"Nothing selected, input was " + this.value );
+ 			$('input#content-relation-pattern').val("");
+// 			console.log( ui.item ?
+// 				"Selected: " + ui.item.value + " aka " + ui.item.id :
+// 				"Nothing selected, input was " + this.value );
+			return false;
 		}
 	});
 	
@@ -158,8 +163,8 @@ $(function(){
 		var relations = $(document.createElement('select'));
 		$.each(relationTypes, function(key, value) { 
 			var option = $(document.createElement('option'));
-			option.attr('value', key);
-			option.append(value);
+			option.attr('value', value.id);
+			option.append(value.value);
 			relations.append(option);
 		});
 		

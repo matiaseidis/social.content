@@ -19,6 +19,7 @@ import lombok.Setter;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,6 +43,8 @@ import com.mati.demo.prevalence.transaction.user.CreateUser;
 
 @Controller
 public class UserAccountController {
+	
+	public Logger logger = Logger.getLogger(getClass());
 
 	@Autowired @Getter @Setter private BaseModel baseModel;
 	@Resource(name="authenticationProvider") private AuthenticationProviderImpl authenticationProvider;
@@ -158,7 +161,7 @@ public class UserAccountController {
 		try{
 			is = new FileInputStream(destinationPath + defaultPictureName + defaultImgExt);
 		}catch (Exception e) {
-			System.out.println("unable to load the default img at " + destinationPath + defaultPictureName);
+			logger.info("unable to load the default img at " + destinationPath + defaultPictureName);
 		}
 		return is;
 	}

@@ -281,7 +281,8 @@ input.title {
 }
 .show-tags-box ul li a {}
 .follow-user-link img,
-.follow-tag-link img{
+.follow-tag-link img,
+img.remove-relation{
 	border: 1px solid #333333;
     padding: 2px;
     border-radius:7px;

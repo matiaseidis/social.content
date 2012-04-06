@@ -3,6 +3,7 @@ package com.mati.demo.prevalence;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.log4j.Logger;
 import org.prevayler.Prevayler;
 import org.prevayler.PrevaylerFactory;
 import org.prevayler.foundation.monitor.SimpleMonitor;
@@ -15,6 +16,8 @@ import com.mati.demo.prevalence.transaction.user.AddTagToUser;
 import com.mati.demo.prevalence.transaction.user.RemoveTagFromUser;
 
 public class BaseModel {
+	
+	public Logger logger = Logger.getLogger(getClass());
 	
 	@Setter private String prevalenceDirectory;
 	@Getter private Prevayler prevayler;
@@ -42,8 +45,8 @@ public class BaseModel {
 		try{
 		prevayler = prevaylerFactory.create(); 
 		}catch(Exception e){
-			System.err.println("FAILED TO LOAD PREVALENT SYSTEM " + e);
-			System.err.println(e.getMessage());
+			logger.error("FAILED TO LOAD PREVALENT SYSTEM " + e);
+			logger.error(e.getMessage());
 			System.exit(1);
 		}
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.prevayler.Transaction;
 
 import com.mati.demo.model.base.Model;
@@ -19,7 +20,7 @@ public class UpdateContent implements Transaction{
 	
 	private final Content content;
 	private final String loggedInUserName;
-	
+	public Logger logger = Logger.getLogger(getClass());
 
 	
 	/*
@@ -38,7 +39,7 @@ public class UpdateContent implements Transaction{
 		List<Tag> updatedTags = content.getTags();
 		
 		if(!originalTags.equals(updatedTags)){
-			System.out.println("NOT SAME");
+			logger.info("NOT SAME");
 			
 			List<Tag> diff = new ArrayList<Tag>(originalTags);
 			diff.removeAll(updatedTags);

@@ -75,4 +75,8 @@ public abstract class Content extends Taggable implements Commentable{
 		relations.add(relation);
 	}
 	
+	public boolean removeRelation(Relation relation) {
+		return relations.remove(relation);
+	}
+	
 }

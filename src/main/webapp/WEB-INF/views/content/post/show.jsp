@@ -34,7 +34,10 @@
 
 
 	</div>
-	<jsp:include page="../relations-box.jsp" />
+	<div id="relation-box-wrapper">
+		<jsp:include page="../relations-box.jsp" />
+	</div>
+	<jsp:include page="../rating-box.jsp" />
 	<jsp:include page="../comments-box.jsp" />
 </body>
 </html>

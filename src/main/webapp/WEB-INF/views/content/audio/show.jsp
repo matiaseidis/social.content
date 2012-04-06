@@ -17,6 +17,7 @@
 <title><c:out value="${content.title}"></c:out></title>
 </head>
 <body>
+<jsp:include page="../content-id.jsp"></jsp:include>
 <jsp:include page="../edit-link.jsp"></jsp:include>
 <jsp:include page="../delete-link.jsp"></jsp:include>
 <!-- <div class="player-1"> -->
@@ -63,7 +64,10 @@
 		});
 	</script>
 
-
+<div id="relation-box-wrapper">
+		<jsp:include page="../relations-box.jsp" />
+	</div>
+	<jsp:include page="../rating-box.jsp" />
 	<jsp:include page="../comments-box.jsp" />
 </body>
 </html>

@@ -17,6 +17,7 @@ import lombok.Setter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
+import org.apache.log4j.Logger;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mati.demo.model.content.Content;
@@ -30,6 +31,7 @@ import com.mati.demo.util.GetContentQuery;
 
 public class User extends Taggable{
 
+	public Logger logger = Logger.getLogger(getClass());
 	/**
 	 * 
 	 */
@@ -66,7 +68,7 @@ public class User extends Taggable{
 	
 	public void addContent(Content c){
 		content.put(c.hashCode(), c);
-		System.out.println("added content user");
+		logger.info("added content user");
 	}
 	
 	public List<Content> getContent(){	

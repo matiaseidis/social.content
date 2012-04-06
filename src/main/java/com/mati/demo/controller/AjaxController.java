@@ -33,6 +33,7 @@ import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 import com.mati.demo.prevalence.transaction.content.AddRelation;
+import com.mati.demo.prevalence.transaction.content.RemoveRelation;
 import com.mati.demo.prevalence.transaction.content.comment.CreateComment;
 import com.mati.demo.prevalence.transaction.tag.StartFollowingTag;
 import com.mati.demo.prevalence.transaction.tag.StopFollowingTag;
@@ -80,7 +81,8 @@ public class AjaxController {
 	}
 	
 	@RequestMapping(value="relations/add", method=RequestMethod.POST)
-	public @ResponseBody List<Relation> addRelations(@RequestParam int contentId, @RequestParam String relations, ModelAndView m){
+//	public @ResponseBody List<Relation> addRelations(@RequestParam int contentId, @RequestParam String relations, ModelAndView m){
+	public ModelAndView addRelations(@RequestParam int contentId, @RequestParam String relations, ModelAndView m){
 		
 		Content c = getBaseModel().getModel().loadContentById(contentId);
 		
@@ -91,15 +93,53 @@ public class AjaxController {
 				String[] elements = relationString.split("_");
 				int id = Integer.valueOf(elements[0]);
 				int type = Integer.valueOf(elements[1]);
-				
-				Relation r = new Relation();
-				r.setType(RelationType.get(type));
-				r.setRelatedId(id);
-				r.setAuthor(getBaseModel().getModel().getLoggedInUser());
-				getBaseModel().getPrevayler().execute(new AddRelation(contentId, r));
+				Content related = getBaseModel().getModel().loadContentById(id);
+				if(related != null && related.getId() != c.getId()){
+					Relation r = new Relation();
+					r.setType(RelationType.get(type));
+					r.setRelated(related);
+					r.setAuthor(getBaseModel().getModel().getLoggedInUser());
+					getBaseModel().getPrevayler().execute(new AddRelation(contentId, r));
+				}
 			}
 		}
-		return c.getRelations();
+		m.addObject("content", c);
+		m.setViewName("/content/relations-box");
+		return m;
+	}
+	
+	@RequestMapping(value="relation/remove", method=RequestMethod.POST)
+	public @ResponseBody String removeRelation(@RequestParam int relatedId, @RequestParam int relationId, ModelAndView m){
+		
+		Content c = getBaseModel().getModel().loadContentById(relatedId);
+		Relation r = null;
+		if(c == null){
+			// TODO handle
+		}
+		for(Relation rel : c.getRelations()){
+			if(rel.getId() == relationId){
+				r = rel;
+				break;
+			}
+		}
+		if(r == null){
+			// TODO handle
+		}
+		getBaseModel().getPrevayler().execute(new RemoveRelation(c,r));
+		return "La relacion ha sido eliminada";
+	}
+	
+	@RequestMapping(value="relations/list", method=RequestMethod.GET)
+	public @ResponseBody List<AutoCompleteItem> listRelationTypes(ModelAndView m){
+		
+		List<AutoCompleteItem> result = new ArrayList<AutoCompleteItem>();
+		for(RelationType rt : RelationType.values()){
+			AutoCompleteItem item = new AutoCompleteItem();
+			item.setId(rt.getId());
+			item.setValue(rt.getDescription());
+			result.add(item);
+		}
+		return result;
 	}
 	
 	@RequestMapping(value="comment/{id}", method=RequestMethod.POST)
@@ -355,6 +395,6 @@ public class AjaxController {
 }
 
 class AutoCompleteItem{
-	@Getter @Setter String value;
 	@Getter @Setter int id;
+	@Getter @Setter String value;
 }

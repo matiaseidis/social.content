@@ -26,7 +26,7 @@ public class ContentMocker {
 
 	final private BaseModel baseModel;
 	
-	int number = 200;
+	int number = 20;
 	
 	
 	public ContentMocker(BaseModel baseModel/*, AuthenticationProviderImpl authenticationProvider*/){
@@ -53,10 +53,10 @@ public class ContentMocker {
 			u.setPassword(userName+i);
 
 			baseModel.getPrevayler().execute(new CreateUser(u));
-			try {
+//			try {
 
-//				baseModel.getPrevayler().execute(new StartFollowingUser(u.getUserName(), admin.getUserName()));
-//				baseModel.getPrevayler().execute(new StartFollowingUser(admin.getUserName(), u.getUserName() ));
+				baseModel.getPrevayler().execute(new StartFollowingUser(u.getUserName(), admin.getUserName()));
+				baseModel.getPrevayler().execute(new StartFollowingUser(admin.getUserName(), u.getUserName() ));
 				for(int c = 0; i<5;i++){
 					baseModel.getPrevayler().execute(new CreateContent<Video>(video(c, u), u.getUserName(), null));
 					baseModel.getPrevayler().execute(new CreateContent<Audio>(audio(c, u), u.getUserName(), null));
@@ -64,11 +64,11 @@ public class ContentMocker {
 					baseModel.getPrevayler().execute(new CreateContent<Event>(event(c, u), u.getUserName(), null));
 				}
 
-			}catch(AuthenticationException ae){
+//			}catch(AuthenticationException ae){
 				//TODO handle this
 				
-				System.out.println(ae);
-			}
+//				System.out.println(ae);
+//			}
 		}
 	}
 

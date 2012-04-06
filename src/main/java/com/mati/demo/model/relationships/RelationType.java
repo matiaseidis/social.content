@@ -4,8 +4,8 @@ import lombok.Getter;
 
 public enum RelationType {
 
-	TIENE_QUE_VER_CON(0, "Tiene que ver con"),
-	ES_HORRIBLE_IGUAL_QUE(1, "Es igual que");
+	TIENE_QUE_VER_CON(0, "tiene que ver con"),
+	ES_HORRIBLE_IGUAL_QUE(1, "es igual que");
 
 	@Getter private final int id;
 

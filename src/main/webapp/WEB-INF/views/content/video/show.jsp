@@ -14,6 +14,7 @@
 </head>
 <body>
 <jsp:include page="../author.jsp"></jsp:include>
+<jsp:include page="../content-id.jsp"></jsp:include>
 <jsp:include page="../edit-link.jsp"></jsp:include>
 <jsp:include page="../delete-link.jsp"></jsp:include>
 
@@ -38,6 +39,10 @@
 	<div class="content-description">
 	<p><c:out value="${content.body}" escapeXml="false"></c:out></p>
 	</div>
+	<div id="relation-box-wrapper">
+		<jsp:include page="../relations-box.jsp" />
+	</div>
+	<jsp:include page="../rating-box.jsp" />
 	<jsp:include page="../comments-box.jsp" />
 </body>
 </html>

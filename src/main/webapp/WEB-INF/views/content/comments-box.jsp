@@ -13,7 +13,7 @@
 	<sec:authorize access="isAuthenticated()">
 		<form:form action="${ctx}/comment/add/${contentType}/${content.id}"
 			modelAttribute="comment" method="post">
-			<form:label for="body" path="body"></form:label>
+<%-- 			<form:label for="body" path="body"></form:label> --%>
 			<form:textarea cols="80" rows="4" path="body" id="new-comment-body" />
 			<input type="hidden" id="comment-content-id" value="${content.id}" />
 			<p>

@@ -20,6 +20,11 @@
 	src="<c:url value='/js/jquery/jquery-1.7.1.min.js' />"></script>
 	<script type="text/javascript"
 	src="<c:url value='/js/jquery/ui/js/jquery-ui-1.8.18.custom.min.js' />"></script>
+	
+	<script type="text/javascript"
+	src="<c:url value='/js/jquery/rating/jquery.rating.js' />"></script>
+		<link rel="stylesheet" type="text/css"
+	href="<c:url value='/js/jquery/rating/rating.css' />" />
 <!-- 	<script src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js" type="text/javascript"></script> -->
 	
 <title>Social Content :: <sitemesh:write property='title' /></title>
@@ -170,6 +175,29 @@
 					        	$target.fadeOut('fast', function() {
 					        		$target.html(data);
 					        		$target.fadeIn('fast', function() {});
+					      		});
+					        },
+					        error: function(data) {
+						          alert(data);
+						          $target.html(data);
+						        }
+					      });
+					};
+					
+					var removeRelation = function(event, relationId, relatedId){
+						event.preventDefault();
+						var $target = $(event.target).closest('div.relation');
+						console.log($target);
+						$.ajax({
+							type: "POST",
+					        url: '${ctx}/ajax/relation/remove',
+					        data:{
+					        	'relationId':relationId,
+					        	'relatedId':relatedId
+					        },
+					        success: function(data) {
+					        	$target.fadeOut('fast', function() {
+					        		$target.empty().html(data).fadeIn('fast');
 					      		});
 					        },
 					        error: function(data) {

@@ -16,5 +16,10 @@
         <function-class>com.mati.demo.util.UserUtils</function-class>
         <function-signature>boolean isTagFollowedBy(com.mati.demo.model.tag.Tag, com.mati.demo.model.user.User)</function-signature>
     </function>
+     <function>
+        <name>isOwnRelation</name> 
+        <function-class>com.mati.demo.util.UserUtils</function-class>
+        <function-signature>boolean isOwnRelation(com.mati.demo.model.relationships.Relation, com.mati.demo.model.user.User)</function-signature>
+    </function>
   
 </taglib>

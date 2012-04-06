@@ -16,6 +16,7 @@ import java.util.TreeMap;
 
 import lombok.Getter;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.mati.demo.model.content.Content;
@@ -24,6 +25,8 @@ import com.mati.demo.model.tag.TagRepository;
 import com.mati.demo.model.user.User;
 
 public class Model implements Serializable{
+	
+	public Logger logger = Logger.getLogger(getClass());
 
 	/**
 	 *
@@ -78,7 +81,7 @@ public class Model implements Serializable{
 	public void addContent(Content c){
 		contentMap.put(c.hashCode(), c);
 		c.getAuthor().addContent(c);
-		System.out.println("added content model");
+		logger.info("added content model");
 	}
 
 	public void addUser(User u){
