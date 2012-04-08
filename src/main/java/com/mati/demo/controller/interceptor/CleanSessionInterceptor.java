@@ -24,8 +24,8 @@ public class CleanSessionInterceptor extends HandlerInterceptorAdapter{
 					// count == 0
 					//el anterior request fue un get
 					if(request.getSession() != null){
-						request.getSession().setAttribute("errors", null);
-						request.getSession().setAttribute("message", null);
+						//request.getSession().setAttribute("errors", null);
+						//request.getSession().setAttribute("message", null);
 					}
 				}
 			}

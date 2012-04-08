@@ -7,11 +7,11 @@
 		<a href="${ctx}/" title="Inicio">
 		<img src="<c:url value='/img/symbolize-icons-set/png/32x32/home.png' />" /></a>
 		<a href="${ctx}/user/content" title="Mis cosas">
-		<img src="<c:url value='/img/symbolize-icons-set/png/32x32/briefcase.png' />" /></a> 
+		<img src="<c:url value='/img/symbolize-icons-set/png/16x16/briefcase.png' />" /></a> 
 		<a href="${ctx}/user/content/add" title="Agregar contenido">
-		<img src="<c:url value='/img/symbolize-icons-set/png/32x32/new.png' />" /></a>
-		<a href="${ctx}/search" title="Buscar">
-		<img src="<c:url value='/img/symbolize-icons-set/png/32x32/search.png' />" /></a>
+		<img src="<c:url value='/img/symbolize-icons-set/png/16x16/page.png' />" /></a>
+<%-- 		<a href="${ctx}/search" title="Buscar"> --%>
+<%-- 		<img src="<c:url value='/img/symbolize-icons-set/png/32x32/search.png' />" /></a> --%>
 </div>
 <div class="menu-right">
 <!-- 	<form action="search" class="search-form"> -->

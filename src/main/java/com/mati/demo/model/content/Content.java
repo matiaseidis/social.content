@@ -3,7 +3,9 @@ package com.mati.demo.model.content;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -21,6 +23,7 @@ public abstract class Content extends Taggable implements Commentable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Getter @Setter private int id;
 	@Getter @Setter private Date postDate;
 	
@@ -31,6 +34,8 @@ public abstract class Content extends Taggable implements Commentable{
 	@Getter final private String contentType = getClass().getSimpleName().toLowerCase();
 	
 	@Getter private List<Relation> relations = new ArrayList<Relation>();
+	
+	private Map<String, Float> ratings = new HashMap<String, Float>();
 	
 	@Getter private final SortedSet<Comment> comments = new TreeSet<Comment>(new Comparator<Comment>(){
 
@@ -77,6 +82,28 @@ public abstract class Content extends Taggable implements Commentable{
 	
 	public boolean removeRelation(Relation relation) {
 		return relations.remove(relation);
+	}
+	
+	public void addRating(String userName, float rate){
+		ratings.put(userName, rate);
+	}
+	
+	public int ratedBy(){
+		return ratings.size();
+	}
+	
+	public float getRate(){
+		float total = 0;
+		for(float rate : ratings.values()){
+			total += rate;
+		}
+		float result = total / ((ratedBy() == 0)? 1 : ratedBy());
+		
+		return result;
+	}
+
+	public void removeRating(String userName) {
+		ratings.remove(userName);
 	}
 	
 }

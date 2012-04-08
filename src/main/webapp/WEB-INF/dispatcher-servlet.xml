@@ -21,7 +21,8 @@
 		<property name="entityName" value="user"></property>
 		<property name="entityPluralName" value="users"></property>
 	</bean>
-
+	
+	
 	<bean id="ajax.controller" class="com.mati.demo.controller.AjaxController">
 		<property name="usersFixedTotal" value="6" />
 		<property name="tagsFixedTotal" value="6" />
@@ -29,10 +30,9 @@
 		<property name="longFixedTotal" value="20" />
 		<property name="imgSize" value="27" />
 	</bean>
-	
-	<bean id="relations.controller" class="com.mati.demo.controller.RelationsController">
-	</bean>
-	
+
+	<bean id="rating.controller" class="com.mati.demo.controller.RatingController" ></bean>
+	<bean id="relations.controller" class="com.mati.demo.controller.RelationsController" ></bean>
 	<bean id="follow.user.controller" class="com.mati.demo.controller.follow.FollowUserController"></bean>
 	<bean id="follow.tag.controller" class="com.mati.demo.controller.follow.FollowTagController"></bean>
 	<bean id="tag.controller" class="com.mati.demo.controller.TagController"></bean>
@@ -172,13 +172,13 @@
 		</mvc:interceptor>
 
 <!-- hay que borrar este interceptor y cada vez que en el master decorator rendereo errors o message borrarlos de session ahi mismo despues de pintarlos -->
-		<mvc:interceptor>
-			<mvc:mapping path="/**/*" />
-			<bean id="clean.session.interceptor"
-				class="com.mati.demo.controller.interceptor.CleanSessionInterceptor">
-				<!-- <property name="baseModel" ref="base.model"></property> -->
-			</bean>
-		</mvc:interceptor>
+<!-- 		<mvc:interceptor> -->
+<!-- 			<mvc:mapping path="/**/*" /> -->
+<!-- 			<bean id="clean.session.interceptor" -->
+<!-- 				class="com.mati.demo.controller.interceptor.CleanSessionInterceptor"> -->
+<!-- 				<property name="baseModel" ref="base.model"></property> -->
+<!-- 			</bean> -->
+<!-- 		</mvc:interceptor> -->
 
 		<mvc:interceptor>
 			<mvc:mapping path="/content/*/show/**" />

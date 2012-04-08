@@ -92,11 +92,14 @@ a
 }
 .tab{
 	padding:10px;
-	border:1px solid #EDEDED;}
-.selected{
-/* 	font-weight:bold; */
-	background-color: #EDEDED;
+	border:1px solid #EDEDED;
+	border-top:none;
 }
+.tab, .selected{
+background-color: #bfbfbf;
+    color: #FFFFFF;
+}
+.selected{}
 #search-box-trigger{
 	float:left;
 	padding-right:10px;
@@ -140,7 +143,10 @@ font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
 	 line-height: 25px;
 	 font-size:10px;
 }
-a {    text-decoration: none;}
+a {    
+	text-decoration: none;
+	outline:none;
+	}
 ul {
 	list-style: none outside none;
 	padding-left: 0;

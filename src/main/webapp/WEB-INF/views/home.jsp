@@ -23,7 +23,12 @@
 	-------------------------------------------------------------------------------------
 
 	<p>TODO</p>
-
+	<p>
+	 TODO reemplazar fn por esto y eliminar esta fn (de aca y de edit-link) y el attr model del action show 
+    c:if test content.author.userName eq user.userName
+	c:if test myFunctions:isContentFromLoggedInUser(content.id, model)
+	</p>
+	<p>implementar imagen, documento</p>
 	<p>update user password</p>
 	<p>datos de perfil -> agregar redes sociales (?)</p>
 	<p>poder borrar usuario</p>
@@ -31,6 +36,11 @@
 	<p>no se puede borrar contenido en la vista de edit (o mandar el link de delete a user/content)!!!!</p>
 	<p>interfaz de admin?</p>
 	-------------------------------------------------------------------------------------
+
+<myTags:contentList contentList="${bestRated}" title="bestRated"></myTags:contentList>
+<myTags:contentList contentList="${mostVisited}" title="mostVisited"></myTags:contentList>
+<myTags:contentList contentList="${mostRecent}" title="mostRecent"></myTags:contentList>
+
 
 	<%-- 	<myTags:paginatedContentList contentList="${followedContent}" title="paged content" page="1"></myTags:paginatedContentList> --%>
 	<sec:authorize access="isAuthenticated()">

@@ -5,7 +5,7 @@
 <sec:authorize access="isAuthenticated()">
 	<c:if test="${myFunctions:isContentFromLoggedInUser(content.id, model)}">
 		<div class="edit-link">
-		<a href="../edit/${content.id}">Editar <c:out value="${contentType}"></c:out></a>
+		<a href="../edit/${content.id}">editar </a>
 		</div>
 	</c:if>
 </sec:authorize>

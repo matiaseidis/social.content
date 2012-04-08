@@ -129,6 +129,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 			return new ModelAndView("redirect:"+ADD);
 		}
 //		return new ModelAndView("redirect:"+LIST);
+		request.getSession().setAttribute(MESSAGE, "Se creo: "+content.getTitle());
 		return new ModelAndView("redirect:/user/content");
 		
 	}

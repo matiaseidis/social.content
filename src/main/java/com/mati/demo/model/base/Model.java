@@ -219,4 +219,36 @@ public class Model implements Serializable{
 		
 		return c.subList(from(c, page, total), to(c, page, total));
 	}
+
+	public List<Content> bestRated() {
+		return getContent(0,2);
+	}
+
+	public List<Content> mostVisited() {
+		List<Content> result = new ArrayList<Content>(getContent());
+		Collections.sort(result, new Comparator<Content>() {
+
+			@Override
+			public int compare(Content c1, Content c2) {
+				if (c1.getVisited() == c2.getVisited()) 
+					return 0;
+				
+				boolean greater = c1.getVisited() >= c2.getVisited(); 
+				return greater ? 1 : -1;
+			}
+		});
+		return result.subList(from(result,0 , 6), to(result, 0, 6));
+	}
+
+	public List<Content> mostRecent() {
+		List<Content> result = new ArrayList<Content>(getContent());
+		Collections.sort(result, new Comparator<Content>() {
+
+			@Override
+			public int compare(Content c1, Content c2) {
+				return c1.getPostDate().compareTo(c2.getPostDate());
+			}
+		});
+		return result.subList(from(result,0 , 6), to(result, 0, 6));
+	}
 }

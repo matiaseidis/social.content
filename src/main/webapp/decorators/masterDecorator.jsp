@@ -40,18 +40,13 @@
 		<c:if test="${message ne null}">
 			<div class="message">
 				<p>${message}</p>
-<!-- 				aca hay que resolver lo de message y todo lo de sesesion, en lugar del interceptor, que flushee al pintarlo -->
 			</div>
+			<% session.setAttribute("message", null); %>
 		</c:if>
-		<c:if test="${sessionScope.message ne null}">
-			<div class="message">
-				<p>${sessionScope.message}</p>
-			</div>
-		</c:if>
-
 		<c:if test="${sessionScope.errors ne null}">
 			<div class="errorblock">
 				<p>${errors}</p>
+				<% session.setAttribute("errors", null); %>
 			</div>
 		</c:if>
 		<div class='mainBody'>
@@ -59,7 +54,6 @@
 				<img src='<c:url value="/img/symbolize-icons-set/png/16x16/search.png" />' />
 			</a>
 			<div class="search-box-wrapper">
-			
 				<div id="search-box" class="search-box"></div>
 			</div>
 			<div class="title">
