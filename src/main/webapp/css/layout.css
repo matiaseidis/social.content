@@ -43,7 +43,7 @@ background:url(../img/background.png);
 	float: left;
 }
 .menu-left img{
-	width:24px; 
+/* 	width:24px;  */
 }
 .menu-right {
 	float: right;

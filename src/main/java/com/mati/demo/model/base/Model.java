@@ -221,12 +221,21 @@ public class Model implements Serializable{
 	}
 
 	public List<Content> bestRated() {
-		return getContent(0,2);
+		return mostBla(new Comparator<Content>() {
+
+			@Override
+			public int compare(Content c1, Content c2) {
+				if (c1.getRate() == c2.getRate()) 
+					return 0;
+				
+				boolean greater = c1.getRate() >= c2.getRate(); 
+				return greater ? -1 : 1;
+			}
+		}, 6);
 	}
 
 	public List<Content> mostVisited() {
-		List<Content> result = new ArrayList<Content>(getContent());
-		Collections.sort(result, new Comparator<Content>() {
+		return mostBla(new Comparator<Content>() {
 
 			@Override
 			public int compare(Content c1, Content c2) {
@@ -234,21 +243,24 @@ public class Model implements Serializable{
 					return 0;
 				
 				boolean greater = c1.getVisited() >= c2.getVisited(); 
-				return greater ? 1 : -1;
+				return greater ? -1 : 1;
 			}
-		});
-		return result.subList(from(result,0 , 6), to(result, 0, 6));
+		}, 6);
 	}
-
+	
 	public List<Content> mostRecent() {
-		List<Content> result = new ArrayList<Content>(getContent());
-		Collections.sort(result, new Comparator<Content>() {
+		return mostBla(new Comparator<Content>() {
 
 			@Override
 			public int compare(Content c1, Content c2) {
-				return c1.getPostDate().compareTo(c2.getPostDate());
+				return c2.getPostDate().compareTo(c1.getPostDate());
 			}
-		});
-		return result.subList(from(result,0 , 6), to(result, 0, 6));
+		}, 6);
+	}
+	
+	public List<Content> mostBla(Comparator<Content> comp, int max) {
+		List<Content> result = new ArrayList<Content>(getContent());
+		Collections.sort(result, comp);
+		return result.subList(from(result,0 , max), to(result, 0, max));
 	}
 }
