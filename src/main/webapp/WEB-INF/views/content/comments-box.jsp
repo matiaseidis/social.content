@@ -7,9 +7,9 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <div id="comments-box">
-	<h3>
+	<p>
 	<img src='<c:url value="/img/symbolize-icons-set/png/16x16/comments.png" />' />
-	Comente esto viejo!</h3>
+	Comente esto viejo!</p>
 	<sec:authorize access="isAuthenticated()">
 		<form:form action="${ctx}/comment/add/${contentType}/${content.id}"
 			modelAttribute="comment" method="post">

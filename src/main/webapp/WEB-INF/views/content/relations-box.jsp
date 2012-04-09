@@ -8,10 +8,12 @@
 	uri="http://www.springframework.org/security/tags"%>
 <div id="relations-box">
 	<sec:authorize access="isAuthenticated()">
+		<p>
 		<a href="#" id="relations-trigger"> <img
 			src='<c:url value="/img/symbolize-icons-set/png/16x16/wired.png" />' />
 			Relacionar esto
 		</a>
+		</p>
 		<script>
 	$(function() {
 		$('#relations-trigger').click(function(e) {

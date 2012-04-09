@@ -25,7 +25,7 @@ import com.mati.demo.prevalence.transaction.content.RemoveRelation;
 
 
 @Controller
-@RequestMapping("ajax/relation")
+@RequestMapping("ajax")
 public class RelationsController {
 	
 	@Autowired @Setter @Getter private BaseModel baseModel;

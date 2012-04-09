@@ -66,10 +66,13 @@ form.follow, .follow-link {
 .search-form {
 	display: inline;
 }
+#relation-box-wrapper, 
+#comments-box{ margin-top:10px; }
 .relation-result span {
 	margin-right:10px;
 	margin-left:10px;
 	}
+.rating{margin:0 !important;}
 .search-form input {
 	display: inline;
 }
@@ -98,6 +101,7 @@ a
 .tab, .selected{
 background-color: #bfbfbf;
     color: #FFFFFF;
+    border:1px solid #BFBFBF;
 }
 .selected{}
 #search-box-trigger{

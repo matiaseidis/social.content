@@ -3,6 +3,7 @@ package com.mati.demo.authentication;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
@@ -14,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public class AuthenticationProviderImpl extends AbstractUserDetailsAuthenticationProvider{
 	
 	@Setter @Getter private UserDetailsService userDetailsService;
+	public Logger logger = Logger.getLogger(getClass());
+
 	
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
@@ -25,6 +28,7 @@ public class AuthenticationProviderImpl extends AbstractUserDetailsAuthenticatio
 		}
 		
 		if(userDetails.getPassword().equals(authentication.getCredentials().toString())){
+			logger.info("Authenticated user: " + userDetails.getUsername());
 			return new UsernamePasswordAuthenticationToken(
 					userDetails.getUsername(), 
 					userDetails.getPassword(), 

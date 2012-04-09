@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <div class="menu-left">
 		<a href="${ctx}/" title="Inicio">
@@ -19,10 +20,12 @@
 <!-- 	<input type="submit" value="Buscar"> -->
 <!-- 	</form> -->
 	<a href="${ctx}/profile/${user.userName}" title="Perfil">
-	<img src="<c:url value='/img/symbolize-icons-set/png/32x32/user.png' />" />
+<%-- 	<img src="<c:url value='/img/symbolize-icons-set/png/32x32/user.png' />" /> --%>
+	<c:out value="${user.userName}"></c:out>
+	<myTags:userImg height="27" width="27" username="${user.userName}" hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
 	</a> 
 	<a href="${ctx}/j_spring_security_logout" title="Logout">
-	<img src="<c:url value='/img/symbolize-icons-set/png/32x32/stop.png' />" /></a>
+	<img src="<c:url value='/img/symbolize-icons-set/png/16x16/delete.png' />" /></a>
 </div>
 
 <!-- <ul> -->

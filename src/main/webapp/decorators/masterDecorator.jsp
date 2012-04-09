@@ -104,8 +104,8 @@
 			</div>
 			</c:if>
 			<sec:authorize access="isAuthenticated()">
-				<myTags:userImg height="27" width="27" username="${user.userName}" hasOwnImage="${user.hasOwnImage}"></myTags:userImg>
-				<c:out value="${user.userName}"></c:out>
+<%-- 				<myTags:userImg height="27" width="27" username="${user.userName}" hasOwnImage="${user.hasOwnImage}"></myTags:userImg> --%>
+<%-- 				<c:out value="${user.userName}"></c:out> --%>
 
 				<p></p>
 				<div class="sidebar-box-wrapper" id="content-sidebar-box-wrapper">
