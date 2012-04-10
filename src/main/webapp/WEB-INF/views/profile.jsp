@@ -40,6 +40,9 @@
 		<p>Siguiendo a ${fn:length(profileUser.followedTags)} etiqueta(s)</p>
 
 	</div>
+	<div id="lalala" name="lalala">
+	a ver que pasa con esto
+	</div>
 
 	<!-- 	<div> -->
 	<!-- 	<p>Contenido publicado:</p> -->

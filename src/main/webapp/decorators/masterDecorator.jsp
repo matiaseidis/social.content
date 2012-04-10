@@ -98,110 +98,12 @@
 					
 				});
 			</script>
-			<c:if test='${content ne null and action ne "create"}'>
-			<div class="sidebar-box-wrapper" id="content-info-box-wrapper">
-				<myTags:contentInfo content="${content}"></myTags:contentInfo>
-			</div>
+			<c:if test="${sidebar ne null}">
+				<jsp:include page="../WEB-INF/sidebar/${sidebar}.jsp"></jsp:include>
 			</c:if>
-			<sec:authorize access="isAuthenticated()">
-<%-- 				<myTags:userImg height="27" width="27" username="${user.userName}" hasOwnImage="${user.hasOwnImage}"></myTags:userImg> --%>
-<%-- 				<c:out value="${user.userName}"></c:out> --%>
-
-				<p></p>
-				<div class="sidebar-box-wrapper" id="content-sidebar-box-wrapper">
-					<div id="followedContent" class="sidebar-box"></div>
-				</div>
-				<div class="sidebar-box-wrapper users-sidebar-box-wrapper">
-					<div id="followedUsers" class="sidebar-box"></div>
-				</div>
-				<div class="sidebar-box-wrapper users-sidebar-box-wrapper">
-					<div id="followedBy" class="sidebar-box"></div>
-				</div>
-				<div class="sidebar-box-wrapper">
-					<div id="followedEvents" class="sidebar-box"></div>
-				</div>
-				<div class="sidebar-box-wrapper">
-					<div id="followedTags" class="sidebar-box"></div>
-				</div>
-
-				<%-- 				<myTags:userList title="followedUsers" userList="${followedUsers}">usuarios que estas siguiendo</myTags:userList> --%>
-				<%-- 				<myTags:userList title="followedBy" userList="${followedBy}">usuarios que te siguen</myTags:userList> --%>
-				<%-- 				<myTags:tagList title="followedTags" tagList="${followedTags}">etiquetas que estas siguiendo</myTags:tagList> --%>
-				<%-- 				<myTags:tagList title="tags" tagList="${tags}">etiquetas</myTags:tagList> --%>
-				<script>
-					$(function() {
-						var paginations = [ "followedContent", "followedUsers",
-								"followedBy", "followedEvents", "followedTags" ];
-						
-						$.each(paginations, function(index, value) {
-							paginate(value);
-						});
-					});
-					
-					
-					
-					var paginate = function(value) {
-						var elementId = "#" + value;
-						$.ajax({
-							url : '${ctx}/ajax/' + value + '/0/100',
-							success : function(data) {
-								$(elementId).fadeOut('fast', function() {
-									$(elementId).html(data);
-									$(elementId).fadeIn('fast', function() {
-										
-									});
-								});
-								
-							},
-							error : function(data) {
-								alert(data);
-								$(elementId).html(data);
-							}
-						});
-					};
-					var followUnfollow = function(event, name, entity){
-						event.preventDefault();
-						var $target = $(event.target).closest('div');
-						$.ajax({
-							type: "POST",
-					        url: '${ctx}/ajax/'+entity+'/followUnfollow/'+name,
-					        success: function(data) {
-					        	$target.fadeOut('fast', function() {
-					        		$target.html(data);
-					        		$target.fadeIn('fast', function() {});
-					      		});
-					        },
-					        error: function(data) {
-						          alert(data);
-						          $target.html(data);
-						        }
-					      });
-					};
-					
-					var removeRelation = function(event, relationId, relatedId){
-						event.preventDefault();
-						var $target = $(event.target).closest('div.relation');
-						console.log($target);
-						$.ajax({
-							type: "POST",
-					        url: '${ctx}/ajax/relation/remove',
-					        data:{
-					        	'relationId':relationId,
-					        	'relatedId':relatedId
-					        },
-					        success: function(data) {
-					        	$target.fadeOut('fast', function() {
-					        		$target.empty().html(data).fadeIn('fast');
-					      		});
-					        },
-					        error: function(data) {
-						          alert(data);
-						          $target.html(data);
-						        }
-					      });
-					};
-				</script>
-			</sec:authorize>
+			
+			
+		
 		</div>
 
 		<div class='disclaimer'>Site disclaimer. This is an example.</div>

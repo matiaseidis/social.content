@@ -30,28 +30,28 @@
 				</span> <span>el <fmt:formatDate dateStyle="short" type="date"
 							value="${content.postDate}" timeZone="es" />
 				</span>
-				<c:if test="${content.author.userName eq user.userName}">
-					<form
-						action='<c:url value="/content/${content.contentType}/delete/${content.id}" />'
-						method="POST" class="left content-delete">
-						<input type="image"
-							src='<c:url value="/img/symbolize-icons-set/png/16x16/delete.png" />'>
-					</form>
+<%-- 				<c:if test="${content.author.userName eq user.userName}"> --%>
+<!-- 					<form -->
+<%-- 						action='<c:url value="/content/${content.contentType}/delete/${content.id}" />' --%>
+<!-- 						method="POST" class="left content-delete"> -->
+<!-- 						<input type="image" -->
+<%-- 							src='<c:url value="/img/symbolize-icons-set/png/16x16/delete.png" />'> --%>
+<!-- 					</form> -->
 
-					<form
-						action='<c:url value="/content/${content.contentType}/edit/${content.id}" />'
-						class="left content-edit">
-						<input type="image"
-							src='<c:url value="/img/symbolize-icons-set/png/16x16/edit.png" />'>
-					</form>
+<!-- 					<form -->
+<%-- 						action='<c:url value="/content/${content.contentType}/edit/${content.id}" />' --%>
+<!-- 						class="left content-edit"> -->
+<!-- 						<input type="image" -->
+<%-- 							src='<c:url value="/img/symbolize-icons-set/png/16x16/edit.png" />'> --%>
+<!-- 					</form> -->
 
-					<form
-						action='<c:url value="/content/${content.contentType}/show/${content.id}" />'
-						class="left content-show">
-						<input type="image"
-							src='<c:url value="/img/symbolize-icons-set/png/16x16/play.png" />'>
-					</form>
-				</c:if>
+<!-- 					<form -->
+<%-- 						action='<c:url value="/content/${content.contentType}/show/${content.id}" />' --%>
+<!-- 						class="left content-show"> -->
+<!-- 						<input type="image" -->
+<%-- 							src='<c:url value="/img/symbolize-icons-set/png/16x16/play.png" />'> --%>
+<!-- 					</form> -->
+<%-- 				</c:if> --%>
 				</li>
 			</c:forEach>
 		</ul>

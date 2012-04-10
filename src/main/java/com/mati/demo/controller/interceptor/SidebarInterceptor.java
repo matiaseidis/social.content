@@ -1,8 +1,5 @@
 package com.mati.demo.controller.interceptor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,9 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.mati.demo.model.content.Content;
-import com.mati.demo.model.content.type.Event;
-import com.mati.demo.model.tag.Tag;
 import com.mati.demo.model.user.User;
 import com.mati.demo.prevalence.BaseModel;
 
@@ -61,6 +55,4 @@ public class SidebarInterceptor extends HandlerInterceptorAdapter{
 		super.postHandle(request, response, handler, m);
 
 	}
-	
-
 }

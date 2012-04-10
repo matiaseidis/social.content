@@ -267,6 +267,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		m.addObject("content", content);
 		m.addObject("contentType", getEntityName());
 		m.addObject("tag", new Tag());
+		m.addObject("sidebar", "content-show");
 		m.setViewName("content/"+getEntityName()+"/"+SHOW);
 
 		return m;

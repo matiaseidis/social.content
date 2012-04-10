@@ -44,6 +44,7 @@ public class ProfileController {
 //		} 
 		m.setViewName("profile");
 		m.addObject("profileUser", u);
+		m.addObject("sidebar", "profile");
 		return m;
 	}
 }
