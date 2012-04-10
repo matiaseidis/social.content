@@ -145,10 +145,12 @@ background-color: #bfbfbf;
 body {
 /* 	font-family: "scala-regular", "sketch", Georgia, arial, sans-serif; */
 /* font-family: Times New Roman,sans-serif, monospace, sans; */
-font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+/* , "scala-light", "sketch",  */
+font-family: "scala-regular", "lucida grande",tahoma,verdana,arial,sans-serif;
 	/* 	background-color: #ffffcc; */
 	 line-height: 25px;
 	 font-size:10px;
+	 font-size:16px;
 }
 a {    
 	text-decoration: none;
