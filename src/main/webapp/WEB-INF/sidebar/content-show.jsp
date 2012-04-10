@@ -11,9 +11,9 @@
 	<div class="sidebar-box-wrapper" id="content-info-box-wrapper">
 		<myTags:contentInfo content="${content}"></myTags:contentInfo>
 	</div>
+	<jsp:include page="/WEB-INF/views/content/rating-box.jsp" />
 	<div id="relation-box-wrapper">
 		<jsp:include page="/WEB-INF/views/content/relations-box.jsp" />
 	</div>
-	<jsp:include page="/WEB-INF/views/content/rating-box.jsp" />
 </c:if>
 

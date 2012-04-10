@@ -103,6 +103,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 	protected void updateContent(T oldContent, T updatedContent){
 		
 		updatedContent.setAuthor(getBaseModel().getModel().getLoggedInUser());
+		updatedContent.setPostDate(oldContent.getPostDate());
 		
 //		oldContent.setTitle(updatedContent.getTitle());
 	}

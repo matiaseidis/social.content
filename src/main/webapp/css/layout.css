@@ -38,7 +38,10 @@ background:url(../img/background.png);
 .barrita {
 	
 }
-.edit-link{}
+.edit-link, .delete-link{
+	float:right;
+	padding:5px;
+	}
 .menu-left {
 	float: left;
 }
