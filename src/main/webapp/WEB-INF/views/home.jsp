@@ -30,8 +30,8 @@
 	</p>
 	<p>implementar imagen, documento</p>
 	<p>update user password</p>
-	<p>datos de perfil -> agregar redes sociales (?)</p>
 	<p>poder borrar usuario</p>
+	<p>datos de perfil -> agregar redes sociales (?)</p>
 	<p>el evento debe ser suscribible</p>
 	<p>no se puede borrar contenido en la vista de edit (o mandar el link de delete a user/content)!!!!</p>
 	<p>interfaz de admin?</p>

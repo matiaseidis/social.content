@@ -51,7 +51,8 @@
 		<security:intercept-url pattern="/**" access='hasRole("ROLE_USER")' />
 <!-- 		authentication-success-handler-ref="authentication-success-handler" -->
 <!-- always-use-default-target="true" -->
-		<security:form-login login-page="/login" authentication-failure-url="/login" always-use-default-target="true"/>
+		<security:form-login login-page="/login" authentication-failure-url="/login" 
+		authentication-success-handler-ref="authentication-success-handler"/>
 		<security:logout logout-success-url="/" invalidate-session="true" />
 	</security:http>
 

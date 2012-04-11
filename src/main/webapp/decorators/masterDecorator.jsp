@@ -8,29 +8,33 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/reset.css' />" />
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/fonts.css' />" />
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/layout.css' />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/reset.css' />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/fonts.css' />" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/layout.css' />" />
 <!-- <link rel="stylesheet" type="text/css" -->
 <%-- 	href="<c:url value='/js/jquery/ui/css/hot-sneaks/jquery-ui-1.8.18.custom.css' />" /> --%>
-	<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css"
 	href="<c:url value='/js/jquery/ui/css/custom/jquery-ui-1.8.18.custom.css' />" />
-	
+
 <script type="text/javascript"
 	src="<c:url value='/js/jquery/jquery-1.7.1.min.js' />"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="<c:url value='/js/jquery/ui/js/jquery-ui-1.8.18.custom.min.js' />"></script>
-	
-	<script type="text/javascript"
+
+<script type="text/javascript"
 	src="<c:url value='/js/jquery/rating/jquery.rating.js' />"></script>
-		<link rel="stylesheet" type="text/css"
+<link rel="stylesheet" type="text/css"
 	href="<c:url value='/js/jquery/rating/rating.css' />" />
 <!-- 	<script src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js" type="text/javascript"></script> -->
-	
+
 <title>Social Content :: <sitemesh:write property='title' /></title>
 <sitemesh:write property='head' />
 </head>
 <body>
+
 	<div class="barrita-wrapper">
 		<div class="barrita">
 			<jsp:include page="/barrita.jsp"></jsp:include>
@@ -50,16 +54,16 @@
 			</div>
 		</c:if>
 		<div class='mainBody'>
-			<a href="#" id="search-box-trigger">
-				<img src='<c:url value="/img/symbolize-icons-set/png/16x16/search.png" />' />
+			<a href="#" id="search-box-trigger"> <img
+				src='<c:url value="/img/symbolize-icons-set/png/16x16/search.png" />' />
 			</a>
 			<div class="search-box-wrapper">
 				<div id="search-box" class="search-box"></div>
 			</div>
 			<div class="title">
-			<h1 class='title'>
-				<sitemesh:write property='title' />
-			</h1>
+				<h1 class='title'>
+					<sitemesh:write property='title' />
+				</h1>
 			</div>
 			<sitemesh:write property='body' />
 		</div>
@@ -101,9 +105,9 @@
 			<c:if test="${sidebar ne null}">
 				<jsp:include page="../WEB-INF/sidebar/${sidebar}.jsp"></jsp:include>
 			</c:if>
-			
-			
-		
+
+
+
 		</div>
 
 		<div class='disclaimer'>Site disclaimer. This is an example.</div>
