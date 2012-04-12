@@ -21,17 +21,7 @@
 	<!-- 		TODO borrar este jsp si ya no va -->
 <%-- 		<jsp:include page="../show-tags-box.jsp"></jsp:include> --%>
 		<jsp:include page="../add-tag-box.jsp"></jsp:include>
-		<p>Body</p>
-		<textarea rows="20" cols="70" name="body">
-			<c:choose>
-				<c:when test="${not empty errors}">
-					<c:out value="${errors.post.body}"></c:out>
-				</c:when>
-				<c:otherwise>
-					<c:out value="${post.body}"></c:out>
-				</c:otherwise>
-			</c:choose>
-		</textarea>
+		<jsp:include page="../body.jsp"></jsp:include>
 		<jsp:include page="../submit.jsp"></jsp:include>
 	</form:form>
 	<%-- 	</form> --%>

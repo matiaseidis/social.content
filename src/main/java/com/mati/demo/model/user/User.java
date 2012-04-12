@@ -222,6 +222,26 @@ public class User extends Taggable{
 		return content.get(nodeId);
 	}
 	
+	public List<Content> getContent(int total, int page){	
+		List<Content> c = new ArrayList<Content>(); 
+			c.addAll(getContent());
+		/*
+		 * 
+		 *	TODO pasar este ordenamiento a la declaracion del Map en Model y en User
+		 *	para no tener que ordenar en cada llamado
+		 */
+			Collections.sort(c, new Comparator<Content>(){
+
+			@Override
+			public int compare(Content c1, Content c2) {
+				return c1.getPostDate().compareTo(c2.getPostDate());
+			}
+			
+		});
+		List<Content> result = c.subList(from(c, page, total), to(c, page, total)); 
+		return result;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.mati.demo.model.relationships.Followable#startFollowing(com.mati.demo.model.user.User)

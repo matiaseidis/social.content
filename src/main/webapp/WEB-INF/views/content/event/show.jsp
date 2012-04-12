@@ -11,32 +11,26 @@
 <title><c:out value="${content.title}"></c:out></title>
 </head>
 <body>
-<jsp:include page="../content-id.jsp"></jsp:include>
+	<jsp:include page="../content-id.jsp"></jsp:include>
 	<jsp:include page="../edit-link.jsp"></jsp:include>
 	<jsp:include page="../delete-link.jsp"></jsp:include>
-	
+
 	<c:choose>
-	<c:when test="${content.end ne null}">
-	<c:set var="dateTitle" value="Desde"></c:set>
-	</c:when>
-	<c:otherwise>
-	<c:set var="dateTitle" value="El"></c:set>
-	</c:otherwise>
-	</c:choose>	
+		<c:when test="${content.end ne null}">
+			<c:set var="dateTitle" value="Desde"></c:set>
+		</c:when>
+		<c:otherwise>
+			<c:set var="dateTitle" value="El"></c:set>
+		</c:otherwise>
+	</c:choose>
 	<myTags:shortDate date="${content.start}" title="${dateTitle}"></myTags:shortDate>
 	<myTags:shortDate date="${content.end}" title="Hasta"></myTags:shortDate>
 
-	<jsp:include page="../show-tags-box.jsp"></jsp:include>
+	<%-- 	<jsp:include page="../show-tags-box.jsp"></jsp:include> --%>
 
-	<div class="content-description">
-		<p>
-			<c:out value="${content.body}" escapeXml="false"></c:out>
-		</p>
-	</div>
-	
-	<div id="relation-box-wrapper">
-		<jsp:include page="../relations-box.jsp" />
-	</div>
+	<jsp:include page="../content-body.jsp"></jsp:include>
+
+	<jsp:include page="../relations-list.jsp" />
 	<jsp:include page="../rating-box.jsp" />
 	<jsp:include page="../comments-box.jsp" />
 </body>

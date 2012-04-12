@@ -39,12 +39,12 @@ public class UpdateContent implements Transaction{
 		List<Tag> updatedTags = content.getTags();
 		
 		if(!originalTags.equals(updatedTags)){
-			logger.info("NOT SAME");
+			logger.info("updating tags");
 			
-			List<Tag> diff = new ArrayList<Tag>(originalTags);
-			diff.removeAll(updatedTags);
+			List<Tag> diffToRemove = new ArrayList<Tag>(originalTags);
+			diffToRemove.removeAll(updatedTags);
 			
-			for(Tag t : diff){
+			for(Tag t : diffToRemove){
 				t.removeTagged(content);
 				content.removeTag(model.getTagRepository(), t);
 			}

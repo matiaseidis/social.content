@@ -1,5 +1,7 @@
 package com.mati.demo.util;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.mati.demo.model.base.Model;
 import com.mati.demo.model.content.type.Video;
 
@@ -12,6 +14,9 @@ public class ContentUtils {
 	
 	
 	public static String youTubeThumbnailUri(Video video) {
+		if(video.getMediaFileRef() == null){
+			return StringUtils.EMPTY;
+		}
 		String[] s = video.getMediaFileRef().split("/");
 		return thumbnailPre + s[s.length-1] + thumbnailPos;
 	}

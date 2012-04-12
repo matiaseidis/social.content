@@ -22,8 +22,8 @@
 <div id="searchTabs" class="tabs">
 	<ul class="tabNavigation">
 		<li><a href="#tabs-1">Contenidos</a></li>
-		<li><a href="#tabs-2">Usuarios</a></li>
-		<li><a href="#tabs-3">Etiquetas</a></li>
+<!-- 		<li><a href="#tabs-2">Usuarios</a></li> -->
+<!-- 		<li><a href="#tabs-3">Etiquetas</a></li> -->
 	</ul>
 	<div id="tabs-1" class="tab">	
 	Buscar contenidos...
@@ -37,15 +37,24 @@
 			<span><a href="#">Ok</a></span>
 		</div>
 	</div>
-	<div id="tabs-2" class="tab">
-	Buscar usuarios...
-	<form id="trigger-user-relation-add" class="trigger-relation-add" name="user">
-		<input type="text" class="medium fixed-height" name="pattern" id="user-relation-pattern">
-		<input type="hidden" class="relation-element-id"  > 
-		<input type="image" class="img-input"  title="Relacionar" src='<c:url value="/img/symbolize-icons-set/png/16x16/link.png" />'>
-	</form>
-	<div id="user-relation-result" class="search-result"></div>
-	</div>
+<!-- 	<div id="tabs-2" class="tab"> -->
+<!-- 	Buscar usuarios... -->
+<!-- 	<form id="trigger-user-relation-add" class="trigger-relation-add" name="user"> -->
+<!-- 		<input type="text" class="medium fixed-height" name="pattern" id="user-relation-pattern"> -->
+<!-- 		<input type="hidden" class="relation-element-id"  >  -->
+<%-- 		<input type="image" class="img-input"  title="Relacionar" src='<c:url value="/img/symbolize-icons-set/png/16x16/link.png" />'> --%>
+<!-- 	</form> -->
+<!-- 	<div id="user-relation-result" class="search-result"></div> -->
+<!-- 	</div> -->
+<!-- 	<div id="tabs-3" class="tab"> -->
+<!-- 	Buscar etiquetas... -->
+<!-- 	<form id="trigger-tag-relation-add" class="trigger-relation-add" name="tag"> -->
+<!-- 		<input type="text" class="medium fixed-height" name="pattern" id="tag-relation-pattern"> -->
+<!-- 		<input type="hidden" class="relation-element-id"  >  -->
+<%-- 		<input type="image" class="img-input"  title="Relacionar" src='<c:url value="/img/symbolize-icons-set/png/16x16/link.png" />'> --%>
+<!-- 	</form> -->
+<!-- 	<div id="tag-relation-result" class="search-result"></div> -->
+<!-- 	</div> -->
 </div>
 <style>
 	.ui-autocomplete {
@@ -107,7 +116,7 @@ $(function(){
 	        	console.log(data);
 				$('#over-all-box-wrapper').fadeOut('fast', function(){
 					$('#over-all-box').html('');	
-		        	$('#relation-box-wrapper').hide().html(data).fadeIn('fast');
+		        	$('#relation-list-wrapper').hide().html(data).fadeIn('fast');
 				});
 	        },
 	        error: function(data) {

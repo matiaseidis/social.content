@@ -104,6 +104,7 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		
 		updatedContent.setAuthor(getBaseModel().getModel().getLoggedInUser());
 		updatedContent.setPostDate(oldContent.getPostDate());
+		oldContent.setBody(updatedContent.getBody());
 		
 //		oldContent.setTitle(updatedContent.getTitle());
 	}
@@ -225,7 +226,8 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		ModelAndView m = new ModelAndView();
 
 		String base = (StringUtils.isEmpty(basePath)) ? StringUtils.EMPTY : basePath;
-		m.setViewName("redirect:/" + base + File.separator + getEntityName() + File.separator + LIST);
+//		m.setViewName("redirect:/" + base + File.separator + getEntityName() + File.separator + LIST);
+		m.setViewName("redirect:/" + base + File.separator + getEntityName() + File.separator + SHOW + File.separator + updatedContentId);
 
 		m.addObject(getEntityPluralName(), list(getEntityClass()));
 
@@ -264,6 +266,9 @@ public abstract class ContentController<T extends Content> extends BaseControlle
 		}
 		
 		processBeforeShow(content);
+		
+		m.addObject("moreOfThisAuthor", content.getAuthor().getContent(5,0));
+		
 		m.addObject("model", getBaseModel().getModel());
 		m.addObject("content", content);
 		m.addObject("contentType", getEntityName());

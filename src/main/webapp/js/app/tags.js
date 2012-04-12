@@ -1,4 +1,13 @@
 $(function(){
+	
+	$('#inputTag').keypress(function(e){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if(code == 13) { 
+			$('#addTag').click();			
+			return false;	
+		}
+	});
+	
 	$('#inputTag').val("");
 	
 	$('#addTag').click(function(){

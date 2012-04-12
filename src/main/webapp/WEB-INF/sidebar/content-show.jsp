@@ -10,10 +10,16 @@
 <c:if test='${content ne null and action ne "create"}'>
 	<div class="sidebar-box-wrapper" id="content-info-box-wrapper">
 		<myTags:contentInfo content="${content}"></myTags:contentInfo>
-	</div>
 	<jsp:include page="/WEB-INF/views/content/rating-box.jsp" />
 	<div id="relation-box-wrapper">
 		<jsp:include page="/WEB-INF/views/content/relations-box.jsp" />
+	</div>
+	
+	<br />
+	<hr />
+	<br />
+	<myTags:contentPreview contentList="${moreOfThisAuthor}" ></myTags:contentPreview>
+<%-- 	<myTags:contentList contentList="${moreOfThisAuthor}" title="moreOfThisAuthor"></myTags:contentList> --%>
 	</div>
 </c:if>
 

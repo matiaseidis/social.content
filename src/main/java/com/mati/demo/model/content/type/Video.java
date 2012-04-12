@@ -13,7 +13,7 @@ public class Video extends MediaFileContent{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Getter @Setter private String body;
+//	@Getter @Setter private String body;
 //	@Getter @Setter private String fileName;
 	@Getter @Setter private String url;
 //	transient @Getter @Setter private String videoRef;

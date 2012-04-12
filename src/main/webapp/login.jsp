@@ -21,11 +21,12 @@
 		</div>
 	</c:if>
  
+ 		<a class="home-link" href='<c:url value="/" />' title="Inicio">
+		<img class="home-link" src="<c:url value='/img/symbolize-icons-set/png/16x16/home.png' />" /></a> 
  	<form class="login-form-barrita" name='f' action="<c:url value='/j_spring_security_check' />"
 		method='POST'>
 		<table>
 			<tr>
- 				<td><span><a href='<c:url value="/" />'>Inicio</a></span></td> 
 				<td><label for="j_username" path="j_username">Usuario: </label>
 <!-- 				</td> -->
 <!-- 				<td> -->

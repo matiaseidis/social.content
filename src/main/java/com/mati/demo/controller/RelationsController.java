@@ -59,7 +59,7 @@ public class RelationsController {
 			}
 		}
 		m.addObject("content", c);
-		m.setViewName("/content/relations-box");
+		m.setViewName("/content/relations-list");
 		return m;
 	}
 	

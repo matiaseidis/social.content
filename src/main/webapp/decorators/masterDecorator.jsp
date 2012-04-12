@@ -70,6 +70,15 @@
 		<div class='sidebar'>
 			<!-- 			sidebar right -->
 			<script>
+// 			$('#loading-box-wrapper').show();
+			$(function(){
+				$("#loading-box-wrapper").ajaxStart(function(){
+				    $(this).fadeIn('fast'); //show();
+				 }).ajaxStop(function(){
+				    $(this).fadeOut('fast'); //hide();
+				 });
+			});
+
 			/*
 			 *public
 			 */
@@ -115,5 +124,88 @@
 	<div id="over-all-box-wrapper">
 		<div id="over-all-box"></div>
 	</div>
+
+	<div id="loading-box-wrapper">
+		<div id="loading-box">
+			<p>
+				momento...<br /> <img src='<c:url value="/img/ajax-loader.gif" />' />
+			</p>
+		</div>
+	</div>
+	<sec:authorize access="isAuthenticated()">
+		<script>
+					$(function() {
+						var paginations = [ "followedContent", "followedUsers",
+								"followedBy", "followedEvents", "followedTags" ];
+						
+						$.each(paginations, function(index, value) {
+							paginate(value);
+						});
+					});
+					
+					
+					
+					var paginate = function(value) {
+						var elementId = "#" + value;
+						$.ajax({
+							url : '${ctx}/ajax/' + value + '/0/100',
+							success : function(data) {
+								$(elementId).fadeOut('fast', function() {
+									$(elementId).html(data);
+									$(elementId).fadeIn('fast', function() {
+										
+									});
+								});
+								
+							},
+							error : function(data) {
+								alert(data);
+								$(elementId).html(data);
+							}
+						});
+					};
+					var followUnfollow = function(event, name, entity){
+						event.preventDefault();
+						var $target = $(event.target).closest('div');
+						$.ajax({
+							type: "POST",
+					        url: '${ctx}/ajax/'+entity+'/followUnfollow/'+name,
+					        success: function(data) {
+					        	$target.fadeOut('fast', function() {
+					        		$target.html(data);
+					        		$target.fadeIn('fast', function() {});
+					      		});
+					        },
+					        error: function(data) {
+						          alert(data);
+						          $target.html(data);
+						        }
+					      });
+					};
+					
+					var removeRelation = function(event, relationId, relatedId){
+						event.preventDefault();
+						var $target = $(event.target).closest('div.relation');
+						console.log($target);
+						$.ajax({
+							type: "POST",
+					        url: '${ctx}/ajax/relation/remove',
+					        data:{
+					        	'relationId':relationId,
+					        	'relatedId':relatedId
+					        },
+					        success: function(data) {
+					        	$target.fadeOut('fast', function() {
+					        		$target.empty().html(data).fadeIn('fast');
+					      		});
+					        },
+					        error: function(data) {
+						          alert(data);
+						          $target.html(data);
+						        }
+					      });
+					};
+				</script>
+	</sec:authorize>
 </body>
 </html>

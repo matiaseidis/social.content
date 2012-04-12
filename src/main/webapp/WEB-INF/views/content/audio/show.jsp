@@ -10,16 +10,41 @@
 <script type='text/javascript'
 	src='${ctx}/js/mediaplayer-5.9-viral/jwplayer.js'></script>
 
-<!-- <script type="text/javascript" language="javascript" -->
-<%-- 	src="${ctx}/js/niftyplayer/niftyplayer.js"></script> --%>
 
 
 <title><c:out value="${content.title}"></c:out></title>
 </head>
 <body>
-<jsp:include page="../content-id.jsp"></jsp:include>
-<jsp:include page="../edit-link.jsp"></jsp:include>
-<jsp:include page="../delete-link.jsp"></jsp:include>
+	<jsp:include page="../content-id.jsp"></jsp:include>
+	<jsp:include page="../edit-link.jsp"></jsp:include>
+	<jsp:include page="../delete-link.jsp"></jsp:include>
+	<%-- 	<jsp:include page="../show-tags-box.jsp"></jsp:include> --%>
+	<div id='mediaspace'>This text will be replaced</div>
+
+	<script type='text/javascript'>
+		jwplayer('mediaspace')
+				.setup(
+						{
+							'flashplayer' : '${ctx}/js/mediaplayer-5.9-viral/player.swf',
+							'file' : '<c:out value="${content.mediaFileRef}" ></c:out>',
+							'controlbar' : 'bottom',
+							'width' : '440',
+							'height' : '260',
+							'skin' : '${ctx}/js/video-js/skins/playcasso.zip',
+							'image' : '${userPictureURI}${fn:toLowerCase(content.author.userName)}${userPictureExt}'
+						});
+	</script>
+
+	<jsp:include page="../content-body.jsp"></jsp:include>
+
+	<jsp:include page="../relations-list.jsp" />
+	
+	<%-- 	<jsp:include page="../rating-box.jsp" /> --%>
+	<jsp:include page="../comments-box.jsp" />
+</body>
+</html>
+<!-- <script type="text/javascript" language="javascript" -->
+<%-- 	src="${ctx}/js/niftyplayer/niftyplayer.js"></script> --%>
 <!-- <div class="player-1"> -->
 <!-- 	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" -->
 <!-- 		codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" -->
@@ -48,26 +73,4 @@
 <!-- 	</object> -->
 <!-- </div> -->
 
-	<%-- <audio autoplay="autoplay" src="<c:out value="${content.audioRef}" ></c:out>" controls="controls"></audio> --%>
-	<jsp:include page="../show-tags-box.jsp"></jsp:include>
-	<div id='mediaspace'>This text will be replaced</div>
-
-	<script type='text/javascript'>
-		jwplayer('mediaspace').setup({
-			'flashplayer' : '${ctx}/js/mediaplayer-5.9-viral/player.swf',
-			'file' : '<c:out value="${content.mediaFileRef}" ></c:out>',
-			'controlbar' : 'bottom',
-			'width' : '440',
-			'height' : '260',
-			'skin' : '${ctx}/js/video-js/skins/playcasso.zip',
-			'image' : '${userPictureURI}${fn:toLowerCase(content.author.userName)}${userPictureExt}'
-		});
-	</script>
-
-<div id="relation-box-wrapper">
-		<jsp:include page="../relations-box.jsp" />
-	</div>
-	<jsp:include page="../rating-box.jsp" />
-	<jsp:include page="../comments-box.jsp" />
-</body>
-</html>
+<%-- <audio autoplay="autoplay" src="<c:out value="${content.audioRef}" ></c:out>" controls="controls"></audio> --%>

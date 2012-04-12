@@ -48,7 +48,6 @@ public class AudioController extends ContentController<Audio>{
 	@Override
 	protected void updateContent(Audio oldContent, Audio updatedContent) {
 		
-		oldContent.setBody(updatedContent.getBody());;
 		oldContent.setFileName(updatedContent.getFileName());
 		
 		super.updateContent(oldContent, updatedContent);

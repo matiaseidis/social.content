@@ -178,6 +178,13 @@
 				<!-- <property name="baseModel" ref="base.model"></property> -->
 			</bean>
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean id="logged.in.user.interceptor"
+				class="com.mati.demo.controller.interceptor.LoggedInUserInterceptor">
+			</bean>
+		</mvc:interceptor>
 
 <!-- hay que borrar este interceptor y cada vez que en el master decorator rendereo errors o message borrarlos de session ahi mismo despues de pintarlos -->
 <!-- 		<mvc:interceptor> -->

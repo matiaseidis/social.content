@@ -27,6 +27,8 @@ public abstract class Content extends Taggable implements Commentable{
 	@Getter @Setter private int id;
 	@Getter @Setter private Date postDate;
 	
+	@Getter @Setter private String body;
+	
 	@Getter @Setter private int visited;
 	
 	@Getter @Setter private String title;

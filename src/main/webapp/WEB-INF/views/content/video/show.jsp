@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}" ></c:set>
+<c:set var="ctx" value="${pageContext.request.contextPath}"></c:set>
 
 <html>
 <head>
@@ -13,35 +13,31 @@
 <title><c:out value="${content.title}"></c:out></title>
 </head>
 <body>
-<jsp:include page="../author.jsp"></jsp:include>
-<jsp:include page="../content-id.jsp"></jsp:include>
-<jsp:include page="../edit-link.jsp"></jsp:include>
-<jsp:include page="../delete-link.jsp"></jsp:include>
+	<jsp:include page="../author.jsp"></jsp:include>
+	<jsp:include page="../content-id.jsp"></jsp:include>
+	<jsp:include page="../edit-link.jsp"></jsp:include>
+	<jsp:include page="../delete-link.jsp"></jsp:include>
 
 
-<jsp:include page="../show-tags-box.jsp"></jsp:include>
+	<%-- <jsp:include page="../show-tags-box.jsp"></jsp:include> --%>
 
 
 	<div id='mediaspace'>This text will be replaced</div>
 	<script type='text/javascript'>
-		jwplayer('mediaspace')
-				.setup(
-						{
-							'flashplayer' : '${ctx}/js/mediaplayer-5.9-viral/player.swf',
-							'file' : '<c:out value="${content.mediaFileRef}" ></c:out>',
-							'controlbar' : 'bottom',
-							'width' : '640',
-							'height' : '360',
-							'skin' : '${ctx}/js/video-js/skins/grungetape.zip'
-						});
+		jwplayer('mediaspace').setup({
+			'flashplayer' : '${ctx}/js/mediaplayer-5.9-viral/player.swf',
+			'file' : '<c:out value="${content.mediaFileRef}" ></c:out>',
+			'controlbar' : 'bottom',
+			'width' : '640',
+			'height' : '360',
+			'skin' : '${ctx}/js/video-js/skins/grungetape.zip'
+		});
 	</script>
 	<%-- 'skin':'${pageContext.request.contextPath}/js/video-js/skins/playcasso/playcasso.zip'--%>
-	<div class="content-description">
-	<p><c:out value="${content.body}" escapeXml="false"></c:out></p>
-	</div>
-	<div id="relation-box-wrapper">
-		<jsp:include page="../relations-box.jsp" />
-	</div>
+
+	<jsp:include page="../content-body.jsp"></jsp:include>
+
+	<jsp:include page="../relations-list.jsp" />
 	<jsp:include page="../rating-box.jsp" />
 	<jsp:include page="../comments-box.jsp" />
 </body>

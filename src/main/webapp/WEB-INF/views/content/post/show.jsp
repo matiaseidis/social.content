@@ -11,33 +11,17 @@
 <title><c:out value="${content.title}" escapeXml="true"></c:out></title>
 </head>
 <body>
-<jsp:include page="../content-id.jsp"></jsp:include>
-<jsp:include page="../edit-link.jsp"></jsp:include>
-<jsp:include page="../delete-link.jsp"></jsp:include>
+	<jsp:include page="../content-id.jsp"></jsp:include>
+	<jsp:include page="../edit-link.jsp"></jsp:include>
+	<jsp:include page="../delete-link.jsp"></jsp:include>
+
+	<%-- 			<jsp:include page="../show-tags-box.jsp"></jsp:include> --%>
+
+	<jsp:include page="../content-body.jsp"></jsp:include>
 
 
-	<div>
-		<h6>
-			Publicado por
-			<c:out value="${content.author.userName}" escapeXml="true"></c:out>
-			, el
-			<fmt:formatDate pattern="dd/MM/yyyy" dateStyle="short" type="date"
-				value="${content.postDate}" timeZone="es" />
-		</h6>
-		
-
-			<jsp:include page="../show-tags-box.jsp"></jsp:include>
-
-		<p><h4>
-			<c:out value="${content.body}" escapeXml="false"></c:out>
-		</h4>
-
-
-	</div>
-	<div id="relation-box-wrapper">
-		<jsp:include page="../relations-box.jsp" />
-	</div>
-<%-- 	<jsp:include page="../rating-box.jsp" /> --%>
+	<jsp:include page="../relations-list.jsp" />
+	<%-- 	<jsp:include page="../rating-box.jsp" /> --%>
 	<jsp:include page="../comments-box.jsp" />
 </body>
 </html>
@@ -46,4 +30,3 @@
 
 
 
-					

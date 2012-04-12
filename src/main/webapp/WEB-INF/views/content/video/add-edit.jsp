@@ -27,9 +27,6 @@
 (puede ir en las vistas de contenido que no sean ni add ni edit)-->
 <%-- 		<jsp:include page="../show-tags-box.jsp"></jsp:include> --%>
 		<jsp:include page="../add-tag-box.jsp"></jsp:include>
-		<jsp:include page="../description.jsp"></jsp:include>
-<%-- 		<jsp:include page="../upload.jsp"></jsp:include> --%>
-
 		<p>
 			<form:label for="url" path="url">URL: <c:out
 					value="${video.url}" />
@@ -37,6 +34,10 @@
 			<form:input path="url" type="text" class="medium fixed-height" />
 			<myTags:errorField field="url"></myTags:errorField>
 		</p>
+		<jsp:include page="../body.jsp"></jsp:include>
+<%-- 		<jsp:include page="../description.jsp"></jsp:include> --%>
+<%-- 		<jsp:include page="../upload.jsp"></jsp:include> --%> 
+
 
 
 		<jsp:include page="../submit.jsp"></jsp:include>

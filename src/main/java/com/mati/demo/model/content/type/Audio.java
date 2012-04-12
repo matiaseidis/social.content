@@ -13,7 +13,7 @@ public class Audio extends MediaFileContent{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Getter @Setter private String body;
+//	@Getter @Setter private String body;
 //	@Getter @Setter private String fileName;
 //	transient @Getter @Setter private String audioRef;
 //	transient @Getter @Setter private CommonsMultipartFile fileData;
